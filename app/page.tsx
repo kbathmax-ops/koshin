@@ -44,8 +44,56 @@ export default function Home() {
       <main className="pt-32 px-6 lg:px-12 max-w-[1400px] mx-auto">
         {/* ── Split Hero ── */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[780px]">
-          {/* Left — BUILD */}
+          {/* Left — STORY */}
           <FadeUp>
+            <Link href="/story" className="block h-full">
+              <div className="bg-primary rounded-[2rem] p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden group min-h-[780px] cursor-pointer">
+                {/* Ghost text */}
+                <div className="relative z-10">
+                  <h1
+                    className="text-[110px] lg:text-[160px] font-black text-on-primary-container leading-[0.8] tracking-tighter opacity-20"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    STORY
+                  </h1>
+                </div>
+
+                {/* Teaser card */}
+                <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 lg:p-10 rounded-[1.5rem] border border-on-primary-container/10">
+                  <p className="text-on-primary text-xs uppercase tracking-[0.3em] font-black mb-4">
+                    The Journey
+                  </p>
+                  <h3
+                    className="text-3xl lg:text-4xl font-bold text-on-primary mb-4 leading-tight"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    Where I&apos;ve been &amp; where I&apos;m going.
+                  </h3>
+                  <p className="text-on-primary/70 text-base mb-8 max-w-sm leading-relaxed">
+                    From first lines of code to shipping real products — the
+                    story behind the work.
+                  </p>
+                  <span className="inline-flex items-center gap-3 bg-secondary text-white px-8 py-4 rounded-full font-black text-base group-hover:scale-105 active:scale-95 transition-all shadow-xl">
+                    Read Story
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+
+                {/* Background image overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-15 grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:opacity-30 rounded-[2rem] overflow-hidden">
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW2QqBVa-4RhclIfxZ51hTPZVitsYjZmhx7EQm4jyIdtXggvA1ECEDFJ5uKUFzaedogBEXHtoCKyl5S9yEer55cCsI4doOnXs9DscG604nQ3Vh-LdlzRwkh9GkrOgHHKcomBF0vyFk3rCf5Zp9CZtL50o3p-WkmbHF4gdXTfDhif64x5l0OfkvMpM7hKOrT1xmVFCuX0-YNWoTt-_6D5baThqHwEolpdgptXpRvvKx3kIfhjgU_GpuC_BU8-0v6hOyMdE5YVxdXhba"
+                    alt="Koshin portfolio — student developer and AI builder"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </Link>
+          </FadeUp>
+
+          {/* Right — BUILD */}
+          <FadeUp delay={0.08}>
             <div className="bg-surface-container-low rounded-[2rem] p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden group min-h-[780px]">
               <div className="relative z-10">
                 <span className="inline-flex items-center gap-2 bg-primary-container text-on-primary-container px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-8">
@@ -66,68 +114,18 @@ export default function Home() {
                   <span className="text-secondary font-bold">AI</span> and{" "}
                   <span className="text-secondary font-bold">travel tech</span>.
                 </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {["Next.js", "TypeScript", "Claude API"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-surface-container-highest px-4 py-2 rounded-full text-sm font-bold text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="mt-8">
+                  <Link
+                    href="/work"
+                    className="inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-black text-base hover:scale-105 active:scale-95 transition-all shadow-xl group/btn"
+                  >
+                    See the Work
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Link>
                 </div>
               </div>
 
               <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
-            </div>
-          </FadeUp>
-
-          {/* Right — STORY */}
-          <FadeUp delay={0.08}>
-            <div className="bg-primary rounded-[2rem] p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden group min-h-[780px]">
-              {/* Ghost text */}
-              <div className="relative z-10 text-right">
-                <span
-                  className="text-[110px] lg:text-[160px] font-black text-on-primary-container leading-[0.8] tracking-tighter opacity-20"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  STORY
-                </span>
-              </div>
-
-              {/* Featured card */}
-              <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 lg:p-10 rounded-[1.5rem] border border-on-primary-container/10">
-                <p className="text-on-primary text-xs uppercase tracking-[0.3em] font-black mb-4">
-                  Featured Project
-                </p>
-                <h3
-                  className="text-3xl lg:text-4xl font-bold text-on-primary mb-4 leading-tight"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  Euro Summer Planner
-                </h3>
-                <p className="text-on-primary/70 text-base mb-8 max-w-sm leading-relaxed">
-                  A travel app for planning multi-city European trips —
-                  day-by-day itineraries, packing lists, and budget tracking.
-                </p>
-                <Link
-                  href="/work#euro-summer"
-                  className="inline-flex items-center gap-3 bg-secondary text-white px-8 py-4 rounded-full font-black text-base hover:scale-105 active:scale-95 transition-all shadow-xl group/btn"
-                >
-                  View Work
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                </Link>
-              </div>
-
-              {/* Background image overlay */}
-              <div className="absolute inset-0 pointer-events-none opacity-15 grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:opacity-30 rounded-[2rem] overflow-hidden">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW2QqBVa-4RhclIfxZ51hTPZVitsYjZmhx7EQm4jyIdtXggvA1ECEDFJ5uKUFzaedogBEXHtoCKyl5S9yEer55cCsI4doOnXs9DscG604nQ3Vh-LdlzRwkh9GkrOgHHKcomBF0vyFk3rCf5Zp9CZtL50o3p-WkmbHF4gdXTfDhif64x5l0OfkvMpM7hKOrT1xmVFCuX0-YNWoTt-_6D5baThqHwEolpdgptXpRvvKx3kIfhjgU_GpuC_BU8-0v6hOyMdE5YVxdXhba"
-                  alt="Koshin portfolio — student developer and AI builder"
-                  fill
-                  className="object-cover"
-                />
-              </div>
             </div>
           </FadeUp>
         </section>

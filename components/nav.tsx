@@ -18,6 +18,7 @@ export function Nav() {
   }, []);
 
   const isWork = pathname === "/work" || pathname?.startsWith("/work");
+  const isStory = pathname === "/story";
 
   return (
     <nav className="fixed top-6 left-0 right-0 z-50 px-4">
@@ -41,6 +42,18 @@ export function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
+          <Link
+            href="/story"
+            className={cn(
+              "font-bold tracking-tight transition-colors duration-200",
+              isStory
+                ? "text-[#9d4305]"
+                : "text-[#173321]/70 hover:text-[#9d4305]"
+            )}
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
+            Story
+          </Link>
           <Link
             href="/work"
             className={cn(
@@ -81,6 +94,13 @@ export function Nav() {
       {/* Mobile dropdown */}
       {menuOpen && (
         <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#fcf9ef]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(28,28,22,0.08)] px-8 py-6 flex flex-col gap-4">
+          <Link
+            href="/story"
+            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors"
+            onClick={() => setMenuOpen(false)}
+          >
+            Story
+          </Link>
           <Link
             href="/work"
             className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors"
