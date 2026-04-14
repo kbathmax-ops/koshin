@@ -156,8 +156,8 @@ export function HomeClient() {
                     className="mt-5 text-base leading-relaxed max-w-xs font-medium"
                     style={{ color: "rgba(255,255,255,0.55)" }}
                   >
-                    17. Student founder. Building in the open — one shipped
-                    product at a time.
+                    I&apos;m building on a gap year — using AI for good.
+                    Here&apos;s my story.
                   </p>
                 </div>
 
@@ -235,22 +235,6 @@ export function HomeClient() {
                 }}
               >
                 <div>
-                  <span
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-6 w-fit"
-                    style={{
-                      backgroundColor: "rgba(23,51,33,0.09)",
-                      color: "#173321",
-                      letterSpacing: "0.15em",
-                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    }}
-                  >
-                    <span
-                      className="w-2 h-2 rounded-full inline-block"
-                      style={{ backgroundColor: "#f6be39" }}
-                    />
-                    Available for hire
-                  </span>
-
                   <h2
                     className="font-black leading-none tracking-tighter"
                     style={{
@@ -266,15 +250,8 @@ export function HomeClient() {
                     className="mt-5 text-base leading-relaxed max-w-sm font-medium"
                     style={{ color: "#424842" }}
                   >
-                    Crafting high-performance digital products with a focus on{" "}
-                    <span className="font-bold" style={{ color: "#9d4305" }}>
-                      AI
-                    </span>{" "}
-                    and{" "}
-                    <span className="font-bold" style={{ color: "#9d4305" }}>
-                      travel tech
-                    </span>
-                    .
+                    Discovering how AI can be used with the UN&apos;s 17 SDG
+                    goals.
                   </p>
                 </div>
 
