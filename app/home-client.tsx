@@ -288,8 +288,26 @@ export function HomeClient() {
           transition={{ duration: 0.8, ease: EASE }}
         >
           <div className="px-6 lg:px-12 max-w-[1400px] mx-auto">
+            {/* ── Section divider ── */}
+            <FadeUp>
+              <div className="flex items-center gap-8 mt-20 mb-12 px-2">
+                <div className="h-px flex-1 bg-outline-variant" />
+                <span
+                  className="text-[11px] font-black uppercase shrink-0"
+                  style={{
+                    color: "rgba(23,51,33,0.35)",
+                    letterSpacing: "0.4em",
+                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                  }}
+                >
+                  Live Work
+                </span>
+                <div className="h-px flex-1 bg-outline-variant" />
+              </div>
+            </FadeUp>
+
             {/* ── Widgets ── */}
-            <section className="mt-12 mb-32">
+            <section className="mb-32">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 {/* Sanctions Precedent */}
                 <FadeUp delay={0.1} className="md:col-span-4">
