@@ -121,9 +121,9 @@ export function HomeClient() {
                 </span>
               </motion.div>
 
-              {/* Hero content — fades in after blocks compress */}
+              {/* Hero content — centered */}
               <motion.div
-                className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between"
+                className="absolute inset-0 p-10 lg:p-14 flex flex-col items-center justify-center text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isRevealed ? 1 : 0 }}
                 transition={{
@@ -132,51 +132,49 @@ export function HomeClient() {
                   ease: EASE,
                 }}
               >
-                <div>
-                  <p
-                    className="text-[11px] uppercase font-black mb-6"
-                    style={{
-                      color: "rgba(255,255,255,0.35)",
-                      letterSpacing: "0.35em",
-                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    }}
-                  >
-                    About
-                  </p>
-                  <h2
-                    className="font-black text-white leading-none tracking-tighter"
-                    style={{
-                      fontFamily:
-                        "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                      fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
-                    }}
-                  >
-                    Koshin
-                  </h2>
-                  <p
-                    className="mt-5 text-base leading-relaxed max-w-xs font-medium"
-                    style={{ color: "rgba(255,255,255,0.55)" }}
-                  >
-                    17. Student founder. Building in the open — one shipped
-                    product at a time.
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <span
-                    className="inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.6)" }}
-                  >
-                    Read Story
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
+                <p
+                  className="text-[11px] uppercase font-black mb-6"
+                  style={{
+                    color: "rgba(255,255,255,0.35)",
+                    letterSpacing: "0.35em",
+                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                  }}
+                >
+                  About
+                </p>
+                <h2
+                  className="font-black text-white leading-none tracking-tighter"
+                  style={{
+                    fontFamily:
+                      "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                    fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
+                  }}
+                >
+                  Koshin
+                </h2>
+                <p
+                  className="mt-5 text-base leading-relaxed max-w-xs font-medium"
+                  style={{ color: "rgba(255,255,255,0.55)" }}
+                >
+                  17. Student founder. Building in the open — one shipped
+                  product at a time.
+                </p>
+                <span
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
+                >
+                  Read Story
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
               </motion.div>
 
               {/* Hover glow overlay */}
               <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.04]" />
             </Link>
           </div>
+
+          {/* ── Separator ── */}
+          <div className="hidden md:block w-px self-stretch bg-white/10 shrink-0" />
 
           {/* ── BUILDS block ── */}
           <div
@@ -237,29 +235,13 @@ export function HomeClient() {
                   ease: EASE,
                 }}
               >
-                <span
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-6 w-fit"
-                  style={{
-                    backgroundColor: "rgba(23,51,33,0.09)",
-                    color: "#173321",
-                    letterSpacing: "0.15em",
-                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                  }}
-                >
-                  <span
-                    className="w-2 h-2 rounded-full inline-block"
-                    style={{ backgroundColor: "#f6be39" }}
-                  />
-                  Available for hire
-                </span>
-
                 <h2
                   className="font-black leading-none tracking-tighter"
                   style={{
                     fontFamily:
                       "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                    fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                    color: "#173321",
+                    fontSize: "clamp(1.6rem, 3vw, 3rem)",
+                    color: "rgba(23,51,33,0.18)",
                   }}
                 >
                   WHAT I&apos;M
