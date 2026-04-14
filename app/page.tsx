@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { HomeClient } from "./home-client";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Zap, Mail } from "lucide-react";
+import { Nav } from "@/components/nav";
+import { FadeUp } from "@/components/fade-up";
 
 export const metadata: Metadata = {
   title: "Koshin — Student Developer & AI Builder",
@@ -35,7 +39,181 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeClient />
+      <Nav />
+
+      <main className="pt-32 px-6 lg:px-12 max-w-[1400px] mx-auto">
+        {/* ── Split Hero ── */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[780px]">
+          {/* Left — STORY */}
+          <FadeUp>
+            <Link href="/story" className="block h-full">
+              <div className="bg-primary rounded-[2rem] p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden group min-h-[780px] cursor-pointer">
+                {/* Ghost text */}
+                <div className="relative z-10">
+                  <h1
+                    className="text-[110px] lg:text-[160px] font-black text-on-primary-container leading-[0.8] tracking-tighter opacity-20"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    STORY
+                  </h1>
+                </div>
+
+                {/* Teaser card */}
+                <div className="relative z-10 bg-white/10 backdrop-blur-md p-8 lg:p-10 rounded-[1.5rem] border border-on-primary-container/10">
+                  <p className="text-on-primary text-xs uppercase tracking-[0.3em] font-black mb-4">
+                    The Journey
+                  </p>
+                  <h3
+                    className="text-3xl lg:text-4xl font-bold text-on-primary mb-4 leading-tight"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    Where I&apos;ve been &amp; where I&apos;m going.
+                  </h3>
+                  <p className="text-on-primary/70 text-base mb-8 max-w-sm leading-relaxed">
+                    From first lines of code to shipping real products — the
+                    story behind the work.
+                  </p>
+                  <span className="inline-flex items-center gap-3 bg-secondary text-white px-8 py-4 rounded-full font-black text-base group-hover:scale-105 active:scale-95 transition-all shadow-xl">
+                    Read Story
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+
+                {/* Background image overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-15 grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:opacity-30 rounded-[2rem] overflow-hidden">
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW2QqBVa-4RhclIfxZ51hTPZVitsYjZmhx7EQm4jyIdtXggvA1ECEDFJ5uKUFzaedogBEXHtoCKyl5S9yEer55cCsI4doOnXs9DscG604nQ3Vh-LdlzRwkh9GkrOgHHKcomBF0vyFk3rCf5Zp9CZtL50o3p-WkmbHF4gdXTfDhif64x5l0OfkvMpM7hKOrT1xmVFCuX0-YNWoTt-_6D5baThqHwEolpdgptXpRvvKx3kIfhjgU_GpuC_BU8-0v6hOyMdE5YVxdXhba"
+                    alt="Koshin portfolio — student developer and AI builder"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </Link>
+          </FadeUp>
+
+          {/* Right — WHAT I'M BUILDING */}
+          <FadeUp delay={0.08}>
+            <div className="bg-surface-container-low rounded-[2rem] p-10 lg:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden group min-h-[780px]">
+              <div className="relative z-10">
+                <span className="inline-flex items-center gap-2 bg-primary-container text-on-primary-container px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-8">
+                  <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim" />
+                  Available for hire
+                </span>
+                <h1
+                  className="text-[72px] lg:text-[100px] font-black text-primary leading-[0.85] tracking-tighter mb-8"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                  WHAT I&apos;M
+                  <br />
+                  BUILDING
+                </h1>
+                <p className="text-xl lg:text-2xl font-medium text-on-surface-variant leading-relaxed max-w-md mb-10">
+                  Crafting high-performance digital products with a focus on{" "}
+                  <span className="text-secondary font-bold">AI</span> and{" "}
+                  <span className="text-secondary font-bold">travel tech</span>.
+                </p>
+                <Link
+                  href="/work"
+                  className="inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-black text-base hover:scale-105 active:scale-95 transition-all shadow-xl group/btn"
+                >
+                  See the Work
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                </Link>
+              </div>
+
+              <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
+            </div>
+          </FadeUp>
+        </section>
+
+        {/* ── Widgets ── */}
+        <section className="mt-12 mb-32">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Sanctions Precedent */}
+            <FadeUp delay={0.04} className="md:col-span-4">
+              <Link href="/work#sanctions-precedent">
+                <div className="bg-error-container p-10 rounded-[2rem] relative overflow-hidden group h-full min-h-[200px] hover:-translate-y-1 transition-transform duration-300">
+                  <div className="relative z-10">
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-on-error-container/60 mb-3 block">
+                      Live
+                    </span>
+                    <h4
+                      className="text-on-error-container font-black text-3xl leading-tight"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      Sanctions Precedent
+                    </h4>
+                    <p className="text-on-error-container/70 font-medium mt-4 text-sm">
+                      AI-powered policy research engine
+                    </p>
+                  </div>
+                  <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <Zap className="h-36 w-36 text-on-error-container" />
+                  </div>
+                </div>
+              </Link>
+            </FadeUp>
+
+            {/* Have a project in mind? */}
+            <FadeUp delay={0.08} className="md:col-span-8">
+              <Link href="/work#contact">
+                <div className="bg-surface-container-low p-10 rounded-[2rem] flex items-center justify-between group cursor-pointer hover:-translate-y-1 transition-transform duration-300 h-full min-h-[200px]">
+                  <div className="flex items-center gap-6">
+                    <div className="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
+                      <Mail className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h4
+                        className="text-2xl font-black text-primary"
+                        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      >
+                        Have a project in mind?
+                      </h4>
+                      <p className="text-on-surface-variant font-medium text-sm mt-1">
+                        Currently available for projects and internships.
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-8 w-8 text-secondary group-hover:translate-x-3 transition-transform duration-300 shrink-0" />
+                </div>
+              </Link>
+            </FadeUp>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-surface-container-low mt-24">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-14 max-w-7xl mx-auto">
+          <div>
+            <span
+              className="text-lg font-black text-primary tracking-tighter block mb-1"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            >
+              koshin<span className="text-secondary">.</span>
+            </span>
+            <p className="text-xs uppercase tracking-[0.2em] font-semibold text-primary/40">
+              Built with Next.js & Vercel. © 2026
+            </p>
+          </div>
+          <div className="flex gap-10">
+            {[
+              { label: "GitHub", href: "https://github.com/koshinbathmax" },
+              { label: "Work", href: "/work" },
+              { label: "Contact", href: "/work#contact" },
+            ].map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-xs uppercase tracking-[0.2em] font-semibold text-primary/50 hover:text-primary transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
