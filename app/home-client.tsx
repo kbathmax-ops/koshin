@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Zap, Mail } from "lucide-react";
+import { ArrowRight, Terminal, Palette, Zap, Mail } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 
@@ -121,9 +121,9 @@ export function HomeClient() {
                 </span>
               </motion.div>
 
-              {/* Hero content — centered */}
+              {/* Hero content — fades in after blocks compress */}
               <motion.div
-                className="absolute inset-0 p-10 lg:p-14 flex flex-col items-center justify-center text-center"
+                className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isRevealed ? 1 : 0 }}
                 transition={{
@@ -132,49 +132,51 @@ export function HomeClient() {
                   ease: EASE,
                 }}
               >
-                <p
-                  className="text-[11px] uppercase font-black mb-6"
-                  style={{
-                    color: "rgba(255,255,255,0.35)",
-                    letterSpacing: "0.35em",
-                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                  }}
-                >
-                  About
-                </p>
-                <h2
-                  className="font-black text-white leading-none tracking-tighter"
-                  style={{
-                    fontFamily:
-                      "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                    fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
-                  }}
-                >
-                  Koshin
-                </h2>
-                <p
-                  className="mt-5 text-base leading-relaxed max-w-xs font-medium"
-                  style={{ color: "rgba(255,255,255,0.55)" }}
-                >
-                  17. Student founder. Building in the open — one shipped
-                  product at a time.
-                </p>
-                <span
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
-                  style={{ color: "rgba(255,255,255,0.6)" }}
-                >
-                  Read Story
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <div>
+                  <p
+                    className="text-[11px] uppercase font-black mb-6"
+                    style={{
+                      color: "rgba(255,255,255,0.35)",
+                      letterSpacing: "0.35em",
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                    }}
+                  >
+                    About
+                  </p>
+                  <h2
+                    className="font-black text-white leading-none tracking-tighter"
+                    style={{
+                      fontFamily:
+                        "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                      fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
+                    }}
+                  >
+                    Koshin
+                  </h2>
+                  <p
+                    className="mt-5 text-base leading-relaxed max-w-xs font-medium"
+                    style={{ color: "rgba(255,255,255,0.55)" }}
+                  >
+                    17. Student founder. Building in the open — one shipped
+                    product at a time.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span
+                    className="inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
+                    style={{ color: "rgba(255,255,255,0.6)" }}
+                  >
+                    Read Story
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
               </motion.div>
 
               {/* Hover glow overlay */}
               <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.04]" />
             </Link>
           </div>
-
-          {/* ── Separator ── */}
-          <div className="hidden md:block w-px self-stretch bg-white/10 shrink-0" />
 
           {/* ── BUILDS block ── */}
           <div
@@ -189,18 +191,16 @@ export function HomeClient() {
                 transition={{ duration: 0.35, ease: "easeIn" }}
               >
                 <span
-                  className="font-black leading-none tracking-tighter text-center"
+                  className="font-black leading-none tracking-tighter"
                   style={{
                     fontFamily:
                       "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                    fontSize: "clamp(3rem, 10vw, 12rem)",
+                    fontSize: "clamp(3.5rem, 13vw, 15rem)",
                     color: "rgba(23,51,33,0.09)",
                     letterSpacing: "-0.04em",
                   }}
                 >
-                  WHAT I&apos;M
-                  <br />
-                  BUILDING
+                  BUILDS
                 </span>
               </motion.div>
 
@@ -224,9 +224,9 @@ export function HomeClient() {
                 </span>
               </motion.div>
 
-              {/* Hero content — centered */}
+              {/* Hero content */}
               <motion.div
-                className="absolute inset-0 p-10 lg:p-14 flex flex-col items-center justify-center text-center"
+                className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isRevealed ? 1 : 0 }}
                 transition={{
@@ -235,36 +235,52 @@ export function HomeClient() {
                   ease: EASE,
                 }}
               >
-                <h2
-                  className="font-black leading-none tracking-tighter"
-                  style={{
-                    fontFamily:
-                      "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                    fontSize: "clamp(1.6rem, 3vw, 3rem)",
-                    color: "rgba(23,51,33,0.18)",
-                  }}
-                >
-                  WHAT I&apos;M
-                  <br />
-                  BUILDING
-                </h2>
-                <p
-                  className="mt-5 text-base leading-relaxed max-w-sm font-medium"
-                  style={{ color: "#424842" }}
-                >
-                  Crafting high-performance digital products with a focus on{" "}
-                  <span className="font-bold" style={{ color: "#9d4305" }}>
-                    AI
-                  </span>{" "}
-                  and{" "}
-                  <span className="font-bold" style={{ color: "#9d4305" }}>
-                    travel tech
+                <div>
+                  <span
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-6 w-fit"
+                    style={{
+                      backgroundColor: "rgba(23,51,33,0.09)",
+                      color: "#173321",
+                      letterSpacing: "0.15em",
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                    }}
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full inline-block"
+                      style={{ backgroundColor: "#f6be39" }}
+                    />
+                    Available for hire
                   </span>
-                  .
-                </p>
+
+                  <h2
+                    className="font-black leading-none tracking-tighter"
+                    style={{
+                      fontFamily:
+                        "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                      fontSize: "clamp(3.5rem, 6vw, 6rem)",
+                      color: "#173321",
+                    }}
+                  >
+                    BUILDS
+                  </h2>
+                  <p
+                    className="mt-5 text-base leading-relaxed max-w-sm font-medium"
+                    style={{ color: "#424842" }}
+                  >
+                    Crafting high-performance digital products with a focus on{" "}
+                    <span className="font-bold" style={{ color: "#9d4305" }}>
+                      AI
+                    </span>{" "}
+                    and{" "}
+                    <span className="font-bold" style={{ color: "#9d4305" }}>
+                      travel tech
+                    </span>
+                    .
+                  </p>
+                </div>
 
                 <span
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-black transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-black transition-colors"
                   style={{ color: "rgba(23,51,33,0.5)" }}
                 >
                   See the Work
@@ -288,27 +304,139 @@ export function HomeClient() {
           transition={{ duration: 0.8, ease: EASE }}
         >
           <div className="px-6 lg:px-12 max-w-[1400px] mx-auto">
-            {/* ── Section divider ── */}
-            <FadeUp>
-              <div className="flex items-center gap-8 mt-20 mb-12 px-2">
-                <div className="h-px flex-1 bg-outline-variant" />
-                <span
-                  className="text-[11px] font-black uppercase shrink-0"
-                  style={{
-                    color: "rgba(23,51,33,0.35)",
-                    letterSpacing: "0.4em",
-                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                  }}
-                >
-                  Live Work
-                </span>
-                <div className="h-px flex-1 bg-outline-variant" />
-              </div>
-            </FadeUp>
+            {/* ── Archive section ── */}
+            <section className="mt-24 mb-32">
+              <FadeUp>
+                <div className="flex items-end justify-between mb-16 px-2">
+                  <div>
+                    <p
+                      className="font-black uppercase text-sm mb-4"
+                      style={{
+                        color: "#9d4305",
+                        letterSpacing: "0.4em",
+                        fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      }}
+                    >
+                      Selected Lab Work
+                    </p>
+                    <h2
+                      className="font-black leading-none"
+                      style={{
+                        fontFamily:
+                          "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        fontSize: "clamp(3.5rem, 7vw, 7rem)",
+                        color: "#173321",
+                      }}
+                    >
+                      THE ARCHIVE.
+                    </h2>
+                  </div>
+                  <p
+                    className="hidden lg:block text-right max-w-xs text-sm font-medium"
+                    style={{ color: "#424842" }}
+                  >
+                    A curated collection of real projects and experiments in AI,
+                    travel, and the future of the web.
+                  </p>
+                </div>
+              </FadeUp>
 
-            {/* ── Widgets ── */}
-            <section className="mb-32">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                {/* Large image card */}
+                <FadeUp delay={0.04} className="md:col-span-8">
+                  <div className="bg-surface-container rounded-[2rem] overflow-hidden min-h-[480px] relative group">
+                    <Image
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9JGjLVE3XuFuzZhYfPp_Y2bc5JjfxSNISNmZePObkfKg9gr74hFA-2n7dK0fEk0ezpH2eiBpNLBAnRS7LQVSaw-oVouPyyYNcniFkRMFBBPqTP8MDa2LpHXvRukRinrSBErkjgElOGJr3gyBWCgIX1tGnvS9srdTvRSzI6IFj4i8HZboerSOHT1xZdJSZHzp1FGXPk2o8uw2gXLgyEodqo_q9eBK3QAdQ6Dr6gJIr_D3b9TPUHSjb_mi9dVdoc4xts7SwF6T0ca1E"
+                      alt="AI Travel Agent — student developer project"
+                      fill
+                      className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    />
+                    <div
+                      className="absolute inset-0 p-10 flex flex-col justify-end"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(23,51,33,0.85) 0%, transparent 60%)",
+                      }}
+                    >
+                      <span
+                        className="w-fit px-4 py-1 rounded-full text-xs font-black mb-4 text-white"
+                        style={{ backgroundColor: "#9d4305" }}
+                      >
+                        Case Study
+                      </span>
+                      <h3
+                        className="text-3xl font-black text-white"
+                        style={{
+                          fontFamily:
+                            "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        }}
+                      >
+                        AI Travel Agent
+                      </h3>
+                    </div>
+                  </div>
+                </FadeUp>
+
+                {/* Stats + expertise */}
+                <FadeUp delay={0.08} className="md:col-span-4 flex flex-col gap-6">
+                  <div
+                    className="p-10 rounded-[2rem] flex-1 flex flex-col justify-center text-center"
+                    style={{ backgroundColor: "#3c2b00" }}
+                  >
+                    <span
+                      className="text-6xl font-black mb-2"
+                      style={{
+                        fontFamily:
+                          "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        color: "#f6be39",
+                      }}
+                    >
+                      03+
+                    </span>
+                    <p
+                      className="uppercase font-black text-xs"
+                      style={{
+                        letterSpacing: "0.2em",
+                        color: "rgba(255,255,255,0.5)",
+                      }}
+                    >
+                      Production Launches
+                    </p>
+                  </div>
+                  <div className="bg-surface-container-high p-8 rounded-[2rem] flex-1">
+                    <h4
+                      className="text-lg font-bold mb-6"
+                      style={{
+                        fontFamily:
+                          "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        color: "#173321",
+                      }}
+                    >
+                      Core Expertise
+                    </h4>
+                    <ul className="space-y-4">
+                      {[
+                        { icon: Terminal, label: "Full-stack Engineering" },
+                        { icon: Palette, label: "Motion & UI Design" },
+                        { icon: Zap, label: "AI Agent Architecture" },
+                      ].map(({ icon: Icon, label }) => (
+                        <li key={label} className="flex items-center gap-3">
+                          <Icon
+                            className="h-5 w-5 shrink-0"
+                            style={{ color: "#9d4305" }}
+                          />
+                          <span
+                            className="font-bold text-sm"
+                            style={{ color: "#424842" }}
+                          >
+                            {label}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeUp>
+
                 {/* Sanctions Precedent */}
                 <FadeUp delay={0.1} className="md:col-span-4">
                   <Link href="/work#sanctions-precedent">
