@@ -95,7 +95,7 @@ export function HomeClient() {
                     letterSpacing: "-0.04em",
                   }}
                 >
-                  ABOUT
+                  about
                 </span>
               </motion.div>
 
@@ -132,16 +132,6 @@ export function HomeClient() {
                 }}
               >
                 <div>
-                  <p
-                    className="text-[11px] uppercase font-black mb-6"
-                    style={{
-                      color: "rgba(255,255,255,0.35)",
-                      letterSpacing: "0.35em",
-                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    }}
-                  >
-                    About
-                  </p>
                   <h2
                     className="font-black text-white leading-none tracking-tighter"
                     style={{
@@ -150,7 +140,7 @@ export function HomeClient() {
                       fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
                     }}
                   >
-                    Koshin
+                    about
                   </h2>
                   <p
                     className="mt-5 text-base leading-relaxed max-w-xs font-medium"
@@ -199,7 +189,7 @@ export function HomeClient() {
                     letterSpacing: "-0.04em",
                   }}
                 >
-                  BUILDS
+                  builds
                 </span>
               </motion.div>
 
@@ -244,7 +234,7 @@ export function HomeClient() {
                       color: "#173321",
                     }}
                   >
-                    BUILDS
+                    builds
                   </h2>
                   <p
                     className="mt-5 text-base leading-relaxed max-w-sm font-medium"
@@ -301,7 +291,7 @@ export function HomeClient() {
                           Sanctions Precedent
                         </h4>
                         <p className="text-on-error-container/70 font-medium mt-4 text-sm">
-                          AI-powered policy research engine
+                          A research tool that uses AI to surface legal precedents in sanctions law — cutting hours of manual search down to seconds.
                         </p>
                       </div>
                       <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -370,7 +360,7 @@ export function HomeClient() {
                     color: "rgba(23,51,33,0.4)",
                   }}
                 >
-                  Built with Next.js & Vercel. © 2026
+                  © 2026
                 </p>
               </div>
               <div className="flex gap-10">
