@@ -117,11 +117,9 @@ export default function WorkPage() {
               className="font-extrabold text-7xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-12"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
-              17 years old.
+              High school senior,
               <br />
-              <span className="text-secondary">Student Founder.</span>
-              <br />
-              Shipping daily.
+              <span className="text-secondary">building for good.</span>
             </h1>
             <div className="space-y-6 max-w-2xl text-lg md:text-xl text-on-surface-variant leading-relaxed">
               <p>
@@ -145,8 +143,8 @@ export default function WorkPage() {
             <div className="bg-surface-container p-6 rounded-[1.5rem] shadow-[0_10px_30px_rgba(28,28,22,0.05)] rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="aspect-square relative rounded-[1rem] overflow-hidden mb-5">
                 <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM0W96nUgELQS3-S1N4kq8A3Pr2LT6R5jKV9G6XCe6p6udmjIyyjM3eNW4_duD2rl2NvNzzE-BbF7NRTw2D-_0SevqWkCcU32NkPU6t69o0_96LOjCxFN41ubh_nJClknSVPqKNQ7PrakCxAxYixXSWyRDB-dMlOKk9K9jkizIUoX6KjlVHFACeICVUjvH_POt7P7zAMWqhDezlKIW4oNFRgumV-XSFjktdx873h2csFHmNsKKPFLNhvlpetIFEcY6MMVpFWcw6u8q"
-                  alt="Koshin — student developer and founder, 17 years old"
+                  src="/koshin.jpg"
+                  alt="Koshin — high school senior, building for good"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 />
@@ -158,7 +156,7 @@ export default function WorkPage() {
                 className="font-bold text-lg text-primary"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
-                Building the future of travel with AI.
+                High school senior, building for good.
               </p>
             </div>
           </FadeUp>
