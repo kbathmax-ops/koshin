@@ -73,12 +73,6 @@ export function Nav() {
           >
             Contact
           </Link>
-          <a
-            href="/resume.pdf"
-            className="bg-[#173321] text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-[#9d4305] transition-colors duration-200 active:scale-95"
-          >
-            Resume
-          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -115,12 +109,6 @@ export function Nav() {
           >
             Contact
           </Link>
-          <a
-            href="/resume.pdf"
-            className="bg-[#173321] text-white px-6 py-2.5 rounded-full font-bold text-sm text-center hover:bg-[#9d4305] transition-colors"
-          >
-            Resume
-          </a>
         </div>
       )}
     </nav>
