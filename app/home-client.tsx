@@ -183,8 +183,16 @@ export function HomeClient() {
           {/* ── BUILDS block ── */}
           <div
             className="relative overflow-hidden md:flex-[1.5]"
-            style={{ backgroundColor: "#fcf9ef", flexShrink: 0 }}
+            style={{ flexShrink: 0 }}
           >
+            {/* Background photo */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/builds-bg.jpg')" }}
+            />
+            {/* Dark overlay for text legibility */}
+            <div className="absolute inset-0 bg-black/50" />
+
             <Link href="/work" className="absolute inset-0 group block">
               {/* Intro: giant ghost text centered */}
               <motion.div
@@ -198,7 +206,7 @@ export function HomeClient() {
                     fontFamily:
                       "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
                     fontSize: "clamp(3.5rem, 13vw, 15rem)",
-                    color: "rgba(23,51,33,0.09)",
+                    color: "rgba(255,255,255,0.12)",
                     letterSpacing: "-0.04em",
                   }}
                 >
@@ -215,7 +223,7 @@ export function HomeClient() {
                 <span
                   className="font-black tracking-[0.5em] text-xs uppercase"
                   style={{
-                    color: "rgba(23,51,33,0.2)",
+                    color: "rgba(255,255,255,0.3)",
                     writingMode: "vertical-rl",
                     position: "absolute",
                     left: "2.5rem",
@@ -244,14 +252,18 @@ export function HomeClient() {
                       fontFamily:
                         "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
                       fontSize: "clamp(3.5rem, 6vw, 6rem)",
-                      color: "#173321",
+                      color: "rgba(255,255,255,0.92)",
+                      textShadow: "0 2px 20px rgba(0,0,0,0.5)",
                     }}
                   >
                     builds
                   </h2>
                   <p
                     className="mt-5 text-base leading-relaxed max-w-sm font-medium"
-                    style={{ color: "#424842" }}
+                    style={{
+                      color: "rgba(255,255,255,0.68)",
+                      textShadow: "0 1px 8px rgba(0,0,0,0.6)",
+                    }}
                   >
                     Discovering how AI can be used with the UN&apos;s 17 SDG
                     goals.
@@ -259,19 +271,19 @@ export function HomeClient() {
                 </div>
 
                 <span
-                  className="inline-flex items-center gap-2 text-sm font-black transition-colors"
-                  style={{ color: "rgba(23,51,33,0.5)" }}
+                  className="inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
+                  style={{
+                    color: "rgba(255,255,255,0.7)",
+                    textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                  }}
                 >
                   See the Work
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </motion.div>
 
-              {/* Decorative ambient blur */}
-              <div
-                className="absolute -bottom-12 -right-12 w-80 h-80 rounded-full blur-3xl pointer-events-none"
-                style={{ backgroundColor: "rgba(23,51,33,0.05)" }}
-              />
+              {/* Hover glow overlay */}
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.05]" />
             </Link>
           </div>
         </motion.section>
