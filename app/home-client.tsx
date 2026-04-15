@@ -74,11 +74,16 @@ export function HomeClient() {
           {/* ── ABOUT block ── */}
           <div
             className="relative overflow-hidden md:flex-1"
-            style={{
-              backgroundColor: "#173321",
-              flexShrink: 0,
-            }}
+            style={{ flexShrink: 0 }}
           >
+            {/* Background photo */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/about-bg.jpg')" }}
+            />
+            {/* Dark overlay so text stays legible */}
+            <div className="absolute inset-0 bg-black/40" />
+
             <Link href="/story" className="absolute inset-0 group block">
               {/* Intro: giant ghost text centered */}
               <motion.div
@@ -91,7 +96,7 @@ export function HomeClient() {
                   style={{
                     fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
                     fontSize: "clamp(4rem, 16vw, 18rem)",
-                    color: "rgba(255,255,255,0.13)",
+                    color: "rgba(255,255,255,0.18)",
                     letterSpacing: "-0.04em",
                   }}
                 >
@@ -108,7 +113,7 @@ export function HomeClient() {
                 <span
                   className="font-black tracking-[0.5em] text-xs uppercase"
                   style={{
-                    color: "rgba(255,255,255,0.25)",
+                    color: "rgba(255,255,255,0.35)",
                     writingMode: "vertical-rl",
                     transform: "rotate(180deg)",
                     position: "absolute",
@@ -133,18 +138,23 @@ export function HomeClient() {
               >
                 <div>
                   <h2
-                    className="font-black text-white leading-none tracking-tighter"
+                    className="font-black leading-none tracking-tighter"
                     style={{
                       fontFamily:
                         "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
                       fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
+                      color: "rgba(255,255,255,0.92)",
+                      textShadow: "0 2px 20px rgba(0,0,0,0.4)",
                     }}
                   >
                     about
                   </h2>
                   <p
                     className="mt-5 text-base leading-relaxed max-w-xs font-medium"
-                    style={{ color: "rgba(255,255,255,0.55)" }}
+                    style={{
+                      color: "rgba(255,255,255,0.72)",
+                      textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                    }}
                   >
                     I&apos;m building on a gap year — using AI for good.
                     Here&apos;s my story.
@@ -154,7 +164,10 @@ export function HomeClient() {
                 <div className="flex items-center gap-3">
                   <span
                     className="inline-flex items-center gap-2 text-sm font-black transition-colors group-hover:text-white"
-                    style={{ color: "rgba(255,255,255,0.6)" }}
+                    style={{
+                      color: "rgba(255,255,255,0.75)",
+                      textShadow: "0 1px 8px rgba(0,0,0,0.4)",
+                    }}
                   >
                     Read Story
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -163,7 +176,7 @@ export function HomeClient() {
               </motion.div>
 
               {/* Hover glow overlay */}
-              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.04]" />
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/[0.06]" />
             </Link>
           </div>
 
