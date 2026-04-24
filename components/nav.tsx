@@ -19,6 +19,7 @@ export function Nav() {
 
   const isWork = pathname === "/work" || pathname?.startsWith("/work");
   const isStory = pathname === "/story";
+  const isWebsites = pathname === "/websites" || pathname?.startsWith("/websites");
 
   return (
     <nav className="fixed top-6 left-0 right-0 z-50 px-4">
@@ -67,6 +68,18 @@ export function Nav() {
             Work
           </Link>
           <Link
+            href="/websites"
+            className={cn(
+              "font-bold tracking-tight transition-colors duration-200",
+              isWebsites
+                ? "text-[#9d4305]"
+                : "text-[#173321]/70 hover:text-[#9d4305]"
+            )}
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
+            Websites
+          </Link>
+          <Link
             href="/work#contact"
             className="text-[#173321]/70 font-medium hover:text-[#9d4305] transition-colors duration-200"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
@@ -101,6 +114,13 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Work
+          </Link>
+          <Link
+            href="/websites"
+            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors"
+            onClick={() => setMenuOpen(false)}
+          >
+            Websites
           </Link>
           <Link
             href="/work#contact"

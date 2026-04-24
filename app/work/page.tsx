@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { ContactForm } from "@/components/contact-form";
+import { WorkHillsHero } from "@/components/work-hills-hero";
 
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Travel & Policy Research",
@@ -60,8 +61,7 @@ const projects = [
       "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective — built for policy analysts and legal researchers.",
     tags: ["Claude API", "Supabase"],
     tagColors: ["bg-primary-container text-on-primary-container", "bg-tertiary-fixed-dim text-on-tertiary-fixed"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuA9JGjLVE3XuFuzZhYfPp_Y2bc5JjfxSNISNmZePObkfKg9gr74hFA-2n7dK0fEk0ezpH2eiBpNLBAnRS7LQVSaw-oVouPyyYNcniFkRMFBBPqTP8MDa2LpHXvRukRinrSBErkjgElOGJr3gyBWCgIX1tGnvS9srdTvRSzI6IFj4i8HZboerSOHT1xZdJSZHzp1FGXPk2o8uw2gXLgyEodqo_q9eBK3QAdQ6Dr6gJIr_D3b9TPUHSjb_mi9dVdoc4xts7SwF6T0ca1E",
+    image: "/sanctions-precedent-hero.png",
     year: "2025",
     status: "Live",
     problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually — there's no searchable, structured database.",
@@ -83,21 +83,6 @@ const projects = [
     solution: "A single web app with drag-and-drop city planning, auto-calculated travel times, and a shareable day-by-day itinerary.",
     stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Vercel"],
   },
-  {
-    id: "ai-travel-agent",
-    name: "AI Travel Agent",
-    description:
-      "An autonomous booking assistant that handles reservations and logistics for travel agencies using a supervisor-agent architecture.",
-    tags: ["Claude API", "Next.js"],
-    tagColors: ["bg-tertiary-fixed-dim text-on-tertiary-fixed", "bg-error-container text-on-error-container"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBWbuk_r5heu3OVFoNhcwWwydJu9JeTyQXiyMB5YjRfSo96MV2LWJLvqPOQcy4ktmge6Svo1i0uhiP8TwG6orUXUWvjS4Jbj0nOCRrHyqHvj5yalNN3HLoVl6LffHAedeJYUyP501LZaIo8DOEqxYlQwsOZL-aCB75RHjJzigMOlxdfUrZys08cb4a6XwhYQUBv4zJxSi_a4tj3IfHqwyErW4Ftv2_v7YekZ_uHJiUvghXsTfLp09WobgBQPstI9U2DQnmnK0FBoVWg",
-    year: "2026",
-    status: "In Progress",
-    problem: "Small travel agencies spend 3–5 hours per booking on research, itinerary drafting, and client communication.",
-    solution: "Supervisor agent → 3 specialists (Itinerary Builder, Research Agent, Comms Agent). Input a client brief, get a full PDF + email draft in under 10 minutes.",
-    stack: ["Next.js", "Claude Managed Agents API", "Anthropic SDK", "Stripe"],
-  },
 ];
 
 export default function WorkPage() {
@@ -109,58 +94,10 @@ export default function WorkPage() {
       />
       <Nav />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 pt-28 space-y-32">
-        {/* ── About: The Narrative ── */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-          <FadeUp className="lg:col-span-8">
-            <h1
-              className="font-extrabold text-7xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-12"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-            >
-              High school senior,
-              <br />
-              <span className="text-secondary">building for good.</span>
-            </h1>
-            <div className="space-y-6 max-w-2xl text-lg md:text-xl text-on-surface-variant leading-relaxed">
-              <p>
-                I don&apos;t believe in waiting for permission. While most are
-                checking boxes, I&apos;m building platforms. I&apos;ve spent
-                the last few years turning side-projects into high-performance
-                tools — from consumer travel apps to B2B AI SaaS.
-              </p>
-              <p>
-                My philosophy:{" "}
-                <span className="font-bold text-primary">build real things</span>
-                . I ship in the Next.js + Claude API stack, deploy on Vercel,
-                and focus relentlessly on the details that make software feel
-                premium.
-              </p>
-            </div>
-          </FadeUp>
+      {/* ── Hills Hero ── */}
+      <WorkHillsHero />
 
-          {/* Polaroid card */}
-          <FadeUp delay={0.1} className="lg:col-span-4 pb-4">
-            <div className="bg-surface-container p-6 rounded-[1.5rem] shadow-[0_10px_30px_rgba(28,28,22,0.05)] rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div className="aspect-square relative rounded-[1rem] overflow-hidden mb-5">
-                <Image
-                  src="/koshin.jpg"
-                  alt="Koshin — high school senior, building for good"
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-              <p className="text-xs uppercase tracking-[0.2em] font-black text-secondary mb-1">
-                Current Focus
-              </p>
-              <p
-                className="font-bold text-lg text-primary"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              >
-                High school senior, building for good.
-              </p>
-            </div>
-          </FadeUp>
-        </section>
+      <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-32">
 
         {/* ── Selected Works ── */}
         <section>
@@ -293,31 +230,16 @@ export default function WorkPage() {
 
       {/* Footer */}
       <footer className="bg-surface-container-low mt-24">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-14 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center gap-2 px-12 py-14">
           <span
             className="text-lg font-black text-primary tracking-tighter"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
           >
             koshin<span className="text-secondary">.</span>
           </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold text-primary/40 text-center">
-            Built with Next.js & Vercel. © 2026
+          <p className="text-xs uppercase tracking-[0.2em] font-semibold text-primary/40">
+            © 2026
           </p>
-          <div className="flex gap-8">
-            {[
-              { label: "Source", href: "https://github.com/koshinbathmax" },
-              { label: "Home", href: "/" },
-              { label: "Contact", href: "#contact" },
-            ].map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="text-xs uppercase tracking-[0.2em] font-semibold text-primary/50 hover:text-primary transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
         </div>
       </footer>
     </>

@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Zap, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
-import { FadeUp } from "@/components/fade-up";
 
 type Phase = "intro" | "revealed";
 
@@ -294,76 +293,6 @@ export function HomeClient() {
           animate={contentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <div className="px-6 lg:px-12 max-w-[1400px] mx-auto">
-            {/* ── Widgets ── */}
-            <section className="mt-16 mb-32">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                {/* Sanctions Precedent */}
-                <FadeUp delay={0.1} className="md:col-span-4">
-                  <Link href="/work#sanctions-precedent">
-                    <div className="bg-error-container p-10 rounded-[2rem] relative overflow-hidden group h-full min-h-[200px] hover:-translate-y-1 transition-transform duration-300">
-                      <div className="relative z-10">
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-on-error-container/60 mb-3 block">
-                          Live
-                        </span>
-                        <h4
-                          className="font-black text-3xl leading-tight text-on-error-container"
-                          style={{
-                            fontFamily:
-                              "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                          }}
-                        >
-                          Sanctions Precedent
-                        </h4>
-                        <p className="text-on-error-container/70 font-medium mt-4 text-sm">
-                          A research tool that uses AI to surface legal precedents in sanctions law — cutting hours of manual search down to seconds.
-                        </p>
-                      </div>
-                      <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Zap className="h-36 w-36 text-on-error-container" />
-                      </div>
-                    </div>
-                  </Link>
-                </FadeUp>
-
-                {/* Contact CTA */}
-                <FadeUp delay={0.12} className="md:col-span-8">
-                  <Link href="/work#contact">
-                    <div className="bg-surface-container-low p-10 rounded-[2rem] flex items-center justify-between group cursor-pointer hover:-translate-y-1 transition-transform duration-300 h-full min-h-[200px]">
-                      <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
-                          <Mail className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <h4
-                            className="text-2xl font-black"
-                            style={{
-                              fontFamily:
-                                "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                              color: "#173321",
-                            }}
-                          >
-                            Have a project in mind?
-                          </h4>
-                          <p
-                            className="font-medium text-sm mt-1"
-                            style={{ color: "#424842" }}
-                          >
-                            Currently available for projects and internships.
-                          </p>
-                        </div>
-                      </div>
-                      <ArrowRight
-                        className="h-8 w-8 group-hover:translate-x-3 transition-transform duration-300 shrink-0"
-                        style={{ color: "#9d4305" }}
-                      />
-                    </div>
-                  </Link>
-                </FadeUp>
-              </div>
-            </section>
-          </div>
-
           {/* Footer */}
           <footer className="bg-surface-container-low mt-24">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-14 max-w-7xl mx-auto">
