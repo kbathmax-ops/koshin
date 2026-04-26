@@ -43,7 +43,7 @@ export default function WebsitesPage() {
 
       <WebsitesHero />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 pb-32 space-y-28">
+      <main className="max-w-7xl mx-auto px-6 md:px-12 pt-24 md:pt-32 pb-32 space-y-28">
 
         {/* ── Site cards ── */}
         <section className="space-y-16">

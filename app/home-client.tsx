@@ -155,8 +155,7 @@ export function HomeClient() {
                       textShadow: "0 1px 8px rgba(0,0,0,0.5)",
                     }}
                   >
-                    I&apos;m building on a gap year — using AI for good.
-                    Here&apos;s my story.
+                    I&apos;m building with AI to help people understand the seemingly uncontrollable situations around them. Here&apos;s my story.
                   </p>
                 </div>
 

@@ -19,7 +19,7 @@ export function WorkHillsHero() {
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none px-6">
         <p
           className="text-xs font-black uppercase tracking-[0.4em] mb-6"
-          style={{ color: '#d9480f' }}
+          style={{ color: '#2d6be4' }}
         >
           Selected Work
         </p>
@@ -28,12 +28,10 @@ export function WorkHillsHero() {
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontSize: 'clamp(3.5rem, 9vw, 8rem)',
-            color: '#ffffff',
+            color: '#173321',
           }}
         >
-          High school senior,
-          <br />
-          <span style={{ color: '#d9480f' }}>building for good.</span>
+          experimenting
         </h1>
         <p
           className="text-lg font-medium max-w-xl leading-relaxed"

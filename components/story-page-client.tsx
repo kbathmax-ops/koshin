@@ -266,7 +266,7 @@ function TitleBlock() {
           maxWidth: '14ch',
         }}
       >
-        I&apos;ve never been super technical.
+        jack of all trades meets tech
       </h1>
     </motion.div>
   );
@@ -413,12 +413,13 @@ export function StoryPageClient() {
                   marginBottom: '1.5rem',
                 }}
               >
-                My background.
+                My Background
               </h2>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', listStyle: 'none', padding: 0, margin: 0 }}>
                 {[
-                  'I went to an arts school for 5 years → learned to think about everything creatively',
-                  'Joined an environmental nonprofit for 2 years',
+                  'Arts school for 5 years → learned to think creatively about every situation',
+                  'Environmental nonprofit for 2 years',
+                  'Sales with one of the best graduation trip providers',
                   'Inspired by a NATO conference → fostered a passion in international security',
                   'Learned Korean, Spanish, and French abroad',
                 ].map((item) => (
@@ -444,6 +445,31 @@ export function StoryPageClient() {
         />
 
         {/* Atmospheric wide shot */}
+        {/* Section header before Monaco photo */}
+        <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+          <p style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.65rem',
+            fontWeight: 900,
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            color: '#9d4305',
+            marginBottom: '0.75rem',
+          }}>
+            Travel
+          </p>
+          <h2 style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+            fontWeight: 900,
+            color: '#f2ecdd',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+          }}>
+            Developed a passion for travel &amp; cultural exchange.
+          </h2>
+        </div>
+
         <AtmosphericImage src={IMAGES[2]} alt="Rolling hills" />
 
         {/* 03 — What makes me different */}
@@ -453,13 +479,15 @@ export function StoryPageClient() {
           flip
           speed={1.1}
           text={
-            <StoryBlock label="03 — What makes me different" heading="My worldview & thought process.">
-              <p>
-                We&apos;ve just experienced rapid globalization with a boom in industrialization. Having heritage from two completely opposite parts of the world, I feel called to reducing socioeconomic barriers to cross-cultural connection.
-              </p>
-              <p style={{ marginTop: '1rem' }}>
-                The barrier to distribution &amp; building has thinned with AI &amp; social media. I&apos;m taking advantage of it.
-              </p>
+            <StoryBlock label="03 — What makes me different" heading="Experimenting as of April 2026">
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {['builds + distribution', 'marketing campaigns'].map((item) => (
+                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </StoryBlock>
           }
         />
