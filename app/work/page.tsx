@@ -42,14 +42,6 @@ const jsonLd = {
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "Web",
     },
-    {
-      "@type": "SoftwareApplication",
-      position: 3,
-      name: "Tattoos by Jess",
-      description: "Cinematic editorial website for a tattoo artist, built for bookings and portfolio display.",
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-    },
   ],
 };
 
@@ -75,17 +67,6 @@ const projects = [
     problem: "Community-wide air quality alerts are too broad — they don't tell you whether your specific address is actually in a danger zone.",
     solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
     stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
-  },
-  {
-    id: "tattoos-by-jess",
-    name: "Tattoos by Jess",
-    description:
-      "A cinematic, editorial website for a tattoo artist — built to convert visitors into bookings with a bold visual identity.",
-    tags: ["Next.js", "Tailwind CSS"],
-    image: "/tattoos-by-jess-hero.png",
-    problem: "Tattoo artists rely entirely on Instagram DMs for bookings — no professional web presence, no streamlined booking flow.",
-    solution: "A dark, high-impact single-page site with a direct booking CTA and portfolio gallery that reflects the artist's aesthetic.",
-    stack: ["Next.js", "Tailwind CSS", "Vercel"],
   },
 ];
 

@@ -445,32 +445,32 @@ export function StoryPageClient() {
         />
 
         {/* Atmospheric wide shot */}
-        {/* Section header before Monaco photo */}
-        <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
-          <p style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '0.65rem',
-            fontWeight: 900,
-            letterSpacing: '0.35em',
-            textTransform: 'uppercase',
-            color: '#9d4305',
-            marginBottom: '0.75rem',
-          }}>
-            Travel
-          </p>
-          <h2 style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-            fontWeight: 900,
-            color: '#f2ecdd',
-            lineHeight: 1.1,
-            letterSpacing: '-0.03em',
-          }}>
-            Developed a passion for travel &amp; cultural exchange.
-          </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+            <p style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.65rem',
+              fontWeight: 900,
+              letterSpacing: '0.35em',
+              textTransform: 'uppercase',
+              color: '#9d4305',
+              marginBottom: '0.75rem',
+            }}>
+              Travel
+            </p>
+            <h2 style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+              fontWeight: 900,
+              color: '#f2ecdd',
+              lineHeight: 1.1,
+              letterSpacing: '-0.03em',
+            }}>
+              Developed a passion for travel &amp; cultural exchange.
+            </h2>
+          </div>
+          <AtmosphericImage src={IMAGES[2]} alt="Rolling hills" />
         </div>
-
-        <AtmosphericImage src={IMAGES[2]} alt="Rolling hills" />
 
         {/* 03 — What makes me different */}
         <ParallaxRow
@@ -488,6 +488,26 @@ export function StoryPageClient() {
                   </li>
                 ))}
               </ul>
+              <Link
+                href="/work"
+                style={{
+                  marginTop: '2rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  background: '#f2ecdd',
+                  color: '#0d0d0d',
+                  padding: '0.875rem 1.75rem',
+                  borderRadius: '9999px',
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 900,
+                  fontSize: '0.875rem',
+                  textDecoration: 'none',
+                }}
+              >
+                See the Work
+                <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+              </Link>
             </StoryBlock>
           }
         />
@@ -495,10 +515,6 @@ export function StoryPageClient() {
 
       </div>
 
-      {/* CTA */}
-      <div style={{ position: 'relative', zIndex: 2, background: '#0d0d0d' }}>
-        <StoryCTA />
-      </div>
     </div>
   );
 }
