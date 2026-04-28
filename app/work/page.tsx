@@ -209,12 +209,6 @@ export default function WorkPage() {
                     Available for technical internships and freelance projects.
                     I reply to everything.
                   </p>
-                  <div className="mt-8 flex gap-3 items-center">
-                    <span style={{ color: '#c4956a' }}>@</span>
-                    <span className="font-bold text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                      github.com/koshinbathmax
-                    </span>
-                  </div>
                 </div>
                 <ContactForm />
               </div>
