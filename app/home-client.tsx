@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
-import { PaymentDemo } from "@/components/payment-demo";
+
 
 type Phase = "intro" | "revealed";
 
@@ -293,11 +293,6 @@ export function HomeClient() {
           animate={contentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          {/* Payment Demo */}
-          <section className="mt-24 mb-24">
-            <PaymentDemo />
-          </section>
-
           {/* Footer */}
           <footer className="bg-surface-container-low mt-0">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-14 max-w-7xl mx-auto">
