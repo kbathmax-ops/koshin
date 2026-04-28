@@ -45,10 +45,23 @@ const jsonLd = {
   ],
 };
 
-const projects = [
+type Project = {
+  id: string;
+  name: string;
+  href: string;
+  description: string;
+  tags: string[];
+  image: string;
+  problem: string;
+  solution: string;
+  stack: string[];
+};
+
+const projects: Project[] = [
   {
     id: "sanctions-precedent",
     name: "Sanctions Precedent",
+    href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
     description:
       "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective — built for policy analysts and legal researchers.",
     tags: ["Claude API", "Supabase"],
@@ -60,6 +73,7 @@ const projects = [
   {
     id: "ember",
     name: "Ember",
+    href: "https://ember-app-psi.vercel.app/",
     description:
       "Hyperlocal wildfire smoke alerts for BC and AB residents — alerts tied to your exact address, not your entire community.",
     tags: ["Next.js", "Claude API"],
@@ -89,12 +103,9 @@ export default function WorkPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {projects.map((project, i) => (
               <FadeUp key={project.id} delay={i * 0.08}>
-                <div id={project.id} className="group cursor-pointer scroll-mt-28">
-                  {/* Image */}
-                  <div
-                    className="rounded-[1.5rem] overflow-hidden mb-8 transition-transform duration-500 group-hover:-translate-y-2"
-                    style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}
-                  >
+                <div id={project.id} className="group scroll-mt-28">
+                  {/* Image — clicks through to live project */}
+                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block rounded-[1.5rem] overflow-hidden mb-8 transition-transform duration-500 group-hover:-translate-y-2" style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
                     <div className="aspect-[16/10] relative">
                       <Image
                         src={project.image}
@@ -104,7 +115,7 @@ export default function WorkPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
-                  </div>
+                  </a>
 
                   {/* Info */}
                   <div className="px-2">
@@ -149,7 +160,7 @@ export default function WorkPage() {
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-4">
                       {project.stack.map((s) => (
                         <span
                           key={s}
@@ -159,6 +170,15 @@ export default function WorkPage() {
                           {s}
                         </span>
                       ))}
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-auto inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100"
+                        style={{ color: '#c4956a', opacity: 0.85 }}
+                      >
+                        View Project <ArrowRight className="h-4 w-4" />
+                      </a>
                     </div>
                   </div>
                 </div>
