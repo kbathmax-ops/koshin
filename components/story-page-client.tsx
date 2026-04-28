@@ -227,8 +227,6 @@ function Section03() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const landscapeY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const portraitY  = useTransform(scrollYProgress, [0, 1], [80, -90]);
-  const portraitRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   return (
     <div
@@ -241,60 +239,28 @@ function Section03() {
         padding: '0 clamp(1.5rem, 5vw, 5rem)',
       }}
     >
-      {/* Image stack — both clipped inside one rounded rectangle */}
+      {/* Single portrait */}
       <motion.div
         style={{
-          flex: '0 0 52%',
-          position: 'relative',
+          flex: '0 0 42%',
           y: landscapeY,
           borderRadius: '1rem',
           overflow: 'hidden',
           boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
-          aspectRatio: '16/9',
         }}
       >
-        {/* Landscape fills the frame */}
         <img
-          src="/photo-mountains.jpg"
-          alt="Hazy mountain layers"
+          src="/photo-mirror-selfie.jpg"
+          alt="Mirror selfie"
           style={{
             width: '100%',
-            height: '100%',
+            aspectRatio: '3/4',
             objectFit: 'cover',
-            objectPosition: 'center 40%',
+            objectPosition: 'center 30%',
             display: 'block',
-            filter: 'brightness(0.72) saturate(0.85)',
+            filter: 'brightness(0.88) saturate(0.9)',
           }}
         />
-
-        {/* Portrait — floats inside the rectangle, bottom-right */}
-        <motion.div
-          style={{
-            y: portraitY,
-            rotate: portraitRotate,
-            position: 'absolute',
-            bottom: '0.75rem',
-            right: '0.75rem',
-            width: '36%',
-            borderRadius: '0.625rem',
-            overflow: 'hidden',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.65)',
-            border: '1.5px solid rgba(255,255,255,0.1)',
-          }}
-        >
-          <img
-            src="/photo-mirror-selfie.jpg"
-            alt="Mirror selfie"
-            style={{
-              width: '100%',
-              aspectRatio: '3/4',
-              objectFit: 'cover',
-              objectPosition: 'center 30%',
-              display: 'block',
-              filter: 'brightness(0.88) saturate(0.9)',
-            }}
-          />
-        </motion.div>
       </motion.div>
 
       {/* Text */}
