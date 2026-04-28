@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Lenis from 'lenis';
 
 /* ─── Landscape images (curated for story mood) ─── */
@@ -218,6 +218,299 @@ function AtmosphericImage({ src, alt }: { src: string; alt: string }) {
           }}
         />
       </motion.div>
+    </div>
+  );
+}
+
+/* ─── Section 03 — overlapping landscape + portrait ─── */
+function Section03() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const landscapeY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const portraitY  = useTransform(scrollYProgress, [0, 1], [80, -90]);
+  const portraitRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 'clamp(2rem, 5vw, 5rem)',
+        padding: '0 clamp(1.5rem, 5vw, 5rem)',
+      }}
+    >
+      {/* Image stack */}
+      <div style={{ flex: '0 0 52%', position: 'relative', minHeight: 320 }}>
+        {/* Landscape — wide horizontal */}
+        <motion.div
+          style={{
+            y: landscapeY,
+            borderRadius: '1rem',
+            overflow: 'hidden',
+            boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
+          }}
+        >
+          <img
+            src="/photo-mountains.jpg"
+            alt="Hazy mountain layers"
+            style={{
+              width: '100%',
+              aspectRatio: '16/9',
+              objectFit: 'cover',
+              objectPosition: 'center 40%',
+              display: 'block',
+              filter: 'brightness(0.72) saturate(0.85)',
+            }}
+          />
+        </motion.div>
+
+        {/* Portrait — overlapping bottom-right */}
+        <motion.div
+          style={{
+            y: portraitY,
+            rotate: portraitRotate,
+            position: 'absolute',
+            bottom: '-3.5rem',
+            right: '-2rem',
+            width: '38%',
+            borderRadius: '0.875rem',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
+            border: '2px solid rgba(255,255,255,0.07)',
+          }}
+        >
+          <img
+            src="/photo-mirror-selfie.jpg"
+            alt="Mirror selfie"
+            style={{
+              width: '100%',
+              aspectRatio: '3/4',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+              display: 'block',
+              filter: 'brightness(0.85) saturate(0.9)',
+            }}
+          />
+        </motion.div>
+      </div>
+
+      {/* Text */}
+      <div style={{ flex: 1, paddingBottom: '2rem' }}>
+        <StoryBlock label="03 — What makes me different" heading="Experimenting as of April 2026">
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            {['builds + distribution', 'marketing campaigns'].map((item) => (
+              <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/work"
+            style={{
+              marginTop: '2rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: '#f2ecdd',
+              color: '#0d0d0d',
+              padding: '0.875rem 1.75rem',
+              borderRadius: '9999px',
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 900,
+              fontSize: '0.875rem',
+              textDecoration: 'none',
+            }}
+          >
+            See the Work
+            <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+          </Link>
+        </StoryBlock>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Travel carousel ─── */
+const TRAVEL_SLIDES = [
+  {
+    src: '/photo-monaco.jpg',
+    alt: 'Monaco',
+    caption: 'Monaco — harbour views with friends',
+    captionColor: '#f0a96b',  // warm amber against cool grey overcast
+  },
+  {
+    src: '/photo-spain-volunteer.jpg',
+    alt: 'Spain volunteer program',
+    caption: 'Spain — international English volunteer program',
+    captionColor: '#7ee8c8',  // cool mint against warm amber night lights
+  },
+  {
+    src: '/photo-concert.jpg',
+    alt: 'Concert',
+    caption: 'Live music — the energy is different',
+    captionColor: '#b8ff6e',  // lime against dark stage blacks
+  },
+  {
+    src: '/photo-jeju.jpg',
+    alt: 'Jeju-do, Korea',
+    caption: 'Jeju-do, Korea — volcanic coastline walks',
+    captionColor: '#ff8c5a',  // warm coral against cool grey sky and green grass
+  },
+  {
+    src: '/photo-malaga.jpg',
+    alt: 'Málaga, Spain',
+    caption: 'Málaga, Spain — learning expresiones malagueñas',
+    captionColor: '#5ab4ff',  // electric blue against warm white/green classroom
+  },
+];
+
+function TravelCarousel() {
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState(1);
+
+  const go = (next: number) => {
+    setDir(next > index ? 1 : -1);
+    setIndex(next);
+  };
+
+  const prev = () => go((index - 1 + TRAVEL_SLIDES.length) % TRAVEL_SLIDES.length);
+  const next = () => go((index + 1) % TRAVEL_SLIDES.length);
+
+  const slide = TRAVEL_SLIDES[index];
+
+  return (
+    <div
+      style={{
+        padding: '0 clamp(1.5rem, 5vw, 5rem)',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          position: 'relative',
+          borderRadius: '1rem',
+          overflow: 'hidden',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
+          aspectRatio: '4/3',
+        }}
+      >
+        {/* Slides */}
+        <AnimatePresence initial={false} custom={dir}>
+          <motion.div
+            key={index}
+            custom={dir}
+            initial={{ x: dir * 60, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: dir * -60, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            style={{ position: 'absolute', inset: 0 }}
+          >
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 55%',
+                display: 'block',
+                filter: 'brightness(0.6) saturate(0.7)',
+              }}
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Caption */}
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={index + '-caption'}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
+            style={{
+              position: 'absolute',
+              bottom: '1.25rem',
+              left: '1.5rem',
+              right: '5rem',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              letterSpacing: '0.06em',
+              color: slide.captionColor,
+              zIndex: 10,
+              lineHeight: 1.4,
+            }}
+          >
+            {slide.caption}
+          </motion.p>
+        </AnimatePresence>
+
+        {/* Dots */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '1.4rem',
+            right: '1.5rem',
+            display: 'flex',
+            gap: '0.4rem',
+            zIndex: 10,
+          }}
+        >
+          {TRAVEL_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              style={{
+                width: i === index ? '1.4rem' : '0.4rem',
+                height: '0.4rem',
+                borderRadius: '9999px',
+                background: i === index ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'width 0.3s ease, background 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Prev / Next arrows */}
+        {[
+          { fn: prev, label: 'Previous', side: 'left' as const, Icon: ChevronLeft },
+          { fn: next, label: 'Next',     side: 'right' as const, Icon: ChevronRight },
+        ].map(({ fn, label, side, Icon }) => (
+          <button
+            key={side}
+            onClick={fn}
+            aria-label={label}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              [side]: '0.75rem',
+              transform: 'translateY(-50%)',
+              background: 'rgba(0,0,0,0.35)',
+              backdropFilter: 'blur(6px)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              borderRadius: '50%',
+              width: '2rem',
+              height: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'rgba(255,255,255,0.8)',
+              zIndex: 10,
+              transition: 'background 0.2s',
+            }}
+          >
+            <Icon size={14} />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -469,48 +762,11 @@ export function StoryPageClient() {
               Developed a passion for travel &amp; cultural exchange.
             </h2>
           </div>
-          <AtmosphericImage src={IMAGES[2]} alt="Rolling hills" />
+          <TravelCarousel />
         </div>
 
         {/* 03 — What makes me different */}
-        <ParallaxRow
-          src={IMAGES[3]}
-          alt="Forest path"
-          flip
-          speed={1.1}
-          text={
-            <StoryBlock label="03 — What makes me different" heading="Experimenting as of April 2026">
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                {['builds + distribution', 'marketing campaigns'].map((item) => (
-                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/work"
-                style={{
-                  marginTop: '2rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  background: '#f2ecdd',
-                  color: '#0d0d0d',
-                  padding: '0.875rem 1.75rem',
-                  borderRadius: '9999px',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 900,
-                  fontSize: '0.875rem',
-                  textDecoration: 'none',
-                }}
-              >
-                See the Work
-                <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-              </Link>
-            </StoryBlock>
-          }
-        />
+        <Section03 />
 
 
       </div>
