@@ -241,44 +241,45 @@ function Section03() {
         padding: '0 clamp(1.5rem, 5vw, 5rem)',
       }}
     >
-      {/* Image stack */}
-      <div style={{ flex: '0 0 52%', position: 'relative', minHeight: 320 }}>
-        {/* Landscape — wide horizontal */}
-        <motion.div
+      {/* Image stack — both clipped inside one rounded rectangle */}
+      <motion.div
+        style={{
+          flex: '0 0 52%',
+          position: 'relative',
+          y: landscapeY,
+          borderRadius: '1rem',
+          overflow: 'hidden',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
+          aspectRatio: '16/9',
+        }}
+      >
+        {/* Landscape fills the frame */}
+        <img
+          src="/photo-mountains.jpg"
+          alt="Hazy mountain layers"
           style={{
-            y: landscapeY,
-            borderRadius: '1rem',
-            overflow: 'hidden',
-            boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 40%',
+            display: 'block',
+            filter: 'brightness(0.72) saturate(0.85)',
           }}
-        >
-          <img
-            src="/photo-mountains.jpg"
-            alt="Hazy mountain layers"
-            style={{
-              width: '100%',
-              aspectRatio: '16/9',
-              objectFit: 'cover',
-              objectPosition: 'center 40%',
-              display: 'block',
-              filter: 'brightness(0.72) saturate(0.85)',
-            }}
-          />
-        </motion.div>
+        />
 
-        {/* Portrait — overlapping bottom-right */}
+        {/* Portrait — floats inside the rectangle, bottom-right */}
         <motion.div
           style={{
             y: portraitY,
             rotate: portraitRotate,
             position: 'absolute',
-            bottom: '-3.5rem',
-            right: '-2rem',
-            width: '38%',
-            borderRadius: '0.875rem',
+            bottom: '0.75rem',
+            right: '0.75rem',
+            width: '36%',
+            borderRadius: '0.625rem',
             overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
-            border: '2px solid rgba(255,255,255,0.07)',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.65)',
+            border: '1.5px solid rgba(255,255,255,0.1)',
           }}
         >
           <img
@@ -290,11 +291,11 @@ function Section03() {
               objectFit: 'cover',
               objectPosition: 'center top',
               display: 'block',
-              filter: 'brightness(0.85) saturate(0.9)',
+              filter: 'brightness(0.88) saturate(0.9)',
             }}
           />
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Text */}
       <div style={{ flex: 1, paddingBottom: '2rem' }}>
@@ -346,12 +347,6 @@ const TRAVEL_SLIDES = [
     alt: 'Spain volunteer program',
     caption: 'Spain — international English volunteer program',
     captionColor: '#7ee8c8',  // cool mint against warm amber night lights
-  },
-  {
-    src: '/photo-concert.jpg',
-    alt: 'Concert',
-    caption: 'Live music — the energy is different',
-    captionColor: '#b8ff6e',  // lime against dark stage blacks
   },
   {
     src: '/photo-jeju.jpg',
