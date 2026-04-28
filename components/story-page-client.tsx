@@ -289,7 +289,7 @@ function Section03() {
               width: '100%',
               aspectRatio: '3/4',
               objectFit: 'cover',
-              objectPosition: 'center top',
+              objectPosition: 'center 30%',
               display: 'block',
               filter: 'brightness(0.88) saturate(0.9)',
             }}
