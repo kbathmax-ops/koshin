@@ -156,7 +156,7 @@ export function HomeClient() {
                       textShadow: "0 1px 8px rgba(0,0,0,0.5)",
                     }}
                   >
-                    I&apos;m building with AI to help people understand the seemingly uncontrollable situations around them. Here&apos;s my story.
+                    Non-linear career path — took a gap year after HS to build with AI and GTM strategy. I&apos;m building with AI to help people understand the seemingly uncontrollable situations around them. Here&apos;s my story.
                   </p>
                 </div>
 
@@ -209,7 +209,7 @@ export function HomeClient() {
                     letterSpacing: "-0.04em",
                   }}
                 >
-                  builds
+                  work
                 </span>
               </motion.div>
 
@@ -229,7 +229,7 @@ export function HomeClient() {
                     fontFamily: "var(--font-manrope), Manrope, sans-serif",
                   }}
                 >
-                  work · builds · projects
+                  work · projects
                 </span>
               </motion.div>
 
@@ -255,7 +255,7 @@ export function HomeClient() {
                       textShadow: "0 2px 20px rgba(0,0,0,0.5)",
                     }}
                   >
-                    builds
+                    work
                   </h2>
                   <p
                     className="mt-5 text-base leading-relaxed max-w-sm font-medium"

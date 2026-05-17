@@ -267,7 +267,7 @@ function Section03() {
       <div style={{ flex: 1, paddingBottom: '2rem' }}>
         <StoryBlock label="03 — What makes me different" heading="Experimenting as of April 2026">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {['builds + distribution', 'marketing campaigns'].map((item) => (
+            {['AI for real estate', 'growth + social media campaigns for startups'].map((item) => (
               <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
                 <span>{item}</span>
@@ -577,7 +577,7 @@ function StoryCTA() {
           Ready to build something?
         </p>
         <p style={{ color: 'rgba(242,236,221,0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
-          Available for internships and freelance projects. I reply to everything.
+          website design, building projects with ai, growth marketing? Open to everything marketing-engineer-esque
         </p>
       </div>
 
