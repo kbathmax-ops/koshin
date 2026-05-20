@@ -140,25 +140,6 @@ export default function WorkPage() {
                       {project.description}
                     </p>
 
-                    {/* Mini case study */}
-                    <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div className="rounded-[1rem] p-4" style={{ background: '#111111' }}>
-                        <p className="text-xs font-black uppercase tracking-widest mb-2" style={{ color: '#c4956a' }}>
-                          Problem
-                        </p>
-                        <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                          {project.problem}
-                        </p>
-                      </div>
-                      <div className="rounded-[1rem] p-4" style={{ background: '#111111' }}>
-                        <p className="text-xs font-black uppercase tracking-widest mb-2" style={{ color: '#c4956a' }}>
-                          Solution
-                        </p>
-                        <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                          {project.solution}
-                        </p>
-                      </div>
-                    </div>
 
                     <div className="flex flex-wrap items-center gap-2 mt-4">
                       {project.stack.map((s) => (
@@ -206,8 +187,7 @@ export default function WorkPage() {
                     something together.
                   </h2>
                   <p style={{ color: 'rgba(255,255,255,0.5)' }}>
-                    Available for technical internships and freelance projects.
-                    I reply to everything.
+                    website design, building projects with ai, growth marketing? Open to everything marketing-engineer-esque
                   </p>
                 </div>
                 <ContactForm />

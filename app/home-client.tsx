@@ -149,15 +149,6 @@ export function HomeClient() {
                   >
                     about
                   </h2>
-                  <p
-                    className="mt-5 text-base leading-relaxed max-w-xs font-medium"
-                    style={{
-                      color: "rgba(255,255,255,0.72)",
-                      textShadow: "0 1px 8px rgba(0,0,0,0.5)",
-                    }}
-                  >
-                    Non-linear career path — took a gap year after HS to build with AI and GTM strategy. I&apos;m building with AI to help people understand the seemingly uncontrollable situations around them. Here&apos;s my story.
-                  </p>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -264,8 +255,7 @@ export function HomeClient() {
                       textShadow: "0 1px 8px rgba(0,0,0,0.6)",
                     }}
                   >
-                    Discovering how AI can be used with the UN&apos;s 17 SDG
-                    goals.
+                    Cultivating community & marketing for projects to stand out in the AI builder era.
                   </p>
                 </div>
 
