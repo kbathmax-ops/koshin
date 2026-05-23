@@ -8,13 +8,13 @@ import { ContactForm } from "@/components/contact-form";
 import { WorkHillsHero } from "@/components/work-hills-hero";
 
 export const metadata: Metadata = {
-  title: "Work & Projects — AI, Travel & Policy Research",
+  title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), Euro Summer Planner (travel app), and AI Travel Agent (B2B SaaS). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), Ember (wildfire alert app), and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
-    title: "Work & Projects — AI, Travel & Policy Research | Koshin",
+    title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer case studies: AI sanctions research engine, travel planning app, and autonomous B2B booking agent — built with Next.js and Claude API.",
+      "Student developer and marketer case studies: AI sanctions research engine, wildfire alert app, and growing a tattoo artist's audience by 2k and booking her out months in advance.",
     url: "https://portfolio-koshin2.vercel.app/work",
   },
   alternates: { canonical: "https://portfolio-koshin2.vercel.app/work" },
@@ -81,6 +81,30 @@ const projects: Project[] = [
     problem: "Community-wide air quality alerts are too broad — they don't tell you whether your specific address is actually in a danger zone.",
     solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
     stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
+  },
+  {
+    id: "toronto-cafe-roulette",
+    name: "Toronto Cafe Roulette",
+    href: "https://toronto-cafe-roulette.vercel.app/",
+    description:
+      "Spin the wheel and discover your next coffee chat — a curated roulette of Toronto's best independent cafes, hand-picked for quality and atmosphere.",
+    tags: ["Next.js", "Design"],
+    image: "/toronto-cafe-roulette-hero.png",
+    problem: "Toronto has hundreds of incredible independent cafes but finding the right one for a coffee chat means scrolling through generic Yelp lists and guessing.",
+    solution: "A dead-simple roulette that surfaces only high-quality, curated spots — spin once, get a great cafe, stop overthinking it.",
+    stack: ["HTML", "CSS", "JavaScript", "Vercel"],
+  },
+  {
+    id: "tattoos-by-jess",
+    name: "Tattoos by Jess",
+    href: "https://www.instagram.com/tattoosbyjess.ca",
+    description:
+      "Full-stack social media marketing for an independent tattoo artist — grew her combined following by 2k and booked her out months in advance.",
+    tags: ["Growth Marketing", "Social Media"],
+    image: "/tattoos-by-jess-hero.png",
+    problem: "Jess had exceptional work but no real online presence — she was relying entirely on word-of-mouth with no pipeline of inbound bookings.",
+    solution: "Built and executed a content strategy across platforms, optimized her profile positioning, and turned her social into a booking engine that filled her calendar months out.",
+    stack: ["Instagram", "Content Strategy", "Brand Positioning", "Audience Growth"],
   },
 ];
 
