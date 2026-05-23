@@ -63,10 +63,10 @@ const projects: Project[] = [
     name: "Sanctions Precedent",
     href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
     description:
-      "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective — built for policy analysts and legal researchers.",
+      "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
     tags: ["Claude API", "Supabase"],
     image: "/sanctions-precedent-hero.png",
-    problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually — there's no searchable, structured database.",
+    problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually. There's no searchable, structured database.",
     solution: "Natural language search over a curated Supabase corpus of historical sanctions regimes. Claude analyzes the query, retrieves relevant precedents, and synthesises a structured brief.",
     stack: ["Next.js", "Claude API", "Anthropic SDK", "Supabase"],
   },
@@ -75,10 +75,10 @@ const projects: Project[] = [
     name: "Ember",
     href: "https://ember-app-psi.vercel.app/",
     description:
-      "Hyperlocal wildfire smoke alerts for BC and AB residents — alerts tied to your exact address, not your entire community.",
+      "Hyperlocal wildfire smoke alerts for BC and AB residents. Alerts tied to your exact address, not your entire community.",
     tags: ["Next.js", "Claude API"],
     image: "/ember-hero.png",
-    problem: "Community-wide air quality alerts are too broad — they don't tell you whether your specific address is actually in a danger zone.",
+    problem: "Community-wide air quality alerts are too broad. They don't tell you whether your specific address is actually in a danger zone.",
     solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
     stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
   },
@@ -87,11 +87,11 @@ const projects: Project[] = [
     name: "Toronto Cafe Roulette",
     href: "https://toronto-cafe-roulette.vercel.app/",
     description:
-      "Spin the wheel and discover your next coffee chat — a curated roulette of Toronto's best independent cafes, hand-picked for quality and atmosphere.",
+      "Spin the wheel and discover your next coffee chat. A curated roulette of Toronto's best independent cafes, hand-picked for quality and atmosphere.",
     tags: ["Next.js", "Design"],
     image: "/toronto-cafe-roulette-hero.png",
     problem: "Toronto has hundreds of incredible independent cafes but finding the right one for a coffee chat means scrolling through generic Yelp lists and guessing.",
-    solution: "A dead-simple roulette that surfaces only high-quality, curated spots — spin once, get a great cafe, stop overthinking it.",
+    solution: "A dead-simple roulette that surfaces only high-quality, curated spots. Spin once, get a great cafe, stop overthinking it.",
     stack: ["HTML", "CSS", "JavaScript", "Vercel"],
   },
   {
@@ -99,10 +99,10 @@ const projects: Project[] = [
     name: "Tattoos by Jess",
     href: "https://www.instagram.com/tattoosbyjess.ca",
     description:
-      "Full-stack social media marketing for an independent tattoo artist — grew her combined following by 2k and booked her out months in advance.",
+      "Full-stack social media marketing for an independent tattoo artist. Grew her combined following by 2k and booked her out months in advance.",
     tags: ["Growth Marketing", "Social Media"],
     image: "/tattoos-by-jess-hero.png",
-    problem: "Jess had exceptional work but no real online presence — she was relying entirely on word-of-mouth with no pipeline of inbound bookings.",
+    problem: "Jess had exceptional work but no real online presence. She was relying entirely on word-of-mouth with no pipeline of inbound bookings.",
     solution: "Built and executed a content strategy across platforms, optimized her profile positioning, and turned her social into a booking engine that filled her calendar months out.",
     stack: ["Instagram", "Content Strategy", "Brand Positioning", "Audience Growth"],
   },
@@ -143,17 +143,6 @@ export default function WorkPage() {
 
                   {/* Info */}
                   <div className="px-2">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider"
-                          style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
                     <h3
                       className="font-bold text-3xl mb-3"
                       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#ffffff' }}
@@ -166,20 +155,11 @@ export default function WorkPage() {
 
 
                     <div className="flex flex-wrap items-center gap-2 mt-4">
-                      {project.stack.map((s) => (
-                        <span
-                          key={s}
-                          className="px-3 py-1 rounded-full text-xs font-bold"
-                          style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}
-                        >
-                          {s}
-                        </span>
-                      ))}
                       <a
                         href={project.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-auto inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100"
+                        className="inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100"
                         style={{ color: '#c4956a', opacity: 0.85 }}
                       >
                         View Project <ArrowRight className="h-4 w-4" />
