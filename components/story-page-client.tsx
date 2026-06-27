@@ -590,7 +590,7 @@ function StoryCTA() {
           Ready to build something?
         </p>
         <p style={{ color: 'rgba(242,236,221,0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
-          website design, building projects with ai, growth marketing? Open to everything marketing-engineer-esque
+          looking for growth, content, ugc, ai consulting? I'll get back to you within a day
         </p>
       </div>
 

@@ -191,7 +191,7 @@ export default function WorkPage() {
                     something together.
                   </h2>
                   <p style={{ color: 'rgba(255,255,255,0.5)' }}>
-                    website design, building projects with ai, growth marketing? Open to everything marketing-engineer-esque
+                    looking for growth, content, ugc, ai consulting? I'll get back to you within a day
                   </p>
                 </div>
                 <ContactForm />
