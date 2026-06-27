@@ -59,30 +59,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    id: "sanctions-precedent",
-    name: "Sanctions Precedent",
-    href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
-    description:
-      "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
-    tags: ["Claude API", "Supabase"],
-    image: "/sanctions-precedent-hero.png",
-    problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually. There's no searchable, structured database.",
-    solution: "Natural language search over a curated Supabase corpus of historical sanctions regimes. Claude analyzes the query, retrieves relevant precedents, and synthesises a structured brief.",
-    stack: ["Next.js", "Claude API", "Anthropic SDK", "Supabase"],
-  },
-  {
-    id: "ember",
-    name: "Ember",
-    href: "https://ember-app-psi.vercel.app/",
-    description:
-      "Hyperlocal wildfire smoke alerts for BC and AB residents. Alerts tied to your exact address, not your entire community.",
-    tags: ["Next.js", "Claude API"],
-    image: "/ember-hero.png",
-    problem: "Community-wide air quality alerts are too broad. They don't tell you whether your specific address is actually in a danger zone.",
-    solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
-    stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
-  },
-  {
     id: "toronto-cafe-roulette",
     name: "Toronto Cafe Roulette",
     href: "https://toronto-cafe-roulette.vercel.app/",
@@ -105,6 +81,30 @@ const projects: Project[] = [
     problem: "Jess had exceptional work but no real online presence. She was relying entirely on word-of-mouth with no pipeline of inbound bookings.",
     solution: "Built and executed a content strategy across platforms, optimized her profile positioning, and turned her social into a booking engine that filled her calendar months out.",
     stack: ["Instagram", "Content Strategy", "Brand Positioning", "Audience Growth"],
+  },
+  {
+    id: "sanctions-precedent",
+    name: "Sanctions Precedent",
+    href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
+    description:
+      "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
+    tags: ["Claude API", "Supabase"],
+    image: "/sanctions-precedent-hero.png",
+    problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually. There's no searchable, structured database.",
+    solution: "Natural language search over a curated Supabase corpus of historical sanctions regimes. Claude analyzes the query, retrieves relevant precedents, and synthesises a structured brief.",
+    stack: ["Next.js", "Claude API", "Anthropic SDK", "Supabase"],
+  },
+  {
+    id: "ember",
+    name: "Ember",
+    href: "https://ember-app-psi.vercel.app/",
+    description:
+      "Hyperlocal wildfire smoke alerts for BC and AB residents. Alerts tied to your exact address, not your entire community.",
+    tags: ["Next.js", "Claude API"],
+    image: "/ember-hero.png",
+    problem: "Community-wide air quality alerts are too broad. They don't tell you whether your specific address is actually in a danger zone.",
+    solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
+    stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
   },
 ];
 

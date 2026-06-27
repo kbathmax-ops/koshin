@@ -265,12 +265,24 @@ function Section03() {
 
       {/* Text */}
       <div style={{ flex: 1, paddingBottom: '2rem' }}>
-        <StoryBlock label="03 — What makes me different" heading="Experimenting as of April 2026">
+        <StoryBlock label="03 - What I'm doing now" heading="AI Consulting, Content, Community">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {['AI for real estate', 'growth + social media campaigns for startups'].map((item) => (
-              <li key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            {[
+              { text: 'Fitting tools to save business owners time with admin' },
+              { text: 'Documenting unconventionality — ', link: { href: 'https://www.instagram.com/koshinbmx/', label: 'see here' } },
+              { text: 'Growth for startups' },
+              { text: 'Building 2 communities in Toronto' },
+            ].map((item) => (
+              <li key={item.text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
-                <span>{item}</span>
+                <span>
+                  {item.text}
+                  {item.link && (
+                    <a href={item.link.href} target="_blank" rel="noopener noreferrer" style={{ color: '#9d4305', fontWeight: 700, textDecoration: 'underline' }}>
+                      {item.link.label}
+                    </a>
+                  )}
+                </span>
               </li>
             ))}
           </ul>
@@ -354,8 +366,9 @@ function TravelCarousel() {
           position: 'relative',
           borderRadius: '1rem',
           overflow: 'hidden',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
-          aspectRatio: '4/3',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
+          aspectRatio: '16/7',
+          maxWidth: '640px',
         }}
       >
         {/* Slides */}
@@ -646,7 +659,7 @@ export function StoryPageClient() {
       </div>
 
       {/* Parallax story rows */}
-      <div style={{ position: 'relative', zIndex: 2, background: '#0d0d0d', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+      <div style={{ position: 'relative', zIndex: 2, background: '#0d0d0d', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
         {/* 01 — Origin */}
         <ParallaxRow
@@ -699,7 +712,7 @@ export function StoryPageClient() {
         />
 
         {/* Atmospheric wide shot */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
             <p style={{
               fontFamily: 'JetBrains Mono, monospace',
