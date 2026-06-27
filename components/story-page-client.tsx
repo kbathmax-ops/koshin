@@ -733,7 +733,7 @@ export function StoryPageClient() {
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
             }}>
-              Developed a passion for travel &amp; cultural exchange.
+              Learned I love cultural exchange.
             </h2>
           </div>
           <TravelCarousel />
