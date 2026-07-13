@@ -7,7 +7,7 @@ export function WebsitesHero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ height: '100vh', background: '#fcf9ef' }}
+      style={{ height: '100dvh', background: '#fcf9ef' }}
     >
       {/* SVG grain filter */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
@@ -61,12 +61,12 @@ export function WebsitesHero() {
 
       {/* Text */}
       <div
-        className="relative flex flex-col items-center justify-center text-center gap-6 max-w-7xl mx-auto px-6 md:px-12 h-full"
-        style={{ paddingTop: '9rem', paddingBottom: '5rem', zIndex: 10 }}
+        className="relative flex flex-col items-center justify-center text-center gap-6 max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16 md:pt-36 md:pb-20 h-full"
+        style={{ zIndex: 10 }}
       >
         <div>
           <h1
-            className="font-extrabold text-7xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-6"
+            className="font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-6"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
           >
             Websites

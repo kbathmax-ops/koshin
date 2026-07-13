@@ -14,6 +14,15 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function HomeClient() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [contentVisible, setContentVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     // Lock scroll during intro sequence
@@ -55,10 +64,10 @@ export function HomeClient() {
           animate={
             isRevealed
               ? {
-                  height: "520px",
+                  height: isMobile ? "640px" : "520px",
                   marginTop: "5.5rem",
-                  marginLeft: "1.5rem",
-                  marginRight: "1.5rem",
+                  marginLeft: isMobile ? "1rem" : "1.5rem",
+                  marginRight: isMobile ? "1rem" : "1.5rem",
                   borderRadius: "2rem",
                 }
               : {
@@ -73,7 +82,7 @@ export function HomeClient() {
         >
           {/* ── ABOUT block ── */}
           <div
-            className="relative overflow-hidden md:flex-1"
+            className="relative overflow-hidden flex-1 md:flex-1"
             style={{ flexShrink: 0 }}
           >
             {/* Background photo */}
@@ -127,7 +136,7 @@ export function HomeClient() {
 
               {/* Hero content — fades in after blocks compress */}
               <motion.div
-                className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between"
+                className="absolute inset-0 p-6 sm:p-10 lg:p-14 flex flex-col justify-between"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isRevealed ? 1 : 0 }}
                 transition={{
@@ -172,7 +181,7 @@ export function HomeClient() {
 
           {/* ── BUILDS block ── */}
           <div
-            className="relative overflow-hidden md:flex-[1.5]"
+            className="relative overflow-hidden flex-[1.5] md:flex-[1.5]"
             style={{ flexShrink: 0 }}
           >
             {/* Background photo */}
@@ -226,7 +235,7 @@ export function HomeClient() {
 
               {/* Hero content */}
               <motion.div
-                className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between"
+                className="absolute inset-0 p-6 sm:p-10 lg:p-14 flex flex-col justify-between"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isRevealed ? 1 : 0 }}
                 transition={{
@@ -255,7 +264,7 @@ export function HomeClient() {
                       textShadow: "0 1px 8px rgba(0,0,0,0.6)",
                     }}
                   >
-                    Cultivating community & marketing for projects to stand out in the AI builder era.
+                    Betting on IRL community in the AI era + lowering the knowledge barrier to AI access.
                   </p>
                 </div>
 
@@ -285,7 +294,7 @@ export function HomeClient() {
         >
           {/* Footer */}
           <footer className="bg-surface-container-low mt-0">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-14 max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-6 py-12 md:px-12 md:py-14 max-w-7xl mx-auto">
               <div>
                 <span
                   className="text-lg font-black tracking-tighter block mb-1"
@@ -307,7 +316,7 @@ export function HomeClient() {
                   © 2026
                 </p>
               </div>
-              <div className="flex gap-10">
+              <div className="flex gap-6 sm:gap-10 -my-3">
                 {[
                   { label: "GitHub", href: "https://github.com/koshinbathmax" },
                   { label: "Work", href: "/work" },
@@ -316,7 +325,7 @@ export function HomeClient() {
                   <a
                     key={l.label}
                     href={l.href}
-                    className="text-xs uppercase font-semibold transition-colors hover:opacity-100"
+                    className="text-xs uppercase font-semibold transition-colors hover:opacity-100 py-3"
                     style={{
                       letterSpacing: "0.2em",
                       color: "rgba(23,51,33,0.5)",

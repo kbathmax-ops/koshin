@@ -15,11 +15,11 @@ const IMAGES = [
 ];
 
 /* ─── Sticky hero image that clips → expands on scroll ─── */
-function CenterImage() {
+function CenterImage({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
 
-  const clipProgress = useTransform(scrollY, [200, 1400], [0, 1]);
+  const clipProgress = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
   const scale = useTransform(clipProgress, [0, 1], [1, 1.06]);
 
   const clip = useTransform(clipProgress, (v) => {
@@ -36,7 +36,7 @@ function CenterImage() {
       style={{
         position: 'sticky',
         top: 0,
-        height: '100vh',
+        height: '100dvh',
         overflow: 'hidden',
         zIndex: 1,
       }}
@@ -138,24 +138,22 @@ function ParallaxRow({ src, alt, flip = false, speed = 1, compact = false, text 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], [60 * speed, -60 * speed]);
 
-  const imgFlex = compact ? '0 0 30%' : '0 0 42%';
+  const imgFlexClass = compact ? 'md:flex-[0_0_30%]' : 'md:flex-[0_0_42%]';
   const aspectRatio = compact ? '3/4' : '4/5';
 
   return (
     <div
       ref={ref}
+      className={`story-row flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center`}
       style={{
-        display: 'flex',
-        flexDirection: flip ? 'row-reverse' : 'row',
-        alignItems: 'center',
         gap: 'clamp(2rem, 5vw, 5rem)',
         padding: '0 clamp(1.5rem, 5vw, 5rem)',
       }}
     >
       {/* Image */}
       <motion.div
+        className={`w-full flex-none ${imgFlexClass}`}
         style={{
-          flex: imgFlex,
           y,
           borderRadius: '1rem',
           overflow: 'hidden',
@@ -176,7 +174,7 @@ function ParallaxRow({ src, alt, flip = false, speed = 1, compact = false, text 
       </motion.div>
 
       {/* Text */}
-      <div style={{ flex: 1 }}>
+      <div className="w-full" style={{ flex: 1 }}>
         {text}
       </div>
     </div>
@@ -231,18 +229,16 @@ function Section03() {
   return (
     <div
       ref={ref}
+      className="story-row flex flex-col md:flex-row items-center"
       style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
         gap: 'clamp(2rem, 5vw, 5rem)',
         padding: '0 clamp(1.5rem, 5vw, 5rem)',
       }}
     >
       {/* Single portrait */}
       <motion.div
+        className="w-full flex-none md:flex-[0_0_42%]"
         style={{
-          flex: '0 0 42%',
           y: landscapeY,
           borderRadius: '1rem',
           overflow: 'hidden',
@@ -264,7 +260,7 @@ function Section03() {
       </motion.div>
 
       {/* Text */}
-      <div style={{ flex: 1, paddingBottom: '2rem' }}>
+      <div className="w-full" style={{ flex: 1, paddingBottom: '2rem' }}>
         <StoryBlock label="03 - What I'm doing now" heading="AI Consulting, Content, Community">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
@@ -367,7 +363,7 @@ function TravelCarousel() {
           borderRadius: '1rem',
           overflow: 'hidden',
           boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
-          aspectRatio: '16/7',
+          aspectRatio: '16/8.75',
           maxWidth: '640px',
         }}
       >
@@ -438,17 +434,30 @@ function TravelCarousel() {
             <button
               key={i}
               onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
               style={{
-                width: i === index ? '1.4rem' : '0.4rem',
-                height: '0.4rem',
-                borderRadius: '9999px',
-                background: i === index ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
+                width: '2rem',
+                height: '2rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
-                transition: 'width 0.3s ease, background 0.3s ease',
+                margin: '-0.8rem 0',
               }}
-            />
+            >
+              <span
+                style={{
+                  width: i === index ? '1.4rem' : '0.4rem',
+                  height: '0.4rem',
+                  borderRadius: '9999px',
+                  background: i === index ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
+                  transition: 'width 0.3s ease, background 0.3s ease',
+                }}
+              />
+            </button>
           ))}
         </div>
 
@@ -464,14 +473,14 @@ function TravelCarousel() {
             style={{
               position: 'absolute',
               top: '50%',
-              [side]: '0.75rem',
+              [side]: '0.5rem',
               transform: 'translateY(-50%)',
               background: 'rgba(0,0,0,0.35)',
               backdropFilter: 'blur(6px)',
               border: '1px solid rgba(255,255,255,0.12)',
               borderRadius: '50%',
-              width: '2rem',
-              height: '2rem',
+              width: '2.75rem',
+              height: '2.75rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -481,7 +490,7 @@ function TravelCarousel() {
               transition: 'background 0.2s',
             }}
           >
-            <Icon size={14} />
+            <Icon size={16} />
           </button>
         ))}
       </div>
@@ -640,6 +649,8 @@ function StoryCTA() {
 
 /* ─── Root component ─── */
 export function StoryPageClient() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.08 });
     let rafId: number;
@@ -649,13 +660,13 @@ export function StoryPageClient() {
   }, []);
 
   return (
-    <div style={{ background: '#0d0d0d', minHeight: '100vh', color: '#f2ecdd' }}>
+    <div style={{ background: '#0d0d0d', minHeight: '100dvh', color: '#f2ecdd' }}>
       {/* Fixed title (fades out on scroll) */}
       <TitleBlock />
 
       {/* Sticky zoom hero — takes up 100vh, scroll drives clip+zoom */}
-      <div style={{ height: '280vh', position: 'relative' }}>
-        <CenterImage />
+      <div ref={heroRef} className="h-[160vh] md:h-[200vh] lg:h-[280vh]" style={{ position: 'relative' }}>
+        <CenterImage containerRef={heroRef} />
       </div>
 
       {/* Parallax story rows */}

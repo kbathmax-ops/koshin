@@ -77,7 +77,7 @@ export function Nav() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-[#173321]/70 hover:text-[#173321] transition-colors"
+          className="md:hidden -m-3 p-3 flex items-center justify-center text-[#173321]/70 hover:text-[#173321] transition-colors"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -87,24 +87,24 @@ export function Nav() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#fcf9ef]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(28,28,22,0.08)] px-8 py-6 flex flex-col gap-4">
+        <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#fcf9ef]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(28,28,22,0.08)] px-6 py-2 flex flex-col">
           <Link
             href="/story"
-            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors"
+            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Story
           </Link>
           <Link
             href="/work"
-            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors"
+            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Work
           </Link>
           <Link
             href="/work#contact"
-            className="font-medium text-[#173321]/70 hover:text-[#9d4305] transition-colors"
+            className="font-medium text-[#173321]/70 hover:text-[#9d4305] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Contact

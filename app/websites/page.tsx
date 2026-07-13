@@ -43,7 +43,7 @@ export default function WebsitesPage() {
 
       <WebsitesHero />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 pt-24 md:pt-32 pb-32 space-y-28">
+      <main className="max-w-7xl mx-auto px-6 md:px-12 pt-24 md:pt-32 pb-32 space-y-16 md:space-y-28">
 
         {/* ── Site cards ── */}
         <section className="space-y-16">
@@ -55,10 +55,10 @@ export default function WebsitesPage() {
                 rel="noopener noreferrer"
                 className="group block"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                   {/* Preview panel */}
-                  <div className="lg:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgba(28,28,22,0.08)] transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgba(28,28,22,0.08)] transition-transform duration-500 group-hover:-translate-y-2">
                     <div
                       className="aspect-[16/10] relative flex flex-col"
                       style={{ background: site.bgPreview }}
@@ -154,7 +154,7 @@ export default function WebsitesPage() {
                   </div>
 
                   {/* Info */}
-                  <div className="lg:col-span-5 px-2 lg:px-6">
+                  <div className="md:col-span-5 px-2 lg:px-6">
                     <div className="flex flex-wrap gap-2 mb-5">
                       <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-surface-container-highest text-primary">
                         {site.type}
@@ -205,7 +205,7 @@ export default function WebsitesPage() {
 
         {/* ── CTA ── */}
         <FadeUp>
-          <div className="bg-surface-container-low rounded-[2rem] p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgba(28,28,22,0.04)]">
+          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgba(28,28,22,0.04)] text-center md:text-left">
             <div>
               <h3
                 className="font-extrabold text-3xl text-primary tracking-tight mb-2"
@@ -232,7 +232,7 @@ export default function WebsitesPage() {
 
       {/* Footer */}
       <footer className="bg-surface-container-low">
-        <div className="flex flex-col items-center gap-2 px-12 py-14">
+        <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black text-primary tracking-tighter"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}

@@ -26,6 +26,9 @@ const GLSLHills = ({
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
 
+    // Lighter vertex-shader workload for phones/tablets — same physical plane, fewer segments
+    const segments = window.innerWidth < 1024 ? Math.round(planeSize / 2) : planeSize;
+
     class Plane {
       uniforms: { time: { type: string; value: number } };
       mesh: THREE.Mesh;
@@ -39,7 +42,7 @@ const GLSLHills = ({
 
       createMesh(): THREE.Mesh {
         return new THREE.Mesh(
-          new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize),
+          new THREE.PlaneGeometry(planeSize, planeSize, segments, segments),
           new THREE.RawShaderMaterial({
             uniforms: this.uniforms,
             vertexShader: `
@@ -159,6 +162,9 @@ const GLSLHills = ({
 
     const w = container.clientWidth;
     const h = container.clientHeight;
+    // <1024 covers phones and tablets (iPad is ~768-1024) — both get the lighter tier
+    const isTouchTier = window.innerWidth < 1024;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
     const scene = new THREE.Scene();
@@ -167,6 +173,7 @@ const GLSLHills = ({
     const plane = new Plane();
 
     let animId: number;
+    let paused = false;
 
     const resize = () => {
       if (!container) return;
@@ -178,11 +185,13 @@ const GLSLHills = ({
     };
 
     const renderLoop = () => {
+      if (paused) return;
       plane.render(clock.getDelta());
       renderer.render(scene, camera);
-      animId = requestAnimationFrame(renderLoop);
+      if (!reducedMotion) animId = requestAnimationFrame(renderLoop);
     };
 
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isTouchTier ? 1.5 : 2));
     renderer.setSize(w, h);
     renderer.setClearColor(0x000000, 0);
     camera.position.set(0, 16, cameraZ);
@@ -192,9 +201,23 @@ const GLSLHills = ({
     window.addEventListener('resize', resize);
     renderLoop();
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasPaused = paused;
+        paused = !entry.isIntersecting;
+        if (wasPaused && !paused && !reducedMotion) {
+          clock.getDelta(); // discard elapsed time while paused
+          renderLoop();
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
+
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
+      observer.disconnect();
       renderer.dispose();
     };
   }, [cameraZ, planeSize, speed]);

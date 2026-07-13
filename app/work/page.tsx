@@ -110,7 +110,7 @@ const projects: Project[] = [
 
 export default function WorkPage() {
   return (
-    <div style={{ background: '#000000', minHeight: '100vh' }}>
+    <div style={{ background: '#000000', minHeight: '100dvh' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -120,7 +120,7 @@ export default function WorkPage() {
       {/* ── Hills Hero ── */}
       <WorkHillsHero />
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-32 pb-32">
+      <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pb-32">
 
         {/* ── Project cards ── */}
         <section>
@@ -154,12 +154,12 @@ export default function WorkPage() {
                     </p>
 
 
-                    <div className="flex flex-wrap items-center gap-2 mt-4">
+                    <div className="flex flex-wrap items-center gap-2 -mt-2">
                       <a
                         href={project.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100"
+                        className="inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100 py-3"
                         style={{ color: '#c4956a', opacity: 0.85 }}
                       >
                         View Project <ArrowRight className="h-4 w-4" />
@@ -176,7 +176,7 @@ export default function WorkPage() {
         <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
           <FadeUp>
             <div
-              className="rounded-[2rem] p-12 relative overflow-hidden"
+              className="rounded-[2rem] p-6 md:p-12 relative overflow-hidden"
               style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.4)' }}
             >
               <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(196,149,106,0.06)' }} />
@@ -203,7 +203,7 @@ export default function WorkPage() {
 
       {/* Footer */}
       <footer style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="flex flex-col items-center gap-2 px-12 py-14">
+        <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black tracking-tighter"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#ffffff' }}
