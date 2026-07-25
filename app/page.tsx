@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { HomeClient } from "./home-client";
 
 export const metadata: Metadata = {
-  title: "Koshin — Student Developer & AI Builder",
+  title: { absolute: "Koshin Bathmax" },
   description:
     "Portfolio of Koshin — 17-year-old student developer building AI-powered travel software, sanctions research tools, and B2B SaaS with Next.js and Claude API.",
-  alternates: { canonical: "https://portfolio-koshin2.vercel.app" },
+  alternates: { canonical: "https://kbathmax.com" },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Koshin",
-  url: "https://portfolio-koshin2.vercel.app",
+  url: "https://kbathmax.com",
   sameAs: ["https://github.com/koshinbathmax"],
   jobTitle: "Student Developer & Founder",
   description:

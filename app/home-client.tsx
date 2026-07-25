@@ -103,7 +103,7 @@ export function HomeClient() {
                 <span
                   className="font-black leading-none tracking-tighter"
                   style={{
-                    fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Public Sans', sans-serif",
                     fontSize: "clamp(4rem, 16vw, 18rem)",
                     color: "rgba(255,255,255,0.18)",
                     letterSpacing: "-0.04em",
@@ -150,7 +150,7 @@ export function HomeClient() {
                     className="font-black leading-none tracking-tighter"
                     style={{
                       fontFamily:
-                        "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        "'Public Sans', sans-serif",
                       fontSize: "clamp(3.5rem, 5.5vw, 5.5rem)",
                       color: "rgba(255,255,255,0.92)",
                       textShadow: "0 2px 20px rgba(0,0,0,0.4)",
@@ -203,7 +203,7 @@ export function HomeClient() {
                   className="font-black leading-none tracking-tighter"
                   style={{
                     fontFamily:
-                      "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                      "'Public Sans', sans-serif",
                     fontSize: "clamp(3.5rem, 13vw, 15rem)",
                     color: "rgba(255,255,255,0.12)",
                     letterSpacing: "-0.04em",
@@ -249,7 +249,7 @@ export function HomeClient() {
                     className="font-black leading-none tracking-tighter"
                     style={{
                       fontFamily:
-                        "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                        "'Public Sans', sans-serif",
                       fontSize: "clamp(3.5rem, 6vw, 6rem)",
                       color: "rgba(255,255,255,0.92)",
                       textShadow: "0 2px 20px rgba(0,0,0,0.5)",
@@ -300,7 +300,7 @@ export function HomeClient() {
                   className="text-lg font-black tracking-tighter block mb-1"
                   style={{
                     fontFamily:
-                      "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                      "'Public Sans', sans-serif",
                     color: "#173321",
                   }}
                 >

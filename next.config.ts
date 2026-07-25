@@ -13,6 +13,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Case studies used to live at the top level; they now sit under /work.
+      {
+        source: "/case-studies",
+        destination: "/work/case-studies",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/:slug",
+        destination: "/work/case-studies/:slug",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

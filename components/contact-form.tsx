@@ -36,7 +36,7 @@ export function ContactForm() {
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
         <CheckCircle className="h-10 w-10 text-secondary" />
-        <p className="font-black text-xl text-primary" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        <p className="font-black text-xl text-primary" style={{ fontFamily: "'Public Sans', sans-serif" }}>
           Message sent!
         </p>
         <p className="text-on-surface-variant text-sm">I&apos;ll get back to you within a day or two.</p>
@@ -83,7 +83,7 @@ export function ContactForm() {
         type="submit"
         disabled={status === "sending"}
         className="w-full bg-primary text-white py-4 rounded-full font-black text-base hover:bg-secondary transition-colors duration-200 active:scale-95 disabled:opacity-50"
-        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+        style={{ fontFamily: "'Public Sans', sans-serif" }}
       >
         {status === "sending" ? "Sending…" : "Send Message"}
       </button>

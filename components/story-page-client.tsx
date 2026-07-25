@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import Lenis from 'lenis';
+import { BackgroundShowcase } from './background-showcase';
+import { TravelMap } from './travel-map';
 
 /* ─── Landscape images (curated for story mood) ─── */
 const IMAGES = [
@@ -98,7 +100,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       </p>
       <h2
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "'Public Sans', sans-serif",
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: 900,
           color: '#f2ecdd',
@@ -119,103 +121,6 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       >
         {children}
       </div>
-    </div>
-  );
-}
-
-/* ─── Single parallax image+text row ─── */
-interface ParallaxRowProps {
-  src: string;
-  alt: string;
-  flip?: boolean;
-  speed?: number;
-  compact?: boolean;
-  text: React.ReactNode;
-}
-
-function ParallaxRow({ src, alt, flip = false, speed = 1, compact = false, text }: ParallaxRowProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [60 * speed, -60 * speed]);
-
-  const imgFlexClass = compact ? 'md:flex-[0_0_30%]' : 'md:flex-[0_0_42%]';
-  const aspectRatio = compact ? '3/4' : '4/5';
-
-  return (
-    <div
-      ref={ref}
-      className={`story-row flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center`}
-      style={{
-        gap: 'clamp(2rem, 5vw, 5rem)',
-        padding: '0 clamp(1.5rem, 5vw, 5rem)',
-      }}
-    >
-      {/* Image */}
-      <motion.div
-        className={`w-full flex-none ${imgFlexClass}`}
-        style={{
-          y,
-          borderRadius: '1rem',
-          overflow: 'hidden',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.5)',
-        }}
-      >
-        <img
-          src={src}
-          alt={alt}
-          style={{
-            width: '100%',
-            aspectRatio,
-            objectFit: 'cover',
-            display: 'block',
-            filter: 'brightness(0.75) saturate(0.8)',
-          }}
-        />
-      </motion.div>
-
-      {/* Text */}
-      <div className="w-full" style={{ flex: 1 }}>
-        {text}
-      </div>
-    </div>
-  );
-}
-
-/* ─── Wide atmospheric image (no text) ─── */
-function AtmosphericImage({ src, alt }: { src: string; alt: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        padding: '0 clamp(1.5rem, 5vw, 5rem)',
-        overflow: 'hidden',
-      }}
-    >
-      <motion.div
-        style={{
-          y,
-          borderRadius: '1rem',
-          overflow: 'hidden',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
-        }}
-      >
-        <img
-          src={src}
-          alt={alt}
-          style={{
-            width: '100%',
-            aspectRatio: '4/3',
-            objectFit: 'cover',
-            objectPosition: 'center 55%',
-            display: 'block',
-            filter: 'brightness(0.6) saturate(0.7)',
-          }}
-        />
-      </motion.div>
     </div>
   );
 }
@@ -245,45 +150,45 @@ function Section03() {
           boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
         }}
       >
-        <img
-          src="/photo-mirror-selfie.jpg"
-          alt="Mirror selfie"
+        {/* Placeholder — image to be added */}
+        <div
+          aria-hidden="true"
           style={{
             width: '100%',
             aspectRatio: '3/4',
-            objectFit: 'cover',
-            objectPosition: 'center 30%',
-            display: 'block',
-            filter: 'brightness(0.88) saturate(0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(242,236,221,0.03)',
+            border: '1px dashed rgba(242,236,221,0.22)',
+            color: 'rgba(242,236,221,0.35)',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.72rem',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
           }}
-        />
+        >
+          Image
+        </div>
       </motion.div>
 
       {/* Text */}
       <div className="w-full" style={{ flex: 1, paddingBottom: '2rem' }}>
-        <StoryBlock label="03 - What I'm doing now" heading="AI Consulting, Content, Community">
+        <StoryBlock label="03 — Section label" heading="Section heading">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
-              { text: 'Fitting tools to save business owners time with admin' },
-              { text: 'Documenting unconventionality — ', link: { href: 'https://www.instagram.com/koshinbmx/', label: 'see here' } },
-              { text: 'Growth for startups' },
-              { text: 'Building 2 communities in Toronto' },
-            ].map((item) => (
-              <li key={item.text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              'Point one',
+              'Point two',
+              'Point three',
+            ].map((text) => (
+              <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
-                <span>
-                  {item.text}
-                  {item.link && (
-                    <a href={item.link.href} target="_blank" rel="noopener noreferrer" style={{ color: '#9d4305', fontWeight: 700, textDecoration: 'underline' }}>
-                      {item.link.label}
-                    </a>
-                  )}
-                </span>
+                <span>{text}</span>
               </li>
             ))}
           </ul>
           <Link
-            href="/work"
+            href="#"
             style={{
               marginTop: '2rem',
               display: 'inline-flex',
@@ -293,206 +198,16 @@ function Section03() {
               color: '#0d0d0d',
               padding: '0.875rem 1.75rem',
               borderRadius: '9999px',
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Public Sans', sans-serif",
               fontWeight: 900,
               fontSize: '0.875rem',
               textDecoration: 'none',
             }}
           >
-            See the Work
+            Button label
             <ArrowRight style={{ width: '1rem', height: '1rem' }} />
           </Link>
         </StoryBlock>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Travel carousel ─── */
-const TRAVEL_SLIDES = [
-  {
-    src: '/photo-monaco.jpg',
-    alt: 'Monaco',
-    caption: 'Monaco — harbour views with friends',
-    captionColor: '#f0a96b',  // warm amber against cool grey overcast
-  },
-  {
-    src: '/photo-spain-volunteer.jpg',
-    alt: 'Spain volunteer program',
-    caption: 'Spain — international English volunteer program',
-    captionColor: '#7ee8c8',  // cool mint against warm amber night lights
-  },
-  {
-    src: '/photo-jeju.jpg',
-    alt: 'Jeju-do, Korea',
-    caption: 'Jeju-do, Korea — volcanic coastline walks',
-    captionColor: '#ff8c5a',  // warm coral against cool grey sky and green grass
-  },
-  {
-    src: '/photo-malaga.jpg',
-    alt: 'Málaga, Spain',
-    caption: 'Málaga, Spain — learning expresiones malagueñas',
-    captionColor: '#5ab4ff',  // electric blue against warm white/green classroom
-  },
-];
-
-function TravelCarousel() {
-  const [index, setIndex] = useState(0);
-  const [dir, setDir] = useState(1);
-
-  const go = (next: number) => {
-    setDir(next > index ? 1 : -1);
-    setIndex(next);
-  };
-
-  const prev = () => go((index - 1 + TRAVEL_SLIDES.length) % TRAVEL_SLIDES.length);
-  const next = () => go((index + 1) % TRAVEL_SLIDES.length);
-
-  const slide = TRAVEL_SLIDES[index];
-
-  return (
-    <div
-      style={{
-        padding: '0 clamp(1.5rem, 5vw, 5rem)',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          borderRadius: '1rem',
-          overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
-          aspectRatio: '16/8.75',
-          maxWidth: '640px',
-        }}
-      >
-        {/* Slides */}
-        <AnimatePresence initial={false} custom={dir}>
-          <motion.div
-            key={index}
-            custom={dir}
-            initial={{ x: dir * 60, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: dir * -60, opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            style={{ position: 'absolute', inset: 0 }}
-          >
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center 55%',
-                display: 'block',
-                filter: 'brightness(0.6) saturate(0.7)',
-              }}
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Caption */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={index + '-caption'}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.3, delay: 0.15 }}
-            style={{
-              position: 'absolute',
-              bottom: '1.25rem',
-              left: '1.5rem',
-              right: '5rem',
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              letterSpacing: '0.06em',
-              color: slide.captionColor,
-              zIndex: 10,
-              lineHeight: 1.4,
-            }}
-          >
-            {slide.caption}
-          </motion.p>
-        </AnimatePresence>
-
-        {/* Dots */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '1.4rem',
-            right: '1.5rem',
-            display: 'flex',
-            gap: '0.4rem',
-            zIndex: 10,
-          }}
-        >
-          {TRAVEL_SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => go(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              style={{
-                width: '2rem',
-                height: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-                margin: '-0.8rem 0',
-              }}
-            >
-              <span
-                style={{
-                  width: i === index ? '1.4rem' : '0.4rem',
-                  height: '0.4rem',
-                  borderRadius: '9999px',
-                  background: i === index ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
-                  transition: 'width 0.3s ease, background 0.3s ease',
-                }}
-              />
-            </button>
-          ))}
-        </div>
-
-        {/* Prev / Next arrows */}
-        {[
-          { fn: prev, label: 'Previous', side: 'left' as const, Icon: ChevronLeft },
-          { fn: next, label: 'Next',     side: 'right' as const, Icon: ChevronRight },
-        ].map(({ fn, label, side, Icon }) => (
-          <button
-            key={side}
-            onClick={fn}
-            aria-label={label}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              [side]: '0.5rem',
-              transform: 'translateY(-50%)',
-              background: 'rgba(0,0,0,0.35)',
-              backdropFilter: 'blur(6px)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '50%',
-              width: '2.75rem',
-              height: '2.75rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'rgba(255,255,255,0.8)',
-              zIndex: 10,
-              transition: 'background 0.2s',
-            }}
-          >
-            <Icon size={16} />
-          </button>
-        ))}
       </div>
     </div>
   );
@@ -533,7 +248,7 @@ function TitleBlock() {
       </p>
       <h1
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "'Public Sans', sans-serif",
           fontSize: 'clamp(2.8rem, 7vw, 6rem)',
           fontWeight: 900,
           color: '#f2ecdd',
@@ -588,7 +303,7 @@ function StoryCTA() {
         </p>
         <p
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Public Sans', sans-serif",
             fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
             fontWeight: 900,
             color: '#f2ecdd',
@@ -614,7 +329,7 @@ function StoryCTA() {
             color: '#0d0d0d',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Public Sans', sans-serif",
             fontWeight: 900,
             fontSize: '0.875rem',
             textDecoration: 'none',
@@ -633,7 +348,7 @@ function StoryCTA() {
             color: '#f2ecdd',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Public Sans', sans-serif",
             fontWeight: 900,
             fontSize: '0.875rem',
             textDecoration: 'none',
@@ -672,59 +387,12 @@ export function StoryPageClient() {
       {/* Parallax story rows */}
       <div style={{ position: 'relative', zIndex: 2, background: '#0d0d0d', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
-        {/* 01 — Origin */}
-        <ParallaxRow
-          src={IMAGES[1]}
-          alt="Lake valley at dusk"
-          speed={0.8}
-          compact
-          text={
-            <div>
-              <h2
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-                  fontWeight: 900,
-                  color: '#f2ecdd',
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.02em',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                My Background
-              </h2>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', listStyle: 'none', padding: 0, margin: 0 }}>
-                {[
-                  'Arts school for 5 years → learned to think creatively about every situation',
-                  'Environmental nonprofit for 2 years',
-                  'Sales with one of the best graduation trip providers',
-                  'Inspired by a NATO conference → fostered a passion in international security',
-                  'Learned Korean, Spanish, and French abroad',
-                ].map((item) => (
-                  <li
-                    key={item}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '0.75rem',
-                      color: 'rgba(242,236,221,0.95)',
-                      fontSize: '1.05rem',
-                      fontWeight: 600,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    <span style={{ color: '#d9480f', fontWeight: 900, marginTop: '0.1em', flexShrink: 0 }}>—</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          }
-        />
+        {/* 01 — My Background (animated heading + full-bleed slideshow) */}
+        <BackgroundShowcase />
 
-        {/* Atmospheric wide shot */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+        {/* Atmospheric — Travel */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <p style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '0.65rem',
@@ -737,7 +405,7 @@ export function StoryPageClient() {
               Travel
             </p>
             <h2 style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Public Sans', sans-serif",
               fontSize: 'clamp(1.8rem, 4vw, 3rem)',
               fontWeight: 900,
               color: '#f2ecdd',
@@ -747,7 +415,10 @@ export function StoryPageClient() {
               Learned I love cultural exchange.
             </h2>
           </div>
-          <TravelCarousel />
+          {/* Zoomed-in Europe travel map — X marks the places visited */}
+          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+            <TravelMap />
+          </div>
         </div>
 
         {/* 03 — What makes me different */}

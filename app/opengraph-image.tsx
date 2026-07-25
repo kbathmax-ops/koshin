@@ -6,11 +6,11 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
-  // Load Plus Jakarta Sans 800 from Google Fonts
+  // Load Public Sans 800 (ExtraBold) from Google Fonts
   let fontBold: ArrayBuffer | undefined;
   try {
     const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800",
+      "https://fonts.googleapis.com/css2?family=Public+Sans:wght@800",
       {
         headers: {
           "User-Agent":
@@ -33,7 +33,7 @@ export default async function Image() {
     style?: "normal" | "italic";
     weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
   }> = fontBold
-    ? [{ name: "Plus Jakarta Sans", data: fontBold, style: "normal", weight: 800 }]
+    ? [{ name: "Public Sans", data: fontBold, style: "normal", weight: 800 }]
     : [];
 
   return new ImageResponse(
@@ -47,7 +47,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "'Public Sans', sans-serif",
         }}
       >
         {/* Available badge */}
@@ -143,7 +143,7 @@ export default async function Image() {
               letterSpacing: "0.04em",
             }}
           >
-            portfolio-koshin2.vercel.app
+            kbathmax.com
           </div>
         </div>
       </div>

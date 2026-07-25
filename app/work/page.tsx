@@ -10,14 +10,14 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), Ember (wildfire alert app), and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: AI sanctions research engine, wildfire alert app, and growing a tattoo artist's audience by 2k and booking her out months in advance.",
-    url: "https://portfolio-koshin2.vercel.app/work",
+      "Student developer and marketer case studies: an AI sanctions research engine, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k and booking her out months in advance.",
+    url: "https://kbathmax.com/work",
   },
-  alternates: { canonical: "https://portfolio-koshin2.vercel.app/work" },
+  alternates: { canonical: "https://kbathmax.com/work" },
 };
 
 const jsonLd = {
@@ -37,9 +37,9 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 2,
-      name: "Ember",
-      description: "Hyperlocal wildfire smoke alert app for BC and AB residents, with address-level AQHI monitoring.",
-      applicationCategory: "UtilitiesApplication",
+      name: "Toronto Cafe Roulette",
+      description: "A curated roulette of Toronto's best independent cafes for coffee chats.",
+      applicationCategory: "LifestyleApplication",
       operatingSystem: "Web",
     },
   ],
@@ -94,18 +94,6 @@ const projects: Project[] = [
     solution: "Natural language search over a curated Supabase corpus of historical sanctions regimes. Claude analyzes the query, retrieves relevant precedents, and synthesises a structured brief.",
     stack: ["Next.js", "Claude API", "Anthropic SDK", "Supabase"],
   },
-  {
-    id: "ember",
-    name: "Ember",
-    href: "https://ember-app-psi.vercel.app/",
-    description:
-      "Hyperlocal wildfire smoke alerts for BC and AB residents. Alerts tied to your exact address, not your entire community.",
-    tags: ["Next.js", "Claude API"],
-    image: "/ember-hero.png",
-    problem: "Community-wide air quality alerts are too broad. They don't tell you whether your specific address is actually in a danger zone.",
-    solution: "Address-level AQHI monitoring with a reserve-list system that SMS-notifies you the moment smoke reaches your location.",
-    stack: ["Next.js", "Claude API", "TypeScript", "Vercel"],
-  },
 ];
 
 export default function WorkPage() {
@@ -145,14 +133,46 @@ export default function WorkPage() {
                   <div className="px-2">
                     <h3
                       className="font-bold text-3xl mb-3"
-                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#ffffff' }}
+                      style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
                     >
                       {project.name}
                     </h3>
-                    <p className="text-base leading-relaxed max-w-md mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                    <p className="text-base leading-relaxed max-w-md mb-8" style={{ color: 'rgba(255,255,255,0.55)' }}>
                       {project.description}
                     </p>
 
+                    {/* Case study */}
+                    <div className="max-w-md space-y-6 mb-8">
+                      <div>
+                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#c4956a' }}>
+                          The Problem
+                        </h4>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                          {project.problem}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#c4956a' }}>
+                          The Approach
+                        </h4>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                          {project.solution}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                      {project.stack.map((item) => (
+                        <span
+                          key={item}
+                          className="text-xs font-semibold px-3 py-1.5 rounded-full"
+                          style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)' }}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
 
                     <div className="flex flex-wrap items-center gap-2 -mt-2">
                       <a
@@ -172,6 +192,51 @@ export default function WorkPage() {
           </div>
         </section>
 
+        {/* ── Case studies ── */}
+        <section>
+          <FadeUp>
+            <Link
+              href="/work/case-studies"
+              className="group/cs block rounded-[1.5rem] p-8 md:p-12 relative overflow-hidden transition-transform duration-500 hover:-translate-y-1"
+              style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.4)' }}
+            >
+              <div
+                className="absolute -top-24 -left-24 w-64 h-64 rounded-full blur-3xl pointer-events-none"
+                style={{ background: 'rgba(196,149,106,0.07)' }}
+              />
+              <div className="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+                <div>
+                  <p
+                    className="text-xs uppercase tracking-[0.2em] font-bold mb-4"
+                    style={{ color: '#c4956a' }}
+                  >
+                    Case Studies
+                  </p>
+                  <h2
+                    className="font-extrabold text-3xl md:text-4xl tracking-tight leading-tight mb-4"
+                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
+                  >
+                    Startup storytelling,
+                    <br />
+                    taken apart.
+                  </h2>
+                  <p className="text-base leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                    Longer-form breakdowns of how startups tell their story — the setup, the
+                    diagnosis, the strategic bet, and what it costs. Each one is designed in its
+                    own visual language.
+                  </p>
+                </div>
+                <span
+                  className="inline-flex items-center gap-2 text-sm font-black shrink-0 transition-transform duration-500 group-hover/cs:translate-x-1"
+                  style={{ color: '#c4956a' }}
+                >
+                  Read the case studies <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+          </FadeUp>
+        </section>
+
         {/* ── Contact ── */}
         <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
           <FadeUp>
@@ -184,7 +249,7 @@ export default function WorkPage() {
                 <div>
                   <h2
                     className="font-extrabold text-4xl tracking-tight mb-4 leading-tight"
-                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#ffffff' }}
+                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
                   >
                     Let&apos;s build
                     <br />
@@ -206,7 +271,7 @@ export default function WorkPage() {
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#ffffff' }}
+            style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
           >
             koshin<span style={{ color: '#c4956a' }}>.</span>
           </span>

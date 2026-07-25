@@ -17,7 +17,8 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const isWork = pathname === "/work" || pathname?.startsWith("/work");
+  const isCaseStudies = pathname?.startsWith("/work/case-studies");
+  const isWork = !isCaseStudies && pathname?.startsWith("/work");
   const isStory = pathname === "/story";
 
   return (
@@ -34,7 +35,7 @@ export function Nav() {
         <Link
           href="/"
           className="text-xl font-black text-[#173321] tracking-tighter"
-          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          style={{ fontFamily: "'Public Sans', sans-serif" }}
         >
           koshin
           <span className="text-[#9d4305]">.</span>
@@ -50,7 +51,7 @@ export function Nav() {
                 ? "text-[#9d4305]"
                 : "text-[#173321]/70 hover:text-[#9d4305]"
             )}
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Story
           </Link>
@@ -62,14 +63,26 @@ export function Nav() {
                 ? "text-[#9d4305]"
                 : "text-[#173321]/70 hover:text-[#9d4305]"
             )}
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Work
           </Link>
           <Link
+            href="/work/case-studies"
+            className={cn(
+              "font-bold tracking-tight transition-colors duration-200",
+              isCaseStudies
+                ? "text-[#9d4305]"
+                : "text-[#173321]/70 hover:text-[#9d4305]"
+            )}
+            style={{ fontFamily: "'Public Sans', sans-serif" }}
+          >
+            Case Studies
+          </Link>
+          <Link
             href="/work#contact"
             className="text-[#173321]/70 font-medium hover:text-[#9d4305] transition-colors duration-200"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Contact
           </Link>
@@ -101,6 +114,13 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Work
+          </Link>
+          <Link
+            href="/work/case-studies"
+            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
+            onClick={() => setMenuOpen(false)}
+          >
+            Case Studies
           </Link>
           <Link
             href="/work#contact"

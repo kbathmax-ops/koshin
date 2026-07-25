@@ -9,7 +9,7 @@ const GLSLHills = dynamic(
 
 export function WorkHillsHero() {
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: '100vh', background: '#000000' }}>
+    <div className="relative w-full overflow-hidden" style={{ height: '100dvh', background: '#000000' }}>
       <style>{`
         @keyframes beacon-pulse {
           0%   { transform: scaleX(1)   scaleY(1);   opacity: 0.55; }
@@ -44,8 +44,8 @@ export function WorkHillsHero() {
           <h1
             className="font-extrabold tracking-tighter leading-[0.88]"
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 'clamp(3.5rem, 9vw, 8rem)',
+              fontFamily: "'Public Sans', sans-serif",
+              fontSize: 'clamp(2.5rem, 9vw, 8rem)',
               color: '#ffffff',
             }}
           >

@@ -1,0 +1,359 @@
+/* ==========================================================================
+   Case studies — shared token layer + component styles.
+
+   You should never need to edit this file to add a case study. Per-study
+   tokens are emitted from the content file as a scoped [data-cs-theme] block
+   by components/case-study/theme-style.tsx.
+
+   Every token falls back to the global site value from app/globals.css, so a
+   case study that overrides nothing still renders correctly.
+   ========================================================================== */
+
+.cs-root {
+  /* --- Type ------------------------------------------------------------- */
+  --cs-font-display: var(--font-headline, "Public Sans", ui-sans-serif, system-ui, sans-serif);
+  --cs-font-body: var(--font-sans, "Manrope", ui-sans-serif, system-ui, sans-serif);
+  --cs-font-mono: var(--font-mono, ui-monospace, monospace);
+
+  /* --- Colour ----------------------------------------------------------- */
+  --cs-color-bg: var(--background, #fcf9ef);
+  --cs-color-surface: var(--card, #f7f4e9);
+  --cs-color-text: var(--foreground, #1c1c16);
+  --cs-color-muted: var(--muted-foreground, #424842);
+  --cs-color-accent: var(--secondary, #9d4305);
+  --cs-color-accent-contrast: var(--secondary-foreground, #ffffff);
+
+  /* --- Geometry --------------------------------------------------------- */
+  --cs-radius: var(--radius, 1rem);
+  --cs-max-width: 64rem;
+
+  /* --- Derived (not part of the public token set) ------------------------ */
+  --cs-hairline: color-mix(in srgb, var(--cs-color-muted) 28%, transparent);
+  --cs-gutter: 1.5rem;
+
+  background: var(--cs-color-bg);
+  color: var(--cs-color-text);
+  font-family: var(--cs-font-body);
+  min-height: 100dvh;
+}
+
+@media (min-width: 768px) {
+  .cs-root {
+    --cs-gutter: 3rem;
+  }
+}
+
+.cs-shell {
+  max-width: var(--cs-max-width);
+  margin-inline: auto;
+  padding-inline: var(--cs-gutter);
+}
+
+/* --- Typography ---------------------------------------------------------- */
+
+.cs-root h1,
+.cs-root h2,
+.cs-root h3 {
+  font-family: var(--cs-font-display);
+  color: var(--cs-color-text);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.cs-title {
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  line-height: 0.98;
+  margin: 0;
+}
+
+.cs-thesis {
+  font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--cs-color-muted);
+  max-width: 34ch;
+  margin: 1.5rem 0 0;
+  text-wrap: pretty;
+}
+
+.cs-eyebrow {
+  font-family: var(--cs-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cs-color-accent);
+  margin: 0;
+}
+
+.cs-section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+}
+
+.cs-prose p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--cs-color-muted);
+  max-width: 62ch;
+  margin: 0 0 1.25rem;
+  text-wrap: pretty;
+}
+
+.cs-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Page furniture ------------------------------------------------------ */
+
+.cs-hero {
+  padding-block: clamp(7rem, 16vw, 11rem) clamp(3rem, 7vw, 5rem);
+  border-bottom: 1px solid var(--cs-hairline);
+}
+
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: baseline;
+  margin-bottom: 1.75rem;
+}
+
+.cs-disclaimer {
+  font-family: var(--cs-font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--cs-color-muted);
+  border-left: 2px solid var(--cs-color-accent);
+  padding: 0.375rem 0 0.375rem 0.875rem;
+  margin: 2.5rem 0 0;
+  max-width: 44ch;
+}
+
+.cs-section {
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+  border-bottom: 1px solid var(--cs-hairline);
+}
+
+.cs-section:last-of-type {
+  border-bottom: 0;
+}
+
+/* --- Before / after ------------------------------------------------------ */
+
+.cs-ba {
+  margin-top: 2.5rem;
+}
+
+.cs-ba + .cs-ba {
+  margin-top: 3.5rem;
+}
+
+.cs-ba-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--cs-hairline);
+}
+
+.cs-ba-label {
+  font-family: var(--cs-font-display);
+  font-size: 1.375rem;
+  margin: 0;
+}
+
+.cs-ba-note {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--cs-color-muted);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* Stacked by default (375px up), side by side from 768px. */
+.cs-ba-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .cs-ba-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.cs-panel {
+  border-radius: var(--cs-radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.cs-panel-tag {
+  font-family: var(--cs-font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+  align-self: flex-start;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--cs-radius) * 0.5);
+}
+
+.cs-panel-caption {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.cs-panel-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* BEFORE — deliberately inert. Fixed neutrals, ignores the theme entirely.
+   These values are checked into the shared layer on purpose: "before" must
+   look the same in every case study for the contrast to read. */
+.cs-panel--before {
+  --before-bg: #e8e6e1;
+  --before-text: #3a3a36;
+  --before-muted: #63635c; /* 4.88:1 on --before-bg */
+
+  background: var(--before-bg);
+  border: 1px solid #d6d3cc;
+  color: var(--before-muted);
+  /* System stack, not the theme face — the point is that it is untouched. */
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.cs-panel--before .cs-panel-tag {
+  background: #d6d3cc;
+  color: var(--before-text);
+}
+
+.cs-panel--before .cs-panel-caption {
+  color: var(--before-text);
+  font-weight: 500;
+}
+
+.cs-panel--before .cs-panel-body {
+  color: var(--before-muted);
+}
+
+/* AFTER — fully themed. */
+.cs-panel--after {
+  background: var(--cs-color-surface);
+  border: 1px solid var(--cs-color-accent);
+  color: var(--cs-color-muted);
+  font-family: var(--cs-font-body);
+}
+
+.cs-panel--after .cs-panel-tag {
+  background: var(--cs-color-accent);
+  color: var(--cs-color-accent-contrast);
+}
+
+.cs-panel--after .cs-panel-caption {
+  color: var(--cs-color-text);
+  font-family: var(--cs-font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.cs-panel--after .cs-panel-body {
+  color: var(--cs-color-muted);
+}
+
+/* --- Index cards --------------------------------------------------------- */
+
+.cs-index-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cs-index-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cs-card {
+  /* Each card carries its own study's tokens via [data-cs-theme]. */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--cs-radius);
+  background: var(--cs-color-bg);
+  border: 1px solid var(--cs-hairline);
+  text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgb(28 28 22 / 0.12);
+}
+
+.cs-card:focus-visible {
+  outline: 2px solid var(--cs-color-accent);
+  outline-offset: 3px;
+}
+
+.cs-card-company {
+  font-family: var(--cs-font-display);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  line-height: 1.05;
+  color: var(--cs-color-text);
+  margin: 0;
+}
+
+.cs-card-thesis {
+  font-family: var(--cs-font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--cs-color-muted);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.cs-card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--cs-hairline);
+  font-family: var(--cs-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cs-color-accent);
+}
+
+/* --- Motion -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-card,
+  .cs-card:hover {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Manrope } from "next/font/google";
+import { Public_Sans, Manrope } from "next/font/google";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+// Public Sans is the site's display/heading face (variable font — all weights).
+const publicSans = Public_Sans({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
+  variable: "--font-public-sans",
   display: "swap",
 });
 
@@ -14,13 +15,13 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const BASE_URL = "https://portfolio-koshin2.vercel.app";
+const BASE_URL = "https://kbathmax.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Koshin — Student Developer & AI Builder",
-    template: "%s | Koshin",
+    default: "Koshin Bathmax",
+    template: "%s | Koshin Bathmax",
   },
   description:
     "Portfolio of Koshin — 17-year-old student developer and founder building AI-powered travel software, sanctions research tools, and B2B SaaS. Next.js, TypeScript, Claude API.",
@@ -93,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${manrope.variable}`}
+      className={`${publicSans.variable} ${manrope.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         {children}

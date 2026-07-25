@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://portfolio-koshin2.vercel.app/sitemap.xml",
+    sitemap: "https://kbathmax.com/sitemap.xml",
   };
 }

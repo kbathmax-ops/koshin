@@ -67,7 +67,7 @@ export function WebsitesHero() {
         <div>
           <h1
             className="font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-6"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Websites
           </h1>
@@ -79,7 +79,7 @@ export function WebsitesHero() {
         <Link
           href="/work#contact"
           className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
-          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", background: '#ffffff', color: '#173321' }}
+          style={{ fontFamily: "'Public Sans', sans-serif", background: '#ffffff', color: '#173321' }}
         >
           Want one? Let&apos;s talk
           <ArrowUpRight className="h-4 w-4" />
