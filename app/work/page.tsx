@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
@@ -98,7 +97,7 @@ const projects: Project[] = [
 
 export default function WorkPage() {
   return (
-    <div style={{ background: '#000000', minHeight: '100dvh' }}>
+    <div style={{ background: '#d9d9d9', minHeight: '100dvh' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -117,7 +116,7 @@ export default function WorkPage() {
               <FadeUp key={project.id} delay={i * 0.08}>
                 <div id={project.id} className="group scroll-mt-28">
                   {/* Image — clicks through to live project */}
-                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block rounded-[1.5rem] overflow-hidden mb-8 transition-transform duration-500 group-hover:-translate-y-2" style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
+                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block rounded-[1.5rem] overflow-hidden mb-8 transition-transform duration-500 group-hover:-translate-y-2" style={{ background: '#e2e2e2', boxShadow: '0 10px 40px rgba(18,35,63,0.15)' }}>
                     <div className="aspect-[16/10] relative">
                       <Image
                         src={project.image}
@@ -125,7 +124,7 @@ export default function WorkPage() {
                         fill
                         className="object-cover opacity-90"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
                     </div>
                   </a>
 
@@ -133,41 +132,41 @@ export default function WorkPage() {
                   <div className="px-2">
                     <h3
                       className="font-bold text-3xl mb-3"
-                      style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
+                      style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
                     >
                       {project.name}
                     </h3>
-                    <p className="text-base leading-relaxed max-w-md mb-8" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                    <p className="text-base leading-relaxed max-w-md mb-8" style={{ color: 'rgba(18,35,63,0.72)' }}>
                       {project.description}
                     </p>
 
                     {/* Case study */}
                     <div className="max-w-md space-y-6 mb-8">
                       <div>
-                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#c4956a' }}>
+                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#2f5d9e' }}>
                           The Problem
                         </h4>
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.66)' }}>
                           {project.problem}
                         </p>
                       </div>
                       <div>
-                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#c4956a' }}>
+                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#2f5d9e' }}>
                           The Approach
                         </h4>
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.66)' }}>
                           {project.solution}
                         </p>
                       </div>
                     </div>
 
                     {/* Stack */}
-                    <div className="flex flex-wrap gap-2 mb-6 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                    <div className="flex flex-wrap gap-2 mb-6 pt-6" style={{ borderTop: '1px solid rgba(18,35,63,0.12)' }}>
                       {project.stack.map((item) => (
                         <span
                           key={item}
                           className="text-xs font-semibold px-3 py-1.5 rounded-full"
-                          style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)' }}
+                          style={{ background: 'rgba(18,35,63,0.07)', color: 'rgba(18,35,63,0.70)' }}
                         >
                           {item}
                         </span>
@@ -180,7 +179,7 @@ export default function WorkPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm font-black transition-opacity hover:opacity-100 py-3"
-                        style={{ color: '#c4956a', opacity: 0.85 }}
+                        style={{ color: '#2f5d9e', opacity: 0.85 }}
                       >
                         View Project <ArrowRight className="h-4 w-4" />
                       </a>
@@ -192,70 +191,25 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* ── Case studies ── */}
-        <section>
-          <FadeUp>
-            <Link
-              href="/work/case-studies"
-              className="group/cs block rounded-[1.5rem] p-8 md:p-12 relative overflow-hidden transition-transform duration-500 hover:-translate-y-1"
-              style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.4)' }}
-            >
-              <div
-                className="absolute -top-24 -left-24 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-                style={{ background: 'rgba(196,149,106,0.07)' }}
-              />
-              <div className="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-                <div>
-                  <p
-                    className="text-xs uppercase tracking-[0.2em] font-bold mb-4"
-                    style={{ color: '#c4956a' }}
-                  >
-                    Case Studies
-                  </p>
-                  <h2
-                    className="font-extrabold text-3xl md:text-4xl tracking-tight leading-tight mb-4"
-                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
-                  >
-                    Startup storytelling,
-                    <br />
-                    taken apart.
-                  </h2>
-                  <p className="text-base leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                    Longer-form breakdowns of how startups tell their story — the setup, the
-                    diagnosis, the strategic bet, and what it costs. Each one is designed in its
-                    own visual language.
-                  </p>
-                </div>
-                <span
-                  className="inline-flex items-center gap-2 text-sm font-black shrink-0 transition-transform duration-500 group-hover/cs:translate-x-1"
-                  style={{ color: '#c4956a' }}
-                >
-                  Read the case studies <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-          </FadeUp>
-        </section>
-
         {/* ── Contact ── */}
         <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
           <FadeUp>
             <div
               className="rounded-[2rem] p-6 md:p-12 relative overflow-hidden"
-              style={{ background: '#111111', boxShadow: '0 10px 40px rgba(0,0,0,0.4)' }}
+              style={{ background: '#e2e2e2', boxShadow: '0 10px 40px rgba(18,35,63,0.12)' }}
             >
-              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(196,149,106,0.06)' }} />
+              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(47,93,158,0.06)' }} />
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div>
                   <h2
                     className="font-extrabold text-4xl tracking-tight mb-4 leading-tight"
-                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
+                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
                   >
                     Let&apos;s build
                     <br />
                     something together.
                   </h2>
-                  <p style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <p style={{ color: 'rgba(18,35,63,0.70)' }}>
                     looking for growth, content, ugc, ai consulting? I'll get back to you within a day
                   </p>
                 </div>
@@ -267,15 +221,15 @@ export default function WorkPage() {
       </main>
 
       {/* Footer */}
-      <footer style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <footer style={{ background: '#d9d9d9', borderTop: '1px solid rgba(18,35,63,0.10)' }}>
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "'Public Sans', sans-serif", color: '#ffffff' }}
+            style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
           >
-            koshin<span style={{ color: '#c4956a' }}>.</span>
+            koshin<span style={{ color: '#2f5d9e' }}>.</span>
           </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgba(255,255,255,0.25)' }}>
+          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgba(18,35,63,0.45)' }}>
             © 2026
           </p>
         </div>

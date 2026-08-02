@@ -59,7 +59,7 @@ function CenterImage({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            filter: 'brightness(0.45) saturate(0.7)',
+            filter: 'brightness(1.04) saturate(0.62) contrast(0.94)',
           }}
         />
         {/* Overlay tint */}
@@ -67,7 +67,7 @@ function CenterImage({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.1) 50%, rgba(13,13,13,0.5) 100%)',
+            background: 'linear-gradient(to bottom, rgba(217,217,217,0.42) 0%, rgba(217,217,217,0.20) 50%, rgba(217,217,217,0.55) 100%)',
           }}
         />
       </motion.div>
@@ -87,12 +87,12 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
     <div>
       <p
         style={{
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
           fontSize: '0.65rem',
           fontWeight: 900,
           letterSpacing: '0.35em',
           textTransform: 'uppercase',
-          color: '#9d4305',
+          color: '#2f5d9e',
           marginBottom: '1rem',
         }}
       >
@@ -103,7 +103,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
           fontFamily: "'Public Sans', sans-serif",
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: 900,
-          color: '#f2ecdd',
+          color: '#12233f',
           lineHeight: 1.15,
           letterSpacing: '-0.02em',
           marginBottom: '1rem',
@@ -113,7 +113,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       </h2>
       <div
         style={{
-          color: 'rgba(242,236,221,0.6)',
+          color: 'rgba(18,35,63,0.6)',
           fontSize: '1rem',
           lineHeight: 1.75,
           maxWidth: '32ch',
@@ -147,7 +147,7 @@ function Section03() {
           y: landscapeY,
           borderRadius: '1rem',
           overflow: 'hidden',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.55)',
+          boxShadow: '0 30px 80px rgba(18,35,63,0.18)',
         }}
       >
         {/* Placeholder — image to be added */}
@@ -159,10 +159,10 @@ function Section03() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'rgba(242,236,221,0.03)',
-            border: '1px dashed rgba(242,236,221,0.22)',
-            color: 'rgba(242,236,221,0.35)',
-            fontFamily: 'JetBrains Mono, monospace',
+            background: 'rgba(18,35,63,0.03)',
+            border: '1px dashed rgba(18,35,63,0.22)',
+            color: 'rgba(18,35,63,0.35)',
+            fontFamily: 'var(--font-manrope), Manrope, sans-serif',
             fontSize: '0.72rem',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
@@ -182,7 +182,7 @@ function Section03() {
               'Point three',
             ].map((text) => (
               <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#9d4305', flexShrink: 0 }} />
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2f5d9e', flexShrink: 0 }} />
                 <span>{text}</span>
               </li>
             ))}
@@ -194,8 +194,8 @@ function Section03() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              background: '#f2ecdd',
-              color: '#0d0d0d',
+              background: '#12233f',
+              color: '#f4f4f4',
               padding: '0.875rem 1.75rem',
               borderRadius: '9999px',
               fontFamily: "'Public Sans', sans-serif",
@@ -235,12 +235,12 @@ function TitleBlock() {
     >
       <p
         style={{
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
           fontSize: '0.65rem',
           fontWeight: 900,
           letterSpacing: '0.4em',
           textTransform: 'uppercase',
-          color: '#9d4305',
+          color: '#2f5d9e',
           marginBottom: '1.25rem',
         }}
       >
@@ -251,7 +251,7 @@ function TitleBlock() {
           fontFamily: "'Public Sans', sans-serif",
           fontSize: 'clamp(2.8rem, 7vw, 6rem)',
           fontWeight: 900,
-          color: '#f2ecdd',
+          color: '#12233f',
           lineHeight: 0.9,
           letterSpacing: '-0.04em',
           maxWidth: '14ch',
@@ -278,7 +278,7 @@ function StoryCTA() {
         style={{
           width: '100%',
           height: '1px',
-          background: 'rgba(242,236,221,0.1)',
+          background: 'rgba(18,35,63,0.1)',
         }}
       />
       <div
@@ -291,12 +291,12 @@ function StoryCTA() {
       >
         <p
           style={{
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-manrope), Manrope, sans-serif',
             fontSize: '0.65rem',
             fontWeight: 900,
             letterSpacing: '0.35em',
             textTransform: 'uppercase',
-            color: '#9d4305',
+            color: '#2f5d9e',
           }}
         >
           Next
@@ -306,14 +306,14 @@ function StoryCTA() {
             fontFamily: "'Public Sans', sans-serif",
             fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
             fontWeight: 900,
-            color: '#f2ecdd',
+            color: '#12233f',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
           }}
         >
           Ready to build something?
         </p>
-        <p style={{ color: 'rgba(242,236,221,0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
+        <p style={{ color: 'rgba(18,35,63,0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
           looking for growth, content, ugc, ai consulting? I'll get back to you within a day
         </p>
       </div>
@@ -325,8 +325,8 @@ function StoryCTA() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: '#f2ecdd',
-            color: '#0d0d0d',
+            background: '#12233f',
+            color: '#f4f4f4',
             padding: '1rem 2rem',
             borderRadius: '9999px',
             fontFamily: "'Public Sans', sans-serif",
@@ -344,15 +344,15 @@ function StoryCTA() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: 'rgba(242,236,221,0.08)',
-            color: '#f2ecdd',
+            background: 'rgba(18,35,63,0.08)',
+            color: '#12233f',
             padding: '1rem 2rem',
             borderRadius: '9999px',
             fontFamily: "'Public Sans', sans-serif",
             fontWeight: 900,
             fontSize: '0.875rem',
             textDecoration: 'none',
-            border: '1px solid rgba(242,236,221,0.12)',
+            border: '1px solid rgba(18,35,63,0.12)',
           }}
         >
           Get in touch
@@ -375,7 +375,7 @@ export function StoryPageClient() {
   }, []);
 
   return (
-    <div style={{ background: '#0d0d0d', minHeight: '100dvh', color: '#f2ecdd' }}>
+    <div style={{ background: '#d9d9d9', minHeight: '100dvh', color: '#12233f' }}>
       {/* Fixed title (fades out on scroll) */}
       <TitleBlock />
 
@@ -385,7 +385,7 @@ export function StoryPageClient() {
       </div>
 
       {/* Parallax story rows */}
-      <div style={{ position: 'relative', zIndex: 2, background: '#0d0d0d', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+      <div style={{ position: 'relative', zIndex: 2, background: '#d9d9d9', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
         {/* 01 — My Background (animated heading + full-bleed slideshow) */}
         <BackgroundShowcase />
@@ -394,12 +394,12 @@ export function StoryPageClient() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
           <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <p style={{
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-manrope), Manrope, sans-serif',
               fontSize: '0.65rem',
               fontWeight: 900,
               letterSpacing: '0.35em',
               textTransform: 'uppercase',
-              color: '#9d4305',
+              color: '#2f5d9e',
               marginBottom: '0.75rem',
             }}>
               Travel
@@ -408,7 +408,7 @@ export function StoryPageClient() {
               fontFamily: "'Public Sans', sans-serif",
               fontSize: 'clamp(1.8rem, 4vw, 3rem)',
               fontWeight: 900,
-              color: '#f2ecdd',
+              color: '#12233f',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
             }}>
@@ -416,7 +416,7 @@ export function StoryPageClient() {
             </h2>
           </div>
           {/* Zoomed-in Europe travel map — X marks the places visited */}
-          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+          <div style={{ padding: '0 clamp(1rem, 2.5vw, 2.5rem)' }}>
             <TravelMap />
           </div>
         </div>

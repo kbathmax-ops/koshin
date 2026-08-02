@@ -12,31 +12,31 @@ const SLIDES = [
     title: 'Arts School',
     body: 'Five years learning to think creatively about every situation.',
     src: '/photo-concert.jpg',
-    accent: '#f0a96b',
+    accent: '#9dc2ee',
   },
   {
     title: 'Environmental Nonprofit',
     body: 'Two years working on the ground for the environment.',
     src: '/photo-jeju.jpg',
-    accent: '#7ee8c8',
+    accent: '#9dc2ee',
   },
   {
     title: 'Sales',
     body: 'With one of the best graduation-trip providers.',
     src: '/photo-monaco.jpg',
-    accent: '#ff8c5a',
+    accent: '#9dc2ee',
   },
   {
     title: 'International Security',
     body: 'A NATO conference sparked a lasting passion.',
     src: '/about-bg.jpg',
-    accent: '#5ab4ff',
+    accent: '#9dc2ee',
   },
   {
     title: 'Languages',
     body: 'Learned Korean, Spanish, and French abroad.',
     src: '/photo-spain-volunteer.jpg',
-    accent: '#f0a96b',
+    accent: '#9dc2ee',
   },
 ];
 
@@ -52,7 +52,7 @@ function FallingHeading({ reduced }: { reduced: boolean }) {
         // 2x larger; min kept low enough to avoid overflow at 375px
         fontSize: 'clamp(2.75rem, 9vw, 6.5rem)',
         fontWeight: 900,
-        color: '#f2ecdd',
+        color: '#12233f',
         lineHeight: 1.05,
         letterSpacing: '-0.03em',
         margin: 0,
@@ -138,7 +138,7 @@ export function BackgroundShowcase() {
         display: 'flex',
         flexDirection: 'column',
         gap: 'clamp(2rem, 5vw, 3.5rem)',
-        color: '#f2ecdd',
+        color: '#12233f',
       }}
     >
       {/* Heading — centered in the padded column */}
@@ -217,7 +217,7 @@ export function BackgroundShowcase() {
           >
             <p
               style={{
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-manrope), Manrope, sans-serif',
                 fontSize: '0.8rem',
                 fontWeight: 700,
                 letterSpacing: '0.25em',

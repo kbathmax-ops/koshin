@@ -43,7 +43,17 @@ export default function CaseStudiesIndexPage() {
           >
             startup storytelling
           </h1>
-          <p className="cs-thesis">
+          <p
+            className="cs-thesis"
+            style={{
+              // Match the h1: same family/weight, but spanning the full shell width.
+              fontFamily: "'Public Sans', sans-serif",
+              fontWeight: 800,
+              maxWidth: "none",
+              letterSpacing: "-0.01em",
+              color: "var(--cs-color-text)",
+            }}
+          >
             Communication is the heart of a brand — to investors, audience,
             and everyone else. I sorted through a few startups &amp; reimagined
             how they could elevate their marketing &amp; capital through

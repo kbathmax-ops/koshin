@@ -17,28 +17,27 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const isCaseStudies = pathname?.startsWith("/work/case-studies");
-  const isWork = !isCaseStudies && pathname?.startsWith("/work");
+  const isWork = pathname?.startsWith("/work");
   const isStory = pathname === "/story";
 
   return (
     <nav className="fixed top-6 left-0 right-0 z-50 px-4">
       <div
         className={cn(
-          "bg-[#fcf9ef]/70 backdrop-blur-xl rounded-full max-w-4xl mx-auto flex justify-between items-center gap-8 px-8 py-4 transition-shadow duration-300",
+          "bg-[#eeeeee]/75 backdrop-blur-xl rounded-full max-w-4xl mx-auto flex justify-between items-center gap-8 px-8 py-4 transition-shadow duration-300",
           scrolled
-            ? "shadow-[0_10px_40px_rgba(28,28,22,0.10)]"
-            : "shadow-[0_10px_30px_rgba(28,28,22,0.05)]"
+            ? "shadow-[0_10px_40px_rgba(18,35,63,0.10)]"
+            : "shadow-[0_10px_30px_rgba(18,35,63,0.05)]"
         )}
       >
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl font-black text-[#173321] tracking-tighter"
+          className="text-xl font-black text-[#12233f] tracking-tighter"
           style={{ fontFamily: "'Public Sans', sans-serif" }}
         >
           koshin
-          <span className="text-[#9d4305]">.</span>
+          <span className="text-[#2f5d9e]">.</span>
         </Link>
 
         {/* Desktop links */}
@@ -48,8 +47,8 @@ export function Nav() {
             className={cn(
               "font-bold tracking-tight transition-colors duration-200",
               isStory
-                ? "text-[#9d4305]"
-                : "text-[#173321]/70 hover:text-[#9d4305]"
+                ? "text-[#2f5d9e]"
+                : "text-[#12233f]/70 hover:text-[#2f5d9e]"
             )}
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
@@ -60,28 +59,16 @@ export function Nav() {
             className={cn(
               "font-bold tracking-tight transition-colors duration-200",
               isWork
-                ? "text-[#9d4305]"
-                : "text-[#173321]/70 hover:text-[#9d4305]"
+                ? "text-[#2f5d9e]"
+                : "text-[#12233f]/70 hover:text-[#2f5d9e]"
             )}
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Work
           </Link>
           <Link
-            href="/work/case-studies"
-            className={cn(
-              "font-bold tracking-tight transition-colors duration-200",
-              isCaseStudies
-                ? "text-[#9d4305]"
-                : "text-[#173321]/70 hover:text-[#9d4305]"
-            )}
-            style={{ fontFamily: "'Public Sans', sans-serif" }}
-          >
-            Case Studies
-          </Link>
-          <Link
             href="/work#contact"
-            className="text-[#173321]/70 font-medium hover:text-[#9d4305] transition-colors duration-200"
+            className="text-[#12233f]/70 font-medium hover:text-[#2f5d9e] transition-colors duration-200"
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
             Contact
@@ -90,7 +77,7 @@ export function Nav() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden -m-3 p-3 flex items-center justify-center text-[#173321]/70 hover:text-[#173321] transition-colors"
+          className="md:hidden -m-3 p-3 flex items-center justify-center text-[#12233f]/70 hover:text-[#12233f] transition-colors"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -100,31 +87,24 @@ export function Nav() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#fcf9ef]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(28,28,22,0.08)] px-6 py-2 flex flex-col">
+        <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#eeeeee]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(18,35,63,0.08)] px-6 py-2 flex flex-col">
           <Link
             href="/story"
-            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
+            className="font-bold text-[#12233f] hover:text-[#2f5d9e] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Story
           </Link>
           <Link
             href="/work"
-            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
+            className="font-bold text-[#12233f] hover:text-[#2f5d9e] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Work
           </Link>
           <Link
-            href="/work/case-studies"
-            className="font-bold text-[#173321] hover:text-[#9d4305] transition-colors py-3"
-            onClick={() => setMenuOpen(false)}
-          >
-            Case Studies
-          </Link>
-          <Link
             href="/work#contact"
-            className="font-medium text-[#173321]/70 hover:text-[#9d4305] transition-colors py-3"
+            className="font-medium text-[#12233f]/70 hover:text-[#2f5d9e] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Contact

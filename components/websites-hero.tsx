@@ -7,7 +7,7 @@ export function WebsitesHero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ height: '100dvh', background: '#fcf9ef' }}
+      style={{ height: '100dvh', background: '#d9d9d9' }}
     >
       {/* SVG grain filter */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
@@ -30,7 +30,7 @@ export function WebsitesHero() {
         aria-hidden
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
-          backgroundImage: 'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 60px, rgba(23,51,33,0.10) 61px, transparent 62px)',
+          backgroundImage: 'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 60px, rgba(18,35,63,0.10) 61px, transparent 62px)',
           pointerEvents: 'none',
         }}
       />
@@ -52,7 +52,7 @@ export function WebsitesHero() {
           style={{
             width: 'clamp(280px, 45vw, 520px)',
             height: 'clamp(280px, 45vw, 520px)',
-            color: '#173321',
+            color: '#12233f',
             opacity: 0.06,
           }}
           strokeWidth={1}
@@ -79,7 +79,7 @@ export function WebsitesHero() {
         <Link
           href="/work#contact"
           className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
-          style={{ fontFamily: "'Public Sans', sans-serif", background: '#ffffff', color: '#173321' }}
+          style={{ fontFamily: "'Public Sans', sans-serif", background: '#ffffff', color: '#12233f' }}
         >
           Want one? Let&apos;s talk
           <ArrowUpRight className="h-4 w-4" />
@@ -92,7 +92,7 @@ export function WebsitesHero() {
         style={{
           position: 'absolute', bottom: 0, left: 0, right: 0,
           height: '100px', zIndex: 6, pointerEvents: 'none',
-          background: 'linear-gradient(to bottom, transparent, #fcf9ef)',
+          background: 'linear-gradient(to bottom, transparent, #d9d9d9)',
         }}
       />
     </section>

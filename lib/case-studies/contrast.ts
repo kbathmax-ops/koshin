@@ -10,11 +10,11 @@ import type { CaseStudy, CaseStudyTheme } from "./types";
 /** Global site values, mirrored from app/globals.css. Used when a theme
  *  omits a token, so the audit checks what will actually render. */
 const GLOBAL_FALLBACK = {
-  colorBg: "#fcf9ef",
-  colorSurface: "#f7f4e9",
-  colorText: "#1c1c16",
-  colorMuted: "#424842",
-  colorAccent: "#9d4305",
+  colorBg: "#d9d9d9",
+  colorSurface: "#e2e2e2",
+  colorText: "#12233f",
+  colorMuted: "#41506b",
+  colorAccent: "#2f5d9e",
   colorAccentContrast: "#ffffff",
 } as const;
 

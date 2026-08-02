@@ -4,7 +4,7 @@ import type { CaseStudy } from "./types";
  * REFERENCE IMPLEMENTATION — placeholder copy, replace freely.
  *
  * Theme is deliberately the opposite of the global site system
- * (cream #fcf9ef / Plus Jakarta Sans / 1rem radius) so the override is
+ * (cream #d9d9d9 / Plus Jakarta Sans / 1rem radius) so the override is
  * obvious at a glance: near-black canvas, editorial serif, 2px corners.
  */
 export const linear: CaseStudy = {

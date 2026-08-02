@@ -40,7 +40,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "#fcf9ef",
+          background: "#d9d9d9",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -54,8 +54,8 @@ export default async function Image() {
         <div style={{ display: "flex" }}>
           <div
             style={{
-              background: "#2d4a36",
-              color: "#98b99f",
+              background: "#1b3a6b",
+              color: "#ffffff",
               borderRadius: "9999px",
               padding: "10px 24px",
               fontSize: "13px",
@@ -72,7 +72,7 @@ export default async function Image() {
                 width: "8px",
                 height: "8px",
                 borderRadius: "9999px",
-                background: "#f6be39",
+                background: "#2f5d9e",
               }}
             />
             Available for hire
@@ -85,20 +85,20 @@ export default async function Image() {
             style={{
               fontSize: "108px",
               fontWeight: 800,
-              color: "#173321",
+              color: "#12233f",
               lineHeight: "0.88",
               letterSpacing: "-5px",
               display: "flex",
             }}
           >
             koshin
-            <span style={{ color: "#9d4305" }}>.</span>
+            <span style={{ color: "#2f5d9e" }}>.</span>
           </div>
           <div
             style={{
               fontSize: "30px",
               fontWeight: 700,
-              color: "#424842",
+              color: "#41506b",
               letterSpacing: "-0.5px",
             }}
           >
@@ -120,8 +120,8 @@ export default async function Image() {
               <div
                 key={tag}
                 style={{
-                  background: "#e5e2d9",
-                  color: "#173321",
+                  background: "#bfbfbf",
+                  color: "#12233f",
                   borderRadius: "9999px",
                   padding: "12px 24px",
                   fontSize: "16px",
@@ -139,7 +139,7 @@ export default async function Image() {
             style={{
               fontSize: "15px",
               fontWeight: 700,
-              color: "#9d4305",
+              color: "#2f5d9e",
               letterSpacing: "0.04em",
             }}
           >

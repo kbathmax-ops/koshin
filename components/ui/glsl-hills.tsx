@@ -146,7 +146,7 @@ const GLSLHills = ({
 
               void main(void) {
                 float opacity = (96.0 - length(vPosition)) / 256.0 * 0.55;
-                vec3 color = vec3(1.0, 1.0, 1.0);
+                vec3 color = vec3(0.106, 0.227, 0.416);
                 gl_FragColor = vec4(color, opacity);
               }
             `,

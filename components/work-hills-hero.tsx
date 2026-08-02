@@ -9,7 +9,7 @@ const GLSLHills = dynamic(
 
 export function WorkHillsHero() {
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: '100dvh', background: '#000000' }}>
+    <div className="relative w-full overflow-hidden" style={{ height: '100dvh', background: '#d9d9d9' }}>
       <style>{`
         @keyframes beacon-pulse {
           0%   { transform: scaleX(1)   scaleY(1);   opacity: 0.55; }
@@ -36,7 +36,7 @@ export function WorkHillsHero() {
               style={{
                 width: '100%',
                 height: '100%',
-                border: '1.5px solid rgba(255,255,255,0.45)',
+                border: '1.5px solid rgba(18,35,63,0.40)',
                 animationDelay: `${i * 0.87}s`,
               }}
             />
@@ -46,7 +46,7 @@ export function WorkHillsHero() {
             style={{
               fontFamily: "'Public Sans', sans-serif",
               fontSize: 'clamp(2.5rem, 9vw, 8rem)',
-              color: '#ffffff',
+              color: '#12233f',
             }}
           >
             experimenting
@@ -54,7 +54,7 @@ export function WorkHillsHero() {
         </div>
         <p
           className="text-lg font-medium max-w-xl leading-relaxed"
-          style={{ color: 'rgba(255,255,255,0.65)' }}
+          style={{ color: 'rgba(18,35,63,0.72)' }}
         >
           I believe AI can be used to build a world we&apos;ve always dreamed of — safe, healthy, and secure for all.
         </p>
@@ -63,7 +63,7 @@ export function WorkHillsHero() {
       {/* Subtle bottom fade so content below blends in */}
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #000000)' }}
+        style={{ background: 'linear-gradient(to bottom, transparent, #d9d9d9)' }}
       />
     </div>
   );

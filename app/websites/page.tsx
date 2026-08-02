@@ -58,7 +58,7 @@ export default function WebsitesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                   {/* Preview panel */}
-                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgba(28,28,22,0.08)] transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgba(18,35,63,0.08)] transition-transform duration-500 group-hover:-translate-y-2">
                     <div
                       className="aspect-[16/10] relative flex flex-col"
                       style={{ background: site.bgPreview }}
@@ -179,8 +179,7 @@ export default function WebsitesPage() {
                       {site.name}
                     </h2>
                     <p
-                      className="text-sm font-semibold mb-5 uppercase tracking-wider"
-                      style={{ color: site.accent }}
+                      className="text-sm font-semibold mb-5 uppercase tracking-wider text-secondary"
                     >
                       {site.tagline}
                     </p>
@@ -188,10 +187,7 @@ export default function WebsitesPage() {
                       {site.description}
                     </p>
 
-                    <div
-                      className="inline-flex items-center gap-2 font-bold text-sm group-hover:gap-3 transition-all duration-200"
-                      style={{ color: site.accent }}
-                    >
+                    <div className="inline-flex items-center gap-2 font-bold text-sm text-secondary group-hover:gap-3 transition-all duration-200">
                       Visit site
                       <ArrowUpRight className="h-4 w-4" />
                     </div>
@@ -205,7 +201,7 @@ export default function WebsitesPage() {
 
         {/* ── CTA ── */}
         <FadeUp>
-          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgba(28,28,22,0.04)] text-center md:text-left">
+          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgba(18,35,63,0.04)] text-center md:text-left">
             <div>
               <h3
                 className="font-extrabold text-3xl text-primary tracking-tight mb-2"
@@ -219,7 +215,7 @@ export default function WebsitesPage() {
             </div>
             <Link
               href="/work#contact"
-              className="shrink-0 inline-flex items-center gap-2 bg-primary text-on-primary font-bold text-sm px-8 py-4 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
+              className="shrink-0 inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-8 py-4 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
               style={{ fontFamily: "'Public Sans', sans-serif" }}
             >
               Get in touch

@@ -301,16 +301,16 @@ export function HomeClient() {
                   style={{
                     fontFamily:
                       "'Public Sans', sans-serif",
-                    color: "#173321",
+                    color: "#12233f",
                   }}
                 >
-                  koshin<span style={{ color: "#9d4305" }}>.</span>
+                  koshin<span style={{ color: "#2f5d9e" }}>.</span>
                 </span>
                 <p
                   className="text-xs uppercase font-semibold"
                   style={{
                     letterSpacing: "0.2em",
-                    color: "rgba(23,51,33,0.4)",
+                    color: "rgba(18,35,63,0.4)",
                   }}
                 >
                   © 2026
@@ -328,7 +328,7 @@ export function HomeClient() {
                     className="text-xs uppercase font-semibold transition-colors hover:opacity-100 py-3"
                     style={{
                       letterSpacing: "0.2em",
-                      color: "rgba(23,51,33,0.5)",
+                      color: "rgba(18,35,63,0.5)",
                     }}
                   >
                     {l.label}
