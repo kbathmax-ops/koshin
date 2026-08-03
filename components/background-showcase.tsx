@@ -49,10 +49,13 @@ function FallingHeading({ reduced }: { reduced: boolean }) {
       aria-label={HEADING}
       style={{
         fontFamily: "'Public Sans', sans-serif",
-        // 2x larger; min kept low enough to avoid overflow at 375px
-        fontSize: 'clamp(2.75rem, 9vw, 6.5rem)',
+        fontSize: 'clamp(1.35rem, 3.2vw, 2.5rem)',
         fontWeight: 900,
-        color: '#12233f',
+        // `difference` inverts against whatever slide sits behind it, so the
+        // heading stays legible on both the dark and the blown-out frames
+        // without hardcoding a colour per slide.
+        color: '#ffffff',
+        mixBlendMode: 'difference',
         lineHeight: 1.05,
         letterSpacing: '-0.03em',
         margin: 0,
@@ -80,7 +83,10 @@ function FallingHeading({ reduced }: { reduced: boolean }) {
                 <motion.span
                   key={`${wi}-${ci}`}
                   aria-hidden="true"
-                  initial={reduced ? { opacity: 0 } : { y: -120, opacity: 0 }}
+                  // Fall distance must stay inside the slideshow's overflow
+                  // clip, or the letters start clipped and never register as
+                  // in-view — so they'd never animate in at all.
+                  initial={reduced ? { opacity: 0 } : { y: -28, opacity: 0 }}
                   whileInView={reduced ? { opacity: 1 } : { y: 0, opacity: 1 }}
                   viewport={{ once: true, amount: 0.6 }}
                   transition={
@@ -141,11 +147,6 @@ export function BackgroundShowcase() {
         color: '#12233f',
       }}
     >
-      {/* Heading — centered in the padded column */}
-      <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
-        <FallingHeading reduced={reduced} />
-      </div>
-
       {/* Slideshow — breaks out to full viewport width */}
       <div
         ref={frameRef}
@@ -162,6 +163,9 @@ export function BackgroundShowcase() {
           overflow: 'hidden',
           background: '#0a0a0a',
           outlineOffset: '-3px',
+          // Contain the heading's blend mode to the slideshow so it composites
+          // against the slides, not the page background behind them.
+          isolation: 'isolate',
         }}
       >
         <AnimatePresence initial={false} custom={dir}>
@@ -197,6 +201,20 @@ export function BackgroundShowcase() {
             />
           </motion.div>
         </AnimatePresence>
+
+        {/* Heading — overlaid on the slides, top-left, aligned with the copy */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 'clamp(2.5rem, 6vh, 4rem)',
+            left: 'clamp(1.5rem, 5vw, 5rem)',
+            right: 'clamp(1.5rem, 5vw, 5rem)',
+            zIndex: 7,
+            pointerEvents: 'none',
+          }}
+        >
+          <FallingHeading reduced={reduced} />
+        </div>
 
         {/* Slide text */}
         <AnimatePresence mode="wait">
