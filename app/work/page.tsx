@@ -41,6 +41,14 @@ const jsonLd = {
       applicationCategory: "LifestyleApplication",
       operatingSystem: "Web",
     },
+    {
+      "@type": "SoftwareApplication",
+      position: 3,
+      name: "The Window Seat",
+      description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
+      applicationCategory: "TravelApplication",
+      operatingSystem: "Web",
+    },
   ],
 };
 
@@ -51,8 +59,6 @@ type Project = {
   description: string;
   tags: string[];
   image: string;
-  problem: string;
-  solution: string;
   stack: string[];
 };
 
@@ -65,8 +71,6 @@ const projects: Project[] = [
       "Spin the wheel and discover your next coffee chat. A curated roulette of Toronto's best independent cafes, hand-picked for quality and atmosphere.",
     tags: ["Next.js", "Design"],
     image: "/toronto-cafe-roulette-hero.png",
-    problem: "Toronto has hundreds of incredible independent cafes but finding the right one for a coffee chat means scrolling through generic Yelp lists and guessing.",
-    solution: "A dead-simple roulette that surfaces only high-quality, curated spots. Spin once, get a great cafe, stop overthinking it.",
     stack: ["HTML", "CSS", "JavaScript", "Vercel"],
   },
   {
@@ -77,8 +81,6 @@ const projects: Project[] = [
       "Full-stack social media marketing for an independent tattoo artist. Grew her combined following by 2k and booked her out months in advance.",
     tags: ["Growth Marketing", "Social Media"],
     image: "/tattoos-by-jess-hero.png",
-    problem: "Jess had exceptional work but no real online presence. She was relying entirely on word-of-mouth with no pipeline of inbound bookings.",
-    solution: "Built and executed a content strategy across platforms, optimized her profile positioning, and turned her social into a booking engine that filled her calendar months out.",
     stack: ["Instagram", "Content Strategy", "Brand Positioning", "Audience Growth"],
   },
   {
@@ -89,9 +91,17 @@ const projects: Project[] = [
       "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
     tags: ["Claude API", "Supabase"],
     image: "/sanctions-precedent-hero.png",
-    problem: "Policy analysts searching for comparable sanctions cases have to trawl through thousands of legal documents manually. There's no searchable, structured database.",
-    solution: "Natural language search over a curated Supabase corpus of historical sanctions regimes. Claude analyzes the query, retrieves relevant precedents, and synthesises a structured brief.",
     stack: ["Next.js", "Claude API", "Anthropic SDK", "Supabase"],
+  },
+  {
+    id: "the-window-seat",
+    name: "The Window Seat",
+    href: "https://thewindowseat.vercel.app",
+    description:
+      "A travel personality quiz for builders and founders. Six questions return three countries, each framed by the lesson it tends to teach — matched deterministically against a database built from real first-person travel essays, with every entry citing its source.",
+    tags: ["Next.js", "Supabase"],
+    image: "/thewindowseat-hero.png",
+    stack: ["Next.js", "Tailwind CSS", "Supabase", "Vercel"],
   },
 ];
 
@@ -139,26 +149,6 @@ export default function WorkPage() {
                     <p className="text-base leading-relaxed max-w-md mb-8" style={{ color: 'rgba(18,35,63,0.72)' }}>
                       {project.description}
                     </p>
-
-                    {/* Case study */}
-                    <div className="max-w-md space-y-6 mb-8">
-                      <div>
-                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#2f5d9e' }}>
-                          The Problem
-                        </h4>
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.66)' }}>
-                          {project.problem}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className="text-[0.7rem] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: '#2f5d9e' }}>
-                          The Approach
-                        </h4>
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.66)' }}>
-                          {project.solution}
-                        </p>
-                      </div>
-                    </div>
 
                     {/* Stack */}
                     <div className="flex flex-wrap gap-2 mb-6 pt-6" style={{ borderTop: '1px solid rgba(18,35,63,0.12)' }}>
