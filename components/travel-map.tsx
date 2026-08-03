@@ -21,23 +21,26 @@ import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
  * ships static SVG, no d3 in the bundle, no runtime map fetch.
  */
 
-const LAND = 'rgba(18,35,63,0.10)';
-const LAND_STROKE = 'rgba(18,35,63,0.28)';
-const VISITED_FILL = 'rgba(47,93,158,0.22)';
+const LAND = 'rgba(18,35,63,0.22)';
+const LAND_STROKE = 'rgba(18,35,63,0.38)';
+const VISITED_FILL = 'rgba(47,93,158,0.42)';
 const VISITED_STROKE = '#2f5d9e';
 const MARK = '#1b3a6b';
 const MARK_HOT = '#4b82c9';
+const OCEAN = '#e8eaee';
+const OCEAN_STROKE = 'rgba(18,35,63,0.22)';
 const EASE_OUT_BACK: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
-// Lens geometry (fractions of the world frame). The frame aspect equals
-// WORLD.W / WORLD.H, so SVG user units map linearly to frame pixels.
-const LENS_W = 0.27;
-const LENS_LEFT = 0.03;
-const LENS_BOTTOM = 0.05;
-
-const lensCX = (LENS_LEFT + LENS_W / 2) * WORLD.W;
+// Lens geometry. The frame aspect equals WORLD.W / WORLD.H, so SVG user units
+// map linearly to frame pixels and the lens can be placed straight from the
+// generator's projected anchor (open water in the Indian Ocean lobe).
+const LENS_W = 0.22;
 const lensR = (LENS_W / 2) * WORLD.W;
-const lensCY = (1 - (LENS_BOTTOM + LENS_W)) * WORLD.H;
+const lensCX = WORLD.lensAnchor.x;
+const lensCY = WORLD.lensAnchor.y;
+
+const LENS_LEFT_PCT = ((lensCX - lensR) / WORLD.W) * 100;
+const LENS_TOP_PCT = ((lensCY - lensR) / WORLD.H) * 100;
 
 // Connector from the Europe anchor ring to the edge of the lens.
 const A = WORLD.europeAnchor;
@@ -145,9 +148,35 @@ export function TravelMap() {
         style={{ position: 'relative', width: '100%', maxWidth: '1440px', aspectRatio: `${WORLD.W} / ${WORLD.H}` }}
       >
         <svg viewBox={`0 0 ${WORLD.W} ${WORLD.H}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
-          {WORLD.countries.map((c, i) => (
-            <motion.path key={c.name + i} d={c.d} variants={flyIn(c)} style={landStyle(c.visited)} />
+          {/* Goode's lobes, each its own closed shape — they read as the ocean
+              behind the land and give the projection its interrupted silhouette. */}
+          {WORLD.lobes.map((d, i) => (
+            <motion.path
+              key={i}
+              d={d}
+              fill={OCEAN}
+              stroke={OCEAN_STROKE}
+              strokeWidth={1.5}
+              strokeLinejoin="round"
+              variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } } }}
+            />
           ))}
+          {/* Features that straddle an interruption (Greenland, Russia at the
+              antimeridian) get clipped imperfectly by d3 and spill into the
+              gaps between lobes. Clipping land to the lobes keeps the
+              silhouette honest — and the fly-in now assembles inside the map. */}
+          <defs>
+            <clipPath id="goode-lobes">
+              {WORLD.lobes.map((d, i) => (
+                <path key={i} d={d} />
+              ))}
+            </clipPath>
+          </defs>
+          <g clipPath="url(#goode-lobes)">
+            {WORLD.countries.map((c, i) => (
+              <motion.path key={c.name + i} d={c.d} variants={flyIn(c)} style={landStyle(c.visited)} />
+            ))}
+          </g>
 
           {/* Region ring + connector to the magnifier lens */}
           <motion.circle
@@ -185,8 +214,14 @@ export function TravelMap() {
                   >
                     {/* Invisible disc widens the tap target well past the stroke. */}
                     {note && <circle cx={m.x} cy={m.y} r={s * 2.1} fill="transparent" />}
-                    <line x1={m.x - s} y1={m.y - s} x2={m.x + s} y2={m.y + s} stroke={active ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
-                    <line x1={m.x + s} y1={m.y - s} x2={m.x - s} y2={m.y + s} stroke={active ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
+                    {/* Not-yet-visited marks pulse instead of sitting solid. */}
+                    <g
+                      className={m.pending ? 'travel-mark-pending' : undefined}
+                      style={m.pending ? { animationDelay: `${lensDelay}s` } : undefined}
+                    >
+                      <line x1={m.x - s} y1={m.y - s} x2={m.x + s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
+                      <line x1={m.x + s} y1={m.y - s} x2={m.x - s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
+                    </g>
                   </motion.g>
                 </motion.g>
                 {m.label && (
@@ -211,7 +246,7 @@ export function TravelMap() {
             shown: { scale: 1, opacity: 1, transition: { duration: reduced ? 0.3 : 0.55, delay: lensDelay, ease: reduced ? 'easeOut' : EASE_OUT_BACK } },
           }}
           style={{
-            position: 'absolute', left: `${LENS_LEFT * 100}%`, bottom: `${LENS_BOTTOM * 100}%`,
+            position: 'absolute', left: `${LENS_LEFT_PCT}%`, top: `${LENS_TOP_PCT}%`,
             width: `${LENS_W * 100}%`, aspectRatio: '1', borderRadius: '50%', overflow: 'hidden',
             border: `2.5px solid ${VISITED_STROKE}`, background: '#e2e2e2',
             boxShadow: '0 12px 40px rgba(18,35,63,0.20), inset 0 0 30px rgba(18,35,63,0.06)',
@@ -368,8 +403,9 @@ export function TravelMap() {
           const note = getTravelNote(m.name);
           const inner = (
             <>
-              <span style={{ color: note ? MARK_HOT : MARK }}>✕</span>
+              <span style={{ color: note || m.pending ? MARK_HOT : MARK }}>✕</span>
               {m.name}
+              {m.pending && <span style={{ opacity: 0.6 }}>· soon</span>}
             </>
           );
           if (!note) {

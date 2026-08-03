@@ -115,6 +115,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Travel map: not-yet-visited marks pulse. Driven by CSS rather than
+   framer-motion — the marks sit inside a variant tree, and the parent's
+   "shown" variant pins opacity to 1, which kills a child keyframe animation. */
+@keyframes travel-mark-flash {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+.travel-mark-pending {
+  animation: travel-mark-flash 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .travel-mark-pending { animation: none; }
+}
+
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #b3b6bb; border-radius: 5px; }

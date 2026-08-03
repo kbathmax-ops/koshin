@@ -8,7 +8,8 @@
 // Adapted from the "X Marks The Spot" Claude Design project.
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { geoEquirectangular, geoMercator, geoPath, geoBounds } from 'd3-geo';
+import { geoMercator, geoPath, geoBounds } from 'd3-geo';
+import { geoInterruptedHomolosine } from 'd3-geo-projection';
 import { feature } from 'topojson-client';
 
 // Capitals for the X-marks.
@@ -22,12 +23,47 @@ const CAP = {
   France: [2.35, 48.85],
   Monaco: [7.42, 43.73],
   Italy: [12.5, 41.9],
+  Peru: [-77.03, -12.05],
 };
 // Order the marks appear (roughly west → east), and which are in the Europe cluster.
-const WORLD_MARKS = ['Canada', 'United States', 'Dominican Republic', 'South Korea', 'Spain', 'England', 'France', 'Monaco', 'Italy'];
+const WORLD_MARKS = ['Canada', 'United States', 'Dominican Republic', 'Peru', 'South Korea', 'Spain', 'England', 'France', 'Monaco', 'Italy'];
 const EUROPE_MARKS = ['Spain', 'England', 'France', 'Monaco', 'Italy'];
 // Standalone marks get a label on the world map; the European cluster is left to the lens.
-const WORLD_LABELLED = new Set(['Canada', 'United States', 'Dominican Republic', 'South Korea']);
+const WORLD_LABELLED = new Set(['Canada', 'United States', 'Dominican Republic', 'South Korea', 'Peru']);
+// Not visited yet — rendered as a slow-flashing X ("next stop") rather than a solid one.
+const PENDING = new Set(['Peru']);
+
+/*
+ * Goode's lobes, matching d3-geo-projection's own table for
+ * geoInterruptedHomolosine: [lon0, lon1] spans per hemisphere.
+ *
+ * d3's geoPath emits the interrupted sphere as ONE continuous ring that walks
+ * every lobe, so filling it bridges the interruptions into a solid blob. Each
+ * lobe outline is therefore walked by hand in projected space: along the
+ * equator, up the eastern meridian to the pole, back down the western one.
+ * The pole is a single point in Mollweide, so the ring closes there with no
+ * top edge. EPS keeps the walk just inside the seam, since a point sitting
+ * exactly on an interruption can resolve into either neighbouring lobe.
+ */
+const LOBES = [
+  { lon: [-180, -40], pole: 90 },
+  { lon: [-40, 180], pole: 90 },
+  { lon: [-180, -100], pole: -90 },
+  { lon: [-100, -20], pole: -90 },
+  { lon: [-20, 80], pole: -90 },
+  { lon: [80, 180], pole: -90 },
+];
+const EPS = 0.35;
+
+function lobeOutline(projection, [lon0, lon1], poleLat) {
+  const a = lon0 + EPS, b = lon1 - EPS, N = 180;
+  const pts = [];
+  for (let i = 0; i <= N; i++) pts.push([a + ((b - a) * i) / N, 0]);
+  for (let i = 1; i <= N; i++) pts.push([b, (poleLat * i) / N]);
+  for (let i = N - 1; i >= 1; i--) pts.push([a, (poleLat * i) / N]);
+  const xy = pts.map((p) => projection(p)).filter(Boolean);
+  return `M${xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L')}Z`;
+}
 
 const seedRand = (s0) => {
   let seed = s0;
@@ -59,24 +95,48 @@ function buildCountries(features, path, W, H, visitedNames, s0) {
   return out;
 }
 
-/* ── WORLD (110m, equirectangular) ── */
+/* ── WORLD (110m, Goode interrupted homolosine) ──
+   The interrupted projection slices the oceans into lobes, so the frame is
+   sized from the projected sphere rather than assumed 2:1. Antarctica is
+   dropped: Goode shreds it across every lobe and it carries no marks. */
 const world = (() => {
-  const W = 2000, H = 1000;
+  const W = 2000;
   const topo = JSON.parse(readFileSync('node_modules/world-atlas/countries-110m.json', 'utf8'));
   const geo = feature(topo, topo.objects.countries);
-  const projection = geoEquirectangular().fitSize([W, H], { type: 'Sphere' });
+  const features = geo.features.filter((f) => f.properties.name !== 'Antarctica');
+
+  const projection = geoInterruptedHomolosine().fitWidth(W, { type: 'Sphere' });
+  // Seat the sphere against the top-left of the viewBox and size H to match.
+  let b = geoPath(projection).bounds({ type: 'Sphere' });
+  const [tx, ty] = projection.translate();
+  projection.translate([tx - b[0][0], ty - b[0][1]]);
   const path = geoPath(projection);
+  b = path.bounds({ type: 'Sphere' });
+  const H = Math.ceil(b[1][1]);
+  const lobes = LOBES.map((l) => lobeOutline(projection, l.lon, l.pole));
+
   const visited = new Set(['Canada', 'United States of America', 'Dominican Rep.', 'South Korea', 'Spain', 'United Kingdom', 'France', 'Italy']);
-  const countries = buildCountries(geo.features, path, W, H, visited, 11);
+  const countries = buildCountries(features, path, W, H, visited, 11);
   const marks = WORLD_MARKS.map((name) => {
     const [x, y] = projection(CAP[name]);
-    return { name, x: +x.toFixed(1), y: +y.toFixed(1), label: WORLD_LABELLED.has(name), europe: EUROPE_MARKS.includes(name) };
+    return {
+      name, x: +x.toFixed(1), y: +y.toFixed(1),
+      label: WORLD_LABELLED.has(name),
+      europe: EUROPE_MARKS.includes(name),
+      pending: PENDING.has(name),
+    };
   });
   // Anchor + radius of the Europe cluster on the world map (for the lens connector).
   const [ax, ay] = projection([5, 47]);
   const europeMarks = marks.filter((m) => m.europe);
   const r = Math.max(...europeMarks.map((m) => Math.hypot(m.x - ax, m.y - ay))) + 26;
-  return { W, H, countries, marks, europeAnchor: { x: +ax.toFixed(1), y: +ay.toFixed(1), r: +r.toFixed(1) } };
+  // Where the magnifier lens parks: open water in the Indian Ocean lobe.
+  const [lx, ly] = projection([82, -34]);
+  return {
+    W, H, lobes, countries, marks,
+    europeAnchor: { x: +ax.toFixed(1), y: +ay.toFixed(1), r: +r.toFixed(1) },
+    lensAnchor: { x: +lx.toFixed(1), y: +ly.toFixed(1) },
+  };
 })();
 
 /* ── EUROPE (50m, Mercator window) — the magnifier lens ── */
@@ -114,11 +174,11 @@ const europe = (() => {
 
 const out =
   `// GENERATED by scripts/gen-travel-map.mjs — do not edit by hand.\n` +
-  `// WORLD: equirectangular 110m + 9 visited marks. EUROPE: Mercator window 50m (magnifier lens).\n\n` +
+  `// WORLD: Goode interrupted homolosine 110m + marks. EUROPE: Mercator window 50m (magnifier lens).\n\n` +
   `export type Country = { name: string; d: string; visited: boolean; dx: number; dy: number; rot: number; delay: number };\n` +
-  `export type WorldMark = { name: string; x: number; y: number; label: boolean; europe: boolean };\n` +
+  `export type WorldMark = { name: string; x: number; y: number; label: boolean; europe: boolean; pending: boolean };\n` +
   `export type Mark = { name: string; x: number; y: number };\n\n` +
-  `export const WORLD = ${JSON.stringify(world)} as { W: number; H: number; countries: Country[]; marks: WorldMark[]; europeAnchor: { x: number; y: number; r: number } };\n\n` +
+  `export const WORLD = ${JSON.stringify(world)} as { W: number; H: number; lobes: string[]; countries: Country[]; marks: WorldMark[]; europeAnchor: { x: number; y: number; r: number }; lensAnchor: { x: number; y: number } };\n\n` +
   `export const EUROPE = ${JSON.stringify(europe)} as { W: number; H: number; countries: Country[]; marks: Mark[] };\n`;
 
 writeFileSync('lib/travel-map-data.ts', out);

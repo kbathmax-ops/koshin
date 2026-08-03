@@ -174,12 +174,12 @@ function Section03() {
 
       {/* Text */}
       <div className="w-full" style={{ flex: 1, paddingBottom: '2rem' }}>
-        <StoryBlock label="03 — Section label" heading="Section heading">
+        <StoryBlock label="03 — Gap year" heading="What I'm doing in my gap year">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
-              'Point one',
-              'Point two',
-              'Point three',
+              'Working startup growth',
+              'Travelling as much as I can',
+              'Building my Instagram :)',
             ].map((text) => (
               <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2f5d9e', flexShrink: 0 }} />
