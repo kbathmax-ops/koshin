@@ -29,7 +29,8 @@ const SLIDES = [
   {
     title: 'Inspired by International Security',
     body: 'Invited to the Halifax International Security Forum, realized national defense is something I want to work in in the future.',
-    src: '/about-bg.jpg',
+    src: '/photo-security.jpg',
+    pos: 'center 64%',
     accent: '#9dc2ee',
   },
   {
@@ -185,7 +186,9 @@ export function BackgroundShowcase() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center 45%',
+                // Portrait sources crop hard in this wide frame; `pos` lets a
+                // slide pick the band worth keeping.
+                objectPosition: slide.pos ?? 'center 45%',
                 filter: 'brightness(0.55) saturate(0.85)',
                 display: 'block',
               }}
