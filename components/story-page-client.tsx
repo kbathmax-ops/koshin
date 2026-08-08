@@ -177,8 +177,10 @@ function Section03() {
               </li>
             ))}
           </ul>
-          <Link
-            href="#"
+          <a
+            href="https://www.instagram.com/koshinbmx"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               marginTop: '2rem',
               display: 'inline-flex',
@@ -194,9 +196,9 @@ function Section03() {
               textDecoration: 'none',
             }}
           >
-            Button label
+            Follow on Instagram
             <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-          </Link>
+          </a>
         </StoryBlock>
       </div>
     </div>
