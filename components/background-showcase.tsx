@@ -22,13 +22,13 @@ const SLIDES = [
   },
   {
     title: 'Sales',
-    body: 'With one of the best graduation-trip providers.',
+    body: 'With one of the best graduation-trip providers in the country.',
     src: '/photo-monaco.jpg',
     accent: '#9dc2ee',
   },
   {
-    title: 'International Security',
-    body: 'A NATO conference sparked a lasting passion.',
+    title: 'Inspired by International Security',
+    body: 'Invited to the Halifax International Security Forum, realized national defense is something I want to work in in the future.',
     src: '/about-bg.jpg',
     accent: '#9dc2ee',
   },
