@@ -150,26 +150,16 @@ function Section03() {
           boxShadow: '0 30px 80px rgba(18,35,63,0.18)',
         }}
       >
-        {/* Placeholder — image to be added */}
-        <div
-          aria-hidden="true"
+        <img
+          src="/photo-gap-year.jpg"
+          alt="Koshin"
           style={{
             width: '100%',
             aspectRatio: '3/4',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'rgba(18,35,63,0.03)',
-            border: '1px dashed rgba(18,35,63,0.22)',
-            color: 'rgba(18,35,63,0.35)',
-            fontFamily: 'var(--font-manrope), Manrope, sans-serif',
-            fontSize: '0.72rem',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
+            objectFit: 'cover',
+            display: 'block',
           }}
-        >
-          Image
-        </div>
+        />
       </motion.div>
 
       {/* Text */}
