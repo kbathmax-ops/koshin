@@ -9,10 +9,6 @@
 export type TravelNote = {
   /** Matches the mark name on the map. */
   name: string;
-  /** Optional line under the title — city, region, whatever fits. */
-  where?: string;
-  /** Optional — "Summer 2023", "2019 & 2024", however you want it. */
-  when?: string;
   /** A few sentences: the place, and what you got up to there. */
   blurb: string;
 };
@@ -20,57 +16,49 @@ export type TravelNote = {
 export const TRAVEL_NOTES: TravelNote[] = [
   {
     name: 'Canada',
-    where: 'Home base',
-    when: 'Add the years',
-    blurb: 'Placeholder — a few lines about home: where you grew up, the trips across the country, what keeps pulling you back.',
+    blurb:
+      'The place I call home & my favourite country. Been to the east coast, Quebec, yet to visit the west. Some of the smartest, most underrated builders live in Canada + freshwater lakes are not something to be taken for granted.',
   },
   {
     name: 'United States',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — the US story goes here: the cities, the drives, the people you met along the way.',
+    blurb: 'NYC 3x - went for the hustle energy. Kid me learned dreams are possible in NYC.',
   },
   {
     name: 'Dominican Republic',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — the DR write-up: the coast, the food, the pace of it, and what stuck with you.',
+    blurb:
+      'Sold this grad trip to my grade for a year. Learned to cherish the fleeting bonding weeks with your people.',
+  },
+  {
+    name: 'Peru',
+    blurb: 'Headed there soon - can’t wait :)',
   },
   {
     name: 'South Korea',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — Korea notes: the language, the late nights, the culture shock that turned into comfort.',
+    blurb:
+      'The motherland + insane infrastructure. Started travelling with an economic perspective after Korea. Their rise to power is one of the most fascinating stories I’ve known.',
   },
   {
     name: 'Spain',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — Spain: what you did there and the one moment you still bring up.',
+    blurb:
+      'Second favourite country. Reminded me that we are one people, and we are meant to live, not just survive. Most beautiful beaches I’ve ever seen.',
   },
   {
     name: 'England',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — England: what you did there and the one moment you still bring up.',
+    blurb: 'Magical in August. South Bank.',
   },
   {
     name: 'France',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — France: what you did there and the one moment you still bring up.',
+    blurb:
+      'Never been to Paris, only to the south. Inspired by Italian architecture, slow-paced life & kindness of locals.',
   },
   {
     name: 'Monaco',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — Monaco: what you did there and the one moment you still bring up.',
+    blurb:
+      '10 minutes in, I saw a child on a massive yacht. Told myself it’s a non-negotiable & I need one of those.',
   },
   {
     name: 'Italy',
-    where: 'Add a city',
-    when: 'Add the years',
-    blurb: 'Placeholder — Italy: what you did there and the one moment you still bring up.',
+    blurb: 'Spent 3 hours in Ventimiglia. Great - once again, a slow-paced way of life.',
   },
 ];
 

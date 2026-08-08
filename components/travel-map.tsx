@@ -359,30 +359,13 @@ export function TravelMap() {
                   ✕
                 </button>
 
-                <p style={{
-                  fontFamily: 'var(--font-manrope), Manrope, sans-serif', fontSize: '0.56rem', fontWeight: 900,
-                  letterSpacing: '0.3em', textTransform: 'uppercase', color: MARK_HOT, margin: 0,
-                }}>
-                  {open.where || 'Been there'}
-                </p>
-
                 <h3 style={{
                   fontFamily: "'Public Sans', sans-serif", fontWeight: 900,
                   fontSize: '1.15rem', letterSpacing: '-0.03em', lineHeight: 1.15,
-                  color: '#12233f', margin: '0.45rem 2rem 0 0',
+                  color: '#12233f', margin: '0 2rem 0 0',
                 }}>
                   {open.name}
                 </h3>
-
-                {open.when && (
-                  <p style={{
-                    fontFamily: 'var(--font-manrope), Manrope, sans-serif', fontSize: '0.58rem', fontWeight: 700,
-                    letterSpacing: '0.18em', textTransform: 'uppercase',
-                    color: 'rgba(18,35,63,0.42)', margin: '0.4rem 0 0',
-                  }}>
-                    {open.when}
-                  </p>
-                )}
 
                 <p style={{
                   fontSize: '0.82rem', lineHeight: 1.6, color: 'rgba(18,35,63,0.72)',
