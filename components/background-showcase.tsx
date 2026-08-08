@@ -17,7 +17,7 @@ const SLIDES = [
   {
     title: 'Environmental Nonprofit',
     body: 'Two years working on the ground for the environment.',
-    src: '/photo-jeju.jpg',
+    src: '/photo-nonprofit.jpg',
     accent: '#9dc2ee',
   },
   {
