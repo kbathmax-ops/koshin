@@ -34,8 +34,8 @@ const SLIDES = [
   },
   {
     title: 'Languages',
-    body: 'Learned Korean, Spanish, and French abroad.',
-    src: '/photo-spain-volunteer.jpg',
+    body: 'Lived in Spain for a month & dedicated myself to learning as many languages as I can for the rest of my life.',
+    src: '/photo-languages.jpg',
     accent: '#9dc2ee',
   },
 ];
