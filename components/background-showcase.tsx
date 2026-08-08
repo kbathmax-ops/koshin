@@ -23,7 +23,7 @@ const SLIDES = [
   {
     title: 'Sales',
     body: 'With one of the best graduation-trip providers in the country.',
-    src: '/photo-monaco.jpg',
+    src: '/photo-sales.jpg',
     accent: '#9dc2ee',
   },
   {
