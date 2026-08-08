@@ -11,7 +11,7 @@ const SLIDES = [
   {
     title: 'Arts School',
     body: 'Five years learning to think creatively about every situation.',
-    src: '/photo-concert.jpg',
+    src: '/photo-arts-school.jpg',
     accent: '#9dc2ee',
   },
   {
