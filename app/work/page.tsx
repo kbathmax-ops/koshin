@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Snap Toronto (teaching AI to small business owners across the Americas), Sanctions Precedent (AI-powered sanctions research engine), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Snap Toronto (teaching AI to small business owners across the Americas), Sanctions Precedent (AI-powered sanctions research engine), detour (flight search that skips US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: teaching AI to small business owners across the Americas, an AI sanctions research engine, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: teaching AI to small business owners across the Americas, an AI sanctions research engine, a flight search that never routes you through the US, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -56,6 +56,16 @@ const jsonLd = {
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
       operatingSystem: "Web",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 5,
+      name: "detour",
+      description:
+        "Flight search that hides every itinerary connecting through the US or its territories, and shows what avoiding them costs.",
+      applicationCategory: "TravelApplication",
+      operatingSystem: "Web",
+      url: "https://flyaround-omega.vercel.app",
     },
   ],
 };
@@ -111,6 +121,14 @@ const projects: Project[] = [
     description:
       "A travel personality quiz for builders and founders. Six questions return three countries, each framed by the lesson it tends to teach — matched deterministically against a database built from real first-person travel essays, with every entry citing its source.",
     image: "/thewindowseat-hero.png",
+  },
+  {
+    id: "detour",
+    name: "detour",
+    href: "https://flyaround-omega.vercel.app",
+    description:
+      "Flight search for people who would rather not transit the United States. Every itinerary connecting through the US or its territories is hidden by default — a filter no major search engine offers — and the results show what avoiding them actually costs. A retro departures board over a routing engine built on real airline hub networks.",
+    image: "/detour-hero.png",
   },
 ];
 
