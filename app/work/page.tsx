@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Snap Toronto (teaching AI to small business owners across the Americas), Sanctions Precedent (AI-powered sanctions research engine), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: an AI sanctions research engine, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k and booking her out months in advance.",
+      "Student developer and marketer case studies: teaching AI to small business owners across the Americas, an AI sanctions research engine, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -26,8 +26,16 @@ const jsonLd = {
   description: "AI-powered software projects by a 17-year-old developer and student founder.",
   itemListElement: [
     {
-      "@type": "SoftwareApplication",
+      "@type": "EducationalOrganization",
       position: 1,
+      name: "Snap Toronto",
+      description:
+        "Events and webinars teaching small business owners in cities across the Americas how to use AI for admin work — invoicing, scheduling, and follow-ups.",
+      url: "https://snaptoronto.org",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 2,
       name: "Sanctions Precedent",
       description: "AI-powered sanctions research engine built with Next.js, Claude API, and Supabase.",
       applicationCategory: "ResearchApplication",
@@ -35,7 +43,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 2,
+      position: 3,
       name: "Toronto Cafe Roulette",
       description: "A curated roulette of Toronto's best independent cafes for coffee chats.",
       applicationCategory: "LifestyleApplication",
@@ -43,7 +51,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 3,
+      position: 4,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
@@ -63,6 +71,16 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    id: "snap-toronto",
+    name: "Snap Toronto",
+    href: "https://snaptoronto.org",
+    description:
+      "Teaching AI to small business owners in cities across the Americas — events and webinars on using it for the admin work nobody enjoys: invoicing, scheduling, follow-ups. What I'm building during my gap year.",
+    tags: ["Education", "Next.js"],
+    image: "/snap-toronto-hero.png",
+    stack: ["Next.js", "Tailwind CSS", "Vercel", "Community Building"],
+  },
   {
     id: "toronto-cafe-roulette",
     name: "Toronto Cafe Roulette",
