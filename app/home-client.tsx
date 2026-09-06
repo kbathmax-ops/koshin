@@ -275,7 +275,7 @@ export function HomeClient() {
                     textShadow: "0 1px 8px rgba(0,0,0,0.5)",
                   }}
                 >
-                  See the Work
+                  See the Builds
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </motion.div>
@@ -319,7 +319,7 @@ export function HomeClient() {
               <div className="flex gap-6 sm:gap-10 -my-3">
                 {[
                   { label: "GitHub", href: "https://github.com/koshinbathmax" },
-                  { label: "Work", href: "/work" },
+                  { label: "Builds", href: "/work" },
                   { label: "Contact", href: "/work#contact" },
                 ].map((l) => (
                   <a

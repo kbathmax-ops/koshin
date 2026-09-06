@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Snap Toronto (teaching AI to small business owners across the Americas), Sanctions Precedent (AI-powered sanctions research engine), detour (flight search that skips US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: teaching AI to small business owners across the Americas, an AI sanctions research engine, a flight search that never routes you through the US, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: an AI sanctions research engine, a travel personality quiz built on real travel essays, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -26,16 +26,8 @@ const jsonLd = {
   description: "AI-powered software projects by a 17-year-old developer and student founder.",
   itemListElement: [
     {
-      "@type": "EducationalOrganization",
-      position: 1,
-      name: "Snap Toronto",
-      description:
-        "Events and webinars teaching small business owners in cities across the Americas how to use AI for admin work — invoicing, scheduling, and follow-ups.",
-      url: "https://snaptoronto.org",
-    },
-    {
       "@type": "SoftwareApplication",
-      position: 2,
+      position: 1,
       name: "Sanctions Precedent",
       description: "AI-powered sanctions research engine built with Next.js, Claude API, and Supabase.",
       applicationCategory: "ResearchApplication",
@@ -43,7 +35,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 3,
+      position: 2,
       name: "Toronto Cafe Roulette",
       description: "A curated roulette of Toronto's best independent cafes for coffee chats.",
       applicationCategory: "LifestyleApplication",
@@ -51,21 +43,11 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 4,
+      position: 3,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
       operatingSystem: "Web",
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 5,
-      name: "detour",
-      description:
-        "Flight search that hides every itinerary connecting through the US or its territories, and shows what avoiding them costs.",
-      applicationCategory: "TravelApplication",
-      operatingSystem: "Web",
-      url: "https://flyaround-omega.vercel.app",
     },
   ],
 };
@@ -81,14 +63,6 @@ type Project = {
 };
 
 const projects: Project[] = [
-  {
-    id: "snap-toronto",
-    name: "Snap Toronto",
-    href: "https://snaptoronto.org",
-    description:
-      "Teaching AI to small business owners in cities across the Americas — events and webinars on using it for the admin work nobody enjoys: invoicing, scheduling, follow-ups. What I'm building during my gap year.",
-    image: "/snap-toronto-hero.png",
-  },
   {
     id: "toronto-cafe-roulette",
     name: "Toronto Cafe Roulette",
@@ -122,15 +96,14 @@ const projects: Project[] = [
       "A travel personality quiz for builders and founders. Six questions return three countries, each framed by the lesson it tends to teach — matched deterministically against a database built from real first-person travel essays, with every entry citing its source.",
     image: "/thewindowseat-hero.png",
   },
-  {
-    id: "detour",
-    name: "detour",
-    href: "https://flyaround-omega.vercel.app",
-    description:
-      "Flight search for people who would rather not transit the United States. Every itinerary connecting through the US or its territories is hidden by default — a filter no major search engine offers — and the results show what avoiding them actually costs. A retro departures board over a routing engine built on real airline hub networks.",
-    image: "/detour-hero.png",
-  },
 ];
+
+/**
+ * Brand work is still being built in private. Set SHOW_BRAND_WORK=true in
+ * .env.local to see it in dev; it stays off (and out of the client bundle)
+ * everywhere it isn't set, so nothing ships to production.
+ */
+const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
 
 export default function WorkPage() {
   return (
@@ -146,8 +119,19 @@ export default function WorkPage() {
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pb-32">
 
-        {/* ── Project cards ── */}
-        <section>
+        {/* ── Builds ── */}
+        <section id="builds" className="scroll-mt-28">
+          <FadeUp>
+            <h2
+              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
+              style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+            >
+              Builds
+            </h2>
+            <p className="text-base mb-10 md:mb-14 max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
+              Things I&apos;ve shipped — most of them live, all of them started as an experiment.
+            </p>
+          </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {projects.map((project, i) => (
               <FadeUp key={project.id} delay={i * 0.08}>
@@ -201,6 +185,23 @@ export default function WorkPage() {
           </div>
         </section>
 
+        {/* ── Brand work — in progress, private until it's ready ── */}
+        {SHOW_BRAND_WORK && (
+          <section id="brand-work" className="scroll-mt-28">
+            <FadeUp>
+              <h2
+                className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
+                style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+              >
+                Brand work
+              </h2>
+              <p className="text-base max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
+                Marketing, content, and growth work for brands. In progress.
+              </p>
+            </FadeUp>
+          </section>
+        )}
+
         {/* ── Contact ── */}
         <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
           <FadeUp>
@@ -219,9 +220,6 @@ export default function WorkPage() {
                     <br />
                     something together.
                   </h2>
-                  <p style={{ color: 'rgba(18,35,63,0.70)' }}>
-                    looking for growth, content, ugc, ai consulting? I'll get back to you within a day
-                  </p>
                 </div>
                 <ContactForm />
               </div>
