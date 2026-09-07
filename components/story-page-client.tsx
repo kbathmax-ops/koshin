@@ -255,6 +255,95 @@ function TitleBlock() {
   );
 }
 
+/* ─── Section 04 — where I'm strongest ─── */
+const STRENGTHS = [
+  'Debate',
+  'Writing',
+  'Marketing psychology',
+  'Public speaking',
+  'Faking it till I make it',
+  'Leadership',
+];
+
+function Section04() {
+  return (
+    <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+      <p
+        style={{
+          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
+          fontSize: '0.65rem',
+          fontWeight: 900,
+          letterSpacing: '0.35em',
+          textTransform: 'uppercase',
+          color: '#2f5d9e',
+          marginBottom: '1rem',
+        }}
+      >
+        04 — Strengths
+      </p>
+      <h2
+        style={{
+          fontFamily: "'Public Sans', sans-serif",
+          fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+          fontWeight: 900,
+          color: '#12233f',
+          lineHeight: 1.1,
+          letterSpacing: '-0.03em',
+          marginBottom: 'clamp(2rem, 4vw, 3rem)',
+        }}
+      >
+        Places where I shine
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ columnGap: 'clamp(2rem, 5vw, 5rem)' }}>
+        {STRENGTHS.map((strength, i) => (
+          <motion.div
+            key={strength}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5, delay: (i % 2) * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              gap: 'clamp(1rem, 2.5vw, 2rem)',
+              padding: '1.25rem 0',
+              borderTop: '1px solid rgba(18,35,63,0.14)',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-manrope), Manrope, sans-serif',
+                fontSize: '0.7rem',
+                fontWeight: 900,
+                letterSpacing: '0.2em',
+                color: '#2f5d9e',
+                flexShrink: 0,
+              }}
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span
+              style={{
+                fontFamily: "'Public Sans', sans-serif",
+                fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
+                fontWeight: 900,
+                color: '#12233f',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.2,
+              }}
+            >
+              {strength}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+      {/* Closing rule so the last row doesn't hang open */}
+      <div style={{ borderTop: '1px solid rgba(18,35,63,0.14)' }} />
+    </div>
+  );
+}
+
 /* ─── Bottom CTA ─── */
 function StoryCTA() {
   return (
@@ -415,6 +504,9 @@ export function StoryPageClient() {
 
         {/* 03 — What makes me different */}
         <Section03 />
+
+        {/* 04 — Places where I shine */}
+        <Section04 />
 
 
       </div>

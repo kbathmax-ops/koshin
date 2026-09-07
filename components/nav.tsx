@@ -64,7 +64,7 @@ export function Nav() {
             )}
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
-            Work
+            Builds
           </Link>
           <Link
             href="/work#contact"
@@ -100,7 +100,7 @@ export function Nav() {
             className="font-bold text-[#12233f] hover:text-[#2f5d9e] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
-            Work
+            Builds
           </Link>
           <Link
             href="/work#contact"

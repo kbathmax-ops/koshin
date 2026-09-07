@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -42,8 +42,18 @@ const jsonLd = {
       operatingSystem: "Web",
     },
     {
-      "@type": "CreativeWork",
+      "@type": "SoftwareApplication",
       position: 3,
+      name: "detour",
+      description:
+        "Chrome extension that hides flight results routing through the US or its territories on Google Flights.",
+      applicationCategory: "TravelApplication",
+      operatingSystem: "Chrome",
+      url: "https://detour-landing-roan.vercel.app",
+    },
+    {
+      "@type": "CreativeWork",
+      position: 4,
       name: "Snap Toronto — identity & site design",
       description:
         "Identity and site design for a Toronto AI workshop series: condensed display type, a hand-drawn mark, and full-bleed photography of the businesses it serves.",
@@ -51,21 +61,21 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      position: 4,
+      position: 5,
       name: "Toronto's Hot Take Slideshow Night — event poster",
       description:
         "Poster design for a Toronto slideshow night: hand-drawn brush lettering over a photograph of the room.",
     },
     {
       "@type": "CreativeWork",
-      position: 5,
+      position: 6,
       name: "Ocean Management — brand identity & deck",
       description:
         "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
     },
     {
       "@type": "SoftwareApplication",
-      position: 6,
+      position: 7,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
@@ -109,6 +119,14 @@ const projects: Project[] = [
       "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
     image: "/sanctions-precedent-hero.png",
     unavailable: true,
+  },
+  {
+    id: "detour",
+    name: "detour",
+    href: "https://detour-landing-roan.vercel.app",
+    description:
+      "A Chrome extension for people who would rather not transit the United States. On Google Flights it hides every itinerary connecting through the US or its territories — a filter no major search engine offers. No account, no analytics, no network calls: your on/off preference and the last result count stay on your own machine.",
+    image: "/detour-landing-hero.jpg",
   },
   {
     id: "the-window-seat",
