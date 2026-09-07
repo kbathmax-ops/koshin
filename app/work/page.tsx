@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: an AI sanctions research engine, a travel personality quiz built on real travel essays, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -42,8 +42,16 @@ const jsonLd = {
       operatingSystem: "Web",
     },
     {
-      "@type": "SoftwareApplication",
+      "@type": "CreativeWork",
       position: 3,
+      name: "Snap Toronto — identity & site design",
+      description:
+        "Identity and site design for a Toronto AI workshop series: condensed display type, a hand-drawn mark, and full-bleed photography of the businesses it serves.",
+      url: "https://snaptoronto.org",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 4,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
@@ -98,12 +106,100 @@ const projects: Project[] = [
   },
 ];
 
+type Shot = {
+  src: string;
+  alt: string;
+  /** Caption under the shot — what part of the design it shows. */
+  label: string;
+  width: number;
+  height: number;
+};
+
+type DesignProject = {
+  id: string;
+  name: string;
+  href: string;
+  role: string;
+  year: string;
+  description: string;
+  shots: Shot[];
+};
+
+const designWork: DesignProject[] = [
+  {
+    id: "snap-toronto",
+    name: "Snap Toronto",
+    href: "https://snaptoronto.org",
+    role: "Identity & site design",
+    year: "2026",
+    description:
+      "Identity and site design for the AI workshop series I run in Toronto. Condensed display type set at poster scale, a hand-drawn stick figure as the mark, and full-bleed photography of the small businesses it's actually for. The case gets made in numbers rather than adjectives.",
+    shots: [
+      {
+        src: "/design/snap-toronto-hero.jpg",
+        alt: "Snap Toronto homepage hero — condensed display type over a street photograph",
+        label: "Homepage — display type over full-bleed street photography",
+        width: 1600,
+        height: 850,
+      },
+      {
+        src: "/design/snap-toronto-workshops.jpg",
+        alt: "Snap Toronto workshops section — three full-height photo panels labelled by trade",
+        label: "Workshops — edge-to-edge photo panels, labelled by trade",
+        width: 1600,
+        height: 1032,
+      },
+      {
+        src: "/design/snap-toronto-stats.png",
+        alt: "Snap Toronto statistics section — oversized numerals beside cited claims",
+        label: "Stats — oversized numerals, every claim cited",
+        width: 1600,
+        height: 386,
+      },
+      {
+        src: "/design/snap-toronto-cta.png",
+        alt: "Snap Toronto call to action — headline with an accent underline above a pill button",
+        label: "Sign-up — accent underline, single pill button",
+        width: 1600,
+        height: 472,
+      },
+    ],
+  },
+];
+
 /**
  * Brand work is still being built in private. Set SHOW_BRAND_WORK=true in
  * .env.local to see it in dev; it stays off (and out of the client bundle)
  * everywhere it isn't set, so nothing ships to production.
  */
 const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
+
+/** One screenshot in the design gallery — clicks through to the live site. */
+function Screenshot({ shot, href, full = false }: { shot: Shot; href: string; full?: boolean }) {
+  return (
+    <figure>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-[1rem] overflow-hidden transition-transform duration-500 hover:-translate-y-1.5"
+        style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}
+      >
+        <Image
+          src={shot.src}
+          alt={shot.alt}
+          width={shot.width}
+          height={shot.height}
+          sizes={full ? "(min-width: 768px) 1152px, 100vw" : "(min-width: 768px) 560px, 100vw"}
+          className="w-full h-auto"
+        />
+      </a>
+      <figcaption className="text-xs mt-3 px-1 leading-relaxed" style={{ color: 'rgba(18,35,63,0.55)' }}>
+        {shot.label}
+      </figcaption>
+    </figure>
+  );
+}
 
 export default function WorkPage() {
   return (
@@ -181,6 +277,78 @@ export default function WorkPage() {
                   </div>
                 </div>
               </FadeUp>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Design ── */}
+        <section id="design" className="scroll-mt-28">
+          <FadeUp>
+            <h2
+              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
+              style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+            >
+              Design
+            </h2>
+            <p className="text-base mb-10 md:mb-14 max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
+              Identity and interface work — the look of a thing before it&apos;s the code of a thing.
+            </p>
+          </FadeUp>
+
+          <div className="space-y-20 md:space-y-28">
+            {designWork.map((project) => (
+              <div key={project.id} id={`design-${project.id}`} className="scroll-mt-28">
+                {/* Header */}
+                <FadeUp>
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-end mb-6 md:mb-8 pb-6" style={{ borderBottom: '1px solid rgba(18,35,63,0.14)' }}>
+                    <div className="md:col-span-5">
+                      <p className="text-xs uppercase tracking-[0.2em] font-semibold mb-2" style={{ color: 'rgba(18,35,63,0.45)' }}>
+                        {project.role} · {project.year}
+                      </p>
+                      <h3
+                        className="font-extrabold text-3xl md:text-4xl tracking-tighter"
+                        style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+                      >
+                        {project.name}
+                      </h3>
+                    </div>
+                    <div className="md:col-span-7 md:pl-8">
+                      <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
+                        {project.description}
+                      </p>
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
+                        style={{ color: '#2f5d9e', opacity: 0.85 }}
+                      >
+                        Visit snaptoronto.org <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  </div>
+                </FadeUp>
+
+                {/* Screenshots — hero full width, then the tall one beside a stack of the short ones */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                  {project.shots.slice(0, 2).map((shot, i) => (
+                    <FadeUp
+                      key={shot.src}
+                      delay={i * 0.08}
+                      className={i === 0 ? "md:col-span-2" : undefined}
+                    >
+                      <Screenshot shot={shot} href={project.href} full={i === 0} />
+                    </FadeUp>
+                  ))}
+                  <div className="space-y-6 md:space-y-8">
+                    {project.shots.slice(2).map((shot, i) => (
+                      <FadeUp key={shot.src} delay={(i + 2) * 0.08}>
+                        <Screenshot shot={shot} href={project.href} />
+                      </FadeUp>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>

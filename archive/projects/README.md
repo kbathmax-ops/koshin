@@ -6,6 +6,10 @@ hero image (in `assets/`, restore to `public/`).
 
 ## Snap Toronto
 
+> Note: Snap Toronto came back to `/work` on 2026-09-06 as the first entry in the
+> **Design** section (`designWork` in `app/work/page.tsx`), with live screenshots in
+> `public/design/`. This block is the old *Builds* card, kept for reference.
+
 - id: `snap-toronto`
 - href: https://snaptoronto.org
 - image: `assets/snap-toronto-hero.png` → `public/snap-toronto-hero.png`
