@@ -50,8 +50,22 @@ const jsonLd = {
       url: "https://snaptoronto.org",
     },
     {
-      "@type": "SoftwareApplication",
+      "@type": "CreativeWork",
       position: 4,
+      name: "Toronto's Hot Take Slideshow Night — event poster",
+      description:
+        "Poster design for a Toronto slideshow night: hand-drawn brush lettering over a photograph of the room.",
+    },
+    {
+      "@type": "CreativeWork",
+      position: 5,
+      name: "Ocean Management — brand identity & deck",
+      description:
+        "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 6,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
@@ -118,7 +132,8 @@ type Shot = {
 type DesignProject = {
   id: string;
   name: string;
-  href: string;
+  /** Omitted for pieces with nowhere to link out to — print and event work. */
+  href?: string;
   role: string;
   year: string;
   description: string;
@@ -165,6 +180,47 @@ const designWork: DesignProject[] = [
       },
     ],
   },
+  {
+    id: "hot-take-slideshow-night",
+    name: "Toronto's Hot Take Slideshow Night",
+    role: "Event poster",
+    year: "2026",
+    description:
+      "Poster for a slideshow night at 300 Campbell Ave, where people present their take on a random topic to a full room. A hand-drawn brush wordmark over a photograph of the crowd, with the grotesque set tight underneath so the date and address still hold up at feed size.",
+    shots: [
+      {
+        src: "/design/hot-take-slideshow-night.jpg",
+        alt: "Toronto's Hot Take Slideshow Night poster — brush lettering over a photo of a packed room watching a projector",
+        label: "Poster — brush wordmark over the room, details set tight beneath",
+        width: 1600,
+        height: 790,
+      },
+    ],
+  },
+  {
+    id: "ocean-management",
+    name: "Ocean Management",
+    role: "Brand identity & deck",
+    year: "2026",
+    description:
+      "Identity and pitch deck for a Toronto influencer management agency. A geometric sans wordmark with two of its counters knocked out and replaced by the brand's own shapes — a red pill carrying the year, a gold one carrying the wave mark — over a warm off-white. Where the deck needs to raise its voice it goes full-bleed gold with justified all-caps.",
+    shots: [
+      {
+        src: "/design/ocean-management-cover.jpg",
+        alt: "Ocean Management deck cover — geometric wordmark with coloured pills set into its counters",
+        label: "Cover — the mark set into the counters of its own wordmark",
+        width: 1600,
+        height: 900,
+      },
+      {
+        src: "/design/ocean-management-statement.jpg",
+        alt: "Ocean Management statement slide — justified all-caps type on a gold field",
+        label: "Statement slide — justified all-caps on brand gold",
+        width: 1600,
+        height: 900,
+      },
+    ],
+  },
 ];
 
 /**
@@ -174,26 +230,38 @@ const designWork: DesignProject[] = [
  */
 const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
 
-/** One screenshot in the design gallery — clicks through to the live site. */
-function Screenshot({ shot, href, full = false }: { shot: Shot; href: string; full?: boolean }) {
+/** One shot in the design gallery — clicks through to the live site when there is one. */
+function Screenshot({ shot, href, full = false }: { shot: Shot; href?: string; full?: boolean }) {
+  const frameClass = "block rounded-[1rem] overflow-hidden transition-transform duration-500";
+  const frameStyle = { background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' };
+  const image = (
+    <Image
+      src={shot.src}
+      alt={shot.alt}
+      width={shot.width}
+      height={shot.height}
+      sizes={full ? "(min-width: 768px) 1152px, 100vw" : "(min-width: 768px) 560px, 100vw"}
+      className="w-full h-auto"
+    />
+  );
+
   return (
     <figure>
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block rounded-[1rem] overflow-hidden transition-transform duration-500 hover:-translate-y-1.5"
-        style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}
-      >
-        <Image
-          src={shot.src}
-          alt={shot.alt}
-          width={shot.width}
-          height={shot.height}
-          sizes={full ? "(min-width: 768px) 1152px, 100vw" : "(min-width: 768px) 560px, 100vw"}
-          className="w-full h-auto"
-        />
-      </a>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${frameClass} hover:-translate-y-1.5`}
+          style={frameStyle}
+        >
+          {image}
+        </a>
+      ) : (
+        <div className={frameClass} style={frameStyle}>
+          {image}
+        </div>
+      )}
       <figcaption className="text-xs mt-3 px-1 leading-relaxed" style={{ color: 'rgba(18,35,63,0.55)' }}>
         {shot.label}
       </figcaption>
@@ -316,38 +384,58 @@ export default function WorkPage() {
                       <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
                         {project.description}
                       </p>
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                        style={{ color: '#2f5d9e', opacity: 0.85 }}
-                      >
-                        Visit snaptoronto.org <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
+                      {project.href && (
+                        <a
+                          href={project.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
+                          style={{ color: '#2f5d9e', opacity: 0.85 }}
+                        >
+                          Visit {project.href.replace('https://', '')} <ArrowRight className="h-3.5 w-3.5" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </FadeUp>
 
                 {/* Screenshots — hero full width, then the tall one beside a stack of the short ones */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
-                  {project.shots.slice(0, 2).map((shot, i) => (
-                    <FadeUp
-                      key={shot.src}
-                      delay={i * 0.08}
-                      className={i === 0 ? "md:col-span-2" : undefined}
-                    >
-                      <Screenshot shot={shot} href={project.href} full={i === 0} />
-                    </FadeUp>
-                  ))}
-                  <div className="space-y-6 md:space-y-8">
-                    {project.shots.slice(2).map((shot, i) => (
-                      <FadeUp key={shot.src} delay={(i + 2) * 0.08}>
-                        <Screenshot shot={shot} href={project.href} />
+                {project.shots.length <= 2 ? (
+                  <div
+                    className={`grid grid-cols-1 gap-6 md:gap-8 items-start${
+                      project.shots.length === 2 ? " md:grid-cols-2" : ""
+                    }`}
+                  >
+                    {project.shots.map((shot, i) => (
+                      <FadeUp key={shot.src} delay={i * 0.08}>
+                        <Screenshot
+                          shot={shot}
+                          href={project.href}
+                          full={project.shots.length === 1}
+                        />
                       </FadeUp>
                     ))}
                   </div>
-                </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                    {project.shots.slice(0, 2).map((shot, i) => (
+                      <FadeUp
+                        key={shot.src}
+                        delay={i * 0.08}
+                        className={i === 0 ? "md:col-span-2" : undefined}
+                      >
+                        <Screenshot shot={shot} href={project.href} full={i === 0} />
+                      </FadeUp>
+                    ))}
+                    <div className="space-y-6 md:space-y-8">
+                      {project.shots.slice(2).map((shot, i) => (
+                        <FadeUp key={shot.src} delay={(i + 2) * 0.08}>
+                          <Screenshot shot={shot} href={project.href} />
+                        </FadeUp>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
