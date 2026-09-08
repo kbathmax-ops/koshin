@@ -167,9 +167,9 @@ function Section03() {
         <StoryBlock label="03 — Gap year" heading="What I'm doing in my gap year">
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {[
-              'Working startup growth',
-              'Travelling as much as I can',
-              'Building my Instagram :)',
+              'Travelling for adventure once in a while',
+              'Showing the whole thing on my Instagram',
+              'Innovating at a startup',
             ].map((text) => (
               <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2f5d9e', flexShrink: 0 }} />
