@@ -100,7 +100,7 @@ const projects: Project[] = [
     name: "Toronto Cafe Roulette",
     href: "https://toronto-cafe-roulette.vercel.app/",
     description:
-      "Spin the wheel and discover your next coffee chat. A curated roulette of Toronto's best independent cafes, hand-picked for quality and atmosphere.",
+      "A roulette of hand-picked independent Toronto cafes that spins you one place to take your next coffee chat.",
     image: "/toronto-cafe-roulette-hero.png",
   },
   {
@@ -108,7 +108,7 @@ const projects: Project[] = [
     name: "Tattoos by Jess",
     href: "https://www.instagram.com/tattoosbyjess.ca",
     description:
-      "Full-stack social media marketing for an independent tattoo artist. Grew her combined following by 2k and booked her out months in advance.",
+      "Social media marketing for an independent tattoo artist that grew her combined following by 2k and booked her out months in advance.",
     image: "/tattoos-by-jess-hero.png",
   },
   {
@@ -116,7 +116,7 @@ const projects: Project[] = [
     name: "Sanctions Precedent",
     href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
     description:
-      "An AI-powered research engine that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective. Built for policy analysts and legal researchers.",
+      "An AI research engine for policy analysts that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective.",
     image: "/sanctions-precedent-hero.png",
     unavailable: true,
   },
@@ -125,7 +125,7 @@ const projects: Project[] = [
     name: "detour",
     href: "https://detour-landing-roan.vercel.app",
     description:
-      "A Chrome extension for people who would rather not transit the United States. On Google Flights it hides every itinerary connecting through the US or its territories — a filter no major search engine offers. No account, no analytics, no network calls: your on/off preference and the last result count stay on your own machine.",
+      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories — no account, no analytics, nothing leaving your machine.",
     image: "/detour-landing-hero.jpg",
   },
   {
@@ -133,7 +133,7 @@ const projects: Project[] = [
     name: "The Window Seat",
     href: "https://thewindowseat.vercel.app",
     description:
-      "A travel personality quiz for builders and founders. Six questions return three countries, each framed by the lesson it tends to teach — matched deterministically against a database built from real first-person travel essays, with every entry citing its source.",
+      "A six-question travel quiz that matches builders and founders to three countries, each drawn from a database of real first-person travel essays.",
     image: "/thewindowseat-hero.png",
   },
 ];
@@ -250,15 +250,15 @@ const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
 
 /** One shot in the design gallery — clicks through to the live site when there is one. */
 function Screenshot({ shot, href, full = false }: { shot: Shot; href?: string; full?: boolean }) {
-  const frameClass = "block rounded-[1rem] overflow-hidden transition-transform duration-500";
-  const frameStyle = { background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' };
+  const frameClass = "block overflow-hidden transition-transform duration-500";
+  const frameStyle = { background: '#e2e2e2', boxShadow: '0 4px 16px rgba(18,35,63,0.11)' };
   const image = (
     <Image
       src={shot.src}
       alt={shot.alt}
       width={shot.width}
       height={shot.height}
-      sizes={full ? "(min-width: 768px) 1152px, 100vw" : "(min-width: 768px) 560px, 100vw"}
+      sizes={full ? "(min-width: 768px) 720px, 100vw" : "(min-width: 768px) 350px, 100vw"}
       className="w-full h-auto"
     />
   );
@@ -280,9 +280,6 @@ function Screenshot({ shot, href, full = false }: { shot: Shot; href?: string; f
           {image}
         </div>
       )}
-      <figcaption className="text-xs mt-3 px-1 leading-relaxed" style={{ color: 'rgba(18,35,63,0.55)' }}>
-        {shot.label}
-      </figcaption>
     </figure>
   );
 }
@@ -371,56 +368,48 @@ export default function WorkPage() {
         <section id="design" className="scroll-mt-28">
           <FadeUp>
             <h2
-              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
+              className="font-extrabold text-3xl md:text-4xl tracking-tighter mb-8 md:mb-10"
               style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
             >
               Design
             </h2>
-            <p className="text-base mb-10 md:mb-14 max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
-              Identity and interface work — the look of a thing before it&apos;s the code of a thing.
-            </p>
           </FadeUp>
 
-          <div className="space-y-20 md:space-y-28">
+          <div className="space-y-12 md:space-y-16 max-w-3xl">
             {designWork.map((project) => (
               <div key={project.id} id={`design-${project.id}`} className="scroll-mt-28">
                 {/* Header */}
                 <FadeUp>
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-end mb-6 md:mb-8 pb-6" style={{ borderBottom: '1px solid rgba(18,35,63,0.14)' }}>
-                    <div className="md:col-span-5">
-                      <p className="text-xs uppercase tracking-[0.2em] font-semibold mb-2" style={{ color: 'rgba(18,35,63,0.45)' }}>
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 mb-4 pb-3" style={{ borderBottom: '1px solid rgba(18,35,63,0.14)' }}>
+                    <div>
+                      <p className="text-[0.65rem] uppercase tracking-[0.2em] font-semibold mb-1" style={{ color: 'rgba(18,35,63,0.45)' }}>
                         {project.role} · {project.year}
                       </p>
                       <h3
-                        className="font-extrabold text-3xl md:text-4xl tracking-tighter"
+                        className="font-extrabold text-xl md:text-2xl tracking-tighter"
                         style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
                       >
                         {project.name}
                       </h3>
                     </div>
-                    <div className="md:col-span-7 md:pl-8">
-                      <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
-                        {project.description}
-                      </p>
-                      {project.href && (
-                        <a
-                          href={project.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                          style={{ color: '#2f5d9e', opacity: 0.85 }}
-                        >
-                          Visit {project.href.replace('https://', '')} <ArrowRight className="h-3.5 w-3.5" />
-                        </a>
-                      )}
-                    </div>
+                    {project.href && (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
+                        style={{ color: '#2f5d9e', opacity: 0.85 }}
+                      >
+                        Visit {project.href.replace('https://', '')} <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
                   </div>
                 </FadeUp>
 
                 {/* Screenshots — hero full width, then the tall one beside a stack of the short ones */}
                 {project.shots.length <= 2 ? (
                   <div
-                    className={`grid grid-cols-1 gap-6 md:gap-8 items-start${
+                    className={`grid grid-cols-1 gap-3 md:gap-4 items-start${
                       project.shots.length === 2 ? " md:grid-cols-2" : ""
                     }`}
                   >
@@ -435,7 +424,7 @@ export default function WorkPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
                     {project.shots.slice(0, 2).map((shot, i) => (
                       <FadeUp
                         key={shot.src}
@@ -445,7 +434,7 @@ export default function WorkPage() {
                         <Screenshot shot={shot} href={project.href} full={i === 0} />
                       </FadeUp>
                     ))}
-                    <div className="space-y-6 md:space-y-8">
+                    <div className="space-y-3 md:space-y-4">
                       {project.shots.slice(2).map((shot, i) => (
                         <FadeUp key={shot.src} delay={(i + 2) * 0.08}>
                           <Screenshot shot={shot} href={project.href} />
