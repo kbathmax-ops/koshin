@@ -8,7 +8,7 @@
 // Adapted from the "X Marks The Spot" Claude Design project.
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { geoMercator, geoPath, geoBounds } from 'd3-geo';
+import { geoMercator, geoPath, geoBounds, geoCentroid } from 'd3-geo';
 import { geoInterruptedHomolosine } from 'd3-geo-projection';
 import { feature } from 'topojson-client';
 
@@ -70,6 +70,24 @@ function lobeOutline(projection, [lon0, lon1], poleLat) {
   return `M${xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L')}Z`;
 }
 
+/*
+ * Natural Earth files France as one feature that includes its overseas
+ * departments, so highlighting "France" also paints French Guiana blue on the
+ * far side of the Atlantic — which reads as a mistake next to Peru. Keep only
+ * the polygons whose centroid falls inside the country's home longitudes.
+ */
+const HOME_LON = { France: [-20, 20] };
+
+function trimToHomeland(f) {
+  const range = HOME_LON[f.properties.name];
+  if (!range || f.geometry.type !== 'MultiPolygon') return f;
+  const coords = f.geometry.coordinates.filter((poly) => {
+    const lon = geoCentroid({ type: 'Polygon', coordinates: poly })[0];
+    return lon >= range[0] && lon <= range[1];
+  });
+  return { ...f, geometry: { ...f.geometry, coordinates: coords } };
+}
+
 const seedRand = (s0) => {
   let seed = s0;
   return () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
@@ -79,7 +97,8 @@ function buildCountries(features, path, W, H, visitedNames, s0) {
   const rand = seedRand(s0);
   const cx = W / 2, cy = H / 2;
   const out = [];
-  for (const f of features) {
+  for (const raw of features) {
+    const f = trimToHomeland(raw);
     const d = path(f);
     if (!d) continue;
     const c = path.centroid(f);
@@ -120,7 +139,7 @@ const world = (() => {
   const H = Math.ceil(b[1][1]);
   const lobes = LOBES.map((l) => lobeOutline(projection, l.lon, l.pole));
 
-  const visited = new Set(['Canada', 'United States of America', 'Dominican Rep.', 'South Korea', 'Spain', 'United Kingdom', 'France', 'Italy']);
+  const visited = new Set(['Canada', 'United States of America', 'Dominican Rep.', 'Peru', 'South Korea', 'Spain', 'United Kingdom', 'France', 'Italy']);
   const countries = buildCountries(features, path, W, H, visited, 11);
   const marks = WORLD_MARKS.map((name) => {
     const [x, y] = projection(CAP[name]);

@@ -152,7 +152,7 @@ function Section03() {
       >
         <img
           src="/photo-gap-year.jpg"
-          alt="Koshin"
+          alt="Koshin above Machu Picchu, Peru"
           style={{
             width: '100%',
             aspectRatio: '3/4',
