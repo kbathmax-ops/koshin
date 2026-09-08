@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Koshin Bathmax",
   },
   description:
-    "Portfolio of Koshin — 17-year-old student developer and founder building AI-powered travel software, sanctions research tools, and B2B SaaS. Next.js, TypeScript, Claude API.",
+    "Portfolio of Koshin, a 17-year-old student developer and founder building AI-powered travel software, sanctions research tools, and B2B SaaS with Next.js, TypeScript, and the Claude API.",
   keywords: [
     "student developer portfolio",
     "17 year old developer",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Koshin — Developer Portfolio",
     title: "Koshin — Student Developer & AI Builder",
     description:
-      "17-year-old developer and student founder. AI-powered travel software, sanctions research tools, and B2B SaaS — built with Next.js and Claude API.",
+      "17-year-old developer and student founder. AI-powered travel software, sanctions research tools, and B2B SaaS, built with Next.js and the Claude API.",
     images: [
       {
         url: "/og.png",

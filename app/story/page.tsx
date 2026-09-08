@@ -5,7 +5,7 @@ import { StoryPageClient } from "@/components/story-page-client";
 export const metadata: Metadata = {
   title: "Story — Koshin",
   description:
-    "The story behind the work — where Koshin has been and where he's going.",
+    "The story behind the work, and where Koshin is going next.",
   alternates: { canonical: "https://kbathmax.com/story" },
 };
 

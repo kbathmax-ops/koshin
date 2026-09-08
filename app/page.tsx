@@ -4,7 +4,7 @@ import { HomeClient } from "./home-client";
 export const metadata: Metadata = {
   title: { absolute: "Koshin Bathmax" },
   description:
-    "Portfolio of Koshin — 17-year-old student developer building AI-powered travel software, sanctions research tools, and B2B SaaS with Next.js and Claude API.",
+    "Portfolio of Koshin, a 17-year-old student developer building AI-powered travel software, sanctions research tools, and B2B SaaS with Next.js and Claude API.",
   alternates: { canonical: "https://kbathmax.com" },
 };
 

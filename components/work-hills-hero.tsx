@@ -56,7 +56,7 @@ export function WorkHillsHero() {
           className="text-lg font-medium max-w-xl leading-relaxed"
           style={{ color: 'rgba(18,35,63,0.72)' }}
         >
-          I believe AI can be used to build a world we&apos;ve always dreamed of — safe, healthy, and secure for all.
+          I believe AI can be used to build the world we&apos;ve always dreamed of: safe, healthy, and secure for all.
         </p>
       </div>
 

@@ -110,7 +110,7 @@ const projects: Project[] = [
     name: "detour",
     href: "https://detour-landing-roan.vercel.app",
     description:
-      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories — no account, no analytics, nothing leaving your machine.",
+      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories, with no account to make and nothing leaving your machine.",
     image: "/detour-landing-hero.jpg",
     inReview: true,
   },
@@ -143,7 +143,7 @@ const projects: Project[] = [
     name: "Substack",
     href: "https://substack.com/@koshinbathmax",
     description:
-      "Where I write about tech, cities, and culture through an anthropological lens — most recently on individualism as a recession indicator.",
+      "Where I write about tech and culture through an anthropological lens. The latest post argues individualism is the biggest recession indicator.",
     image: "/substack-hero.jpg",
   },
   {
@@ -151,7 +151,7 @@ const projects: Project[] = [
     name: "Sanctions Precedent",
     href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
     description:
-      "An AI research engine for policy analysts that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective.",
+      "An AI research engine that finds historical sanctions precedents by sector, intensity, and geopolitical objective, built for policy analysts.",
     image: "/sanctions-precedent-hero.png",
     unavailable: true,
   },
@@ -215,6 +215,13 @@ const designWork: DesignProject[] = [
         width: 1600,
         height: 472,
       },
+      {
+        src: "/design/snap-toronto-wordmark.png",
+        alt: "Snap Toronto wordmark — SNAP TORONTO stacked in condensed type with the stick figure walking across the letters",
+        label: "Wordmark — the mark walking the top of its own type",
+        width: 1940,
+        height: 860,
+      },
     ],
   },
   {
@@ -240,7 +247,7 @@ const designWork: DesignProject[] = [
     role: "Brand identity & deck",
     year: "2026",
     description:
-      "Identity and pitch deck for a Toronto influencer management agency. A geometric sans wordmark with two of its counters knocked out and replaced by the brand's own shapes — a red pill carrying the year, a gold one carrying the wave mark — over a warm off-white. Where the deck needs to raise its voice it goes full-bleed gold with justified all-caps.",
+      "Identity and pitch deck for a Toronto influencer management agency. A geometric sans wordmark on a warm off-white, with two of its counters knocked out and replaced by the brand's own shapes: a red pill carrying the year, a gold one carrying the wave mark. Where the deck needs to raise its voice it goes full-bleed gold with justified all-caps.",
     shots: [
       {
         src: "/design/ocean-management-cover.jpg",
@@ -327,7 +334,7 @@ export default function WorkPage() {
               Builds
             </h2>
             <p className="text-base mb-10 md:mb-14 max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
-              Things I&apos;ve shipped — most of them live, all of them started as an experiment.
+              Things I&apos;ve shipped. Most are still live, and every one of them started as an experiment.
             </p>
           </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">

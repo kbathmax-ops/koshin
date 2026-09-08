@@ -8,11 +8,11 @@ import { WebsitesHero } from "@/components/websites-hero";
 export const metadata: Metadata = {
   title: "Websites — Koshin",
   description:
-    "Client and personal websites built by Koshin — pixel-perfect, fast, and deployed on Vercel.",
+    "Client and personal websites built by Koshin. Fast, pixel-perfect, and deployed on Vercel.",
   openGraph: {
     title: "Websites — Koshin",
     description:
-      "Client and personal websites built by Koshin — pixel-perfect, fast, and deployed on Vercel.",
+      "Client and personal websites built by Koshin. Fast, pixel-perfect, and deployed on Vercel.",
     url: "https://kbathmax.com/websites",
   },
   alternates: { canonical: "https://kbathmax.com/websites" },
@@ -24,7 +24,7 @@ const sites = [
     name: "Northland Canoes",
     tagline: "Outfitter · Algonquin Park, Ontario",
     description:
-      "Editorial dark-theme site for a canoe outfitter. Crosshair navigation, cinematic full-bleed routes, filmstrip gear catalog, and an archival field journal grid — all hand-coded from a Claude Design wireframe.",
+      "Editorial dark-theme site for a canoe outfitter, hand-coded from a Claude Design wireframe. Crosshair navigation, full-bleed route pages, a filmstrip gear catalog, and an archival field journal grid.",
     url: "https://northland-canoes.vercel.app",
     tags: ["HTML/CSS", "Vercel"],
     palette: ["#1a1a1a", "#1C2A22", "#B5481D", "#C9BFA7"],
@@ -210,7 +210,7 @@ export default function WebsitesPage() {
                 Need a site built?
               </h3>
               <p className="text-on-surface-variant max-w-md">
-                I build clean, fast websites from design files or scratch — deployed and live within days.
+                I build clean, fast websites from a design file or from scratch, live within days.
               </p>
             </div>
             <Link
