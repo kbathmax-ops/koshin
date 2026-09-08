@@ -81,6 +81,14 @@ const jsonLd = {
       applicationCategory: "TravelApplication",
       operatingSystem: "Web",
     },
+    {
+      "@type": "Blog",
+      position: 8,
+      name: "Koshin Bathmax on Substack",
+      description:
+        "Essays on tech, cities, and culture through an anthropological lens.",
+      url: "https://substack.com/@koshinbathmax",
+    },
   ],
 };
 
@@ -129,6 +137,14 @@ const projects: Project[] = [
     description:
       "A six-question travel quiz that matches builders and founders to three countries, each drawn from a database of real first-person travel essays.",
     image: "/thewindowseat-hero.png",
+  },
+  {
+    id: "substack",
+    name: "Substack",
+    href: "https://substack.com/@koshinbathmax",
+    description:
+      "Where I write about tech, cities, and culture through an anthropological lens — most recently on individualism as a recession indicator.",
+    image: "/substack-hero.jpg",
   },
   {
     id: "sanctions-precedent",
