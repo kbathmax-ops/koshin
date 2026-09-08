@@ -129,6 +129,23 @@ html {
   .travel-mark-pending { animation: none; }
 }
 
+/* Project status light — a slow pulse next to a build that isn't fully live yet. */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,160,90,0.45); }
+  50%      { opacity: 0.35; box-shadow: 0 0 0 4px rgba(34,160,90,0); }
+}
+.status-light {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #22a05a;
+  animation: status-pulse 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-light { animation: none; }
+}
+
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #b3b6bb; border-radius: 5px; }

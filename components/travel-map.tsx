@@ -145,7 +145,7 @@ export function TravelMap() {
         initial="hidden"
         whileInView="shown"
         viewport={{ once: true, amount: 0.3 }}
-        style={{ position: 'relative', width: '100%', maxWidth: '1440px', aspectRatio: `${WORLD.W} / ${WORLD.H}` }}
+        style={{ position: 'relative', width: '100%', maxWidth: '1180px', aspectRatio: `${WORLD.W} / ${WORLD.H}` }}
       >
         <svg viewBox={`0 0 ${WORLD.W} ${WORLD.H}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
           {/* Goode's lobes, each its own closed shape — they read as the ocean
@@ -226,7 +226,7 @@ export function TravelMap() {
                 </motion.g>
                 {m.label && (
                   <motion.text
-                    x={m.x} y={m.y + 34} textAnchor="middle"
+                    x={m.x} y={m.y + m.labelDy} textAnchor="middle"
                     variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
                     onClick={note ? () => select(m.name) : undefined}
                     style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#12233f', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}

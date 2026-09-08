@@ -30,7 +30,8 @@ export const TRAVEL_NOTES: TravelNote[] = [
   },
   {
     name: 'Peru',
-    blurb: 'Headed there soon - can’t wait :)',
+    blurb:
+      'Challenged myself to go to a completely different side of the world. Had the most insane adventures of my life so far.',
   },
   {
     name: 'South Korea',

@@ -472,8 +472,8 @@ export function StoryPageClient() {
         <BackgroundShowcase />
 
         {/* Atmospheric — Travel */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-          <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '3rem 0 3.5rem' }}>
+          <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <p style={{
               fontFamily: 'var(--font-manrope), Manrope, sans-serif',
               fontSize: '0.65rem',
@@ -497,7 +497,7 @@ export function StoryPageClient() {
             </h2>
           </div>
           {/* Zoomed-in Europe travel map — X marks the places visited */}
-          <div style={{ padding: '0 clamp(1rem, 2.5vw, 2.5rem)' }}>
+          <div style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1rem, 2.5vw, 2.5rem)' }}>
             <TravelMap />
           </div>
         </div>

@@ -92,9 +92,20 @@ type Project = {
   image: string;
   /** Live site is down — flags the card with a red marker. */
   unavailable?: boolean;
+  /** Shipped but waiting on a store review — flags the card with a green light. */
+  inReview?: boolean;
 };
 
 const projects: Project[] = [
+  {
+    id: "detour",
+    name: "detour",
+    href: "https://detour-landing-roan.vercel.app",
+    description:
+      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories — no account, no analytics, nothing leaving your machine.",
+    image: "/detour-landing-hero.jpg",
+    inReview: true,
+  },
   {
     id: "toronto-cafe-roulette",
     name: "Toronto Cafe Roulette",
@@ -106,10 +117,18 @@ const projects: Project[] = [
   {
     id: "tattoos-by-jess",
     name: "Tattoos by Jess",
-    href: "https://www.instagram.com/tattoosbyjess.ca",
+    href: "https://www.instagram.com/tattoosbyjesss/",
     description:
       "Social media marketing for an independent tattoo artist that grew her combined following by 2k and booked her out months in advance.",
     image: "/tattoos-by-jess-hero.png",
+  },
+  {
+    id: "the-window-seat",
+    name: "The Window Seat",
+    href: "https://thewindowseat.vercel.app",
+    description:
+      "A six-question travel quiz that matches builders and founders to three countries, each drawn from a database of real first-person travel essays.",
+    image: "/thewindowseat-hero.png",
   },
   {
     id: "sanctions-precedent",
@@ -119,22 +138,6 @@ const projects: Project[] = [
       "An AI research engine for policy analysts that surfaces historical sanctions precedents by sector, intensity, and geopolitical objective.",
     image: "/sanctions-precedent-hero.png",
     unavailable: true,
-  },
-  {
-    id: "detour",
-    name: "detour",
-    href: "https://detour-landing-roan.vercel.app",
-    description:
-      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories — no account, no analytics, nothing leaving your machine.",
-    image: "/detour-landing-hero.jpg",
-  },
-  {
-    id: "the-window-seat",
-    name: "The Window Seat",
-    href: "https://thewindowseat.vercel.app",
-    description:
-      "A six-question travel quiz that matches builders and founders to three countries, each drawn from a database of real first-person travel essays.",
-    image: "/thewindowseat-hero.png",
   },
 ];
 
@@ -338,10 +341,16 @@ export default function WorkPage() {
                       {project.unavailable && (
                         <AlertCircle className="h-4 w-4 shrink-0" style={{ color: '#c0392b' }} aria-hidden />
                       )}
+                      {project.inReview && <span className="status-light shrink-0" aria-hidden />}
                     </h3>
                     {project.unavailable && (
                       <p className="text-xs font-semibold mb-1.5" style={{ color: '#c0392b' }}>
                         (currently unavailable)
+                      </p>
+                    )}
+                    {project.inReview && (
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: '#22a05a' }}>
+                        (under review)
                       </p>
                     )}
                     <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
