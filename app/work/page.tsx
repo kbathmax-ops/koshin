@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: human & chimp (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: a 3D human and chimp encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -28,6 +28,16 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 1,
+      name: "human & chimp",
+      description:
+        "A 3D human/chimp encounter simulator with Blender-modelled characters, orbit camera, and a cited research panel. Built with React, Three.js, and Vite.",
+      applicationCategory: "SimulationApplication",
+      operatingSystem: "Web",
+      url: "https://human-and-chimp.vercel.app",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 2,
       name: "Sanctions Precedent",
       description: "AI-powered sanctions research engine built with Next.js, Claude API, and Supabase.",
       applicationCategory: "ResearchApplication",
@@ -35,7 +45,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 2,
+      position: 3,
       name: "Toronto Cafe Roulette",
       description: "A curated roulette of Toronto's best independent cafes for coffee chats.",
       applicationCategory: "LifestyleApplication",
@@ -43,7 +53,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 3,
+      position: 4,
       name: "detour",
       description:
         "Chrome extension that hides flight results routing through the US or its territories on Google Flights.",
@@ -53,7 +63,7 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      position: 4,
+      position: 5,
       name: "Snap Toronto — identity & site design",
       description:
         "Identity and site design for a Toronto AI workshop series: condensed display type, a hand-drawn mark, and full-bleed photography of the businesses it serves.",
@@ -61,21 +71,21 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      position: 5,
+      position: 6,
       name: "Toronto's Hot Take Slideshow Night — event poster",
       description:
         "Poster design for a Toronto slideshow night: hand-drawn brush lettering over a photograph of the room.",
     },
     {
       "@type": "CreativeWork",
-      position: 6,
+      position: 7,
       name: "Ocean Management — brand identity & deck",
       description:
         "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
     },
     {
       "@type": "SoftwareApplication",
-      position: 7,
+      position: 8,
       name: "The Window Seat",
       description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
       applicationCategory: "TravelApplication",
@@ -83,7 +93,7 @@ const jsonLd = {
     },
     {
       "@type": "Blog",
-      position: 8,
+      position: 9,
       name: "Koshin Bathmax on Substack",
       description:
         "Essays on tech, cities, and culture through an anthropological lens.",
@@ -105,6 +115,14 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    id: "human-and-chimp",
+    name: "human & chimp",
+    href: "https://human-and-chimp.vercel.app",
+    description:
+      "A 3D simulator that plays out a human and a chimp meeting from any angle you drag it to, with both characters modelled in Blender and a research panel citing what the numbers are actually based on.",
+    image: "/human-and-chimp-hero.png",
+  },
   {
     id: "detour",
     name: "detour",
