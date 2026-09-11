@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: human & chimp (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Chimpanzee vs. Human (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: a 3D human and chimp encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: a 3D chimpanzee and human encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -28,12 +28,12 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 1,
-      name: "human & chimp",
+      name: "Chimpanzee vs. Human",
       description:
-        "A 3D human/chimp encounter simulator with Blender-modelled characters, orbit camera, and a cited research panel. Built with React, Three.js, and Vite.",
+        "A 3D chimpanzee/human encounter simulator with Blender-modelled characters, orbit camera, and a cited research panel. Built with React, Three.js, and Vite.",
       applicationCategory: "SimulationApplication",
       operatingSystem: "Web",
-      url: "https://human-and-chimp.vercel.app",
+      url: "https://chimpanzeevshuman.space",
     },
     {
       "@type": "SoftwareApplication",
@@ -117,10 +117,10 @@ type Project = {
 const projects: Project[] = [
   {
     id: "human-and-chimp",
-    name: "human & chimp",
-    href: "https://human-and-chimp.vercel.app",
+    name: "Chimpanzee vs. Human",
+    href: "https://chimpanzeevshuman.space",
     description:
-      "A 3D simulator that plays out a human and a chimp meeting from any angle you drag it to, with both characters modelled in Blender and a research panel citing what the numbers are actually based on.",
+      "A 3D simulator that plays out a chimpanzee and a human meeting from any angle you drag it to, with both characters modelled in Blender and a research panel citing what the numbers are actually based on.",
     image: "/human-and-chimp-hero.png",
   },
   {
