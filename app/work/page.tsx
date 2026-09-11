@@ -33,7 +33,7 @@ const jsonLd = {
         "A 3D chimpanzee/human encounter simulator with Blender-modelled characters, orbit camera, and a cited research panel. Built with React, Three.js, and Vite.",
       applicationCategory: "SimulationApplication",
       operatingSystem: "Web",
-      url: "https://chimpanzeevshuman.space",
+      url: "https://chimpvshuman.space",
     },
     {
       "@type": "SoftwareApplication",
@@ -118,7 +118,7 @@ const projects: Project[] = [
   {
     id: "human-and-chimp",
     name: "Chimpanzee vs. Human",
-    href: "https://chimpanzeevshuman.space",
+    href: "https://chimpvshuman.space",
     description:
       "A 3D simulator that plays out a chimpanzee and a human meeting from any angle you drag it to, with both characters modelled in Blender and a research panel citing what the numbers are actually based on.",
     image: "/human-and-chimp-hero.png",
