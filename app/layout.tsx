@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans, Manrope } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Public Sans is the site's display/heading face (variable font — all weights).
@@ -98,6 +99,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         {children}
+        <Analytics />
       </body>
     </html>
   );
