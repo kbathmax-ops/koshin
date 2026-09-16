@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Relay (a GTM coordination prototype for marketing and sales teams), Chimpanzee vs. Human (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Vibecoded builds, writing, design, and more. Here's what I can do. Let's move mountains together",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: Relay, a GTM coordination prototype for marketing and sales teams; a 3D chimpanzee and human encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Vibecoded builds, writing, design, and more. Here's what I can do. Let's move mountains together",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -30,7 +30,7 @@ const jsonLd = {
       position: 1,
       name: "Chimpanzee vs. Human",
       description:
-        "A 3D chimpanzee/human encounter simulator with Blender-modelled characters, orbit camera, and a cited research panel. Built with React, Three.js, and Vite.",
+        "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
       applicationCategory: "SimulationApplication",
       operatingSystem: "Web",
       url: "https://chimpvshuman.space",
@@ -47,7 +47,7 @@ const jsonLd = {
       "@type": "SoftwareApplication",
       position: 3,
       name: "Toronto Cafe Roulette",
-      description: "A curated roulette of Toronto's best independent cafes for coffee chats.",
+      description: "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
       applicationCategory: "LifestyleApplication",
       operatingSystem: "Web",
     },
@@ -56,7 +56,7 @@ const jsonLd = {
       position: 4,
       name: "detour",
       description:
-        "Chrome extension that hides flight results routing through the US or its territories on Google Flights.",
+        "A Chrome extension that hides Google Flights itineraries connecting through the US.",
       applicationCategory: "TravelApplication",
       operatingSystem: "Chrome",
       url: "https://detour-landing-roan.vercel.app",
@@ -87,21 +87,13 @@ const jsonLd = {
       "@type": "SoftwareApplication",
       position: 8,
       name: "The Window Seat",
-      description: "A travel personality quiz matching you to three countries from a database of real first-person travel essays.",
+      description: "A quiz for ambitious people to consider travel for their personal growth.",
       applicationCategory: "TravelApplication",
       operatingSystem: "Web",
     },
     {
-      "@type": "Blog",
-      position: 9,
-      name: "Koshin Bathmax on Substack",
-      description:
-        "Essays on tech, cities, and culture through an anthropological lens.",
-      url: "https://substack.com/@koshinbathmax",
-    },
-    {
       "@type": "SoftwareApplication",
-      position: 10,
+      position: 9,
       name: "Relay",
       description:
         "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
@@ -141,7 +133,7 @@ const projects: Project[] = [
     name: "Chimpanzee vs. Human",
     href: "https://chimpvshuman.space",
     description:
-      "A 3D simulator that plays out a chimpanzee and a human meeting from any angle you drag it to, with both characters modelled in Blender and a research panel citing what the numbers are actually based on.",
+      "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
     image: "/human-and-chimp-hero.png",
   },
   {
@@ -149,7 +141,7 @@ const projects: Project[] = [
     name: "detour",
     href: "https://detour-landing-roan.vercel.app",
     description:
-      "A Chrome extension that hides every Google Flights itinerary connecting through the US or its territories, with no account to make and nothing leaving your machine.",
+      "A Chrome extension that hides Google Flights itineraries connecting through the US.",
     image: "/detour-landing-hero.jpg",
     inReview: true,
   },
@@ -158,7 +150,7 @@ const projects: Project[] = [
     name: "Toronto Cafe Roulette",
     href: "https://toronto-cafe-roulette.vercel.app/",
     description:
-      "A roulette of hand-picked independent Toronto cafes that spins you one place to take your next coffee chat.",
+      "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
     image: "/toronto-cafe-roulette-hero.png",
   },
   {
@@ -166,7 +158,7 @@ const projects: Project[] = [
     name: "Tattoos by Jess",
     href: "https://www.instagram.com/tattoosbyjesss/",
     description:
-      "Social media marketing for an independent tattoo artist that grew her combined following by 2k and booked her out months in advance.",
+      "Made a friend's tattoo shop go viral.",
     image: "/tattoos-by-jess-hero.png",
   },
   {
@@ -174,16 +166,8 @@ const projects: Project[] = [
     name: "The Window Seat",
     href: "https://thewindowseat.vercel.app",
     description:
-      "A six-question travel quiz that matches builders and founders to three countries, each drawn from a database of real first-person travel essays.",
+      "A quiz for ambitious people to consider travel for their personal growth.",
     image: "/thewindowseat-hero.png",
-  },
-  {
-    id: "substack",
-    name: "Substack",
-    href: "https://substack.com/@koshinbathmax",
-    description:
-      "Where I write about tech and culture through an anthropological lens. The latest post argues individualism is the biggest recession indicator.",
-    image: "/substack-hero.jpg",
   },
   {
     id: "sanctions-precedent",
@@ -367,21 +351,18 @@ export default function WorkPage() {
         <section id="builds" className="scroll-mt-28">
           <FadeUp>
             <h2
-              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
+              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-10 md:mb-14"
               style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
             >
               Builds
             </h2>
-            <p className="text-base mb-10 md:mb-14 max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
-              Things I&apos;ve shipped. Most are still live, and every one of them started as an experiment.
-            </p>
           </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {projects.map((project, i) => (
               <FadeUp key={project.id} delay={i * 0.08}>
                 <div id={project.id} className="group scroll-mt-28">
                   {/* Image — clicks through to live project */}
-                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block rounded-[1rem] overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
+                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
                     <div className="aspect-[16/10] relative">
                       <Image
                         src={project.image}

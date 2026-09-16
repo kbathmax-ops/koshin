@@ -49,14 +49,14 @@ export function WorkHillsHero() {
               color: '#12233f',
             }}
           >
-            experimenting
+            solutions,<br />solutions
           </h1>
         </div>
         <p
           className="text-lg font-medium max-w-xl leading-relaxed"
           style={{ color: 'rgba(18,35,63,0.72)' }}
         >
-          I believe AI can be used to build the world we&apos;ve always dreamed of: safe, healthy, and secure for all.
+          Vibecoded builds, writing, design, and more. Here&apos;s what I can do. Let&apos;s move mountains together
         </p>
       </div>
 
