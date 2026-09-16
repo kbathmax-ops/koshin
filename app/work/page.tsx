@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
   description:
-    "Case studies by Koshin: Chimpanzee vs. Human (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
+    "Case studies by Koshin: Relay (a GTM coordination prototype for marketing and sales teams), Chimpanzee vs. Human (a 3D encounter simulator built with React and Three.js), Snap Toronto (identity and site design for a Toronto AI workshop series), Sanctions Precedent (AI-powered sanctions research engine), The Window Seat (a travel personality quiz built on real travel essays), detour (a Chrome extension that hides US layovers), Toronto Cafe Roulette, and Tattoos by Jess (social media growth marketing). Built with Next.js, Claude API, and Supabase.",
   openGraph: {
     title: "Work & Projects — AI, Marketing & Research | Koshin",
     description:
-      "Student developer and marketer case studies: a 3D chimpanzee and human encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
+      "Student developer and marketer case studies: Relay, a GTM coordination prototype for marketing and sales teams; a 3D chimpanzee and human encounter simulator, identity and site design for a Toronto AI workshop series, an AI sanctions research engine, a travel personality quiz built on real travel essays, a Chrome extension that hides US layovers, a curated Toronto cafe finder, and growing a tattoo artist's audience by 2k.",
     url: "https://kbathmax.com/work",
   },
   alternates: { canonical: "https://kbathmax.com/work" },
@@ -99,6 +99,16 @@ const jsonLd = {
         "Essays on tech, cities, and culture through an anthropological lens.",
       url: "https://substack.com/@koshinbathmax",
     },
+    {
+      "@type": "SoftwareApplication",
+      position: 10,
+      name: "Relay",
+      description:
+        "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://relay-gtm-koshin.kbathmax.chatgpt.site",
+    },
   ],
 };
 
@@ -108,6 +118,8 @@ type Project = {
   href: string;
   description: string;
   image: string;
+  /** Optional wording when the destination has limited access. */
+  linkLabel?: string;
   /** Live site is down — flags the card with a red marker. */
   unavailable?: boolean;
   /** Shipped but waiting on a store review — flags the card with a green light. */
@@ -115,6 +127,15 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    id: "relay",
+    name: "Relay",
+    href: "https://relay-gtm-koshin.kbathmax.chatgpt.site",
+    description:
+      "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
+    image: "/relay-handoff.png",
+    linkLabel: "View private demo",
+  },
   {
     id: "human-and-chimp",
     name: "Chimpanzee vs. Human",
@@ -405,7 +426,7 @@ export default function WorkPage() {
                       className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
                       style={{ color: '#2f5d9e', opacity: 0.85 }}
                     >
-                      View Project <ArrowRight className="h-3.5 w-3.5" />
+                      {project.linkLabel ?? "View Project"} <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </div>
                 </div>
