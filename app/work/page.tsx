@@ -28,7 +28,7 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 1,
-      name: "Chimpanzee vs. Human",
+      name: "Chimp and Human",
       description:
         "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
       applicationCategory: "SimulationApplication",
@@ -130,7 +130,7 @@ const projects: Project[] = [
   },
   {
     id: "human-and-chimp",
-    name: "Chimpanzee vs. Human",
+    name: "Chimp and Human",
     href: "https://chimpvshuman.space",
     description:
       "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
