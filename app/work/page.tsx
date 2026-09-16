@@ -387,7 +387,7 @@ export default function WorkPage() {
                         src={project.image}
                         alt={`${project.name} — project by Koshin`}
                         fill
-                        className="object-cover opacity-90"
+                        className="object-contain p-3 opacity-90"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
                     </div>
