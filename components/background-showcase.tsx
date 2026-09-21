@@ -38,54 +38,54 @@ const STOPS: Stop[] = [
     title: 'Arts School',
     body: 'Five years learning to think creatively about every situation.',
     src: '/photo-arts-school.jpg',
-    x: 17,
-    xNarrow: 29,
-    y: 25,
+    x: 31,
+    xNarrow: 38,
+    y: 36,
     card: 'below',
   },
   {
     title: 'Environmental Nonprofit',
     body: 'Two years working on the ground for the environment.',
     src: '/photo-nonprofit.jpg',
-    x: 79,
-    xNarrow: 71,
-    y: 22,
+    x: 69,
+    xNarrow: 62,
+    y: 38,
     card: 'below',
   },
   {
     title: 'Sales',
     body: 'With one of the best graduation-trip providers in the country.',
     src: '/photo-sales.jpg',
-    x: 81,
-    xNarrow: 72,
-    y: 52,
+    x: 70,
+    xNarrow: 63,
+    y: 54,
     card: 'below',
   },
   {
     title: 'International Security',
     body: 'Invited to the Halifax International Security Forum, and realized national defense is something I want to work in.',
     src: '/photo-security.jpg',
-    x: 19,
-    xNarrow: 28,
-    y: 55,
-    card: 'below',
+    x: 32,
+    xNarrow: 38,
+    y: 70,
+    card: 'above',
   },
   {
     title: 'Languages',
     body: 'Lived in Spain for a month, and dedicated myself to learning as many languages as I can for the rest of my life.',
     src: '/photo-languages.jpg',
-    x: 21,
-    xNarrow: 29,
-    y: 83,
+    x: 33,
+    xNarrow: 39,
+    y: 78,
     card: 'above',
   },
   {
     title: 'Gap Year',
     body: 'Travelling for adventure, innovating at a startup, showing the whole thing as I go.',
     src: '/photo-gap-year.jpg',
-    x: 79,
-    xNarrow: 71,
-    y: 80,
+    x: 69,
+    xNarrow: 62,
+    y: 84,
     card: 'above',
   },
 ];
@@ -220,13 +220,16 @@ export function BackgroundShowcase() {
 
   const boatW = narrow ? 96 : 132;
   const boatH = narrow ? 33 : 46;
+  const faceD = narrow ? 30 : 42;
   const gap = narrow ? '1.4rem' : '2.15rem';
+  // Above-canoe cards clear the rider, which sits proud of the hull.
+  const gapAbove = narrow ? '2.9rem' : '3.9rem';
 
   return (
     <section
       aria-labelledby="background-heading"
       ref={containerRef}
-      className="h-[400vh] md:h-[460vh]"
+      className="h-[280vh] md:h-[320vh]"
       style={{
         position: 'relative',
         width: '100vw',
@@ -239,7 +242,7 @@ export function BackgroundShowcase() {
           {
             position: 'sticky',
             top: 0,
-            height: '100dvh',
+            height: narrow ? '82dvh' : '75dvh',
             overflow: 'hidden',
             isolation: 'isolate',
             // Open ocean shading into a shallow shelf at the bottom right, the
@@ -293,6 +296,7 @@ export function BackgroundShowcase() {
               progress={scrollYProgress}
               narrow={narrow}
               gap={gap}
+              gapAbove={gapAbove}
               reduced={reduced}
             />
           ))}
@@ -358,6 +362,51 @@ export function BackgroundShowcase() {
           </motion.div>
         </motion.div>
 
+        {/* Me, riding along. Takes the canoe's position but not its heading, so
+            the face stays upright through the turns. */}
+        <motion.div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0,
+            x,
+            y,
+            opacity: boatOpacity,
+            zIndex: 3,
+            transition: 'opacity 0.4s ease',
+          }}
+        >
+          <motion.div
+            animate={reduced ? undefined : { y: [0, -2.5, 0, 2.5, 0] }}
+            transition={reduced ? undefined : { duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              position: 'absolute',
+              left: -faceD / 2,
+              top: -boatH * 0.18 - faceD,
+              width: faceD,
+              height: faceD,
+            }}
+          >
+            <img
+              src="/koshin-canoe.jpg"
+              alt=""
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'block',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                objectPosition: '60% 28%',
+                border: '2px solid rgba(255,255,255,0.92)',
+                boxShadow: '0 4px 10px rgba(4,16,34,0.45)',
+              }}
+            />
+          </motion.div>
+        </motion.div>
+
         {/* Scroll affordance — a pinned section with no hint reads as broken. */}
         <motion.div
           aria-hidden="true"
@@ -418,6 +467,7 @@ function StopCard({
   progress,
   narrow,
   gap,
+  gapAbove,
   reduced,
 }: {
   stop: Stop;
@@ -425,6 +475,7 @@ function StopCard({
   progress: MotionValue<number>;
   narrow: boolean;
   gap: string;
+  gapAbove: string;
   reduced: boolean;
 }) {
   const start = stopStart(index);
@@ -463,7 +514,7 @@ function StopCard({
         left: `clamp(calc(var(--card-w) / 2 + 1.25rem), ${xPct}%, calc(100% - var(--card-w) / 2 - 1.25rem))`,
         ...(stop.card === 'below'
           ? { top: `calc(${stop.y}% + ${gap})` }
-          : { bottom: `calc(${100 - stop.y}% + ${gap})` }),
+          : { bottom: `calc(${100 - stop.y}% + ${gapAbove})` }),
         width: 'var(--card-w)',
         transform: 'translateX(-50%)',
         zIndex: 4,
@@ -530,7 +581,7 @@ function StopCard({
           alt=""
           style={{
             width: '100%',
-            height: '118px',
+            height: '78px',
             objectFit: 'cover',
             borderRadius: '8px',
             display: 'block',

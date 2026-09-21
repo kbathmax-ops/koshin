@@ -50,21 +50,12 @@ export const metadata: Metadata = {
     title: "Koshin — Student Developer & AI Builder",
     description:
       "17-year-old developer and student founder. AI-powered travel software, sanctions research tools, and B2B SaaS, built with Next.js and the Claude API.",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Koshin — Student Developer & AI Builder",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Koshin — Student Developer & AI Builder",
+    title: "koshin",
     description:
-      "17-year-old developer building AI travel software, sanctions research tools, and B2B SaaS with Next.js and Claude API.",
-    images: ["/og.png"],
+      "18 year old taking a gap year to work in startup growth & travel.",
   },
   robots: {
     index: true,
