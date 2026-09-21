@@ -64,7 +64,7 @@ export function Nav() {
             )}
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
-            Builds
+            Work
           </Link>
           <Link
             href="/work#contact"
@@ -87,7 +87,8 @@ export function Nav() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 max-w-4xl mx-auto bg-[#eeeeee]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(18,35,63,0.08)] px-6 py-2 flex flex-col">
+        <div className="md:hidden mt-2 max-w-4xl mx-auto flex justify-end px-8">
+          <div className="bg-[#eeeeee]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(18,35,63,0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
           <Link
             href="/story"
             className="font-bold text-[#12233f] hover:text-[#2f5d9e] transition-colors py-3"
@@ -100,7 +101,7 @@ export function Nav() {
             className="font-bold text-[#12233f] hover:text-[#2f5d9e] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
-            Builds
+            Work
           </Link>
           <Link
             href="/work#contact"
@@ -109,6 +110,7 @@ export function Nav() {
           >
             Contact
           </Link>
+          </div>
         </div>
       )}
     </nav>

@@ -257,15 +257,6 @@ export function HomeClient() {
                   >
                     work
                   </h2>
-                  <p
-                    className="mt-5 text-base leading-relaxed max-w-sm font-medium"
-                    style={{
-                      color: "rgba(255,255,255,0.68)",
-                      textShadow: "0 1px 8px rgba(0,0,0,0.6)",
-                    }}
-                  >
-                    Betting on IRL community in the AI era + lowering the knowledge barrier to AI access.
-                  </p>
                 </div>
 
                 <span
@@ -275,7 +266,7 @@ export function HomeClient() {
                     textShadow: "0 1px 8px rgba(0,0,0,0.5)",
                   }}
                 >
-                  See the Builds
+                  See the Work
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </motion.div>
@@ -319,7 +310,7 @@ export function HomeClient() {
               <div className="flex gap-6 sm:gap-10 -my-3">
                 {[
                   { label: "GitHub", href: "https://github.com/koshinbathmax" },
-                  { label: "Builds", href: "/work" },
+                  { label: "Work", href: "/work" },
                   { label: "Contact", href: "/work#contact" },
                 ].map((l) => (
                   <a

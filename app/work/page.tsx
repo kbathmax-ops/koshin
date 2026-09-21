@@ -347,14 +347,14 @@ export default function WorkPage() {
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pb-32">
 
-        {/* ── Builds ── */}
+        {/* ── Work ── */}
         <section id="builds" className="scroll-mt-28">
           <FadeUp>
             <h2
               className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-10 md:mb-14"
               style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
             >
-              Builds
+              Work
             </h2>
           </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
