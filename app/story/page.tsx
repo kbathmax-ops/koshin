@@ -3,7 +3,7 @@ import { Nav } from "@/components/nav";
 import { StoryPageClient } from "@/components/story-page-client";
 
 export const metadata: Metadata = {
-  title: "Story — Koshin",
+  title: "story",
   description:
     "The story behind the work, and where Koshin is going next.",
   alternates: { canonical: "https://kbathmax.com/story" },
