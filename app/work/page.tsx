@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { ContactForm } from "@/components/contact-form";
 import { WorkHillsHero } from "@/components/work-hills-hero";
+import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work & Projects — AI, Marketing & Research",
@@ -99,86 +101,9 @@ const jsonLd = {
         "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
-      url: "https://relay-gtm-koshin.kbathmax.chatgpt.site",
     },
   ],
 };
-
-type Project = {
-  id: string;
-  name: string;
-  href: string;
-  description: string;
-  image: string;
-  /** Optional wording when the destination has limited access. */
-  linkLabel?: string;
-  /** Live site is down — flags the card with a red marker. */
-  unavailable?: boolean;
-  /** Shipped but waiting on a store review — flags the card with a green light. */
-  inReview?: boolean;
-};
-
-const projects: Project[] = [
-  {
-    id: "relay",
-    name: "Relay",
-    href: "https://relay-gtm-koshin.kbathmax.chatgpt.site",
-    description:
-      "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
-    image: "/relay-handoff.png",
-    linkLabel: "View private demo",
-  },
-  {
-    id: "human-and-chimp",
-    name: "Chimp and Human",
-    href: "https://chimpvshuman.space",
-    description:
-      "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
-    image: "/human-and-chimp-hero.png",
-  },
-  {
-    id: "detour",
-    name: "detour",
-    href: "https://detour-landing-roan.vercel.app",
-    description:
-      "A Chrome extension that hides Google Flights itineraries connecting through the US.",
-    image: "/detour-landing-hero.jpg",
-    inReview: true,
-  },
-  {
-    id: "toronto-cafe-roulette",
-    name: "Toronto Cafe Roulette",
-    href: "https://toronto-cafe-roulette.vercel.app/",
-    description:
-      "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
-    image: "/toronto-cafe-roulette-hero.png",
-  },
-  {
-    id: "tattoos-by-jess",
-    name: "Tattoos by Jess",
-    href: "https://www.instagram.com/tattoosbyjesss/",
-    description:
-      "Made a friend's tattoo shop go viral.",
-    image: "/tattoos-by-jess-hero.png",
-  },
-  {
-    id: "the-window-seat",
-    name: "The Window Seat",
-    href: "https://thewindowseat.vercel.app",
-    description:
-      "A quiz for ambitious people to consider travel for their personal growth.",
-    image: "/thewindowseat-hero.png",
-  },
-  {
-    id: "sanctions-precedent",
-    name: "Sanctions Precedent",
-    href: "https://sanctions-precedent-qo0om9rrh-koshin2.vercel.app",
-    description:
-      "An AI research engine that finds historical sanctions precedents by sector, intensity, and geopolitical objective, built for policy analysts.",
-    image: "/sanctions-precedent-hero.png",
-    unavailable: true,
-  },
-];
 
 type Shot = {
   src: string;
@@ -359,10 +284,10 @@ export default function WorkPage() {
           </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {projects.map((project, i) => (
-              <FadeUp key={project.id} delay={i * 0.08}>
-                <div id={project.id} className="group scroll-mt-28">
-                  {/* Image — clicks through to live project */}
-                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
+              <FadeUp key={project.slug} delay={i * 0.08}>
+                <div id={project.slug} className="group scroll-mt-28">
+                  {/* Image — clicks through to the project's own page */}
+                  <Link href={`/work/${project.slug}`} className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
                     <div className="aspect-[16/10] relative">
                       <Image
                         src={project.image}
@@ -372,7 +297,7 @@ export default function WorkPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
                     </div>
-                  </a>
+                  </Link>
 
                   {/* Info */}
                   <div className="px-1">
@@ -400,15 +325,13 @@ export default function WorkPage() {
                       {project.description}
                     </p>
 
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href={`/work/${project.slug}`}
                       className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
                       style={{ color: '#2f5d9e', opacity: 0.85 }}
                     >
-                      {project.linkLabel ?? "View Project"} <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
+                      Read the process <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 </div>
               </FadeUp>
