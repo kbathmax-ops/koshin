@@ -21,7 +21,10 @@ export function Nav() {
   const isStory = pathname === "/story";
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-50 px-4">
+    <nav
+      className="fixed top-6 left-0 right-0 z-50 px-4"
+      style={{ viewTransitionName: 'site-nav' }}
+    >
       <div
         className={cn(
           "bg-[#eeeeee]/75 backdrop-blur-xl rounded-full max-w-4xl mx-auto flex justify-between items-center gap-8 px-8 py-4 transition-shadow duration-300",

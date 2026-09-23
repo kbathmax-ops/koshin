@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { PageTransition } from "@/components/page-transition";
 import "./globals.css";
 
 // Public Sans is the site's display/heading face (variable font — all weights).
@@ -89,7 +90,7 @@ export default function RootLayout({
       className={`${publicSans.variable} ${manrope.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
-        {children}
+        <PageTransition>{children}</PageTransition>
         <Analytics />
       </body>
     </html>
