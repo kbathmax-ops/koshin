@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Lenis from 'lenis';
 import { BackgroundShowcase } from './background-showcase';
+import { StoryHero } from './story-hero';
 import { TravelMap } from './travel-map';
 
 /* ─── Landscape images (curated for story mood) ─── */
@@ -15,65 +16,6 @@ const IMAGES = [
   '/photo-monaco.jpg',  // Monaco group photo (atmospheric wide)
   'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=80&w=1600', // forest path
 ];
-
-/* ─── Sticky hero image that clips → expands on scroll ─── */
-function CenterImage({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
-
-  const clipProgress = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
-  const scale = useTransform(clipProgress, [0, 1], [1, 1.06]);
-
-  const clip = useTransform(clipProgress, (v) => {
-    const top = 28 - v * 28;
-    const bottom = 72 + v * 28;
-    const left = 22 - v * 22;
-    const right = 78 + v * 22;
-    return `polygon(${left}% ${top}%, ${right}% ${top}%, ${right}% ${bottom}%, ${left}% ${bottom}%)`;
-  });
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        position: 'sticky',
-        top: 0,
-        height: '100dvh',
-        overflow: 'hidden',
-        zIndex: 1,
-      }}
-    >
-      <motion.div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          clipPath: clip,
-          scale,
-          transformOrigin: 'center center',
-        }}
-      >
-        <img
-          src={IMAGES[0]}
-          alt="Mountain landscape"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            filter: 'brightness(1.04) saturate(0.62) contrast(0.94)',
-          }}
-        />
-        {/* Overlay tint */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom, rgba(217,217,217,0.42) 0%, rgba(217,217,217,0.20) 50%, rgba(217,217,217,0.55) 100%)',
-          }}
-        />
-      </motion.div>
-    </div>
-  );
-}
 
 /* ─── Section label + heading + body as a text block ─── */
 interface StoryBlockProps {
@@ -202,56 +144,6 @@ function Section03() {
         </StoryBlock>
       </div>
     </div>
-  );
-}
-
-/* ─── Title block that fades out as you scroll ─── */
-function TitleBlock() {
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-  const y = useTransform(scrollY, [0, 500], [0, -40]);
-
-  return (
-    <motion.div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 20,
-        pointerEvents: 'none',
-        opacity,
-        y,
-        padding: 'clamp(5rem, 12vh, 8rem) clamp(1.5rem, 5vw, 5rem) 0',
-      }}
-    >
-      <p
-        style={{
-          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
-          fontSize: '0.65rem',
-          fontWeight: 900,
-          letterSpacing: '0.4em',
-          textTransform: 'uppercase',
-          color: '#2f5d9e',
-          marginBottom: '1.25rem',
-        }}
-      >
-        The Story
-      </p>
-      <h1
-        style={{
-          fontFamily: "'Public Sans', sans-serif",
-          fontSize: 'clamp(2.8rem, 7vw, 6rem)',
-          fontWeight: 900,
-          color: '#12233f',
-          lineHeight: 0.9,
-          letterSpacing: '-0.04em',
-          maxWidth: '14ch',
-        }}
-      >
-        jack of all trades meets tech
-      </h1>
-    </motion.div>
   );
 }
 
@@ -445,7 +337,6 @@ function StoryCTA() {
 
 /* ─── Root component ─── */
 export function StoryPageClient() {
-  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.08 });
@@ -457,13 +348,7 @@ export function StoryPageClient() {
 
   return (
     <div style={{ background: '#d9d9d9', minHeight: '100dvh', color: '#12233f' }}>
-      {/* Fixed title (fades out on scroll) */}
-      <TitleBlock />
-
-      {/* Sticky zoom hero — takes up 100vh, scroll drives clip+zoom */}
-      <div ref={heroRef} className="h-[160vh] md:h-[200vh] lg:h-[280vh]" style={{ position: 'relative' }}>
-        <CenterImage containerRef={heroRef} />
-      </div>
+      <StoryHero />
 
       {/* Parallax story rows */}
       <div style={{ position: 'relative', zIndex: 2, background: '#d9d9d9', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
