@@ -35,7 +35,7 @@ export function Nav() {
       >
         {/* Logo */}
         <Link
-          href="/"
+          href="/story"
           className="text-xl font-black text-[#12233f] tracking-tighter"
           style={{ fontFamily: "'Public Sans', sans-serif" }}
         >

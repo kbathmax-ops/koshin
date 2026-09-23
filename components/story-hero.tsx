@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowDown } from 'lucide-react';
 
 /* ─── Story hero — four stacked photo bands, no animation ───
    Band order is just this array — reorder freely. The band without a `slot`
@@ -14,31 +15,32 @@ type Band = {
   src: string;
   alt: string;
   position: string;
-  slot?: 'intro' | 'offer' | 'background';
+  slot?: 'intro' | 'offer' | 'travel' | 'background';
 };
 
 const BANDS: Band[] = [
   {
     src: '/photo-cusco.jpg',
     alt: 'Koshin in the Plaza de Armas, Cusco',
-    position: '58% 34%',
+    position: '58% 20%',
     slot: 'intro',
   },
   {
     src: '/photo-betakit.jpg',
     alt: 'The BetaKit Most Ambitious conference stage',
-    position: '50% 46%',
+    position: '50% 62%',
     slot: 'offer',
   },
   {
     src: '/photo-flight.jpg',
     alt: 'A wing over the horizon at sunset',
-    position: '50% 56%',
+    position: '50% 50%',
+    slot: 'travel',
   },
   {
     src: '/photo-beach-night.jpg',
     alt: 'Friends on a pebble beach at night',
-    position: '50% 62%',
+    position: '50% 56%',
     slot: 'background',
   },
 ];
@@ -64,13 +66,21 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
   return (
     <section aria-label="Introduction" className="sh">
       <style>{`
-        .sh { display: flex; flex-direction: column; }
+        /* Fixed to one viewport with the bands splitting it evenly, so the
+           set always lands as a full screen rather than drifting with the
+           window height. */
+        .sh {
+          display: flex;
+          flex-direction: column;
+          height: 100dvh;
+        }
 
         .sh-band {
           position: relative;
           display: flex;
           align-items: center;
-          min-height: clamp(5rem, 14dvh, 8.5rem);
+          flex: 1;
+          min-height: 0;
           padding: 0.75rem clamp(1.5rem, 5vw, 5rem);
           isolation: isolate;
           overflow: hidden;
@@ -79,32 +89,15 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         /* Clear the fixed nav pill floating over the top of the page. */
         .sh-band-intro { padding-top: clamp(5rem, 12vh, 7.5rem); }
 
-        /* Sun-bleached grade on the photo itself: pulled-back colour, lifted
-           blacks, warm. The grain and scrim then sit on top of it. */
-        .sh-img {
-          object-fit: cover;
-          z-index: 0;
-          filter: saturate(0.62) contrast(0.93) brightness(1.04) sepia(0.20);
-        }
+        /* Photos run ungraded — grain is the only treatment. */
+        .sh-img { object-fit: cover; z-index: 0; }
 
-        /* ── Vintage treatment, stacked above the photo ──
-           1. warm grade  2. sensor grain  3. edge falloff  4. type scrim
-           All pointer-events:none so they never block the links. */
-        .sh-grade, .sh-grain, .sh-vignette, .sh-scrim {
+        /* Two layers above the photo: grain, then the type scrim.
+           Both pointer-events:none so they never block the links. */
+        .sh-grain, .sh-scrim {
           position: absolute;
           inset: 0;
           pointer-events: none;
-        }
-
-        /* Pulled-back colour, lifted blacks, warm — a sun-bleached print. */
-        .sh-grade {
-          background: linear-gradient(
-            to bottom,
-            rgba(214, 178, 128, 0.16),
-            rgba(150, 132, 112, 0.09)
-          );
-          mix-blend-mode: multiply;
-          z-index: 1;
         }
 
         /* Two grain sizes: fine sensor noise over coarser mottling, the way
@@ -112,18 +105,9 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         .sh-grain {
           background-image: ${GRAIN_FINE}, ${GRAIN_COARSE};
           background-size: 180px 180px, 300px 300px;
-          opacity: 0.34;
+          opacity: 0.55;
           mix-blend-mode: soft-light;
           z-index: 2;
-        }
-
-        .sh-vignette {
-          background: radial-gradient(
-            120% 160% at 50% 50%,
-            rgba(0, 0, 0, 0) 55%,
-            rgba(30, 24, 18, 0.30) 100%
-          );
-          z-index: 3;
         }
 
         /* Carries the type. Without it, cream over the Cusco sky is illegible. */
@@ -139,6 +123,19 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
         .sh-body { position: relative; z-index: 5; }
         .sh-bare { text-decoration: none; display: inline-block; }
+
+        .sh-row {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.55em;
+        }
+        /* Sized off the type so it tracks the heading at every breakpoint. */
+        .sh-arrow {
+          width: 0.82em;
+          height: 0.82em;
+          stroke-width: 2.6;
+          flex-shrink: 0;
+        }
 
         .sh-text {
           font-family: 'Public Sans', sans-serif;
@@ -202,9 +199,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
             priority
             style={{ objectPosition: band.position }}
           />
-          <span className="sh-grade" aria-hidden="true" />
           <span className="sh-grain" aria-hidden="true" />
-          <span className="sh-vignette" aria-hidden="true" />
           <span className="sh-scrim" aria-hidden="true" />
 
           {band.slot === 'intro' && (
@@ -215,7 +210,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
           {band.slot === 'offer' && (
             <div className="sh-body">
-              <p className="sh-text">what I can offer you</p>
+              <p className="sh-text">what I can offer</p>
               <div className="sh-links">
                 <a className="sh-link" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                   resumé
@@ -227,13 +222,23 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
             </div>
           )}
 
+          {band.slot === 'travel' && (
+            <p className="sh-text sh-body">
+              where I&apos;ve been &amp; what it&apos;s taught me
+            </p>
+          )}
+
           {band.slot === 'background' &&
             (backgroundHref ? (
-              <Link className="sh-text sh-body sh-bare" href={backgroundHref}>
+              <Link className="sh-text sh-body sh-bare sh-row" href={backgroundHref}>
                 my background
+                <ArrowDown className="sh-arrow" aria-hidden="true" />
               </Link>
             ) : (
-              <p className="sh-text sh-body">my background</p>
+              <p className="sh-text sh-body sh-row">
+                my background
+                <ArrowDown className="sh-arrow" aria-hidden="true" />
+              </p>
             ))}
         </div>
       ))}
