@@ -1,28 +1,15 @@
-const STOPS = [
-  {
-    title: 'Arts School',
-    body: 'Five years learning to think creatively about every situation.',
-  },
-  {
-    title: 'Environmental Nonprofit',
-    body: 'Two years working on the ground for the environment.',
-  },
-  {
-    title: 'Sales',
-    body: 'With one of the best graduation-trip providers in the country.',
-  },
-  {
-    title: 'International Security',
-    body: 'Invited to the Halifax International Security Forum, and realized national defense is something I want to work in.',
-  },
-  {
-    title: 'Languages',
-    body: 'Lived in Spain for a month, and dedicated myself to learning as many languages as I can for the rest of my life.',
-  },
-  {
-    title: 'Gap Year',
-    body: 'Travelling for adventure, innovating at a startup, showing the whole thing as I go.',
-  },
+const INTRO = [
+  "I'm intensely devoted to creating things that change how humans live & think",
+  'I take inspiration from innovators like Bridgit Mendler, Martin Luther King, and Eileen Gu',
+];
+
+const POINTS = [
+  'born & raised in downtown & uptown toronto',
+  'arts school for 9 years, developed a strong eye for visuals & talent in all mediums',
+  '@ 15, invited to a nato/eu conference in Halifax → found passion in making the world a better place',
+  'high school: student council, finance for the Toronto Youth Environmental Council, 30k in sales for GradCity, marketing for Outward Bound Canada',
+  'summers: solo travelled Europe, South America, Asia → the world has so many things to offer',
+  "currently: deferred Queen's University for a year, creating content, travelling the world (scotland & ireland next) & breaking into go-to-market",
 ];
 
 export function BackgroundShowcase() {
@@ -42,22 +29,34 @@ export function BackgroundShowcase() {
           fontSize: 'clamp(1.35rem, 3.2vw, 2.5rem)',
           fontWeight: 900,
           letterSpacing: '-0.03em',
-          margin: '0 0 2rem',
+          margin: '0 0 1.25rem',
         }}
       >
-        MY BACKGROUND
+        Koshin Bathmax
       </h2>
 
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-        {STOPS.map((stop) => (
+      {INTRO.map((line) => (
+        <p
+          key={line}
+          style={{
+            margin: '0 0 0.6rem',
+            lineHeight: 1.5,
+            fontSize: '1.05rem',
+          }}
+        >
+          {line}
+        </p>
+      ))}
+
+      <ul style={{ listStyle: 'none', margin: '1.75rem 0 0', padding: 0 }}>
+        {POINTS.map((point) => (
           <li
-            key={stop.title}
+            key={point}
             style={{
               display: 'flex',
               gap: '0.75rem',
               alignItems: 'flex-start',
-              padding: '0.9rem 0',
-              borderBottom: '1px solid rgba(0,0,0,0.08)',
+              padding: '0.4rem 0',
             }}
           >
             <span
@@ -70,9 +69,7 @@ export function BackgroundShowcase() {
             >
               •
             </span>
-            <p style={{ margin: 0, lineHeight: 1.5 }}>
-              <strong>{stop.title}</strong> — {stop.body}
-            </p>
+            <p style={{ margin: 0, lineHeight: 1.5 }}>{point}</p>
           </li>
         ))}
       </ul>
