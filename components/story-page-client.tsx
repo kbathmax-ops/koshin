@@ -7,15 +7,8 @@ import { ArrowRight } from 'lucide-react';
 import Lenis from 'lenis';
 import { BackgroundShowcase } from './background-showcase';
 import { StoryHero } from './story-hero';
+import { SiteFooter } from './site-footer';
 import { TravelMap } from './travel-map';
-
-/* ─── Landscape images (curated for story mood) ─── */
-const IMAGES = [
-  '/photo-concert.jpg', // concert hero
-  '/photo-spain.jpg',   // Spain solo photo (Origin row)
-  '/photo-monaco.jpg',  // Monaco group photo (atmospheric wide)
-  'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=80&w=1600', // forest path
-];
 
 /* ─── Section label + heading + body as a text block ─── */
 interface StoryBlockProps {
@@ -396,6 +389,7 @@ export function StoryPageClient() {
 
       </div>
 
+      <SiteFooter />
     </div>
   );
 }

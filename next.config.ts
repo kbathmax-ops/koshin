@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The story is the landing page — kbathmax.com goes straight to it.
+      // Deliberately temporary: a permanent redirect gets cached hard by
+      // browsers and is painful to undo while the site is still moving.
+      {
+        source: "/",
+        destination: "/story",
+        permanent: false,
+      },
       // Case studies used to live at the top level; they now sit under /work.
       {
         source: "/case-studies",

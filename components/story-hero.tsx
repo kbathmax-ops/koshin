@@ -20,15 +20,15 @@ type Band = {
 
 const BANDS: Band[] = [
   {
-    src: '/photo-cusco.jpg',
-    alt: 'Koshin in the Plaza de Armas, Cusco',
-    position: '58% 20%',
+    src: '/photo-halifax-forum.jpg',
+    alt: 'The Halifax International Security Forum in session',
+    position: '38% 48%',
     slot: 'intro',
   },
   {
-    src: '/photo-betakit.jpg',
-    alt: 'The BetaKit Most Ambitious conference stage',
-    position: '50% 62%',
+    src: '/photo-monaco-walk.jpg',
+    alt: 'Koshin walking above Monaco',
+    position: '34% 72%',
     slot: 'offer',
   },
   {
@@ -155,34 +155,32 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         }
         .sh-bare:hover, .sh-bare:focus-visible { color: #ffffff; }
 
-        /* Band two: links sit ready and appear the instant the band is
-           hovered or focused. No transition — the reveal is immediate. */
+        /* Always on — these are the three things a hiring reader came for, so
+           they are solid pills rather than type sitting on a photo. */
         .sh-links {
           display: flex;
-          gap: 1.25rem;
-          margin-top: 0.5rem;
-          visibility: hidden;
-        }
-        .sh-band-offer:hover .sh-links,
-        .sh-band-offer:focus-within .sh-links { visibility: visible; }
-
-        /* Touch devices have no hover, so never hide the links there. */
-        @media (hover: none) {
-          .sh-links { visibility: visible; }
+          flex-wrap: wrap;
+          gap: 0.6rem;
+          margin-top: 0.8rem;
         }
 
         .sh-link {
           font-family: var(--font-manrope), Manrope, sans-serif;
-          font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+          font-size: clamp(0.82rem, 1.3vw, 0.98rem);
           font-weight: 800;
-          letter-spacing: 0.02em;
-          color: #f4efe4;
+          letter-spacing: 0.01em;
+          color: #12233f;
+          background: #f4efe4;
           text-decoration: none;
-          border-bottom: 2px solid #f4efe4;
-          padding-bottom: 2px;
-          text-shadow: 0 1px 10px rgba(12, 14, 20, 0.5);
+          padding: 0.5rem 1.1rem;
+          border-radius: 999px;
+          box-shadow: 0 6px 20px rgba(10, 12, 18, 0.38);
+          white-space: nowrap;
         }
-        .sh-link:hover, .sh-link:focus-visible { color: #ffffff; border-color: #ffffff; }
+        .sh-link:hover, .sh-link:focus-visible {
+          background: #ffffff;
+          color: #2f5d9e;
+        }
       `}</style>
 
       {BANDS.map((band) => (
@@ -218,6 +216,14 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
                 <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
                   my work
                 </Link>
+                <a
+                  className="sh-link"
+                  href="https://www.linkedin.com/in/koshinbathmax/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin
+                </a>
               </div>
             </div>
           )}
