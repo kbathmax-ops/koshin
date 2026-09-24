@@ -37,7 +37,7 @@ export function Nav() {
         <Link
           href="/story"
           className="text-xl font-black text-[#12233f] tracking-tighter"
-          style={{ fontFamily: "'Public Sans', sans-serif" }}
+          style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
         >
           koshin
           <span className="text-[#2f5d9e]">.</span>
@@ -53,7 +53,7 @@ export function Nav() {
                 ? "text-[#2f5d9e]"
                 : "text-[#12233f]/70 hover:text-[#2f5d9e]"
             )}
-            style={{ fontFamily: "'Public Sans', sans-serif" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
           >
             Story
           </Link>
@@ -65,14 +65,14 @@ export function Nav() {
                 ? "text-[#2f5d9e]"
                 : "text-[#12233f]/70 hover:text-[#2f5d9e]"
             )}
-            style={{ fontFamily: "'Public Sans', sans-serif" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
           >
             Work
           </Link>
           <Link
             href="/work#contact"
             className="text-[#12233f]/70 font-medium hover:text-[#2f5d9e] transition-colors duration-200"
-            style={{ fontFamily: "'Public Sans', sans-serif" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
           >
             Contact
           </Link>

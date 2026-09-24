@@ -65,7 +65,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <section>
       <h2
         className="font-extrabold text-2xl md:text-3xl tracking-tighter mb-5"
-        style={{ fontFamily: "'Public Sans', sans-serif", color: "#12233f" }}
+        style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
       >
         {title}
       </h2>
@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
           <h1
             className="font-extrabold text-4xl md:text-6xl tracking-tighter mb-4 flex items-center gap-3 flex-wrap"
-            style={{ fontFamily: "'Public Sans', sans-serif", color: "#12233f" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
           >
             {project.name}
             {project.inReview && <span className="status-light shrink-0" aria-hidden />}
@@ -190,7 +190,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "'Public Sans', sans-serif", color: "#12233f" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
           >
             koshin<span style={{ color: "#2f5d9e" }}>.</span>
           </span>

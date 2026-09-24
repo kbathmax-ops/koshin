@@ -229,7 +229,7 @@ export function TravelMap() {
                     x={m.x} y={m.y + m.labelDy} textAnchor="middle"
                     variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
                     onClick={note ? () => select(m.name) : undefined}
-                    style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
+                    style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
                   >
                     {m.name}
                   </motion.text>
@@ -268,7 +268,7 @@ export function TravelMap() {
                   {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
                   <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
                   <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '30px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontSize: '30px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
                 </g>
               );
             })}
@@ -360,7 +360,7 @@ export function TravelMap() {
                 </button>
 
                 <h3 style={{
-                  fontFamily: "'Public Sans', sans-serif", fontWeight: 900,
+                  fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontWeight: 900,
                   fontSize: '1.15rem', letterSpacing: '-0.03em', lineHeight: 1.15,
                   color: '#12233f', margin: '0 2rem 0 0',
                 }}>

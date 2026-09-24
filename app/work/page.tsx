@@ -9,11 +9,11 @@ import { WorkHillsHero } from "@/components/work-hills-hero";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Work & Projects — AI, Marketing & Research",
+  title: "work",
   description:
     "Vibecoded builds, writing, design, and more. Here's what I can do. Let's move mountains together",
   openGraph: {
-    title: "Work & Projects — AI, Marketing & Research | Koshin",
+    title: "work | Koshin Bathmax",
     description:
       "Vibecoded builds, writing, design, and more. Here's what I can do. Let's move mountains together",
     url: "https://kbathmax.com/work",
@@ -277,7 +277,7 @@ export default function WorkPage() {
           <FadeUp>
             <h2
               className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-10 md:mb-14"
-              style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
             >
               Work
             </h2>
@@ -303,7 +303,7 @@ export default function WorkPage() {
                   <div className="px-1">
                     <h3
                       className="font-bold text-xl mb-1.5 flex items-center gap-1.5"
-                      style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+                      style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
                     >
                       {project.name}
                       {project.unavailable && (
@@ -344,7 +344,7 @@ export default function WorkPage() {
           <FadeUp>
             <h2
               className="font-extrabold text-3xl md:text-4xl tracking-tighter mb-8 md:mb-10"
-              style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
             >
               Design
             </h2>
@@ -362,7 +362,7 @@ export default function WorkPage() {
                       </p>
                       <h3
                         className="font-extrabold text-xl md:text-2xl tracking-tighter"
-                        style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+                        style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
                       >
                         {project.name}
                       </h3>
@@ -429,7 +429,7 @@ export default function WorkPage() {
             <FadeUp>
               <h2
                 className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
-                style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+                style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
               >
                 Brand work
               </h2>
@@ -452,7 +452,7 @@ export default function WorkPage() {
                 <div>
                   <h2
                     className="font-extrabold text-4xl tracking-tight mb-4 leading-tight"
-                    style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+                    style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
                   >
                     Let&apos;s build
                     <br />
@@ -471,7 +471,7 @@ export default function WorkPage() {
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "'Public Sans', sans-serif", color: '#12233f' }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
           >
             koshin<span style={{ color: '#2f5d9e' }}>.</span>
           </span>

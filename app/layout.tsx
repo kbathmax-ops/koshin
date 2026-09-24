@@ -1,10 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans, Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { PageTransition } from "@/components/page-transition";
 import "./globals.css";
 
-// Public Sans is the site's display/heading face (variable font — all weights).
+// Advercase is the display face — headings, titles and the wordmark.
+const advercase = localFont({
+  src: [
+    { path: "../assets/fonts/Advercase-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../assets/fonts/Advercase-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-advercase",
+  display: "swap",
+});
+
+// Public Sans stays loaded as the fallback behind Advercase.
 const publicSans = Public_Sans({
   subsets: ["latin"],
   variable: "--font-public-sans",
@@ -87,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${publicSans.variable} ${manrope.variable}`}
+      className={`${advercase.variable} ${publicSans.variable} ${manrope.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         <PageTransition>{children}</PageTransition>

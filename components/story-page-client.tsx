@@ -35,7 +35,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       </p>
       <h2
         style={{
-          fontFamily: "'Public Sans', sans-serif",
+          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: 900,
           color: '#12233f',
@@ -88,7 +88,7 @@ function Section04() {
       </p>
       <h2
         style={{
-          fontFamily: "'Public Sans', sans-serif",
+          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
           fontSize: 'clamp(1.8rem, 4vw, 3rem)',
           fontWeight: 900,
           color: '#12233f',
@@ -130,7 +130,7 @@ function Section04() {
             </span>
             <span
               style={{
-                fontFamily: "'Public Sans', sans-serif",
+                fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
                 fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
                 fontWeight: 900,
                 color: '#12233f',
@@ -189,7 +189,7 @@ function StoryCTA() {
         </p>
         <p
           style={{
-            fontFamily: "'Public Sans', sans-serif",
+            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
             fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
             fontWeight: 900,
             color: '#12233f',
@@ -215,7 +215,7 @@ function StoryCTA() {
             color: '#f4f4f4',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "'Public Sans', sans-serif",
+            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
             fontWeight: 900,
             fontSize: '0.875rem',
             textDecoration: 'none',
@@ -234,7 +234,7 @@ function StoryCTA() {
             color: '#12233f',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "'Public Sans', sans-serif",
+            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
             fontWeight: 900,
             fontSize: '0.875rem',
             textDecoration: 'none',
@@ -277,7 +277,7 @@ export function StoryPageClient() {
         >
           <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <h2 style={{
-              fontFamily: "'Public Sans', sans-serif",
+              fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
               fontSize: 'clamp(1.8rem, 4vw, 3rem)',
               fontWeight: 900,
               color: '#12233f',

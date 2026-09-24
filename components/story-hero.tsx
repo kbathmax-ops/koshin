@@ -153,7 +153,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         }
 
         .sh-text {
-          font-family: 'Public Sans', sans-serif;
+          font-family: var(--font-advercase), 'Public Sans', sans-serif;
           font-weight: 900;
           letter-spacing: -0.03em;
           line-height: 1.05;

@@ -44,7 +44,7 @@ export function WorkHillsHero() {
           <h1
             className="font-extrabold tracking-tighter leading-[0.88]"
             style={{
-              fontFamily: "'Public Sans', sans-serif",
+              fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
               fontSize: 'clamp(2.5rem, 9vw, 8rem)',
               color: '#12233f',
             }}

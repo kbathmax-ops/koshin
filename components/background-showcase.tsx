@@ -25,7 +25,7 @@ export function BackgroundShowcase() {
       <h2
         id="background-heading"
         style={{
-          fontFamily: "'Public Sans', sans-serif",
+          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
           fontSize: 'clamp(1.35rem, 3.2vw, 2.5rem)',
           fontWeight: 900,
           letterSpacing: '-0.03em',
@@ -72,7 +72,7 @@ export function BackgroundShowcase() {
               <span
                 aria-hidden="true"
                 style={{
-                  fontFamily: "'Public Sans', sans-serif",
+                  fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
                   fontWeight: 900,
                   lineHeight: 1.5,
                 }}

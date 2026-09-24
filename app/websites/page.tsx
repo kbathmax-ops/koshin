@@ -174,7 +174,7 @@ export default function WebsitesPage() {
 
                     <h2
                       className="font-extrabold text-4xl text-primary tracking-tight mb-1"
-                      style={{ fontFamily: "'Public Sans', sans-serif" }}
+                      style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
                     >
                       {site.name}
                     </h2>
@@ -205,7 +205,7 @@ export default function WebsitesPage() {
             <div>
               <h3
                 className="font-extrabold text-3xl text-primary tracking-tight mb-2"
-                style={{ fontFamily: "'Public Sans', sans-serif" }}
+                style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
               >
                 Need a site built?
               </h3>
@@ -216,7 +216,7 @@ export default function WebsitesPage() {
             <Link
               href="/work#contact"
               className="shrink-0 inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-8 py-4 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
-              style={{ fontFamily: "'Public Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
             >
               Get in touch
               <ArrowUpRight className="h-4 w-4" />
@@ -231,7 +231,7 @@ export default function WebsitesPage() {
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
             className="text-lg font-black text-primary tracking-tighter"
-            style={{ fontFamily: "'Public Sans', sans-serif" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
           >
             koshin<span className="text-secondary">.</span>
           </span>

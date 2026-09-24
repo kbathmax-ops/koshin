@@ -11,7 +11,7 @@ export function SiteFooter() {
         <div>
           <span
             className="text-lg font-black tracking-tighter block mb-1"
-            style={{ fontFamily: "'Public Sans', sans-serif", color: "#12233f" }}
+            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
           >
             koshin<span style={{ color: "#2f5d9e" }}>.</span>
           </span>
