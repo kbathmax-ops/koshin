@@ -73,19 +73,6 @@ const STRENGTHS = [
 function Section04() {
   return (
     <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
-      <p
-        style={{
-          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
-          fontSize: '0.65rem',
-          fontWeight: 900,
-          letterSpacing: '0.35em',
-          textTransform: 'uppercase',
-          color: '#2f5d9e',
-          marginBottom: '1rem',
-        }}
-      >
-        04 — Strengths
-      </p>
       <h2
         style={{
           fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
