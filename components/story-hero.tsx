@@ -20,15 +20,15 @@ type Band = {
 
 const BANDS: Band[] = [
   {
-    src: '/photo-halifax-forum.jpg',
-    alt: 'The Halifax International Security Forum in session',
-    position: '38% 48%',
-    slot: 'intro',
-  },
-  {
     src: '/photo-monaco-walk.jpg',
     alt: 'Koshin walking above Monaco',
     position: '34% 72%',
+    slot: 'intro',
+  },
+  {
+    src: '/photo-halifax-forum.jpg',
+    alt: 'The Halifax International Security Forum in session',
+    position: '38% 48%',
     slot: 'offer',
   },
   {
@@ -94,20 +94,28 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
         /* Two layers above the photo: grain, then the type scrim.
            Both pointer-events:none so they never block the links. */
-        .sh-grain, .sh-scrim {
+        .sh-grain, .sh-grain-hard, .sh-scrim {
           position: absolute;
           inset: 0;
           pointer-events: none;
         }
 
-        /* Two grain sizes: fine sensor noise over coarser mottling, the way
-           a small sensor actually looks pushed in low light. */
+        /* Heavy grain. Two tile sizes — fine sensor noise over coarser
+           mottling — and a second pass in overlay on top of the soft-light
+           layer, which is what pushes it past a subtle texture. */
         .sh-grain {
           background-image: ${GRAIN_FINE}, ${GRAIN_COARSE};
           background-size: 180px 180px, 300px 300px;
-          opacity: 0.55;
+          opacity: 0.95;
           mix-blend-mode: soft-light;
           z-index: 2;
+        }
+        .sh-grain-hard {
+          background-image: ${GRAIN_FINE};
+          background-size: 140px 140px;
+          opacity: 0.30;
+          mix-blend-mode: overlay;
+          z-index: 3;
         }
 
         /* Carries the type. Without it, cream over the Cusco sky is illegible. */
@@ -198,6 +206,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
             style={{ objectPosition: band.position }}
           />
           <span className="sh-grain" aria-hidden="true" />
+          <span className="sh-grain-hard" aria-hidden="true" />
           <span className="sh-scrim" aria-hidden="true" />
 
           {band.slot === 'intro' && (
@@ -229,9 +238,9 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           )}
 
           {band.slot === 'travel' && (
-            <p className="sh-text sh-body">
+            <Link className="sh-text sh-body sh-bare" href="/story#travel">
               where I&apos;ve been &amp; what it&apos;s taught me
-            </p>
+            </Link>
           )}
 
           {band.slot === 'background' &&

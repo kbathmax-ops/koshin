@@ -21,14 +21,14 @@ import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
  * ships static SVG, no d3 in the bundle, no runtime map fetch.
  */
 
-const LAND = 'rgba(18,35,63,0.22)';
-const LAND_STROKE = 'rgba(18,35,63,0.38)';
-const VISITED_FILL = 'rgba(47,93,158,0.42)';
-const VISITED_STROKE = '#2f5d9e';
-const MARK = '#1b3a6b';
-const MARK_HOT = '#4b82c9';
-const OCEAN = '#e8eaee';
-const OCEAN_STROKE = 'rgba(18,35,63,0.22)';
+const LAND = 'rgba(28,58,42,0.22)';
+const LAND_STROKE = 'rgba(28,58,42,0.38)';
+const VISITED_FILL = 'rgba(45,106,74,0.42)';
+const VISITED_STROKE = '#2d6a4a';
+const MARK = '#1b4332';
+const MARK_HOT = '#52a678';
+const OCEAN = '#e8ecea';
+const OCEAN_STROKE = 'rgba(28,58,42,0.22)';
 const EASE_OUT_BACK: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
 // Lens geometry. The frame aspect equals WORLD.W / WORLD.H, so SVG user units
@@ -229,7 +229,7 @@ export function TravelMap() {
                     x={m.x} y={m.y + m.labelDy} textAnchor="middle"
                     variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
                     onClick={note ? () => select(m.name) : undefined}
-                    style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#12233f', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
+                    style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
                   >
                     {m.name}
                   </motion.text>
@@ -268,7 +268,7 @@ export function TravelMap() {
                   {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
                   <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
                   <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '30px', fontWeight: 800, fill: '#12233f', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "'Public Sans', sans-serif", fontSize: '30px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
                 </g>
               );
             })}

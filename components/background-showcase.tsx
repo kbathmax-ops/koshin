@@ -49,29 +49,40 @@ export function BackgroundShowcase() {
       ))}
 
       <ul style={{ listStyle: 'none', margin: '1.75rem 0 0', padding: 0 }}>
-        {POINTS.map((point) => (
-          <li
-            key={point}
-            style={{
-              display: 'flex',
-              gap: '0.75rem',
-              alignItems: 'flex-start',
-              padding: '0.4rem 0',
-            }}
-          >
-            <span
-              aria-hidden="true"
+        {POINTS.map((point) => {
+          // Where Koshin is right now is the line a hiring reader cares about
+          // most, so it gets boxed out of the run of bullets.
+          const isCurrent = point.startsWith('currently:');
+
+          return (
+            <li
+              key={point}
               style={{
-                fontFamily: "'Public Sans', sans-serif",
-                fontWeight: 900,
-                lineHeight: 1.5,
+                display: 'flex',
+                gap: '0.75rem',
+                alignItems: 'flex-start',
+                padding: isCurrent ? '1.5rem' : '0.4rem 0',
+                ...(isCurrent && {
+                  marginTop: '1rem',
+                  border: '1.5px solid rgba(18,35,63,0.28)',
+                  borderRadius: '0.6rem',
+                }),
               }}
             >
-              •
-            </span>
-            <p style={{ margin: 0, lineHeight: 1.5 }}>{point}</p>
-          </li>
-        ))}
+              <span
+                aria-hidden="true"
+                style={{
+                  fontFamily: "'Public Sans', sans-serif",
+                  fontWeight: 900,
+                  lineHeight: 1.5,
+                }}
+              >
+                •
+              </span>
+              <p style={{ margin: 0, lineHeight: 1.5 }}>{point}</p>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

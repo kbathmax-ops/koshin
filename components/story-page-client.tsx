@@ -349,20 +349,13 @@ export function StoryPageClient() {
         {/* 01 — My Background (animated heading + full-bleed slideshow) */}
         <BackgroundShowcase />
 
-        {/* Atmospheric — Travel */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '3rem 0 3.5rem' }}>
+        {/* Atmospheric — Travel. `id` is the anchor the hero's third band
+            links to, and scroll-margin clears the fixed nav pill. */}
+        <div
+          id="travel"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '3rem 0 3.5rem', scrollMarginTop: 'clamp(5.5rem, 13vh, 8rem)' }}
+        >
           <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
-            <p style={{
-              fontFamily: 'var(--font-manrope), Manrope, sans-serif',
-              fontSize: '0.65rem',
-              fontWeight: 900,
-              letterSpacing: '0.35em',
-              textTransform: 'uppercase',
-              color: '#2f5d9e',
-              marginBottom: '0.75rem',
-            }}>
-              Travel
-            </p>
             <h2 style={{
               fontFamily: "'Public Sans', sans-serif",
               fontSize: 'clamp(1.8rem, 4vw, 3rem)',
@@ -371,7 +364,7 @@ export function StoryPageClient() {
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
             }}>
-              Learned I love cultural exchange.
+              where I&apos;ve been
             </h2>
           </div>
           {/* Zoomed-in Europe travel map — X marks the places visited */}
