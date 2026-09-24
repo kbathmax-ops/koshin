@@ -60,86 +60,6 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
   );
 }
 
-/* ─── Section 03 — overlapping landscape + portrait ─── */
-function Section03() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const landscapeY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
-  return (
-    <div
-      ref={ref}
-      className="story-row flex flex-col md:flex-row items-center"
-      style={{
-        gap: 'clamp(2rem, 5vw, 5rem)',
-        padding: '0 clamp(1.5rem, 5vw, 5rem)',
-      }}
-    >
-      {/* Single portrait */}
-      <motion.div
-        className="w-full flex-none md:flex-[0_0_42%]"
-        style={{
-          y: landscapeY,
-          borderRadius: '1rem',
-          overflow: 'hidden',
-          boxShadow: '0 30px 80px rgba(18,35,63,0.18)',
-        }}
-      >
-        <img
-          src="/photo-gap-year.jpg"
-          alt="Koshin above Machu Picchu, Peru"
-          style={{
-            width: '100%',
-            aspectRatio: '3/4',
-            objectFit: 'cover',
-            display: 'block',
-          }}
-        />
-      </motion.div>
-
-      {/* Text */}
-      <div className="w-full" style={{ flex: 1, paddingBottom: '2rem' }}>
-        <StoryBlock label="03 — Gap year" heading="What I'm doing in my gap year">
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {[
-              'Travelling for adventure once in a while',
-              'Showing the whole thing on my Instagram',
-              'Innovating at a startup',
-            ].map((text) => (
-              <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2f5d9e', flexShrink: 0 }} />
-                <span>{text}</span>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="https://www.instagram.com/koshinbmx"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              marginTop: '2rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              background: '#12233f',
-              color: '#f4f4f4',
-              padding: '0.875rem 1.75rem',
-              borderRadius: '9999px',
-              fontFamily: "'Public Sans', sans-serif",
-              fontWeight: 900,
-              fontSize: '0.875rem',
-              textDecoration: 'none',
-            }}
-          >
-            Follow on Instagram
-            <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-          </a>
-        </StoryBlock>
-      </div>
-    </div>
-  );
-}
-
 /* ─── Section 04 — where I'm strongest ─── */
 const STRENGTHS = [
   'Debate',
@@ -353,7 +273,7 @@ export function StoryPageClient() {
             links to, and scroll-margin clears the fixed nav pill. */}
         <div
           id="travel"
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '3rem 0 3.5rem', scrollMarginTop: 'clamp(5.5rem, 13vh, 8rem)' }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '0 0 3.5rem', scrollMarginTop: 'clamp(5.5rem, 13vh, 8rem)' }}
         >
           <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <h2 style={{
@@ -373,8 +293,6 @@ export function StoryPageClient() {
           </div>
         </div>
 
-        {/* 03 — What makes me different */}
-        <Section03 />
 
         {/* 04 — Places where I shine */}
         <Section04 />
