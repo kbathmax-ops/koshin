@@ -22,7 +22,7 @@ const BANDS: Band[] = [
   {
     src: '/photo-monaco-walk.jpg',
     alt: 'Koshin walking above Monaco',
-    position: '34% 56%',
+    position: '34% 66%',
     slot: 'intro',
   },
   {
@@ -96,12 +96,8 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         /* Clear the fixed nav pill floating over the top of the page. */
         .sh-band-intro { padding-top: clamp(5rem, 12vh, 7.5rem); }
 
-        /* Fully black and white — grain is the only other treatment. */
-        .sh-img {
-          object-fit: cover;
-          z-index: 0;
-          filter: grayscale(1);
-        }
+        /* Photos run in full colour — grain is the only treatment. */
+        .sh-img { object-fit: cover; z-index: 0; }
 
         /* Two layers above the photo: grain, then the type scrim.
            Both pointer-events:none so they never block the links. */
