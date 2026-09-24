@@ -22,13 +22,13 @@ const BANDS: Band[] = [
   {
     src: '/photo-monaco-walk.jpg',
     alt: 'Koshin walking above Monaco',
-    position: '34% 72%',
+    position: '34% 56%',
     slot: 'intro',
   },
   {
     src: '/photo-halifax-forum.jpg',
     alt: 'The Halifax International Security Forum in session',
-    position: '38% 48%',
+    position: '38% 64%',
     slot: 'offer',
   },
   {
@@ -46,21 +46,28 @@ const BANDS: Band[] = [
 ];
 
 /** A tile of desaturated fractal noise as a data URI — rendered once by the
-    browser and repeated, which is far cheaper than filtering each band. */
-function grain(baseFrequency: number, size: number) {
+    browser and repeated, which is far cheaper than filtering each band.
+    `punch` steepens the noise's own contrast: raw turbulence clusters around
+    mid-grey, which reads as haze rather than grain once blended. */
+function grain(baseFrequency: number, size: number, punch = 1) {
   const svg =
     `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}'>` +
     `<filter id='g'>` +
     `<feTurbulence type='fractalNoise' baseFrequency='${baseFrequency}' numOctaves='4' stitchTiles='stitch'/>` +
     `<feColorMatrix type='saturate' values='0'/>` +
+    `<feComponentTransfer>` +
+    `<feFuncR type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
+    `<feFuncG type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
+    `<feFuncB type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
+    `</feComponentTransfer>` +
     `</filter>` +
     `<rect width='100%' height='100%' filter='url(%23g)'/>` +
     `</svg>`;
   return `url("data:image/svg+xml,${svg.replace(/</g, '%3C').replace(/>/g, '%3E').replace(/#/g, '%23')}")`;
 }
 
-const GRAIN_FINE = grain(0.9, 180);
-const GRAIN_COARSE = grain(0.32, 300);
+const GRAIN_FINE = grain(0.9, 180, 2.4);
+const GRAIN_COARSE = grain(0.32, 300, 2.0);
 
 export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) {
   return (
@@ -89,8 +96,12 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         /* Clear the fixed nav pill floating over the top of the page. */
         .sh-band-intro { padding-top: clamp(5rem, 12vh, 7.5rem); }
 
-        /* Photos run ungraded — grain is the only treatment. */
-        .sh-img { object-fit: cover; z-index: 0; }
+        /* Fully black and white — grain is the only other treatment. */
+        .sh-img {
+          object-fit: cover;
+          z-index: 0;
+          filter: grayscale(1);
+        }
 
         /* Two layers above the photo: grain, then the type scrim.
            Both pointer-events:none so they never block the links. */
@@ -106,14 +117,14 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         .sh-grain {
           background-image: ${GRAIN_FINE}, ${GRAIN_COARSE};
           background-size: 180px 180px, 300px 300px;
-          opacity: 0.95;
+          opacity: 1;
           mix-blend-mode: soft-light;
           z-index: 2;
         }
         .sh-grain-hard {
           background-image: ${GRAIN_FINE};
           background-size: 140px 140px;
-          opacity: 0.30;
+          opacity: 0.62;
           mix-blend-mode: overlay;
           z-index: 3;
         }
