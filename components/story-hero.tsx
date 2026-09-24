@@ -224,7 +224,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
           {band.slot === 'offer' && (
             <div className="sh-body">
-              <p className="sh-text">what I can offer</p>
+              <p className="sh-text">what I offer</p>
               <div className="sh-links">
                 <a className="sh-link" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                   resumé
