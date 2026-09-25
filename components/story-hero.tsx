@@ -226,9 +226,9 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
             <div className="sh-body">
               <p className="sh-text">what I offer</p>
               <div className="sh-links">
-                <a className="sh-link" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <Link className="sh-link" href="/resume">
                   resumé
-                </a>
+                </Link>
                 <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
                   my work
                 </Link>
