@@ -7,6 +7,13 @@ import { ContactForm } from "@/components/contact-form";
 import { WorkHillsHero } from "@/components/work-hills-hero";
 import { projects } from "@/lib/projects";
 
+/* Anything with nowhere to send people sinks to the end of the grid, so the
+   cards a visitor can actually click come first. Sorted rather than hand-
+   ordered, so a project that gains a URL moves up on its own. */
+const orderedProjects = [...projects].sort(
+  (a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)),
+);
+
 export const metadata: Metadata = {
   title: "work",
   description:
@@ -282,21 +289,41 @@ export default function WorkPage() {
             </h2>
           </FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-            {projects.map((project, i) => (
+            {orderedProjects.map((project, i) => (
               <FadeUp key={project.slug} delay={i * 0.08}>
                 <div id={project.slug} className="group scroll-mt-28">
-                  {/* Not a link: the per-project pages are held back for now. */}
-                  <div className="block overflow-hidden mb-4" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
-                    <div className="aspect-[16/10] relative">
-                      <Image
-                        src={project.image}
-                        alt={`${project.name} — project by Koshin`}
-                        fill
-                        className="object-contain p-3 opacity-90"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
-                    </div>
-                  </div>
+                  {(() => {
+                    const shot = (
+                      <div className="aspect-[16/10] relative">
+                        <Image
+                          src={project.image}
+                          alt={`${project.name} — project by Koshin`}
+                          fill
+                          className="object-contain p-3 opacity-90"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
+                      </div>
+                    );
+                    const frame = { background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' };
+
+                    // Relay and Sanctions Precedent have nowhere to send people,
+                    // so their cards stay inert rather than looking clickable.
+                    return project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5"
+                        style={frame}
+                      >
+                        {shot}
+                      </a>
+                    ) : (
+                      <div className="block overflow-hidden mb-4" style={frame}>
+                        {shot}
+                      </div>
+                    );
+                  })()}
 
                   {/* Info */}
                   <div className="px-1">
@@ -320,9 +347,22 @@ export default function WorkPage() {
                         (under review)
                       </p>
                     )}
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.72)' }}>
+                    <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
                       {project.description}
                     </p>
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
+                        style={{ color: '#2f5d9e', opacity: 0.85 }}
+                      >
+                        {project.linkLabel ?? 'Visit the site'}
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </FadeUp>
