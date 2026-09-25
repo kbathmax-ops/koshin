@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
@@ -286,8 +285,8 @@ export default function WorkPage() {
             {projects.map((project, i) => (
               <FadeUp key={project.slug} delay={i * 0.08}>
                 <div id={project.slug} className="group scroll-mt-28">
-                  {/* Image — clicks through to the project's own page */}
-                  <Link href={`/work/${project.slug}`} className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
+                  {/* Not a link: the per-project pages are held back for now. */}
+                  <div className="block overflow-hidden mb-4" style={{ background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' }}>
                     <div className="aspect-[16/10] relative">
                       <Image
                         src={project.image}
@@ -297,7 +296,7 @@ export default function WorkPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
                     </div>
-                  </Link>
+                  </div>
 
                   {/* Info */}
                   <div className="px-1">
@@ -321,17 +320,9 @@ export default function WorkPage() {
                         (under review)
                       </p>
                     )}
-                    <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(18,35,63,0.72)' }}>
                       {project.description}
                     </p>
-
-                    <Link
-                      href={`/work/${project.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                      style={{ color: '#2f5d9e', opacity: 0.85 }}
-                    >
-                      Read the process <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
                   </div>
                 </div>
               </FadeUp>
