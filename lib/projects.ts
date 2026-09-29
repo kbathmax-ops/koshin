@@ -69,7 +69,7 @@ export const projects: Project[] = [
     description:
       "A pocket compass that points you to your friends in crowds where phone service disappears.",
     image: "/way-compass-hero.jpg",
-    // Add liveUrl once the Vercel production URL for kbathmax-ops/way-compass is confirmed.
+    liveUrl: "https://way-compass.vercel.app",
     story: {
       intention:
         "Events in Toronto are packed: FIFA World Cup matches, Guelph and Western homecoming, street festivals every weekend in the summer. Losing your friends is inevitable, and Find My is never as precise as you need it to be. The idea came at Guelph homecoming, after losing my friends every 10 minutes and then getting locked out of a friend's apartment.",
