@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
@@ -308,7 +309,15 @@ export default function WorkPage() {
 
                     // Relay and Sanctions Precedent have nowhere to send people,
                     // so their cards stay inert rather than looking clickable.
-                    return project.liveUrl ? (
+                    return project.detailFirst ? (
+                      <Link
+                        href={`/work/${project.slug}`}
+                        className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5"
+                        style={frame}
+                      >
+                        {shot}
+                      </Link>
+                    ) : project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -351,7 +360,15 @@ export default function WorkPage() {
                       {project.description}
                     </p>
 
-                    {project.liveUrl && (
+                    {project.detailFirst ? (
+                      <Link
+                        href={`/work/${project.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
+                        style={{ color: '#2f5d9e', opacity: 0.85 }}
+                      >
+                        Read the project <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    ) : project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"

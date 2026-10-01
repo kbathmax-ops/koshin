@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
   if (!project) notFound();
 
-  const { story } = project;
+  const { story, details } = project;
 
   return (
     <div style={{ background: "#d9d9d9", minHeight: "100dvh" }}>
@@ -131,6 +131,41 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             </p>
           )}
         </FadeUp>
+
+        {details && (
+          <div className="mt-16 md:mt-20 space-y-12 md:space-y-16">
+            <FadeUp>
+              <Section title="The problem">
+                {details.problem.map((paragraph) => (
+                  <Prose key={paragraph} copy={paragraph} />
+                ))}
+              </Section>
+            </FadeUp>
+
+            <FadeUp>
+              <Section title="The solution">
+                <Prose copy={details.solution} />
+              </Section>
+            </FadeUp>
+
+            <FadeUp>
+              <Section title="Features">
+                <ul className="space-y-3 pl-5 list-disc marker:text-[#2f5d9e]">
+                  {details.features.map((feature) => (
+                    <li key={feature} className="pl-1 text-base leading-relaxed" style={{ color: "rgba(18,35,63,0.78)" }}>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                {details.note && (
+                  <p className="text-sm leading-relaxed pt-2" style={{ color: "rgba(18,35,63,0.6)" }}>
+                    {details.note}
+                  </p>
+                )}
+              </Section>
+            </FadeUp>
+          </div>
+        )}
 
         {/* The written thinking comes before the screenshot on purpose — the
             process is the part worth reading. */}

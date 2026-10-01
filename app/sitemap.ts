@@ -16,8 +16,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    // Per-project pages still build, but nothing links to them for now, so
-    // they stay out of the sitemap rather than being indexed unreachable.
+    {
+      url: `${BASE_URL}/work/way-compass`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    // Other per-project pages still build, but their cards link directly to
+    // live sites, so they stay out of the sitemap for now.
     // Case studies are archived (see archive/work/case-studies) — no longer routed.
   ];
 }

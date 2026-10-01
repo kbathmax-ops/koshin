@@ -24,6 +24,13 @@ export type ProjectStory = {
   learnings?: string[];
 };
 
+export type ProjectDetails = {
+  problem: string[];
+  solution: string;
+  features: string[];
+  note?: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -37,6 +44,9 @@ export type Project = {
   unavailable?: boolean;
   /** Shipped but waiting on a store review — flags the card with a green light. */
   inReview?: boolean;
+  /** Open the portfolio write-up before the live site. */
+  detailFirst?: boolean;
+  details?: ProjectDetails;
   story?: ProjectStory;
 };
 
@@ -67,12 +77,30 @@ export const projects: Project[] = [
     slug: "way-compass",
     name: "WAY",
     description:
-      "A pocket compass that points you to your friends in crowds where phone service disappears.",
+      "A pocket compass concept for finding friends in crowded places when cell service is unreliable.",
     image: "/way-compass-hero.jpg",
     liveUrl: "https://way-compass.vercel.app",
-    story: {
-      intention:
-        "Events in Toronto are packed: FIFA World Cup matches, Guelph and Western homecoming, street festivals every weekend in the summer. Losing your friends is inevitable, and Find My is never as precise as you need it to be. The idea came at Guelph homecoming, after losing my friends every 10 minutes and then getting locked out of a friend's apartment.",
+    linkLabel: "Explore the interactive WAY site",
+    detailFirst: true,
+    details: {
+      problem: [
+        "At crowded events, it is easy to lose sight of friends and family. Toronto's World Cup watch parties and summer street festivals made that clear to me. Find My can be too imprecise to help you spot someone nearby, especially when cell service is unreliable.",
+        "At Guelph homecoming, I kept getting separated from my friends. Music, shouting, and a crowd of people who looked familiar made finding them harder than I expected. With no cell service, I needed a way to tell which direction to walk.",
+      ],
+      solution:
+        "The idea came to me when I was locked out of a friend's apartment. WAY is a compact, affordable friend-finding compass designed to clip onto a keychain. After connecting with friends, you would select a person and follow a visual direction indicator and proximity lights to find them.",
+      features: [
+        "A bright arrow and 12-segment LED ring point toward the selected friend.",
+        "Illuminated distance marks show when you are getting closer.",
+        "One button cycles between friends; holding it sends an SOS alert to the group.",
+        "Vibration confirms selections and provides feedback without a speaker.",
+        "A thin, bead-blasted recycled aluminum body is designed to feel solid while weighing less than 42 grams.",
+        "An impact-resistant translucent polycarbonate face protects the display.",
+        "An integrated loop attaches to keys, a bag, or a lanyard.",
+        "Bluetooth connects the compass to a phone for setup.",
+        "A proposed sub-GHz radio and GNSS system would share locations without cellular service.",
+      ],
+      note: "WAY is a design concept. Its weight, cost, radio range, and location accuracy are targets that still need hardware testing.",
     },
   },
   {
