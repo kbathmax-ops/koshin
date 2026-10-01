@@ -207,18 +207,43 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               className="overflow-hidden"
               style={{ background: "#e2e2e2", boxShadow: "0 6px 24px rgba(18,35,63,0.13)" }}
             >
-              <div className="aspect-[16/10] relative">
+              {project.detailImage ? (
                 <Image
-                  src={project.image}
-                  alt={`${project.name} — project by Koshin`}
-                  fill
-                  sizes="(min-width: 768px) 720px, 100vw"
-                  className="object-contain p-3"
+                  src={project.detailImage.src}
+                  alt={project.detailImage.alt}
+                  width={project.detailImage.width}
+                  height={project.detailImage.height}
+                  sizes="(min-width: 768px) 672px, 100vw"
+                  className="w-full h-auto"
                 />
-              </div>
+              ) : (
+                <div className="aspect-[16/10] relative">
+                  <Image
+                    src={project.image}
+                    alt={`${project.name} — project by Koshin`}
+                    fill
+                    sizes="(min-width: 768px) 720px, 100vw"
+                    className="object-contain p-3"
+                  />
+                </div>
+              )}
             </div>
           </figure>
         </FadeUp>
+
+        {project.detailFirst && project.liveUrl && (
+          <FadeUp>
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-8 text-sm font-black transition-opacity hover:opacity-100"
+              style={{ color: "#2f5d9e", opacity: 0.85 }}
+            >
+              Visit the {project.name} site <ArrowRight className="h-4 w-4" />
+            </a>
+          </FadeUp>
+        )}
       </main>
 
       <footer style={{ background: "#d9d9d9", borderTop: "1px solid rgba(18,35,63,0.10)" }}>

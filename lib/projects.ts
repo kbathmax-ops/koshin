@@ -36,6 +36,7 @@ export type Project = {
   name: string;
   description: string;
   image: string;
+  detailImage?: { src: string; alt: string; width: number; height: number };
   /** The live thing, when there is one to visit. */
   liveUrl?: string;
   /** Wording for the outbound link when "View live site" is wrong. */
@@ -79,6 +80,12 @@ export const projects: Project[] = [
     description:
       "A pocket compass concept for finding friends in crowded places when cell service is unreliable.",
     image: "/way-compass-hero.jpg",
+    detailImage: {
+      src: "/way.png",
+      alt: "WAY product reference showing front, rear, left edge, right edge, top edge, and front three-quarter views",
+      width: 1536,
+      height: 1024,
+    },
     liveUrl: "https://way-compass.vercel.app",
     linkLabel: "Explore the interactive WAY site",
     detailFirst: true,
