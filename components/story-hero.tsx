@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowDown } from 'lucide-react';
 
-/* ─── Story hero — three stacked photo bands, no animation ───
-   Band order is just this array — reorder freely. Each band carries a line
-   of type; the offer band is double height.
+/* ─── Story hero — three photo bands split by heavy black rules ───
+   Follows the "03 - Artboard 1" layout: a short intro band with the name
+   top-left, a tall middle band with "what I offer" set large on the right
+   (links beside it), and "my background" set large bottom-left. Band
+   heights and type sizes are proportions measured off that artboard.
 
    The photos run bright (Cusco daylight) to near-black (beach at night), so
    type sits in cream over a left-hand scrim rather than relying on the image
@@ -67,53 +68,47 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
   return (
     <section aria-label="Introduction" className="sh">
       <style>{`
-        /* Fixed to one viewport with the bands splitting it evenly, so the
-           set always lands as a full screen rather than drifting with the
-           window height. */
+        /* One viewport tall; the three bands share it 24 / 44 / 32 like the
+           artboard, with heavy rules between them. */
         .sh {
           display: flex;
           flex-direction: column;
           height: 100dvh;
+          background: var(--ink);
         }
 
         .sh-band {
           position: relative;
           display: flex;
           align-items: center;
-          justify-content: center;
-          text-align: center;
-          flex: 1;
           min-height: 0;
-          padding: 0.75rem clamp(1.5rem, 5vw, 5rem);
+          padding: 0 clamp(1.25rem, 3.4vw, 4rem);
           isolation: isolate;
           overflow: hidden;
         }
+        .sh-band + .sh-band { border-top: clamp(6px, 0.75vw, 12px) solid var(--ink); }
 
-        /* The offer band takes two shares of the screen — it absorbed the
-           old travel band below it. */
-        .sh-band-offer { flex: 2; }
+        .sh-band-intro { flex: 24; padding-left: clamp(1.5rem, 6.1vw, 7rem); }
+        .sh-band-offer { flex: 44; justify-content: flex-end; }
+        .sh-band-background { flex: 32; }
 
         /* Clear the fixed nav pill floating over the top of the page. */
-        .sh-band-intro { padding-top: clamp(5rem, 12vh, 7.5rem); }
+        .sh-band-intro { padding-top: 4.5rem; }
 
         /* Photos run in full colour — grain is the only treatment. */
         .sh-img { object-fit: cover; z-index: 0; }
 
-        /* Two layers above the photo: grain, then the type scrim.
-           Both pointer-events:none so they never block the links. */
         .sh-grain, .sh-grain-hard, .sh-scrim {
           position: absolute;
           inset: 0;
           pointer-events: none;
         }
 
-        /* Heavy grain. Two tile sizes — fine sensor noise over coarser
-           mottling — and a second pass in overlay on top of the soft-light
-           layer, which is what pushes it past a subtle texture. */
+        /* Heavy grain: fine sensor noise over coarser mottling, with a second
+           overlay pass that pushes it past a subtle texture. */
         .sh-grain {
           background-image: ${GRAIN_FINE}, ${GRAIN_COARSE};
           background-size: 180px 180px, 300px 300px;
-          opacity: 1;
           mix-blend-mode: soft-light;
           z-index: 2;
         }
@@ -125,77 +120,78 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           z-index: 3;
         }
 
-        /* Carries the type. Without it, cream over the Cusco sky is illegible. */
+        /* Darkens the side the type sits on so white type holds up on bright
+           photos. */
         .sh-scrim {
-          background: radial-gradient(
-            ellipse 60% 90% at 50% 50%,
-            rgba(16, 18, 24, 0.55) 0%,
-            rgba(16, 18, 24, 0.22) 55%,
-            rgba(16, 18, 24, 0) 100%
+          background: linear-gradient(
+            to right,
+            rgba(16, 18, 24, 0.62) 0%,
+            rgba(16, 18, 24, 0.28) 45%,
+            rgba(16, 18, 24, 0) 75%
           );
           z-index: 4;
         }
+        .sh-band-offer .sh-scrim {
+          background: linear-gradient(
+            to left,
+            rgba(16, 18, 24, 0.62) 0%,
+            rgba(16, 18, 24, 0.28) 45%,
+            rgba(16, 18, 24, 0) 75%
+          );
+        }
 
         .sh-body { position: relative; z-index: 5; }
-        .sh-bare { text-decoration: none; display: inline-block; }
-
-        .sh-row {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55em;
-        }
-        /* Sized off the type so it tracks the heading at every breakpoint. */
-        .sh-arrow {
-          width: 0.82em;
-          height: 0.82em;
-          stroke-width: 2.6;
-          flex-shrink: 0;
-        }
 
         .sh-text {
           font-family: var(--font-display);
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          line-height: 1.05;
-          color: #ffffff;
-          font-size: clamp(1.2rem, 2.8vw, 2.1rem);
-          margin: 0;
-          text-shadow: 0 1px 12px rgba(12, 14, 20, 0.45);
-        }
-        .sh-note {
           font-weight: 500;
-          opacity: 0.8;
-          font-size: 0.5em;
-          letter-spacing: 0;
+          letter-spacing: -0.035em;
+          line-height: 0.95;
+          color: #ffffff;
+          margin: 0;
+          text-decoration: none;
+          text-shadow: 0 1px 14px rgba(12, 14, 20, 0.4);
         }
-        .sh-bare:hover, .sh-bare:focus-visible { color: #ffffff; }
+        /* Sizes track width but are capped by height, so the type never
+           outgrows its band on a short, wide window. */
+        .sh-text-sm { font-size: min(7.1vw, 9.5dvh); }
+        .sh-text-lg { font-size: min(9.9vw, 14dvh); }
+        a.sh-text:hover, a.sh-text:focus-visible { opacity: 0.85; }
 
-        /* Always on — these are the three things a hiring reader came for, so
-           they are solid pills rather than type sitting on a photo. */
+        /* Links sit to the left of "what I offer", on its baseline row. */
+        .sh-offer {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          flex-wrap: wrap-reverse;
+          gap: clamp(1rem, 2.5vw, 2.5rem);
+        }
         .sh-links {
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
           gap: 0.6rem;
-          margin-top: 0.8rem;
         }
-
         .sh-link {
           font-family: var(--font-body);
-          font-size: clamp(0.82rem, 1.3vw, 0.98rem);
+          font-size: clamp(0.82rem, 1.2vw, 1rem);
           font-weight: 600;
-          letter-spacing: 0.01em;
           color: var(--ink);
           background: var(--paper);
           text-decoration: none;
-          padding: 0.5rem 1.1rem;
+          padding: 0.55rem 1.15rem;
           border-radius: 999px;
-          box-shadow: 0 6px 20px rgba(10, 12, 18, 0.38);
+          box-shadow: 0 6px 20px rgba(10, 12, 18, 0.35);
           white-space: nowrap;
         }
         .sh-link:hover, .sh-link:focus-visible {
           background: var(--ink);
           color: var(--paper);
+        }
+
+        /* Narrow screens: links drop under the heading, still right-aligned. */
+        @media (max-width: 767px) {
+          .sh-offer { flex-direction: column-reverse; align-items: flex-end; gap: 0.9rem; }
+          .sh-links { justify-content: flex-end; }
         }
       `}</style>
 
@@ -218,15 +214,12 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           <span className="sh-scrim" aria-hidden="true" />
 
           {band.slot === 'intro' && (
-            <p className="sh-text sh-body">
-              Hi! I&apos;m Koshin <span className="sh-note">(like the ocean with a k)</span>
-            </p>
+            <h1 className="sh-text sh-text-sm sh-body">hi! I&rsquo;m Koshin</h1>
           )}
 
           {band.slot === 'offer' && (
-            <div className="sh-body">
-              <p className="sh-text">what I offer</p>
-              <div className="sh-links">
+            <div className="sh-body sh-offer">
+              <nav className="sh-links" aria-label="What I offer">
                 <Link className="sh-link" href="/resume">
                   resumé
                 </Link>
@@ -241,22 +234,18 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
                 >
                   linkedin
                 </a>
-              </div>
+              </nav>
+              <p className="sh-text sh-text-lg">what I offer</p>
             </div>
           )}
 
-
           {band.slot === 'background' &&
             (backgroundHref ? (
-              <Link className="sh-text sh-body sh-bare sh-row" href={backgroundHref}>
+              <Link className="sh-text sh-text-lg sh-body" href={backgroundHref}>
                 my background
-                <ArrowDown className="sh-arrow" aria-hidden="true" />
               </Link>
             ) : (
-              <p className="sh-text sh-body sh-row">
-                my background
-                <ArrowDown className="sh-arrow" aria-hidden="true" />
-              </p>
+              <p className="sh-text sh-text-lg sh-body">my background</p>
             ))}
         </div>
       ))}
