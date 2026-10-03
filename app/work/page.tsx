@@ -5,7 +5,7 @@ import { AlertCircle, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { ContactForm } from "@/components/contact-form";
-import { WorkHillsHero } from "@/components/work-hills-hero";
+import { WorkImageHero } from "@/components/work-image-hero";
 import { projects } from "@/lib/projects";
 
 /* Anything with nowhere to send people sinks to the end of the grid, so the
@@ -133,6 +133,24 @@ type DesignProject = {
 };
 
 const designWork: DesignProject[] = [
+  {
+    id: "way",
+    name: "WAY",
+    href: "https://way-compass.vercel.app",
+    role: "Product design",
+    year: "2026",
+    description:
+      "A keychain compass for finding friends in a crowd when cell service drops. A bead-blasted aluminum body with an integrated loop, a black face carrying a bright arrow inside a 12-segment green LED ring, and a single button for cycling between friends.",
+    shots: [
+      {
+        src: "/way.png",
+        alt: "WAY product reference showing front, rear, left edge, right edge, top edge, and front three-quarter views",
+        label: "Product reference — front, rear, edges, and three-quarter view",
+        width: 1536,
+        height: 1024,
+      },
+    ],
+  },
   {
     id: "snap-toronto",
     name: "Snap Toronto",
@@ -274,8 +292,8 @@ export default function WorkPage() {
       />
       <Nav />
 
-      {/* ── Hills Hero ── */}
-      <WorkHillsHero />
+      {/* ── Featured work hero ── */}
+      <WorkImageHero />
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pb-32">
 
