@@ -151,6 +151,9 @@ export default function WorkPage() {
                     <br />
                     Let&apos;s talk.
                   </h2>
+                  <p className="text-base leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.62)' }}>
+                    Looking into design, product, and engineering.
+                  </p>
                 </div>
                 <ContactForm />
               </div>
