@@ -49,14 +49,6 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 2,
-      name: "Sanctions Precedent",
-      description: "AI-powered sanctions research engine built with Next.js, Claude API, and Supabase.",
-      applicationCategory: "ResearchApplication",
-      operatingSystem: "Web",
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 3,
       name: "Toronto Cafe Roulette",
       description: "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
       applicationCategory: "LifestyleApplication",
@@ -64,7 +56,7 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      position: 4,
+      position: 3,
       name: "detour",
       description:
         "A Chrome extension that hides Google Flights itineraries connecting through the US.",
@@ -74,7 +66,7 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      position: 5,
+      position: 4,
       name: "Snap Toronto — identity & site design",
       description:
         "Identity and site design for a Toronto AI workshop series: condensed display type, a hand-drawn mark, and full-bleed photography of the businesses it serves.",
@@ -82,33 +74,24 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      position: 6,
+      position: 5,
       name: "Toronto's Hot Take Slideshow Night — event poster",
       description:
         "Poster design for a Toronto slideshow night: hand-drawn brush lettering over a photograph of the room.",
     },
     {
       "@type": "CreativeWork",
-      position: 7,
+      position: 6,
       name: "Ocean Management — brand identity & deck",
       description:
         "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
     },
     {
       "@type": "SoftwareApplication",
-      position: 8,
+      position: 7,
       name: "The Window Seat",
       description: "A quiz for ambitious people to consider travel for their personal growth.",
       applicationCategory: "TravelApplication",
-      operatingSystem: "Web",
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 9,
-      name: "Relay",
-      description:
-        "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
-      applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
     },
   ],
