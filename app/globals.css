@@ -186,3 +186,10 @@ html {
     animation-delay: 0s !important;
   }
 }
+
+/* Neue Haas Grotesk via Adobe Fonts (work page). Falls back to Helvetica Neue,
+   its direct descendant, until the web project kit is loaded. */
+:root {
+  --font-haas-display: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-haas-text: "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

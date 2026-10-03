@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { AlertCircle, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { ContactForm } from "@/components/contact-form";
-import { WorkImageHero } from "@/components/work-image-hero";
+import { WorkStage } from "@/components/work-stage";
+import { designWork } from "@/lib/design-work";
 import { projects } from "@/lib/projects";
 
 /* Anything with nowhere to send people sinks to the end of the grid, so the
    cards a visitor can actually click come first. Sorted rather than hand-
    ordered, so a project that gains a URL moves up on its own. */
-const orderedProjects = [...projects].sort(
-  (a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)),
-);
+const visibleProjects = projects
+  .filter((p) => !p.hidden)
+  .sort((a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)));
+
+/* Neue Haas Grotesk comes from an Adobe Fonts web project. Until its ID is
+   set, the type falls back to Helvetica Neue. */
+const adobeFontsId = process.env.NEXT_PUBLIC_ADOBE_FONTS_ID;
 
 export const metadata: Metadata = {
   title: "work",
@@ -112,176 +114,12 @@ const jsonLd = {
   ],
 };
 
-type Shot = {
-  src: string;
-  alt: string;
-  /** Caption under the shot — what part of the design it shows. */
-  label: string;
-  width: number;
-  height: number;
-};
-
-type DesignProject = {
-  id: string;
-  name: string;
-  /** Omitted for pieces with nowhere to link out to — print and event work. */
-  href?: string;
-  role: string;
-  year: string;
-  description: string;
-  shots: Shot[];
-};
-
-const designWork: DesignProject[] = [
-  {
-    id: "way",
-    name: "WAY",
-    href: "https://way-compass.vercel.app",
-    role: "Product design",
-    year: "2026",
-    description:
-      "A keychain compass for finding friends in a crowd when cell service drops. A bead-blasted aluminum body with an integrated loop, a black face carrying a bright arrow inside a 12-segment green LED ring, and a single button for cycling between friends.",
-    shots: [
-      {
-        src: "/way.png",
-        alt: "WAY product reference showing front, rear, left edge, right edge, top edge, and front three-quarter views",
-        label: "Product reference — front, rear, edges, and three-quarter view",
-        width: 1536,
-        height: 1024,
-      },
-    ],
-  },
-  {
-    id: "snap-toronto",
-    name: "Snap Toronto",
-    href: "https://snaptoronto.org",
-    role: "Identity & site design",
-    year: "2026",
-    description:
-      "Identity and site design for the AI workshop series I run in Toronto. Condensed display type set at poster scale, a hand-drawn stick figure as the mark, and full-bleed photography of the small businesses it's actually for. The case gets made in numbers rather than adjectives.",
-    shots: [
-      {
-        src: "/design/snap-toronto-hero.jpg",
-        alt: "Snap Toronto homepage hero — condensed display type over a street photograph",
-        label: "Homepage — display type over full-bleed street photography",
-        width: 1600,
-        height: 850,
-      },
-      {
-        src: "/design/snap-toronto-workshops.jpg",
-        alt: "Snap Toronto workshops section — three full-height photo panels labelled by trade",
-        label: "Workshops — edge-to-edge photo panels, labelled by trade",
-        width: 1600,
-        height: 1032,
-      },
-      {
-        src: "/design/snap-toronto-stats.png",
-        alt: "Snap Toronto statistics section — oversized numerals beside cited claims",
-        label: "Stats — oversized numerals, every claim cited",
-        width: 1600,
-        height: 386,
-      },
-      {
-        src: "/design/snap-toronto-cta.png",
-        alt: "Snap Toronto call to action — headline with an accent underline above a pill button",
-        label: "Sign-up — accent underline, single pill button",
-        width: 1600,
-        height: 472,
-      },
-      {
-        src: "/design/snap-toronto-wordmark.png",
-        alt: "Snap Toronto wordmark — SNAP TORONTO stacked in condensed type with the stick figure walking across the letters",
-        label: "Wordmark — the mark walking the top of its own type",
-        width: 1940,
-        height: 860,
-      },
-    ],
-  },
-  {
-    id: "hot-take-slideshow-night",
-    name: "Toronto's Hot Take Slideshow Night",
-    role: "Event poster",
-    year: "2026",
-    description:
-      "Poster for a slideshow night at 300 Campbell Ave, where people present their take on a random topic to a full room. A hand-drawn brush wordmark over a photograph of the crowd, with the grotesque set tight underneath so the date and address still hold up at feed size.",
-    shots: [
-      {
-        src: "/design/hot-take-slideshow-night.jpg",
-        alt: "Toronto's Hot Take Slideshow Night poster — brush lettering over a photo of a packed room watching a projector",
-        label: "Poster — brush wordmark over the room, details set tight beneath",
-        width: 1600,
-        height: 790,
-      },
-    ],
-  },
-  {
-    id: "ocean-management",
-    name: "Ocean Management",
-    role: "Brand identity & deck",
-    year: "2026",
-    description:
-      "Identity and pitch deck for a Toronto influencer management agency. A geometric sans wordmark on a warm off-white, with two of its counters knocked out and replaced by the brand's own shapes: a red pill carrying the year, a gold one carrying the wave mark. Where the deck needs to raise its voice it goes full-bleed gold with justified all-caps.",
-    shots: [
-      {
-        src: "/design/ocean-management-cover.jpg",
-        alt: "Ocean Management deck cover — geometric wordmark with coloured pills set into its counters",
-        label: "Cover — the mark set into the counters of its own wordmark",
-        width: 1600,
-        height: 900,
-      },
-      {
-        src: "/design/ocean-management-statement.jpg",
-        alt: "Ocean Management statement slide — justified all-caps type on a gold field",
-        label: "Statement slide — justified all-caps on brand gold",
-        width: 1600,
-        height: 900,
-      },
-    ],
-  },
-];
-
 /**
  * Brand work is still being built in private. Set SHOW_BRAND_WORK=true in
  * .env.local to see it in dev; it stays off (and out of the client bundle)
  * everywhere it isn't set, so nothing ships to production.
  */
 const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
-
-/** One shot in the design gallery — clicks through to the live site when there is one. */
-function Screenshot({ shot, href, full = false }: { shot: Shot; href?: string; full?: boolean }) {
-  const frameClass = "block overflow-hidden transition-transform duration-500";
-  const frameStyle = { background: '#e2e2e2', boxShadow: '0 4px 16px rgba(18,35,63,0.11)' };
-  const image = (
-    <Image
-      src={shot.src}
-      alt={shot.alt}
-      width={shot.width}
-      height={shot.height}
-      sizes={full ? "(min-width: 768px) 720px, 100vw" : "(min-width: 768px) 350px, 100vw"}
-      className="w-full h-auto"
-    />
-  );
-
-  return (
-    <figure>
-      {href ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${frameClass} hover:-translate-y-1.5`}
-          style={frameStyle}
-        >
-          {image}
-        </a>
-      ) : (
-        <div className={frameClass} style={frameStyle}>
-          {image}
-        </div>
-      )}
-    </figure>
-  );
-}
 
 export default function WorkPage() {
   return (
@@ -292,202 +130,14 @@ export default function WorkPage() {
       />
       <Nav />
 
-      {/* ── Featured work hero ── */}
-      <WorkImageHero />
+      {adobeFontsId && (
+        <link rel="stylesheet" href={`https://use.typekit.net/${adobeFontsId}.css`} precedence="default" />
+      )}
 
-      <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pb-32">
+      {/* ── Products / designs ── */}
+      <WorkStage products={visibleProjects} designs={designWork} />
 
-        {/* ── Work ── */}
-        <section id="builds" className="scroll-mt-28">
-          <FadeUp>
-            <h2
-              className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-10 md:mb-14"
-              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
-            >
-              Work
-            </h2>
-          </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-            {orderedProjects.map((project, i) => (
-              <FadeUp key={project.slug} delay={i * 0.08}>
-                <div id={project.slug} className="group scroll-mt-28">
-                  {(() => {
-                    const shot = (
-                      <div className="aspect-[16/10] relative">
-                        <Image
-                          src={project.image}
-                          alt={`${project.name} — project by Koshin`}
-                          fill
-                          className="object-contain p-3 opacity-90"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
-                      </div>
-                    );
-                    const frame = { background: '#e2e2e2', boxShadow: '0 6px 24px rgba(18,35,63,0.13)' };
-
-                    // Relay and Sanctions Precedent have nowhere to send people,
-                    // so their cards stay inert rather than looking clickable.
-                    return project.detailFirst ? (
-                      <Link
-                        href={`/work/${project.slug}`}
-                        className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5"
-                        style={frame}
-                      >
-                        {shot}
-                      </Link>
-                    ) : project.liveUrl ? (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-1.5"
-                        style={frame}
-                      >
-                        {shot}
-                      </a>
-                    ) : (
-                      <div className="block overflow-hidden mb-4" style={frame}>
-                        {shot}
-                      </div>
-                    );
-                  })()}
-
-                  {/* Info */}
-                  <div className="px-1">
-                    <h3
-                      className="font-bold text-xl mb-1.5 flex items-center gap-1.5"
-                      style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
-                    >
-                      {project.name}
-                      {project.unavailable && (
-                        <AlertCircle className="h-4 w-4 shrink-0" style={{ color: '#c0392b' }} aria-hidden />
-                      )}
-                      {project.inReview && <span className="status-light shrink-0" aria-hidden />}
-                    </h3>
-                    {project.unavailable && (
-                      <p className="text-xs font-semibold mb-1.5" style={{ color: '#c0392b' }}>
-                        (currently unavailable)
-                      </p>
-                    )}
-                    {project.inReview && (
-                      <p className="text-xs font-semibold mb-1.5" style={{ color: '#22a05a' }}>
-                        (under review)
-                      </p>
-                    )}
-                    <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(18,35,63,0.72)' }}>
-                      {project.description}
-                    </p>
-
-                    {project.detailFirst ? (
-                      <Link
-                        href={`/work/${project.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                        style={{ color: '#2f5d9e', opacity: 0.85 }}
-                      >
-                        Read the project <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    ) : project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                        style={{ color: '#2f5d9e', opacity: 0.85 }}
-                      >
-                        {project.linkLabel ?? 'Visit the site'}
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Design ── */}
-        <section id="design" className="scroll-mt-28">
-          <FadeUp>
-            <h2
-              className="font-extrabold text-3xl md:text-4xl tracking-tighter mb-8 md:mb-10"
-              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
-            >
-              Design
-            </h2>
-          </FadeUp>
-
-          <div className="space-y-12 md:space-y-16 max-w-3xl">
-            {designWork.map((project) => (
-              <div key={project.id} id={`design-${project.id}`} className="scroll-mt-28">
-                {/* Header */}
-                <FadeUp>
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 mb-4 pb-3" style={{ borderBottom: '1px solid rgba(18,35,63,0.14)' }}>
-                    <div>
-                      <p className="text-[0.65rem] uppercase tracking-[0.2em] font-semibold mb-1" style={{ color: 'rgba(18,35,63,0.45)' }}>
-                        {project.role} · {project.year}
-                      </p>
-                      <h3
-                        className="font-extrabold text-xl md:text-2xl tracking-tighter"
-                        style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
-                      >
-                        {project.name}
-                      </h3>
-                    </div>
-                    {project.href && (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-black transition-opacity hover:opacity-100"
-                        style={{ color: '#2f5d9e', opacity: 0.85 }}
-                      >
-                        Visit {project.href.replace('https://', '')} <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-                  </div>
-                </FadeUp>
-
-                {/* Screenshots — hero full width, then the tall one beside a stack of the short ones */}
-                {project.shots.length <= 2 ? (
-                  <div
-                    className={`grid grid-cols-1 gap-3 md:gap-4 items-start${
-                      project.shots.length === 2 ? " md:grid-cols-2" : ""
-                    }`}
-                  >
-                    {project.shots.map((shot, i) => (
-                      <FadeUp key={shot.src} delay={i * 0.08}>
-                        <Screenshot
-                          shot={shot}
-                          href={project.href}
-                          full={project.shots.length === 1}
-                        />
-                      </FadeUp>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
-                    {project.shots.slice(0, 2).map((shot, i) => (
-                      <FadeUp
-                        key={shot.src}
-                        delay={i * 0.08}
-                        className={i === 0 ? "md:col-span-2" : undefined}
-                      >
-                        <Screenshot shot={shot} href={project.href} full={i === 0} />
-                      </FadeUp>
-                    ))}
-                    <div className="space-y-3 md:space-y-4">
-                      {project.shots.slice(2).map((shot, i) => (
-                        <FadeUp key={shot.src} delay={(i + 2) * 0.08}>
-                          <Screenshot shot={shot} href={project.href} />
-                        </FadeUp>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
+      <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pt-16 md:pt-24 pb-32">
 
         {/* ── Brand work — in progress, private until it's ready ── */}
         {SHOW_BRAND_WORK && (

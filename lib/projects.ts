@@ -49,6 +49,8 @@ export type Project = {
   detailFirst?: boolean;
   details?: ProjectDetails;
   story?: ProjectStory;
+  /** Kept on file (its detail page still builds) but left off the /work index. */
+  hidden?: boolean;
 };
 
 export const projects: Project[] = [
@@ -65,6 +67,7 @@ export const projects: Project[] = [
   {
     slug: "relay",
     name: "Relay",
+    hidden: true,
     description:
       "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
     image: "/relay-handoff.png",
@@ -224,6 +227,7 @@ export const projects: Project[] = [
   {
     slug: "sanctions-precedent",
     name: "Sanctions Precedent",
+    hidden: true,
     description:
       "An AI research engine that finds historical sanctions precedents by sector, intensity, and geopolitical objective, built for policy analysts.",
     image: "/sanctions-precedent-hero.png",
