@@ -27,16 +27,16 @@ export function Nav() {
     >
       <div
         className={cn(
-          "bg-[var(--paper-sunk)]/75 backdrop-blur-xl rounded-full max-w-4xl mx-auto flex justify-between items-center gap-8 px-8 py-4 transition-shadow duration-300",
+          "bg-[var(--paper-sunk)]/75 backdrop-blur-xl rounded-full w-fit mx-auto flex items-center gap-8 md:gap-10 pl-5 pr-5 py-2.5 text-sm transition-shadow duration-300",
           scrolled
-            ? "shadow-[0_10px_40px_rgb(var(--ink-rgb) / 0.10)]"
-            : "shadow-[0_10px_30px_rgb(var(--ink-rgb) / 0.05)]"
+            ? "shadow-[0_10px_40px_rgb(var(--ink-rgb)_/_0.10)]"
+            : "shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.05)]"
         )}
       >
         {/* Logo */}
         <Link
           href="/story"
-          className="text-xl font-medium text-[var(--ink)] tracking-tighter"
+          className="text-base font-medium text-[var(--ink)] tracking-tighter"
           style={{ fontFamily: "var(--font-display)" }}
         >
           koshin
@@ -44,11 +44,11 @@ export function Nav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <Link
             href="/story"
             className={cn(
-              "font-bold tracking-tight transition-colors duration-200",
+              "font-medium tracking-tight transition-colors duration-200",
               isStory
                 ? "text-[var(--ink)]"
                 : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
@@ -60,7 +60,7 @@ export function Nav() {
           <Link
             href="/work"
             className={cn(
-              "font-bold tracking-tight transition-colors duration-200",
+              "font-medium tracking-tight transition-colors duration-200",
               isWork
                 ? "text-[var(--ink)]"
                 : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
@@ -84,24 +84,24 @@ export function Nav() {
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
       </div>
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 max-w-4xl mx-auto flex justify-end px-8">
-          <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgb(var(--ink-rgb) / 0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
+        <div className="md:hidden mt-2 w-fit mx-auto flex justify-center">
+          <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
           <Link
             href="/story"
-            className="font-bold text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
+            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Story
           </Link>
           <Link
             href="/work"
-            className="font-bold text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
+            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Work

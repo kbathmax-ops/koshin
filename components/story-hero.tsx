@@ -80,6 +80,8 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           position: relative;
           display: flex;
           align-items: center;
+          justify-content: center;
+          text-align: center;
           flex: 1;
           min-height: 0;
           padding: 0.75rem clamp(1.5rem, 5vw, 5rem);
@@ -125,11 +127,11 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
         /* Carries the type. Without it, cream over the Cusco sky is illegible. */
         .sh-scrim {
-          background: linear-gradient(
-            to right,
-            rgba(16, 18, 24, 0.66) 0%,
-            rgba(16, 18, 24, 0.30) 40%,
-            rgba(16, 18, 24, 0) 68%
+          background: radial-gradient(
+            ellipse 60% 90% at 50% 50%,
+            rgba(16, 18, 24, 0.55) 0%,
+            rgba(16, 18, 24, 0.22) 55%,
+            rgba(16, 18, 24, 0) 100%
           );
           z-index: 4;
         }
@@ -152,8 +154,8 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
         .sh-text {
           font-family: var(--font-display);
-          font-weight: 500;
-          letter-spacing: -0.025em;
+          font-weight: 700;
+          letter-spacing: -0.03em;
           line-height: 1.05;
           color: #ffffff;
           font-size: clamp(1.2rem, 2.8vw, 2.1rem);
@@ -173,6 +175,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         .sh-links {
           display: flex;
           flex-wrap: wrap;
+          justify-content: center;
           gap: 0.6rem;
           margin-top: 0.8rem;
         }
@@ -180,7 +183,7 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         .sh-link {
           font-family: var(--font-body);
           font-size: clamp(0.82rem, 1.3vw, 0.98rem);
-          font-weight: 500;
+          font-weight: 600;
           letter-spacing: 0.01em;
           color: var(--ink);
           background: var(--paper);

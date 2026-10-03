@@ -58,7 +58,7 @@ export default function WebsitesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                   {/* Preview panel */}
-                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgb(var(--ink-rgb) / 0.08)] transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgb(var(--ink-rgb)_/_0.08)] transition-transform duration-500 group-hover:-translate-y-2">
                     <div
                       className="aspect-[16/10] relative flex flex-col"
                       style={{ background: site.bgPreview }}
@@ -201,7 +201,7 @@ export default function WebsitesPage() {
 
         {/* ── CTA ── */}
         <FadeUp>
-          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgb(var(--ink-rgb) / 0.04)] text-center md:text-left">
+          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.04)] text-center md:text-left">
             <div>
               <h3
                 className="font-medium text-3xl text-primary tracking-tight mb-2"

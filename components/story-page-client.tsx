@@ -60,14 +60,16 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
   );
 }
 
-/* ─── Section 04 — where I'm strongest ─── */
-const STRENGTHS = [
-  'Debate',
-  'Writing',
-  'Marketing psychology',
-  'Public speaking',
-  'Faking it till I make it',
-  'Leadership',
+/* ─── Section 04 — my values ───
+   Each value is a short title plus a sentence or two on what it means in
+   practice. Placeholders until the real ones are written. */
+const VALUES: { title: string; description: string }[] = [
+  { title: 'Value one', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
+  { title: 'Value two', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
+  { title: 'Value three', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
+  { title: 'Value four', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
+  { title: 'Value five', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
+  { title: 'Value six', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
 ];
 
 function Section04() {
@@ -84,13 +86,13 @@ function Section04() {
           marginBottom: 'clamp(2rem, 4vw, 3rem)',
         }}
       >
-        Places where I shine
+        my values
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2" style={{ columnGap: 'clamp(2rem, 5vw, 5rem)' }}>
-        {STRENGTHS.map((strength, i) => (
+        {VALUES.map((value, i) => (
           <motion.div
-            key={strength}
+            key={value.title}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -99,7 +101,7 @@ function Section04() {
               display: 'flex',
               alignItems: 'baseline',
               gap: 'clamp(1rem, 2.5vw, 2rem)',
-              padding: '1.25rem 0',
+              padding: '1.25rem 0 1.5rem',
               borderTop: '1px solid rgb(var(--ink-rgb) / 0.14)',
             }}
           >
@@ -115,18 +117,33 @@ function Section04() {
             >
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
-                fontWeight: 500,
-                color: 'var(--ink)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.2,
-              }}
-            >
-              {strength}
-            </span>
+            <div>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
+                  fontWeight: 500,
+                  color: 'var(--ink)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2,
+                  margin: 0,
+                }}
+              >
+                {value.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.95rem',
+                  lineHeight: 1.55,
+                  color: 'rgb(var(--ink-rgb) / 0.62)',
+                  margin: '0.5rem 0 0',
+                  maxWidth: '42ch',
+                }}
+              >
+                {value.description}
+              </p>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -281,7 +298,7 @@ export function StoryPageClient() {
         </div>
 
 
-        {/* 04 — Places where I shine */}
+        {/* 04 — My values */}
         <Section04 />
 
 
