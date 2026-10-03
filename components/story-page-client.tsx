@@ -22,12 +22,12 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
     <div>
       <p
         style={{
-          fontFamily: 'var(--font-manrope), Manrope, sans-serif',
+          fontFamily: 'var(--font-body)',
           fontSize: '0.65rem',
-          fontWeight: 900,
+          fontWeight: 500,
           letterSpacing: '0.35em',
           textTransform: 'uppercase',
-          color: '#2f5d9e',
+          color: 'var(--ink)',
           marginBottom: '1rem',
         }}
       >
@@ -35,10 +35,10 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       </p>
       <h2
         style={{
-          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+          fontFamily: "var(--font-display)",
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-          fontWeight: 900,
-          color: '#12233f',
+          fontWeight: 500,
+          color: 'var(--ink)',
           lineHeight: 1.15,
           letterSpacing: '-0.02em',
           marginBottom: '1rem',
@@ -48,7 +48,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
       </h2>
       <div
         style={{
-          color: 'rgba(18,35,63,0.6)',
+          color: 'rgb(var(--ink-rgb) / 0.6)',
           fontSize: '1rem',
           lineHeight: 1.75,
           maxWidth: '32ch',
@@ -75,10 +75,10 @@ function Section04() {
     <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
       <h2
         style={{
-          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+          fontFamily: "var(--font-display)",
           fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-          fontWeight: 900,
-          color: '#12233f',
+          fontWeight: 500,
+          color: 'var(--ink)',
           lineHeight: 1.1,
           letterSpacing: '-0.03em',
           marginBottom: 'clamp(2rem, 4vw, 3rem)',
@@ -100,16 +100,16 @@ function Section04() {
               alignItems: 'baseline',
               gap: 'clamp(1rem, 2.5vw, 2rem)',
               padding: '1.25rem 0',
-              borderTop: '1px solid rgba(18,35,63,0.14)',
+              borderTop: '1px solid rgb(var(--ink-rgb) / 0.14)',
             }}
           >
             <span
               style={{
-                fontFamily: 'var(--font-manrope), Manrope, sans-serif',
+                fontFamily: 'var(--font-body)',
                 fontSize: '0.7rem',
-                fontWeight: 900,
+                fontWeight: 500,
                 letterSpacing: '0.2em',
-                color: '#2f5d9e',
+                color: 'var(--ink)',
                 flexShrink: 0,
               }}
             >
@@ -117,10 +117,10 @@ function Section04() {
             </span>
             <span
               style={{
-                fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
-                fontWeight: 900,
-                color: '#12233f',
+                fontWeight: 500,
+                color: 'var(--ink)',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.2,
               }}
@@ -131,7 +131,7 @@ function Section04() {
         ))}
       </div>
       {/* Closing rule so the last row doesn't hang open */}
-      <div style={{ borderTop: '1px solid rgba(18,35,63,0.14)' }} />
+      <div style={{ borderTop: '1px solid rgb(var(--ink-rgb) / 0.14)' }} />
     </div>
   );
 }
@@ -151,7 +151,7 @@ function StoryCTA() {
         style={{
           width: '100%',
           height: '1px',
-          background: 'rgba(18,35,63,0.1)',
+          background: 'rgb(var(--ink-rgb) / 0.1)',
         }}
       />
       <div
@@ -164,29 +164,29 @@ function StoryCTA() {
       >
         <p
           style={{
-            fontFamily: 'var(--font-manrope), Manrope, sans-serif',
+            fontFamily: 'var(--font-body)',
             fontSize: '0.65rem',
-            fontWeight: 900,
+            fontWeight: 500,
             letterSpacing: '0.35em',
             textTransform: 'uppercase',
-            color: '#2f5d9e',
+            color: 'var(--ink)',
           }}
         >
           Next
         </p>
         <p
           style={{
-            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+            fontFamily: "var(--font-display)",
             fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-            fontWeight: 900,
-            color: '#12233f',
+            fontWeight: 500,
+            color: 'var(--ink)',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
           }}
         >
           Ready to build something?
         </p>
-        <p style={{ color: 'rgba(18,35,63,0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
+        <p style={{ color: 'rgb(var(--ink-rgb) / 0.5)', fontSize: '0.95rem', lineHeight: 1.7 }}>
           looking for growth, content, ugc, ai consulting? I'll get back to you within a day
         </p>
       </div>
@@ -198,12 +198,12 @@ function StoryCTA() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: '#12233f',
+            background: 'var(--ink)',
             color: '#f4f4f4',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
-            fontWeight: 900,
+            fontFamily: "var(--font-display)",
+            fontWeight: 500,
             fontSize: '0.875rem',
             textDecoration: 'none',
           }}
@@ -217,15 +217,15 @@ function StoryCTA() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: 'rgba(18,35,63,0.08)',
-            color: '#12233f',
+            background: 'rgb(var(--ink-rgb) / 0.08)',
+            color: 'var(--ink)',
             padding: '1rem 2rem',
             borderRadius: '9999px',
-            fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
-            fontWeight: 900,
+            fontFamily: "var(--font-display)",
+            fontWeight: 500,
             fontSize: '0.875rem',
             textDecoration: 'none',
-            border: '1px solid rgba(18,35,63,0.12)',
+            border: '1px solid rgb(var(--ink-rgb) / 0.12)',
           }}
         >
           Get in touch
@@ -247,11 +247,11 @@ export function StoryPageClient() {
   }, []);
 
   return (
-    <div style={{ background: '#d9d9d9', minHeight: '100dvh', color: '#12233f' }}>
+    <div style={{ background: 'var(--paper)', minHeight: '100dvh', color: 'var(--ink)' }}>
       <StoryHero />
 
       {/* Parallax story rows */}
-      <div style={{ position: 'relative', zIndex: 2, background: '#d9d9d9', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+      <div style={{ position: 'relative', zIndex: 2, background: 'var(--paper)', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
         {/* 01 — My Background (animated heading + full-bleed slideshow) */}
         <BackgroundShowcase />
@@ -264,10 +264,10 @@ export function StoryPageClient() {
         >
           <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
             <h2 style={{
-              fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-              fontWeight: 900,
-              color: '#12233f',
+              fontWeight: 500,
+              color: 'var(--ink)',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
             }}>

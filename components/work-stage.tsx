@@ -42,8 +42,8 @@ const NAV_CLEARANCE = 92;
 const EASE = "cubic-bezier(0.77, 0, 0.18, 1)";
 const DURATION = 900;
 
-const display = "var(--font-haas-display)";
-const text = "var(--font-haas-text)";
+const display = "var(--font-display)";
+const text = "var(--font-body)";
 
 function modeFromHash(hash: string, productSlugs: string[]): Mode {
   const h = hash.replace("#", "");
@@ -98,7 +98,7 @@ export function WorkStage({ products, designs }: { products: Project[]; designs:
   const beadsTarget: Mode | null = mode === "products" ? "designs" : mode === "designs" ? "products" : null;
 
   return (
-    <section className="relative bg-white overflow-x-clip" style={{ paddingTop: NAV_CLEARANCE }} aria-label="Work">
+    <section className="relative bg-[var(--paper)] overflow-x-clip" style={{ paddingTop: NAV_CLEARANCE }} aria-label="Work">
       <h1 className="sr-only">Products and designs</h1>
       <div className="relative mx-auto w-full" style={{ maxWidth: `calc((100svh - ${NAV_CLEARANCE}px) * 16 / 9)`, containerType: "inline-size" }}>
         {/* Bead rail — rides along the side of whichever list is open. */}

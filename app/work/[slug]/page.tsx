@@ -38,8 +38,8 @@ function Unwritten({ prompt }: { prompt: string }) {
     <p
       className="text-sm leading-relaxed px-4 py-3"
       style={{
-        color: "rgba(18,35,63,0.52)",
-        border: "1px dashed rgba(18,35,63,0.3)",
+        color: "rgb(var(--ink-rgb) / 0.52)",
+        border: "1px dashed rgb(var(--ink-rgb) / 0.3)",
         borderRadius: "0.5rem",
       }}
     >
@@ -54,7 +54,7 @@ function Unwritten({ prompt }: { prompt: string }) {
 function Prose({ copy }: { copy: string }) {
   if (isTodo(copy)) return <Unwritten prompt={todoPrompt(copy)} />;
   return (
-    <p className="text-base leading-relaxed" style={{ color: "rgba(18,35,63,0.78)" }}>
+    <p className="text-base leading-relaxed" style={{ color: "rgb(var(--ink-rgb) / 0.78)" }}>
       {copy}
     </p>
   );
@@ -64,8 +64,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h2
-        className="font-extrabold text-2xl md:text-3xl tracking-tighter mb-5"
-        style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
+        className="font-medium text-2xl md:text-3xl tracking-tighter mb-5"
+        style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
       >
         {title}
       </h2>
@@ -83,22 +83,22 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
   const { story, details } = project;
 
   return (
-    <div style={{ background: "#d9d9d9", minHeight: "100dvh" }}>
+    <div style={{ background: "var(--paper)", minHeight: "100dvh" }}>
       <Nav />
 
       <main className="max-w-3xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-32">
         <FadeUp>
           <Link
             href="/work"
-            className="inline-flex items-center gap-1.5 text-xs font-black mb-8 transition-opacity hover:opacity-100"
-            style={{ color: "#2f5d9e", opacity: 0.85 }}
+            className="inline-flex items-center gap-1.5 text-xs font-medium mb-8 transition-opacity hover:opacity-100"
+            style={{ color: "var(--ink)", opacity: 0.85 }}
           >
             <ArrowLeft className="h-3.5 w-3.5" /> All work
           </Link>
 
           <h1
-            className="font-extrabold text-4xl md:text-6xl tracking-tighter mb-4 flex items-center gap-3 flex-wrap"
-            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
+            className="font-medium text-4xl md:text-6xl tracking-tighter mb-4 flex items-center gap-3 flex-wrap"
+            style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
           >
             {project.name}
             {project.inReview && <span className="status-light shrink-0" aria-hidden />}
@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
           <p
             className="text-lg md:text-xl leading-relaxed mb-6"
-            style={{ color: "rgba(18,35,63,0.75)" }}
+            style={{ color: "rgb(var(--ink-rgb) / 0.75)" }}
           >
             {project.description}
           </p>
@@ -116,8 +116,8 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-black transition-opacity hover:opacity-100"
-              style={{ color: "#2f5d9e", opacity: 0.85 }}
+              className="inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-100"
+              style={{ color: "var(--ink)", opacity: 0.85 }}
             >
               {project.linkLabel ?? "View live site"} <ArrowRight className="h-4 w-4" />
             </a>
@@ -150,15 +150,15 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
             <FadeUp>
               <Section title="Features">
-                <ul className="space-y-3 pl-5 list-disc marker:text-[#2f5d9e]">
+                <ul className="space-y-3 pl-5 list-disc marker:text-[var(--ink)]">
                   {details.features.map((feature) => (
-                    <li key={feature} className="pl-1 text-base leading-relaxed" style={{ color: "rgba(18,35,63,0.78)" }}>
+                    <li key={feature} className="pl-1 text-base leading-relaxed" style={{ color: "rgb(var(--ink-rgb) / 0.78)" }}>
                       {feature}
                     </li>
                   ))}
                 </ul>
                 {details.note && (
-                  <p className="text-sm leading-relaxed pt-2" style={{ color: "rgba(18,35,63,0.6)" }}>
+                  <p className="text-sm leading-relaxed pt-2" style={{ color: "rgb(var(--ink-rgb) / 0.6)" }}>
                     {details.note}
                   </p>
                 )}
@@ -205,7 +205,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           <figure className="mt-16 md:mt-20">
             <div
               className="overflow-hidden"
-              style={{ background: "#e2e2e2", boxShadow: "0 6px 24px rgba(18,35,63,0.13)" }}
+              style={{ background: "var(--paper-raised)", boxShadow: "0 6px 24px rgb(var(--ink-rgb) / 0.13)" }}
             >
               {project.detailImage ? (
                 <Image
@@ -237,8 +237,8 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-8 text-sm font-black transition-opacity hover:opacity-100"
-              style={{ color: "#2f5d9e", opacity: 0.85 }}
+              className="inline-flex items-center gap-2 mt-8 text-sm font-medium transition-opacity hover:opacity-100"
+              style={{ color: "var(--ink)", opacity: 0.85 }}
             >
               Visit the {project.name} site <ArrowRight className="h-4 w-4" />
             </a>
@@ -246,17 +246,17 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         )}
       </main>
 
-      <footer style={{ background: "#d9d9d9", borderTop: "1px solid rgba(18,35,63,0.10)" }}>
+      <footer style={{ background: "var(--paper)", borderTop: "1px solid rgb(var(--ink-rgb) / 0.10)" }}>
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
-            className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: "#12233f" }}
+            className="text-lg font-medium tracking-tighter"
+            style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
           >
-            koshin<span style={{ color: "#2f5d9e" }}>.</span>
+            koshin<span style={{ color: "var(--ink)" }}>.</span>
           </span>
           <p
             className="text-xs uppercase tracking-[0.2em] font-semibold"
-            style={{ color: "rgba(18,35,63,0.45)" }}
+            style={{ color: "rgb(var(--ink-rgb) / 0.45)" }}
           >
             © 2026
           </p>

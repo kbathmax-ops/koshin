@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 
-/* ─── Story hero — four stacked photo bands, no animation ───
-   Band order is just this array — reorder freely. The band without a `slot`
-   is pure photography, spacing out the three that carry type.
+/* ─── Story hero — three stacked photo bands, no animation ───
+   Band order is just this array — reorder freely. Each band carries a line
+   of type; the offer band is double height.
 
    The photos run bright (Cusco daylight) to near-black (beach at night), so
    type sits in cream over a left-hand scrim rather than relying on the image
@@ -15,7 +15,7 @@ type Band = {
   src: string;
   alt: string;
   position: string;
-  slot?: 'intro' | 'offer' | 'travel' | 'background';
+  slot?: 'intro' | 'offer' | 'background';
 };
 
 const BANDS: Band[] = [
@@ -30,12 +30,6 @@ const BANDS: Band[] = [
     alt: 'The Halifax International Security Forum in session',
     position: '38% 64%',
     slot: 'offer',
-  },
-  {
-    src: '/photo-flight.jpg',
-    alt: 'A wing over the horizon at sunset',
-    position: '50% 50%',
-    slot: 'travel',
   },
   {
     src: '/photo-beach-night.jpg',
@@ -92,6 +86,10 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           isolation: isolate;
           overflow: hidden;
         }
+
+        /* The offer band takes two shares of the screen — it absorbed the
+           old travel band below it. */
+        .sh-band-offer { flex: 2; }
 
         /* Clear the fixed nav pill floating over the top of the page. */
         .sh-band-intro { padding-top: clamp(5rem, 12vh, 7.5rem); }
@@ -153,11 +151,11 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         }
 
         .sh-text {
-          font-family: var(--font-advercase), 'Public Sans', sans-serif;
-          font-weight: 900;
-          letter-spacing: -0.03em;
+          font-family: var(--font-display);
+          font-weight: 500;
+          letter-spacing: -0.025em;
           line-height: 1.05;
-          color: #f4efe4;
+          color: #ffffff;
           font-size: clamp(1.2rem, 2.8vw, 2.1rem);
           margin: 0;
           text-shadow: 0 1px 12px rgba(12, 14, 20, 0.45);
@@ -180,12 +178,12 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
         }
 
         .sh-link {
-          font-family: var(--font-manrope), Manrope, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(0.82rem, 1.3vw, 0.98rem);
-          font-weight: 800;
+          font-weight: 500;
           letter-spacing: 0.01em;
-          color: #12233f;
-          background: #f4efe4;
+          color: var(--ink);
+          background: var(--paper);
           text-decoration: none;
           padding: 0.5rem 1.1rem;
           border-radius: 999px;
@@ -193,8 +191,8 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
           white-space: nowrap;
         }
         .sh-link:hover, .sh-link:focus-visible {
-          background: #ffffff;
-          color: #2f5d9e;
+          background: var(--ink);
+          color: var(--paper);
         }
       `}</style>
 
@@ -244,11 +242,6 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
             </div>
           )}
 
-          {band.slot === 'travel' && (
-            <Link className="sh-text sh-body sh-bare" href="/story#travel">
-              where I&apos;ve been &amp; what it&apos;s taught me
-            </Link>
-          )}
 
           {band.slot === 'background' &&
             (backgroundHref ? (

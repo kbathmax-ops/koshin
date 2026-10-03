@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-headline: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --font-headline: var(--font-display);
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -53,49 +53,62 @@
 }
 
 :root {
-  /* Grey canvas + navy highlights — light mode */
-  --background:            #d9d9d9;
-  --foreground:            #12233f;
-  --surface:               #d9d9d9;
-  --surface-container:     #cdcdcd;
-  --surface-container-low: #e2e2e2;
-  --surface-container-high:#c6c6c6;
-  --surface-container-highest: #bfbfbf;
-  --on-surface:            #12233f;
-  --on-surface-variant:    #41506b;
-  --outline-variant:       #b3b6bb;
+  /* ── Monochrome. Every colour on the site comes from these five. ── */
+  --paper:        #f5f5f2;   /* page */
+  --paper-raised: #ffffff;   /* cards, frames, fields */
+  --paper-sunk:   #ebebe7;   /* nav pill, quiet fills */
+  --ink:          #0b0b0b;   /* type, rules, buttons */
+  --ink-rgb:      11 11 11;  /* for tints: rgb(var(--ink-rgb) / 0.6) */
+  --line:         #d9d9d4;   /* hairlines */
 
-  --primary:               #12233f;
-  --primary-foreground:    #ffffff;
-  --primary-container:     #1b3a6b;
-  --on-primary-container:  #ffffff;
+  /* Neue Haas Grotesk from the Adobe Fonts kit; Helvetica Neue, its direct
+     descendant, stands in until the kit loads. */
+  --font-display: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:    "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  --secondary:             #2f5d9e;
-  --secondary-foreground:  #ffffff;
-  --secondary-container:   #6f9fd8;
-  --on-secondary-container:#0b1830;
+  /* shadcn / theme aliases — all mapped onto the five above */
+  --background:            var(--paper);
+  --foreground:            var(--ink);
+  --surface:               var(--paper);
+  --surface-container:     var(--paper-sunk);
+  --surface-container-low: var(--paper-raised);
+  --surface-container-high:var(--paper-sunk);
+  --surface-container-highest: var(--line);
+  --on-surface:            var(--ink);
+  --on-surface-variant:    rgb(var(--ink-rgb) / 0.62);
+  --outline-variant:       var(--line);
 
-  --tertiary:              #1b3a6b;
-  --tertiary-container:    #26497f;
-  --tertiary-fixed-dim:    #6f9fd8;
-  --on-tertiary-fixed:     #0b1830;
+  --primary:               var(--ink);
+  --primary-foreground:    var(--paper);
+  --primary-container:     var(--ink);
+  --on-primary-container:  var(--paper);
+
+  --secondary:             var(--ink);
+  --secondary-foreground:  var(--paper);
+  --secondary-container:   var(--paper-sunk);
+  --on-secondary-container:var(--ink);
+
+  --tertiary:              var(--ink);
+  --tertiary-container:    var(--paper-sunk);
+  --tertiary-fixed-dim:    var(--line);
+  --on-tertiary-fixed:     var(--ink);
 
   --error-container:       #ffdad6;
   --on-error-container:    #93000a;
   --destructive:           #ba1a1a;
 
-  --card:                  #e2e2e2;
-  --card-foreground:       #12233f;
-  --popover:               #e2e2e2;
-  --popover-foreground:    #12233f;
-  --muted:                 #cdcdcd;
-  --muted-foreground:      #41506b;
-  --accent:                #cdcdcd;
-  --accent-foreground:     #12233f;
+  --card:                  var(--paper-raised);
+  --card-foreground:       var(--ink);
+  --popover:               var(--paper-raised);
+  --popover-foreground:    var(--ink);
+  --muted:                 var(--paper-sunk);
+  --muted-foreground:      rgb(var(--ink-rgb) / 0.62);
+  --accent:                var(--paper-sunk);
+  --accent-foreground:     var(--ink);
 
-  --border:                #b3b6bb;
-  --input:                 #cdcdcd;
-  --ring:                  #2f5d9e;
+  --border:                var(--line);
+  --input:                 var(--paper-sunk);
+  --ring:                  var(--ink);
   --radius:                1rem;
 }
 
@@ -107,7 +120,7 @@
     @apply bg-background text-foreground font-sans;
   }
   h1, h2, h3, h4 {
-    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-display);
   }
 }
 
@@ -148,8 +161,8 @@ html {
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #b3b6bb; border-radius: 5px; }
-::-webkit-scrollbar-thumb:hover { background: #2f5d9e; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink); }
 
 /* ─── Directional page slide ───
    Only navigations tagged `nav-forward` animate (see the ViewTransition in
@@ -187,9 +200,3 @@ html {
   }
 }
 
-/* Neue Haas Grotesk via Adobe Fonts (work page). Falls back to Helvetica Neue,
-   its direct descendant, until the web project kit is loaded. */
-:root {
-  --font-haas-display: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-haas-text: "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}

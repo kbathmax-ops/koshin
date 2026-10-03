@@ -129,21 +129,21 @@ export function ResumeViewer({
           height: 2.4rem;
           padding: 0 0.75rem;
           border-radius: 999px;
-          border: 1px solid rgba(18,35,63,0.16);
-          background: #eeeeee;
-          color: #12233f;
-          font-family: var(--font-manrope), Manrope, sans-serif;
+          border: 1px solid rgb(var(--ink-rgb) / 0.16);
+          background: var(--paper-sunk);
+          color: var(--ink);
+          font-family: var(--font-body);
           font-size: 0.8rem;
-          font-weight: 800;
+          font-weight: 500;
           cursor: pointer;
         }
-        .rv-btn:hover { background: #ffffff; color: #2f5d9e; }
+        .rv-btn:hover { background: #ffffff; color: var(--ink); }
         .rv-pct {
-          font-family: var(--font-manrope), Manrope, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.75rem;
-          font-weight: 800;
+          font-weight: 500;
           letter-spacing: 0.08em;
-          color: rgba(18,35,63,0.5);
+          color: rgb(var(--ink-rgb) / 0.5);
           min-width: 3.5rem;
         }
 
@@ -153,8 +153,8 @@ export function ResumeViewer({
           overflow: hidden;
           height: min(78vh, 900px);
           border-radius: 0.75rem;
-          background: #e2e2e2;
-          border: 1px solid rgba(18,35,63,0.12);
+          background: var(--paper-raised);
+          border: 1px solid rgb(var(--ink-rgb) / 0.12);
           touch-action: none;
           cursor: grab;
         }
@@ -166,16 +166,16 @@ export function ResumeViewer({
           left: 0;
           transform-origin: 0 0;
           will-change: transform;
-          box-shadow: 0 10px 40px rgba(18,35,63,0.22);
+          box-shadow: 0 10px 40px rgb(var(--ink-rgb) / 0.22);
           background: #ffffff;
         }
         .rv-sheet img { display: block; width: 100%; height: auto; user-select: none; }
 
         .rv-hint {
-          font-family: var(--font-manrope), Manrope, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.72rem;
           letter-spacing: 0.06em;
-          color: rgba(18,35,63,0.45);
+          color: rgb(var(--ink-rgb) / 0.45);
         }
       `}</style>
 

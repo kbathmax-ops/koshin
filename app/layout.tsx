@@ -1,32 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Public_Sans, Manrope } from "next/font/google";
-import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { PageTransition } from "@/components/page-transition";
 import "./globals.css";
 
-// Advercase is the display face — headings, titles and the wordmark.
-const advercase = localFont({
-  src: [
-    { path: "../assets/fonts/Advercase-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../assets/fonts/Advercase-Bold.ttf", weight: "700", style: "normal" },
-  ],
-  variable: "--font-advercase",
-  display: "swap",
-});
-
-// Public Sans stays loaded as the fallback behind Advercase.
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-});
+// Neue Haas Grotesk (display + text) is served from an Adobe Fonts web
+// project. Without the ID the type falls back to Helvetica Neue — see
+// --font-display / --font-body in globals.css.
+const adobeFontsId = process.env.NEXT_PUBLIC_ADOBE_FONTS_ID;
 
 const BASE_URL = "https://kbathmax.com";
 
@@ -96,10 +76,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${advercase.variable} ${publicSans.variable} ${manrope.variable}`}
-    >
+    <html lang="en">
+      {adobeFontsId && (
+        <head>
+          <link rel="stylesheet" href={`https://use.typekit.net/${adobeFontsId}.css`} />
+        </head>
+      )}
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         <PageTransition>{children}</PageTransition>
         <Analytics />

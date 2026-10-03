@@ -21,14 +21,17 @@ import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
  * ships static SVG, no d3 in the bundle, no runtime map fetch.
  */
 
-const LAND = 'rgba(28,58,42,0.22)';
-const LAND_STROKE = 'rgba(28,58,42,0.38)';
-const VISITED_FILL = 'rgba(45,106,74,0.42)';
-const VISITED_STROKE = '#2d6a4a';
-const MARK = '#1b4332';
-const MARK_HOT = '#52a678';
-const OCEAN = '#e8ecea';
-const OCEAN_STROKE = 'rgba(28,58,42,0.22)';
+// Monochrome: land is a light ink tint, visited countries a stronger one.
+// These stay literal hex/rgba (not CSS vars) because MARK_HOT gets a hex
+// alpha suffix appended below.
+const LAND = 'rgba(11,11,11,0.07)';
+const LAND_STROKE = 'rgba(11,11,11,0.20)';
+const VISITED_FILL = 'rgba(11,11,11,0.30)';
+const VISITED_STROKE = '#0b0b0b';
+const MARK = '#0b0b0b';
+const MARK_HOT = '#76766f';
+const OCEAN = '#ffffff';
+const OCEAN_STROKE = 'rgba(11,11,11,0.14)';
 const EASE_OUT_BACK: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
 // Lens geometry. The frame aspect equals WORLD.W / WORLD.H, so SVG user units
@@ -229,7 +232,7 @@ export function TravelMap() {
                     x={m.x} y={m.y + m.labelDy} textAnchor="middle"
                     variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
                     onClick={note ? () => select(m.name) : undefined}
-                    style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontSize: '22px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
+                    style={{ fontFamily: "var(--font-display)", fontSize: '22px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: 'var(--paper)', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
                   >
                     {m.name}
                   </motion.text>
@@ -248,8 +251,8 @@ export function TravelMap() {
           style={{
             position: 'absolute', left: `${LENS_LEFT_PCT}%`, top: `${LENS_TOP_PCT}%`,
             width: `${LENS_W * 100}%`, aspectRatio: '1', borderRadius: '50%', overflow: 'hidden',
-            border: `2.5px solid ${VISITED_STROKE}`, background: '#e2e2e2',
-            boxShadow: '0 12px 40px rgba(18,35,63,0.20), inset 0 0 30px rgba(18,35,63,0.06)',
+            border: `2.5px solid ${VISITED_STROKE}`, background: 'var(--paper-raised)',
+            boxShadow: '0 12px 40px rgb(var(--ink-rgb) / 0.20), inset 0 0 30px rgb(var(--ink-rgb) / 0.06)',
             transformOrigin: 'center',
           }}
         >
@@ -268,12 +271,12 @@ export function TravelMap() {
                   {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
                   <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
                   <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontSize: '30px', fontWeight: 800, fill: '#1b4332', paintOrder: 'stroke', stroke: '#d9d9d9', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-display)", fontSize: '30px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: 'var(--paper)', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
                 </g>
               );
             })}
           </svg>
-          <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-manrope), Manrope, sans-serif', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: VISITED_STROKE, pointerEvents: 'none' }}>
+          <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: VISITED_STROKE, pointerEvents: 'none' }}>
             Europe
           </span>
         </motion.div>
@@ -336,11 +339,11 @@ export function TravelMap() {
                 style={{
                   position: 'relative',
                   pointerEvents: 'auto',
-                  background: '#eeeeee',
+                  background: 'var(--paper-sunk)',
                   border: `1px solid ${MARK_HOT}55`,
                   borderRadius: '0.9rem',
                   padding: '1.15rem 1.25rem 1.3rem',
-                  boxShadow: '0 18px 50px rgba(18,35,63,0.22)',
+                  boxShadow: '0 18px 50px rgb(var(--ink-rgb) / 0.22)',
                 }}
               >
                 <button
@@ -352,23 +355,23 @@ export function TravelMap() {
                     position: 'absolute', top: '0.5rem', right: '0.5rem',
                     width: '1.75rem', height: '1.75rem', borderRadius: '50%',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: 'rgba(18,35,63,0.06)', border: 'none',
-                    color: 'rgba(18,35,63,0.6)', fontSize: '0.8rem', lineHeight: 1, cursor: 'pointer',
+                    background: 'rgb(var(--ink-rgb) / 0.06)', border: 'none',
+                    color: 'rgb(var(--ink-rgb) / 0.6)', fontSize: '0.8rem', lineHeight: 1, cursor: 'pointer',
                   }}
                 >
                   ✕
                 </button>
 
                 <h3 style={{
-                  fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", fontWeight: 900,
+                  fontFamily: "var(--font-display)", fontWeight: 500,
                   fontSize: '1.15rem', letterSpacing: '-0.03em', lineHeight: 1.15,
-                  color: '#12233f', margin: '0 2rem 0 0',
+                  color: 'var(--ink)', margin: '0 2rem 0 0',
                 }}>
                   {open.name}
                 </h3>
 
                 <p style={{
-                  fontSize: '0.82rem', lineHeight: 1.6, color: 'rgba(18,35,63,0.72)',
+                  fontSize: '0.82rem', lineHeight: 1.6, color: 'rgb(var(--ink-rgb) / 0.72)',
                   margin: '0.8rem 0 0', whiteSpace: 'pre-line',
                 }}>
                   {open.blurb}
@@ -381,7 +384,7 @@ export function TravelMap() {
       </motion.div>
 
       {/* Visited chips — the keyboard-accessible way into the same notes. */}
-      <figcaption style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontFamily: 'var(--font-manrope), Manrope, sans-serif', fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(18,35,63,0.5)' }}>
+      <figcaption style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontFamily: 'var(--font-body)', fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgb(var(--ink-rgb) / 0.5)' }}>
         {WORLD.marks.map((m) => {
           const note = getTravelNote(m.name);
           const inner = (
@@ -407,8 +410,8 @@ export function TravelMap() {
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 font: 'inherit', letterSpacing: 'inherit', textTransform: 'inherit',
                 background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-                color: 'rgba(18,35,63,0.82)',
-                borderBottom: '1px dotted rgba(18,35,63,0.35)',
+                color: 'rgb(var(--ink-rgb) / 0.82)',
+                borderBottom: '1px dotted rgb(var(--ink-rgb) / 0.35)',
               }}
             >
               {inner}

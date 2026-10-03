@@ -13,9 +13,6 @@ const visibleProjects = projects
   .filter((p) => !p.hidden)
   .sort((a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)));
 
-/* Neue Haas Grotesk comes from an Adobe Fonts web project. Until its ID is
-   set, the type falls back to Helvetica Neue. */
-const adobeFontsId = process.env.NEXT_PUBLIC_ADOBE_FONTS_ID;
 
 export const metadata: Metadata = {
   title: "work",
@@ -106,16 +103,12 @@ const SHOW_BRAND_WORK = process.env.SHOW_BRAND_WORK === "true";
 
 export default function WorkPage() {
   return (
-    <div style={{ background: '#d9d9d9', minHeight: '100dvh' }}>
+    <div style={{ background: 'var(--paper)', minHeight: '100dvh' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-
-      {adobeFontsId && (
-        <link rel="stylesheet" href={`https://use.typekit.net/${adobeFontsId}.css`} precedence="default" />
-      )}
 
       {/* ── Products / designs ── */}
       <WorkStage products={visibleProjects} designs={designWork} />
@@ -127,12 +120,12 @@ export default function WorkPage() {
           <section id="brand-work" className="scroll-mt-28">
             <FadeUp>
               <h2
-                className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-3"
-                style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
+                className="font-medium text-4xl md:text-5xl tracking-tighter mb-3"
+                style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
               >
                 Brand work
               </h2>
-              <p className="text-base max-w-xl leading-relaxed" style={{ color: 'rgba(18,35,63,0.70)' }}>
+              <p className="text-base max-w-xl leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.70)' }}>
                 Marketing, content, and growth work for brands. In progress.
               </p>
             </FadeUp>
@@ -144,14 +137,14 @@ export default function WorkPage() {
           <FadeUp>
             <div
               className="rounded-[2rem] p-6 md:p-12 relative overflow-hidden"
-              style={{ background: '#e2e2e2', boxShadow: '0 10px 40px rgba(18,35,63,0.12)' }}
+              style={{ background: 'var(--paper-raised)', boxShadow: '0 10px 40px rgb(var(--ink-rgb) / 0.12)' }}
             >
-              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(47,93,158,0.06)' }} />
+              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgb(var(--ink-rgb) / 0.06)' }} />
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div>
                   <h2
-                    className="font-extrabold text-4xl tracking-tight mb-4 leading-tight"
-                    style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
+                    className="font-medium text-4xl tracking-tight mb-4 leading-tight"
+                    style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
                   >
                     Let&apos;s build
                     <br />
@@ -166,15 +159,15 @@ export default function WorkPage() {
       </main>
 
       {/* Footer */}
-      <footer style={{ background: '#d9d9d9', borderTop: '1px solid rgba(18,35,63,0.10)' }}>
+      <footer style={{ background: 'var(--paper)', borderTop: '1px solid rgb(var(--ink-rgb) / 0.10)' }}>
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
-            className="text-lg font-black tracking-tighter"
-            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", color: '#12233f' }}
+            className="text-lg font-medium tracking-tighter"
+            style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
           >
-            koshin<span style={{ color: '#2f5d9e' }}>.</span>
+            koshin<span style={{ color: 'var(--ink)' }}>.</span>
           </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgba(18,35,63,0.45)' }}>
+          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
             © 2026
           </p>
         </div>

@@ -7,7 +7,7 @@ export function WebsitesHero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ height: '100dvh', background: '#d9d9d9' }}
+      style={{ height: '100dvh', background: 'var(--paper)' }}
     >
       {/* SVG grain filter */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
@@ -30,7 +30,7 @@ export function WebsitesHero() {
         aria-hidden
         style={{
           position: 'absolute', inset: 0, zIndex: 1,
-          backgroundImage: 'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 60px, rgba(18,35,63,0.10) 61px, transparent 62px)',
+          backgroundImage: 'repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 60px, rgb(var(--ink-rgb) / 0.10) 61px, transparent 62px)',
           pointerEvents: 'none',
         }}
       />
@@ -52,7 +52,7 @@ export function WebsitesHero() {
           style={{
             width: 'clamp(280px, 45vw, 520px)',
             height: 'clamp(280px, 45vw, 520px)',
-            color: '#12233f',
+            color: 'var(--ink)',
             opacity: 0.06,
           }}
           strokeWidth={1}
@@ -66,8 +66,8 @@ export function WebsitesHero() {
       >
         <div>
           <h1
-            className="font-extrabold text-5xl sm:text-6xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-6"
-            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
+            className="font-medium text-5xl sm:text-6xl md:text-8xl tracking-tighter leading-[0.9] text-primary mb-6"
+            style={{ fontFamily: "var(--font-display)" }}
           >
             Websites
           </h1>
@@ -79,7 +79,7 @@ export function WebsitesHero() {
         <Link
           href="/work#contact"
           className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
-          style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif", background: '#ffffff', color: '#12233f' }}
+          style={{ fontFamily: "var(--font-display)", background: '#ffffff', color: 'var(--ink)' }}
         >
           Want one? Let&apos;s talk
           <ArrowUpRight className="h-4 w-4" />
@@ -92,7 +92,7 @@ export function WebsitesHero() {
         style={{
           position: 'absolute', bottom: 0, left: 0, right: 0,
           height: '100px', zIndex: 6, pointerEvents: 'none',
-          background: 'linear-gradient(to bottom, transparent, #d9d9d9)',
+          background: 'linear-gradient(to bottom, transparent, var(--paper))',
         }}
       />
     </section>

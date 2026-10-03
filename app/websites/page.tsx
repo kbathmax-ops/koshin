@@ -58,7 +58,7 @@ export default function WebsitesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                   {/* Preview panel */}
-                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgba(18,35,63,0.08)] transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="md:col-span-7 rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_rgb(var(--ink-rgb) / 0.08)] transition-transform duration-500 group-hover:-translate-y-2">
                     <div
                       className="aspect-[16/10] relative flex flex-col"
                       style={{ background: site.bgPreview }}
@@ -117,7 +117,7 @@ export default function WebsitesPage() {
                             45°32′N · 78°20′W · APR 2026
                           </div>
                           <div
-                            className="font-black leading-none tracking-tighter"
+                            className="font-medium leading-none tracking-tighter"
                             style={{
                               fontFamily: "Helvetica, Arial, sans-serif",
                               fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
@@ -156,10 +156,10 @@ export default function WebsitesPage() {
                   {/* Info */}
                   <div className="md:col-span-5 px-2 lg:px-6">
                     <div className="flex flex-wrap gap-2 mb-5">
-                      <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-surface-container-highest text-primary">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-surface-container-highest text-primary">
                         {site.type}
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-surface-container-highest text-primary">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-surface-container-highest text-primary">
                         {site.year}
                       </span>
                       {site.tags.map((tag) => (
@@ -173,8 +173,8 @@ export default function WebsitesPage() {
                     </div>
 
                     <h2
-                      className="font-extrabold text-4xl text-primary tracking-tight mb-1"
-                      style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
+                      className="font-medium text-4xl text-primary tracking-tight mb-1"
+                      style={{ fontFamily: "var(--font-display)" }}
                     >
                       {site.name}
                     </h2>
@@ -201,11 +201,11 @@ export default function WebsitesPage() {
 
         {/* ── CTA ── */}
         <FadeUp>
-          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgba(18,35,63,0.04)] text-center md:text-left">
+          <div className="bg-surface-container-low rounded-[2rem] p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_10px_30px_rgb(var(--ink-rgb) / 0.04)] text-center md:text-left">
             <div>
               <h3
-                className="font-extrabold text-3xl text-primary tracking-tight mb-2"
-                style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
+                className="font-medium text-3xl text-primary tracking-tight mb-2"
+                style={{ fontFamily: "var(--font-display)" }}
               >
                 Need a site built?
               </h3>
@@ -216,7 +216,7 @@ export default function WebsitesPage() {
             <Link
               href="/work#contact"
               className="shrink-0 inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-8 py-4 rounded-full hover:-translate-y-0.5 transition-transform duration-200"
-              style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               Get in touch
               <ArrowUpRight className="h-4 w-4" />
@@ -230,8 +230,8 @@ export default function WebsitesPage() {
       <footer className="bg-surface-container-low">
         <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
           <span
-            className="text-lg font-black text-primary tracking-tighter"
-            style={{ fontFamily: "var(--font-advercase), 'Public Sans', sans-serif" }}
+            className="text-lg font-medium text-primary tracking-tighter"
+            style={{ fontFamily: "var(--font-display)" }}
           >
             koshin<span className="text-secondary">.</span>
           </span>

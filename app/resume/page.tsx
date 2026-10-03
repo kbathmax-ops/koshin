@@ -13,7 +13,7 @@ export default function Resume() {
   return (
     <>
       <Nav />
-      <main style={{ background: "#d9d9d9", minHeight: "100dvh", color: "#12233f" }}>
+      <main style={{ background: "var(--paper)", minHeight: "100dvh", color: "var(--ink)" }}>
         <div
           style={{
             maxWidth: "1100px",
@@ -23,9 +23,9 @@ export default function Resume() {
         >
           <h1
             style={{
-              fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(1.8rem, 4vw, 3rem)",
-              fontWeight: 900,
+              fontWeight: 500,
               letterSpacing: "-0.03em",
               margin: "0 0 1.5rem",
             }}

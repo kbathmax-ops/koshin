@@ -6,7 +6,7 @@ export function OgCard({ subtitle }: { subtitle: string }) {
   return (
     <div
       style={{
-        background: "#d9d9d9",
+        background: "#f5f5f2",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -20,12 +20,12 @@ export function OgCard({ subtitle }: { subtitle: string }) {
       <div style={{ display: "flex" }}>
         <div
           style={{
-            background: "#1b3a6b",
-            color: "#ffffff",
+            background: "#0b0b0b",
+            color: "#f5f5f2",
             borderRadius: "9999px",
             padding: "10px 24px",
             fontSize: "13px",
-            fontWeight: 800,
+            fontWeight: 500,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             display: "flex",
@@ -38,7 +38,7 @@ export function OgCard({ subtitle }: { subtitle: string }) {
               width: "8px",
               height: "8px",
               borderRadius: "9999px",
-              background: "#2f5d9e",
+              background: "#0b0b0b",
             }}
           />
           Available for hire
@@ -50,22 +50,22 @@ export function OgCard({ subtitle }: { subtitle: string }) {
         <div
           style={{
             fontSize: "108px",
-            fontWeight: 800,
-            color: "#12233f",
+            fontWeight: 500,
+            color: "#0b0b0b",
             lineHeight: "0.88",
             letterSpacing: "-5px",
             display: "flex",
           }}
         >
           koshin
-          <span style={{ color: "#2f5d9e" }}>.</span>
+          <span style={{ color: "#0b0b0b" }}>.</span>
         </div>
         <div
           style={{
             display: "flex",
             fontSize: "32px",
             fontWeight: 700,
-            color: "#41506b",
+            color: "#5f5f5b",
             letterSpacing: "-0.5px",
             lineHeight: 1.3,
             maxWidth: "730px",
@@ -88,8 +88,8 @@ export function OgCard({ subtitle }: { subtitle: string }) {
             <div
               key={tag}
               style={{
-                background: "#bfbfbf",
-                color: "#12233f",
+                background: "#ebebe7",
+                color: "#0b0b0b",
                 borderRadius: "9999px",
                 padding: "12px 24px",
                 fontSize: "16px",
@@ -106,7 +106,7 @@ export function OgCard({ subtitle }: { subtitle: string }) {
           style={{
             fontSize: "15px",
             fontWeight: 700,
-            color: "#2f5d9e",
+            color: "#0b0b0b",
             letterSpacing: "0.04em",
           }}
         >

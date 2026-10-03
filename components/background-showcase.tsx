@@ -25,9 +25,9 @@ export function BackgroundShowcase() {
       <h2
         id="background-heading"
         style={{
-          fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
+          fontFamily: "var(--font-display)",
           fontSize: 'clamp(1.35rem, 3.2vw, 2.5rem)',
-          fontWeight: 900,
+          fontWeight: 500,
           letterSpacing: '-0.03em',
           margin: '0 0 1.25rem',
         }}
@@ -64,7 +64,7 @@ export function BackgroundShowcase() {
                 padding: isCurrent ? '1.5rem' : '0.4rem 0',
                 ...(isCurrent && {
                   marginTop: '1rem',
-                  border: '1.5px solid rgba(18,35,63,0.28)',
+                  border: '1.5px solid rgb(var(--ink-rgb) / 0.28)',
                   borderRadius: '0.6rem',
                 }),
               }}
@@ -72,8 +72,8 @@ export function BackgroundShowcase() {
               <span
                 aria-hidden="true"
                 style={{
-                  fontFamily: "var(--font-advercase), 'Public Sans', sans-serif",
-                  fontWeight: 900,
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
                   lineHeight: 1.5,
                 }}
               >
