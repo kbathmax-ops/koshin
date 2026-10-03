@@ -143,12 +143,13 @@ export default function WorkPage() {
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div>
                   <h2
-                    className="font-medium text-4xl tracking-tight mb-4 leading-tight"
+                    className="font-medium text-3xl md:text-4xl tracking-tight mb-4 leading-tight"
                     style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
                   >
-                    Let&apos;s build
+                    Looking to work somewhere that creates a true mark in their industry.
                     <br />
-                    something together.
+                    <br />
+                    Let&apos;s talk.
                   </h2>
                 </div>
                 <ContactForm />
