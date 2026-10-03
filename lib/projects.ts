@@ -53,6 +53,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "undo",
+    name: "UNDO",
+    description:
+      "A game and brand concept for practising critical thinking. Less autopilot, more you.",
+    image: "/undo-logo.png",
+    liveUrl:
+      "https://drive.google.com/file/d/1Fd81UCkRmUkJVN_puyMvyzRtIn0E-QO_/view?usp=sharing",
+    linkLabel: "View on Google Drive",
+  },
+  {
     slug: "relay",
     name: "Relay",
     description:
