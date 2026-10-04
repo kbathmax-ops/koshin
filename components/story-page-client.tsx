@@ -60,7 +60,7 @@ function StoryBlock({ label, heading, children }: StoryBlockProps) {
   );
 }
 
-/* ─── Section 04 — my values ───
+/* ─── Section 04 — values (list currently hidden; see SHOW_VALUES) ───
    Each value is a short title plus a sentence or two on what it means in
    practice. Placeholders until the real ones are written. */
 const VALUES: { title: string; description: string }[] = [
@@ -72,7 +72,50 @@ const VALUES: { title: string; description: string }[] = [
   { title: 'Value six', description: 'A sentence or two on what this means to you and how it shows up in your work.' },
 ];
 
+/* Values list is hidden for now — flip to true to bring it back. */
+const SHOW_VALUES = false;
+
 function Section04() {
+  if (SHOW_VALUES) return <ValuesList />;
+  return (
+    <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
+      <div style={{ borderTop: '1px solid rgb(var(--ink-rgb) / 0.14)', paddingTop: 'clamp(2rem, 4vw, 3rem)' }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+            fontWeight: 500,
+            color: 'var(--ink)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+            margin: 0,
+          }}
+        >
+          I value innovation &amp; impact.
+        </h2>
+        <p
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 'clamp(1.05rem, 1.6vw, 1.3rem)',
+            lineHeight: 1.5,
+            color: 'rgb(var(--ink-rgb) / 0.7)',
+            margin: '1rem 0 0',
+          }}
+        >
+          If you&apos;re starting something big,{' '}
+          <Link
+            href="/work#contact"
+            style={{ color: 'var(--ink)', textDecoration: 'underline', textUnderlineOffset: '0.2em', textDecorationThickness: '1px' }}
+          >
+            I want in →
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ValuesList() {
   return (
     <div style={{ padding: '0 clamp(1.5rem, 5vw, 5rem)' }}>
       <h2
@@ -298,7 +341,7 @@ export function StoryPageClient() {
         </div>
 
 
-        {/* 04 — My values */}
+        {/* 04 — Values */}
         <Section04 />
 
 
