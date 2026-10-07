@@ -20,6 +20,7 @@ website that keeps ~20% of those graphics. Type is the site's Neue Haas
 | All styles | `app/work/case-studies/teardown.css` |
 | Graphic primitives | `components/poster/primitives.tsx` |
 | Screenshot + arrows | `components/poster/annotated-shot.tsx` |
+| Before/after book stack | `components/poster/book-stack.tsx` |
 | Screenshots | `public/case-studies/<slug>/NN-name.webp` |
 
 ## Adding a teardown
@@ -42,7 +43,7 @@ website that keeps ~20% of those graphics. Type is the site's Neue Haas
 
 - **Page:** plain `--paper` background, max width 76rem. Intro → one section per teardown item → takeaways → footer strip → disclaimer.
 - **Section:** small `01 Label` kicker, `<bracket>` headline, then the stack.
-- **Stack:** two sheets, each 72% wide from 768px. *Their site* (white, 1px rule) sits left; *My version* (cream `#f2efe6`, soft paper shadow) sits right and overlaps by `--td-overlap` (6rem desktop, 1.5rem mobile with a 1rem indent). Their sheet carries the same amount of extra bottom padding, so the overlap never covers a note.
+- **Book stack** (`components/poster/book-stack.tsx`, client): *Before* (their annotated page, white, page edges behind, tilted -0.6deg) and *After* (my version, cream, binding shade, dog-ear, tilted 0.5deg) share one grid cell. After starts at 50% of Before's measured height, 72% wide each from 768px. A Before/After tab pair sits above; tapping a tab or the page underneath brings that page to the front, and it stays there with all its notes until the other is tapped.
 - **Notes:** numbered `01…` in mono, the title bold, and the body in 1–2 sentences. My sheet repeats the same numbering, so fixes line up with problems.
 - **Kept graphics only:** `<bracket>` headlines, `TriBadge` + `CodeTag` once in the intro, `PixelMark` (arrow in placeholders, disc by the takeaways), and `PosterFooter` once at the very bottom.
 - **Don't:** reintroduce posters, black panels, corner metadata or ring text; add more than ~5 callouts per section; or write long paragraphs.

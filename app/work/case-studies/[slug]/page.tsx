@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { AnnotatedShot } from "@/components/poster/annotated-shot";
+import { BookStack } from "@/components/poster/book-stack";
 import { Bracketed, CodeTag, PixelMark, PosterFooter, TriBadge } from "@/components/poster/primitives";
 import { getTeardown, teardowns } from "@/lib/teardowns";
 import type { Teardown, TeardownSection } from "@/lib/teardowns/types";
@@ -99,7 +100,7 @@ function Intro({ t }: { t: Teardown }) {
   );
 }
 
-/** Their annotated page behind, my page laid on top — offset like two sheets of paper. */
+/** Before (their annotated page) and after (my version), stacked like two pages of a book. */
 function Section({ section, index }: { section: TeardownSection; index: number }) {
   const { theirs, mine } = section;
   return (
@@ -114,60 +115,64 @@ function Section({ section, index }: { section: TeardownSection; index: number }
         </h2>
       </FadeUp>
 
-      <div className="td-stack">
-        <FadeUp className="td-sheet td-sheet--theirs">
-          <p className="td-sheet-label">Their site</p>
-          <AnnotatedShot id={section.id} shot={theirs} callouts={theirs.callouts} />
-          <ol className="td-notes">
-            {theirs.callouts.map((c, i) => (
-              <li key={i}>
-                <span className="td-num">{pad(i + 1)}</span>
-                <span>
-                  <strong>{c.title}.</strong> {c.body}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </FadeUp>
-
-        <FadeUp className="td-sheet td-sheet--mine" delay={0.1}>
-          <p className="td-sheet-label">My version</p>
-          {mine?.shot ? (
-            <Image
-              src={mine.shot.src}
-              alt={mine.shot.alt}
-              width={mine.shot.width}
-              height={mine.shot.height}
-              sizes="(min-width: 900px) 70vw, 100vw"
-              className="td-shot"
-            />
-          ) : (
-            <div className="td-placeholder" style={{ aspectRatio: `${theirs.width} / ${theirs.height}` }}>
-              <PixelMark shape="arrow" className="td-pixel-arrow" />
-              <span>Redesign coming soon</span>
-            </div>
-          )}
-          <ol className="td-notes">
-            {theirs.callouts.map((c, i) => {
-              const fix = mine?.fixes[i];
-              return (
-                <li key={i} className={fix ? undefined : "td-notes-todo"}>
-                  <span className="td-num">{pad(i + 1)}</span>
-                  {fix ? (
+      <FadeUp>
+        <BookStack
+          id={section.id}
+          before={
+            <>
+              <AnnotatedShot id={section.id} shot={theirs} callouts={theirs.callouts} />
+              <ol className="td-notes">
+                {theirs.callouts.map((c, i) => (
+                  <li key={i}>
+                    <span className="td-num">{pad(i + 1)}</span>
                     <span>
-                      <strong>{fix.title}.</strong> {fix.why}
+                      <strong>{c.title}.</strong> {c.body}
                     </span>
-                  ) : (
-                    <span>
-                      <strong>Fix for “{c.title}”.</strong> Still to write.
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ol>
-        </FadeUp>
-      </div>
+                  </li>
+                ))}
+              </ol>
+            </>
+          }
+          after={
+            <>
+              {mine?.shot ? (
+                <Image
+                  src={mine.shot.src}
+                  alt={mine.shot.alt}
+                  width={mine.shot.width}
+                  height={mine.shot.height}
+                  sizes="(min-width: 900px) 70vw, 100vw"
+                  className="td-shot"
+                />
+              ) : (
+                <div className="td-placeholder" style={{ aspectRatio: `${theirs.width} / ${theirs.height}` }}>
+                  <PixelMark shape="arrow" className="td-pixel-arrow" />
+                  <span>Redesign coming soon</span>
+                </div>
+              )}
+              <ol className="td-notes">
+                {theirs.callouts.map((c, i) => {
+                  const fix = mine?.fixes[i];
+                  return (
+                    <li key={i} className={fix ? undefined : "td-notes-todo"}>
+                      <span className="td-num">{pad(i + 1)}</span>
+                      {fix ? (
+                        <span>
+                          <strong>{fix.title}.</strong> {fix.why}
+                        </span>
+                      ) : (
+                        <span>
+                          <strong>Fix for “{c.title}”.</strong> Still to write.
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            </>
+          }
+        />
+      </FadeUp>
     </section>
   );
 }
