@@ -1,7 +1,7 @@
 /**
  * Graphic pieces for the poster-grid case study layout. All pure SVG/HTML,
  * all drawn in currentColor so they flip with the poster's tone.
- * Styles live in app/work/case-studies/poster.css.
+ * Styles live in app/work/case-studies/teardown.css.
  */
 
 /** Splits "Text <bracketed>" so the bracketed part keeps its angle brackets on one line. */
@@ -19,23 +19,6 @@ export function Bracketed({ text }: { text: string }) {
         ),
       )}
     </>
-  );
-}
-
-/** Four tiny uppercase metadata blocks across the top of a poster. */
-export function CornerMeta({ items }: { items: string[][] }) {
-  return (
-    <div className="poster-meta">
-      {items.map((lines, i) => (
-        <p key={i}>
-          {lines.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-        </p>
-      ))}
-    </div>
   );
 }
 
@@ -146,22 +129,6 @@ export function PixelMark({ shape, className }: { shape: PixelShape; className?:
           cell === "#" ? <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" /> : null,
         ),
       )}
-    </svg>
-  );
-}
-
-/** Text set around a circle, after the "Coala Music Addicts LTDA" ring. */
-export function RingText({ id, text, className }: { id: string; text: string; className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 200 200" aria-hidden>
-      <defs>
-        <path id={id} d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-      </defs>
-      <text className="poster-ring-text">
-        <textPath href={`#${id}`} textLength="486" lengthAdjust="spacing">
-          {text}
-        </textPath>
-      </text>
     </svg>
   );
 }

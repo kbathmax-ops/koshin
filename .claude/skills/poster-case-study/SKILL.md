@@ -1,13 +1,13 @@
 ---
 name: poster-case-study
-description: Build or edit a website-teardown case study in the poster-grid style (cream/black poster panels, tiny mono corner metadata, triangle badge, boxed code tags, pixel marks, ring text, footer strip, annotated screenshots with arrows). Use when adding a teardown under /work/case-studies, changing callouts or arrows, or styling any page to match this look.
+description: Build or edit a website-teardown case study in the minimal stacked-pages style (their annotated screenshot page behind, my version page offset on top like two sheets of paper; bracket headlines, footer strip, a few pixel marks/badges). Use when adding a teardown under /work/case-studies, changing callouts or arrows, or styling any page to match this look.
 ---
 
-# Poster-grid case study
+# Stacked-pages case study
 
-Reference: a 2×3 grid of music-brand posters (Coala Music). We copy the
-**layout and graphic system**, not the brand — type stays the site's Neue Haas
-(`--font-display` / `--font-body`) plus `--font-mono`.
+Started from a poster-grid reference (Coala Music), then cut back to a minimal
+website that keeps ~20% of those graphics. Type is the site's Neue Haas
+(`--font-display` / `--font-body`) plus `--font-mono` for numbers.
 
 ## Files
 
@@ -17,7 +17,7 @@ Reference: a 2×3 grid of music-brand posters (Coala Music). We copy the
 | Registry | `lib/teardowns/index.ts` |
 | Example teardown | `lib/teardowns/impression-ventures.ts` |
 | Page template | `app/work/case-studies/[slug]/page.tsx` |
-| All styles | `app/work/case-studies/poster.css` |
+| All styles | `app/work/case-studies/teardown.css` |
 | Graphic primitives | `components/poster/primitives.tsx` |
 | Screenshot + arrows | `components/poster/annotated-shot.tsx` |
 | Screenshots | `public/case-studies/<slug>/NN-name.webp` |
@@ -40,13 +40,9 @@ Reference: a 2×3 grid of music-brand posters (Coala Music). We copy the
 
 ## Visual rules
 
-- **Grid:** two posters per row from 900px (theirs | mine), 10px gutters on `--paper`. Posters are `aspect-ratio: 3/4` minimum and grow with content.
-- **Tones:** `--poster-cream #f2efe6` and `--poster-black #0b0b0b`, alternated as a checkerboard (`toneFor`). Never add a third colour; the screenshots supply the colour.
-- **Corners:** every poster opens with `CornerMeta` — 4 tiny uppercase mono blocks (0.625rem, tracking 0.08em). Last block right-aligned.
-- **Headline:** display weight 500, tracking -0.035em, line-height 0.95. Wrap a phrase in `<angle brackets>` for the bracket motif (`<2014>` in the reference). One bracketed phrase per headline.
-- **Footer strip:** every poster ends with `PosterFooter` — KB pixel square, two-line mono label, boxed Diagnose/Redesign/Ship stack, barcode, two-line right label.
-- **Badges:** `TriBadge` (rounded triangle, 3 short lines) and `CodeTag` (two boxed rows). Use sparingly — cover and thesis only.
-- **Pixel marks:** `PixelMark shape="monogram|disc|arrow|noise"`, `crispEdges`, `currentColor`. They are decoration; never more than two per poster.
-- **Ring text:** `RingText` with a unique `id`, for the takeaways poster.
-- **Images:** full-bleed (cover), inset (thesis), framed (annotated). Framed shots get a 1px rule outline, never a shadow or radius.
-- **Don't:** rounded corners, shadows, gradients outside the cover fade, more than ~5 callouts per section, or long paragraphs — keep notes to 1–2 sentences.
+- **Page:** plain `--paper` background, max width 76rem. Intro → one section per teardown item → takeaways → footer strip → disclaimer.
+- **Section:** small `01 Label` kicker, `<bracket>` headline, then the stack.
+- **Stack:** two sheets, each 72% wide from 768px. *Their site* (white, 1px rule) sits left; *My version* (cream `#f2efe6`, soft paper shadow) sits right and overlaps by `--td-overlap` (6rem desktop, 1.5rem mobile with a 1rem indent). Their sheet carries the same amount of extra bottom padding, so the overlap never covers a note.
+- **Notes:** numbered `01…` in mono, the title bold, and the body in 1–2 sentences. My sheet repeats the same numbering, so fixes line up with problems.
+- **Kept graphics only:** `<bracket>` headlines, `TriBadge` + `CodeTag` once in the intro, `PixelMark` (arrow in placeholders, disc by the takeaways), and `PosterFooter` once at the very bottom.
+- **Don't:** reintroduce posters, black panels, corner metadata or ring text; add more than ~5 callouts per section; or write long paragraphs.
