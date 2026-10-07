@@ -333,8 +333,15 @@ export const impressionVentures: Teardown = {
             x: 82,
             y: 29,
             side: "top",
-            title: "Stale dates",
-            body: "The newest story shown is from early 2023. Dated news on a homepage makes the whole site look unmaintained.",
+            title: "3+ years old",
+            body: "Every story is more than three years old. Unless it still applies today, skip this section — dated news on a homepage makes the whole site look unmaintained.",
+          },
+          {
+            x: 55,
+            y: 58,
+            side: "bottom",
+            title: "Easy to skip",
+            body: "A plain list of text links is easy to scroll past. A horizontal row with a picture for each story would earn a second look.",
           },
           {
             x: 67,
