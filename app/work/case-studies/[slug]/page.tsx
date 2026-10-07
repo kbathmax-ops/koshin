@@ -285,7 +285,7 @@ function Mine({
 function Principles({ t }: { t: Teardown }) {
   return (
     <article className="poster poster--black">
-      <CornerMeta items={[["Takeaways"], [t.firm], ["03 rules"], ["Koshin", "Design notes"]]} />
+      <CornerMeta items={[["Takeaways"], [t.firm], [`${pad(t.principles.length)} rules`], ["Koshin", "Design notes"]]} />
       <div className="poster-ring-wrap">
         <RingText
           id="ring-takeaways"
@@ -293,7 +293,7 @@ function Principles({ t }: { t: Teardown }) {
           className="poster-ring"
         />
         <h2 className="poster-display poster-display--md poster-ring-title">
-          Three <Bracketed text="<rules>" />
+          {pad(t.principles.length)} <Bracketed text="<rules>" />
         </h2>
       </div>
       <ol className="poster-rules">
@@ -307,7 +307,7 @@ function Principles({ t }: { t: Teardown }) {
           </li>
         ))}
       </ol>
-      <PosterFooter right={["Rules", "01–03"]} />
+      <PosterFooter right={["Rules", `01–${pad(t.principles.length)}`]} />
     </article>
   );
 }

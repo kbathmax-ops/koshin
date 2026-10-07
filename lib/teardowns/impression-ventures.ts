@@ -367,8 +367,8 @@ export const impressionVentures: Teardown = {
             x: 55,
             y: 41,
             side: "top",
-            title: "New type style",
-            body: "A third headline style, and a new coral accent, appear only at the very end. The pitch should have looked this loud from the top.",
+            title: "CTA too low",
+            body: "Solid footer, but the strongest pitch button on the site only shows up at the very bottom, in a new coral accent. It should be much higher — this loud from the top.",
           },
           {
             x: 50,
@@ -396,6 +396,10 @@ export const impressionVentures: Teardown = {
     {
       title: "One voice",
       body: "One headline style, one accent colour, used the same way in every section.",
+    },
+    {
+      title: "Less on the homepage",
+      body: "Many sections — team, advisors, media, the long card copy — belong on their own pages. The homepage only needs to earn the pitch.",
     },
     {
       title: "Founders first",
