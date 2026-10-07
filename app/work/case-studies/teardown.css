@@ -14,7 +14,7 @@
   min-height: 100dvh;
 }
 @media (min-width: 768px) {
-  .td-page { --td-overlap: 6rem; }
+  .td-page { --td-overlap: 9rem; }
 }
 
 .td-main {
@@ -112,20 +112,51 @@
 @media (min-width: 768px) {
   .td-sheet { width: 72%; padding: 1.75rem; }
 }
+/* Book look: their page sits on a stack of pages (edges peek out), mine is a
+   loose page laid on top — tilted, bound on the left, one corner dog-eared.
+   `rotate` is used instead of `transform` so FadeUp's animation can't override it. */
 .td-sheet--theirs {
   background: var(--paper-raised);
-  /* Room for my sheet to land on without covering any notes. */
+  rotate: -0.6deg;
+  box-shadow:
+    4px 4px 0 -1px var(--paper-raised),
+    4px 4px 0 0 rgb(var(--ink-rgb) / 0.16),
+    8px 8px 0 -1px var(--paper-raised),
+    8px 8px 0 0 rgb(var(--ink-rgb) / 0.12),
+    12px 12px 0 -1px var(--paper-raised),
+    12px 12px 0 0 rgb(var(--ink-rgb) / 0.08);
+  /* Room for my page to land on without covering any notes. */
   padding-bottom: calc(var(--td-overlap) + 1.5rem);
 }
 .td-sheet--mine {
   z-index: 1;
   margin-top: calc(var(--td-overlap) * -1);
   margin-left: 1rem;
-  background: var(--td-cream);
-  box-shadow: 0 1px 2px rgb(var(--ink-rgb) / 0.06), 0 18px 40px -12px rgb(var(--ink-rgb) / 0.22);
+  rotate: 0.5deg;
+  background:
+    linear-gradient(to right, rgb(var(--ink-rgb) / 0.08), transparent 2rem),
+    var(--td-cream);
+  box-shadow:
+    -1px 0 0 rgb(var(--ink-rgb) / 0.1),
+    0 2px 4px rgb(var(--ink-rgb) / 0.08),
+    0 28px 50px -16px rgb(var(--ink-rgb) / 0.32);
+}
+.td-sheet--mine::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: linear-gradient(315deg, var(--paper) 50%, #ddd7c8 50%);
+  box-shadow: -2px -2px 4px rgb(var(--ink-rgb) / 0.08);
 }
 @media (min-width: 768px) {
   .td-sheet--mine { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .td-sheet--theirs,
+  .td-sheet--mine { rotate: none; }
 }
 
 .td-sheet-label {
