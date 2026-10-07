@@ -1,0 +1,438 @@
+/*
+ * Poster-grid case study layout. Rules: .claude/skills/poster-case-study/SKILL.md
+ * Square corners, 1px ink rules, no shadows. Two tones: cream and black.
+ */
+
+.poster-page {
+  --poster-cream: #f2efe6;
+  --poster-black: #0b0b0b;
+  --poster-gap: 10px;
+  background: var(--paper);
+  min-height: 100dvh;
+  color: var(--ink);
+}
+
+.poster-main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 7.5rem var(--poster-gap) 4rem;
+}
+
+.poster-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 0 1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+.poster-back:hover { opacity: 1; }
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--poster-gap);
+  margin-bottom: var(--poster-gap);
+}
+@media (min-width: 900px) {
+  .poster-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- Poster shell ---------- */
+
+.poster {
+  --fg: var(--poster-black);
+  --bg: var(--poster-cream);
+  --rule: rgb(11 11 11 / 0.9);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-width: 0;
+  padding: 1.25rem;
+  background: var(--bg);
+  color: var(--fg);
+}
+@media (min-width: 900px) {
+  .poster { aspect-ratio: 3 / 4; padding: 1.5rem; }
+}
+.poster--black {
+  --fg: var(--poster-cream);
+  --bg: var(--poster-black);
+  --rule: rgb(242 239 230 / 0.9);
+}
+
+.poster-mono,
+.poster-meta {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.poster-meta {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.poster-meta p { min-width: 0; overflow-wrap: anywhere; }
+.poster-meta p:last-child { text-align: right; }
+@media (max-width: 600px) {
+  .poster-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .poster-meta p:nth-child(2n) { text-align: right; }
+}
+
+.poster-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+.poster-display--xl { font-size: clamp(3rem, 7.5vw, 6.5rem); }
+.poster-display--lg { font-size: clamp(2.75rem, 6vw, 5.5rem); }
+.poster-display--md { font-size: clamp(2.25rem, 4.2vw, 4rem); }
+
+.poster-bracket { white-space: nowrap; }
+.poster-dim { opacity: 0.55; }
+
+/* ---------- Footer strip ---------- */
+
+.poster-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding-top: 0.875rem;
+}
+.poster-foot-mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  background: var(--fg);
+  color: var(--bg);
+}
+.poster-foot-mark svg { width: 70%; }
+.poster-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  line-height: 1;
+}
+.poster-stack li {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.poster-stack li::after {
+  content: "";
+  display: none;
+}
+.poster-stack-glyph {
+  display: inline-grid;
+  place-items: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1px solid var(--rule);
+  font-size: 0.5rem;
+}
+.poster-stack li { padding-right: 0.25rem; border: 1px solid var(--rule); }
+.poster-stack-glyph { border-width: 0 1px 0 0; }
+.poster-barcode { width: 2.5rem; height: 1.25rem; flex: none; }
+.poster-foot-right { margin-left: auto; text-align: right; }
+@media (max-width: 480px) {
+  .poster-barcode { display: none; }
+}
+
+/* ---------- Badges + pixel marks ---------- */
+
+.poster-tri { width: 3.75rem; height: auto; }
+.poster-tri-text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  fill: currentColor;
+}
+
+.poster-code {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1.5px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.poster-code span { padding: 0.25rem 0.4rem; }
+.poster-code span + span { border-top: 1.5px solid var(--rule); }
+
+.poster-pixel { display: block; height: auto; }
+.poster-pixel--disc { width: clamp(5rem, 11vw, 8.5rem); }
+.poster-pixel--noise { width: 9rem; }
+.poster-pixel--arrow { width: 2.5rem; }
+.poster-pixel--mono { width: clamp(6rem, 14vw, 11rem); }
+
+/* ---------- Cover ---------- */
+
+.poster--cover { overflow: hidden; min-height: 32rem; }
+.poster-bleed {
+  position: absolute;
+  inset: 3.75rem 0 38% 0;
+}
+.poster-bleed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(11 11 11 / 0.15), rgb(11 11 11 / 0) 40%, var(--poster-black));
+}
+.poster--cover .poster-meta { color: #fff; }
+.poster-cover-body {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.poster-cover-badges { display: flex; align-items: flex-end; gap: 0.75rem; }
+.poster--cover .poster-foot { position: relative; z-index: 1; margin-top: 0; }
+
+/* ---------- Thesis ---------- */
+
+.poster-thesis-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: 1.25rem;
+}
+.poster-inset { justify-self: end; width: min(100%, 22rem); }
+.poster-inset img { width: 100%; height: auto; display: block; }
+.poster-lede {
+  max-width: 34rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.poster-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.poster-index li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  border-top: 1px solid var(--rule);
+}
+.poster-row-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* ---------- Annotated screenshot ---------- */
+
+.ann { display: flex; flex-direction: column; }
+
+.ann-row {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+}
+.ann-row li {
+  position: relative;
+  padding: 0 0.25rem;
+}
+.ann-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15rem;
+}
+/* Tick that joins the label to its arrow on the screenshot edge. */
+.ann-row li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1.5px;
+  height: 0.875rem;
+  background: currentColor;
+}
+.ann-row--top { padding-bottom: 0.875rem; }
+.ann-row--top li::after { top: 100%; }
+.ann-row--bottom { padding-top: 0.875rem; }
+.ann-row--bottom li::after { bottom: 100%; }
+
+.ann-frame {
+  position: relative;
+  outline: 1px solid var(--rule);
+}
+.ann-img { display: block; width: 100%; height: auto; }
+.ann-pending {
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(135deg, transparent 0 10px, rgb(127 127 127 / 0.12) 10px 11px);
+}
+
+.ann-lines {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.ann-halo { stroke: #fff; stroke-width: 4; stroke-linecap: round; }
+.ann-line { stroke: var(--poster-black); stroke-width: 1.5; }
+
+.ann-pin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--poster-black);
+  color: #fff;
+  outline: 2px solid #fff;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .ann-row { display: grid; }
+  .ann-row--empty { display: block; padding: 0; }
+  .ann-lines { display: block; }
+  .ann-pin { display: none; }
+}
+
+/* ---------- Notes lists ---------- */
+
+.poster-notes {
+  display: grid;
+  gap: 0.6rem 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+@media (min-width: 1200px) {
+  .poster-notes { grid-template-columns: 1fr 1fr; }
+}
+.poster-notes li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+}
+.poster-notes strong { font-weight: 600; }
+.poster-notes-num { padding-top: 0.15rem; }
+.poster-notes--todo { opacity: 0.55; }
+
+/* ---------- Redesign placeholder + shot ---------- */
+
+.poster-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1.5px dashed var(--rule);
+  text-align: center;
+}
+.poster-shot img { display: block; width: 100%; height: auto; }
+
+/* ---------- Principles + outro ---------- */
+
+.poster-ring-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 22rem);
+  margin: 0 auto;
+}
+.poster-ring { width: 100%; height: auto; }
+.poster-ring-text {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  fill: currentColor;
+}
+.poster-ring-title {
+  position: absolute;
+  text-align: center;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.poster-rules { display: grid; gap: 0; }
+.poster-rules li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--rule);
+}
+.poster-rules h3 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.poster-rules p { font-size: 0.875rem; line-height: 1.45; opacity: 0.8; }
+
+.poster-outro-marks {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.poster-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.poster-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-bottom: 1px solid var(--rule);
+}
+.poster-wordmark {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.4vw, 4.75rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.poster-wordmark + .poster-foot { margin-top: 0; }
+
+.poster-disclaimer {
+  max-width: 40rem;
+  margin: 1.5rem auto 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster * { transition: none !important; }
+}
