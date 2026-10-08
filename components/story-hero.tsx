@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 
 /* ─── Story hero ───
    Opens centred: the name, a line under it, the links, and the Machu Picchu
-   photo as a big 4:3 frame. The first scroll slides the photo over to the
-   right-hand side and brings the story in beside it.
+   photo as a big 4:3 frame. A moment after the page loads the photo slides
+   over to the right-hand side and the story comes in beside it.
 
    The photo is a 480×360, 1-bit dither — black pixels on white — scaled up
    with nearest-neighbour rendering so each pixel stays a crisp square. It
@@ -23,8 +23,8 @@ const POINTS = [
 
 const CURRENTLY = "Deferred Queen's University for a year, rebranding VC firms & startups and creating content";
 
-/* How far the page has to move before the hero switches to its open state. */
-const THRESHOLD = 24;
+/* How long the centred photo holds before sliding aside (ms). */
+const HOLD = 700;
 
 const EASE = [0.77, 0, 0.18, 1] as const;
 
@@ -32,10 +32,10 @@ export function StoryHero() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const update = () => setOpen(window.scrollY > THRESHOLD);
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    // With reduced motion there's nothing to watch, so skip straight to it.
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const t = window.setTimeout(() => setOpen(true), reduced ? 0 : HOLD);
+    return () => window.clearTimeout(t);
   }, []);
 
   return (
