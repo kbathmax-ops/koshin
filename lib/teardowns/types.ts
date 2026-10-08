@@ -62,6 +62,10 @@ export type Teardown = {
   thesis: string;
   disclaimer: string;
   sections: TeardownSection[];
+  /** Clickable redesign concept, linked from the intro. */
+  redesignHref?: string;
+  /** Brand pieces made for the redesign (posters, napkins…), shown after the takeaways. */
+  collateral?: Shot[];
   /** Takeaways on the closing poster. */
   principles: { title: string; body: string }[];
 };

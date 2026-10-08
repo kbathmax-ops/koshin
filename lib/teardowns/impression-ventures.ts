@@ -1,4 +1,4 @@
-import type { Teardown } from "./types";
+import type { Shot, Teardown, TeardownSection } from "./types";
 
 const dir = "/case-studies/impression-ventures";
 
@@ -7,6 +7,114 @@ const dir = "/case-studies/impression-ventures";
  * screenshot, so arrows stay pinned at any width. Within a row, list callouts
  * left to right so the arrows never cross.
  */
+const after = `${dir}/after`;
+const shot = (file: string, alt: string, width: number, height: number): Shot => ({
+  src: `${after}/${file}`,
+  alt,
+  width,
+  height,
+});
+
+/*
+ * My version of each section, from the redesign concept at
+ * /work/case-studies/impression-ventures/redesign. Fixes are listed in the
+ * same order as that section's callouts.
+ */
+const REDESIGN: Record<string, NonNullable<TeardownSection["mine"]>> = {
+  hero: {
+    headline: "Say who you back, <then prove it>",
+    shot: shot("01-hero.webp", "Redesigned hero: a full-width IMPRESSION wordmark, visible nav, the headline 'Building the future of finance? We lead your seed.', the 84% stat with its caveat, and an orange Pitch us button", 2000, 1460),
+    fixes: [
+      { title: "A claim only they can make", why: "\"We lead your seed\" plus the cheque size and entry point tells a founder in one read whether they're a fit." },
+      { title: "Nav in plain sight", why: "Portfolio, Thesis and About sit under the wordmark, the way Northzone does it. No hamburger on desktop." },
+      { title: "No decoration", why: "White space and type do the framing, so the eye goes straight from the headline to the stat to the button." },
+      { title: "Investor login demoted", why: "It moves to small text in the nav and footer. LPs know where to look." },
+      { title: "Pitch first", why: "The orange Pitch us button is the first action in the nav and the hero, so founders never have to hunt for it." },
+    ],
+  },
+  menu: {
+    headline: "A menu that <opens to links>",
+    shot: shot("02-menu.webp", "Redesigned mobile menu: closed state with Pitch us and Menu buttons, and the open state showing Pitch us, Portfolio, Thesis and About straight away on blue", 2000, 1250),
+    fixes: [
+      { title: "Links on open", why: "The menu opens straight to its four links in large type. Nothing to scroll for." },
+      { title: "Everything above the fold", why: "Links, address and email all fit on one phone screen." },
+      { title: "Pitch us leads", why: "Pitch us is the first link, in orange. Investor login is small text at the bottom." },
+    ],
+  },
+  portfolio: {
+    headline: "Every company, <full colour>",
+    shot: shot("03-portfolio.webp", "Redesigned portfolio row: five full-colour cards for Fraction, Goose, HONK, Juno and Finaeo, each with year and stage chips", 2000, 974),
+    fixes: [
+      { title: "No white wash", why: "Cards run full colour. Each company gets its own block of the brand palette." },
+      { title: "Room for outcomes", why: "Each card links to the company's story, so what happened next has a place to live." },
+      { title: "Readable chips", why: "Year and stage are black-on-white chips, the clearest text on the card." },
+      { title: "See more at once", why: "Five cards fit on a desktop screen, with a scroll row and an 'All companies' link for the rest." },
+    ],
+  },
+  "where-we-invest": {
+    headline: "Three numbers, <one title>",
+    shot: shot("04-where-we-invest.webp", "Redesigned Where we invest band: blue background, the title 'Seed-stage fintech. We lead.' and three large figures, 84%, 5× and $2M, each with one line", 2000, 906),
+    fixes: [
+      { title: "One title", why: "A small caps label and one headline. Nothing competes for the top of the section." },
+      { title: "Cut the clichés", why: "\"Seed-stage fintech. We lead.\" replaces two lines of slogan." },
+      { title: "Copy moves to Thesis", why: "The long card text goes to its own page behind 'Read our thesis →'." },
+      { title: "84% leads", why: "The strongest proof on the site is now the biggest thing in the section." },
+      { title: "Caveat in plain sight", why: "The footnote sits right under the numbers in readable type." },
+    ],
+  },
+  testimonials: {
+    headline: "Quotes you can <scroll through>",
+    shot: shot("05-testimonials.webp", "Redesigned founder quotes: two text-only quote cards side by side, signed with name, role and company, and an orange 'More founder stories' card", 2000, 792),
+    fixes: [
+      { title: "One small label", why: "\"From our founders\" in caps replaces the split header." },
+      { title: "Say it once", why: "The quotes speak for themselves, so the section has no subheader." },
+      { title: "No photos", why: "Text-only cards stay consistent, and several sit side by side in a scroll row instead of one per slide." },
+      { title: "Role and company", why: "Each quote is signed with name, role and company. Full names go in once confirmed." },
+    ],
+  },
+  team: {
+    headline: "Ethos on the homepage, <faces on About>",
+    shot: shot("06-team.webp", "Redesigned How we work section: a large serif statement, 'Conviction investors. We lead seed rounds, keep term sheets straightforward, and stay in the room after the cheque clears.', and a link to meet the team", 2000, 761),
+    fixes: [
+      { title: "No split header", why: "One caps label, then the statement." },
+      { title: "Ethos up front", why: "One sentence in their own words (conviction, lead rounds, straightforward term sheets) says how they work." },
+      { title: "Names, not hover", why: "The team moves to an About page where every face has its name and role visible." },
+      { title: "Half the space", why: "The homepage keeps one line and a link; the portraits live on About." },
+    ],
+  },
+  advisors: {
+    headline: "A name and a line <for everyone>",
+    shot: shot("07-advisors.webp", "Redesigned About page advisors list: small square portraits in a tidy list, each with a name and a one-line background (placeholders)", 2000, 532),
+    fixes: [
+      { title: "A real heading", why: "\"Advisors\" is set as a proper section title." },
+      { title: "Even crops", why: "Small square portraits, all cropped the same way." },
+      { title: "Name and background", why: "Every advisor gets a name and a one-line background next to their face." },
+      { title: "Compact list", why: "A list fills its rows evenly, so there's no empty slot, and it lives on About." },
+    ],
+  },
+  media: {
+    headline: "Stale news <becomes events>",
+    shot: shot("08-media.webp", "Redesigned Events row: Pitch Night and Fintech Breakfast posters as cards, plus a 'Get the next invite' card", 2000, 1051),
+    fixes: [
+      { title: "No text over photos", why: "Event cards put the poster above a plain title, so nothing fights for legibility." },
+      { title: "Drop the old news", why: "Every story was over three years old, so the press list leaves the homepage." },
+      { title: "A picture per card", why: "A horizontal row with a poster for each event earns a second look." },
+      { title: "Distinct titles", why: "Each card has a short, different name: Pitch Night, Fintech Breakfast." },
+    ],
+  },
+  closing: {
+    headline: "Same voice, <same button>",
+    shot: shot("09-closing.webp", "Redesigned closing: 'Got what it takes? Pitch us.' in condensed type with an orange button, above a dark footer with links, address, Pitch us and a small Investor login link", 2000, 942),
+    fixes: [
+      { title: "Pitch from the top", why: "The orange Pitch us button appears in the nav and hero, so the closing line repeats it instead of introducing it." },
+      { title: "Clean copyright", why: "\"© 2026 Impression Ventures\", with no mismatched domain." },
+      { title: "Footer favours founders", why: "Pitch us is the filled button; Investor login is a quiet text link under it." },
+    ],
+  },
+};
+
+const withRedesign = (sections: TeardownSection[]) => sections.map((s) => ({ ...s, mine: REDESIGN[s.id] ?? s.mine }));
+
 export const impressionVentures: Teardown = {
   slug: "impression-ventures",
   firm: "Impression Ventures",
@@ -16,7 +124,7 @@ export const impressionVentures: Teardown = {
     "Impression Ventures has the proof a founder wants to see: 84% of its investments went on to raise a Series A or exit. The site hides it mid-card, under headlines that could belong to any fund. This is a section-by-section look at what gets in the way, and what I'd change.",
   disclaimer:
     "Independent critique for my portfolio. Not affiliated with or endorsed by Impression Ventures. Screenshots are of their public site, shown for commentary.",
-  sections: [
+  sections: withRedesign([
     {
       id: "hero",
       label: "Hero",
@@ -387,6 +495,13 @@ export const impressionVentures: Teardown = {
         ],
       },
     },
+  ]),
+  redesignHref: "/work/case-studies/impression-ventures/redesign",
+  collateral: [
+    { src: `${dir}/brand/poster-pitch-night.png`, alt: "Pitch Night event poster: blue, tall white PITCH NIGHT, an orange date block and event details", width: 1200, height: 1696 },
+    { src: `${dir}/brand/poster-breakfast.png`, alt: "Fintech Breakfast event poster: orange, italic serif Breakfast, and a cup holding a rising blue bar chart", width: 1200, height: 1696 },
+    { src: `${dir}/brand/napkins.png`, alt: "Two cocktail napkins: a white one with a blue IV monogram and an orange one reading Sketch your pitch here above a grid", width: 2400, height: 1600 },
+    { src: `${dir}/brand/cup.png`, alt: "Paper coffee cup with an orange lid and a blue sleeve reading GOT WHAT IT TAKES?", width: 1600, height: 1600 },
   ],
   principles: [
     {

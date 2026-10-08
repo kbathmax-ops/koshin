@@ -54,6 +54,7 @@ export default async function TeardownPage({ params }: Params) {
         ))}
 
         <Takeaways t={t} />
+        {t.collateral && <Collateral shots={t.collateral} />}
       </main>
 
       <div className="td-foot">
@@ -80,9 +81,16 @@ function Intro({ t }: { t: Teardown }) {
         {t.firm} <Bracketed text="<teardown>" />
       </h1>
       <p className="td-lede">{t.thesis}</p>
-      <a href={t.url} target="_blank" rel="noopener noreferrer" className="td-link">
-        {t.url.replace("https://", "")} <ArrowUpRight className="h-4 w-4" aria-hidden />
-      </a>
+      <div className="td-links">
+        {t.redesignHref && (
+          <Link href={t.redesignHref} className="td-link td-link--strong">
+            View the redesign <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
+        )}
+        <a href={t.url} target="_blank" rel="noopener noreferrer" className="td-link">
+          {t.url.replace("https://", "")} <ArrowUpRight className="h-4 w-4" aria-hidden />
+        </a>
+      </div>
 
       <nav aria-label="Sections">
         <ol className="td-index">
@@ -199,6 +207,30 @@ function Takeaways({ t }: { t: Teardown }) {
           ))}
         </ol>
       </FadeUp>
+    </section>
+  );
+}
+
+/** Brand pieces made for the redesign, in a sideways-scrolling row. */
+function Collateral({ shots }: { shots: Teardown["collateral"] & object }) {
+  return (
+    <section className="td-section td-collateral" aria-labelledby="collateral-title">
+      <FadeUp>
+        <h2 className="td-display td-display--md" id="collateral-title">
+          Beyond the <Bracketed text="<website>" />
+        </h2>
+        <p className="td-lede td-collateral-lede">
+          Event posters, cocktail napkins and a coffee cup in the redesign&apos;s type and colours. Concept pieces, not
+          affiliated with Impression Ventures.
+        </p>
+      </FadeUp>
+      <ul className="td-gallery">
+        {shots.map((s) => (
+          <li key={s.src}>
+            <Image src={s.src} alt={s.alt} width={s.width} height={s.height} sizes="(min-width: 768px) 32rem, 85vw" />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
