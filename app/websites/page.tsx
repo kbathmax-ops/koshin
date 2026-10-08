@@ -119,7 +119,7 @@ export default function WebsitesPage() {
                           <div
                             className="font-medium leading-none tracking-tighter"
                             style={{
-                              fontFamily: "Helvetica, Arial, sans-serif",
+                              fontFamily: "var(--font-display)",
                               fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
                               color: site.textPreview,
                               opacity: 0.92,

@@ -35,7 +35,11 @@ export type Project = {
   slug: string;
   name: string;
   description: string;
+  /** What kind of build it is — the first cell of its meta row on /work. */
+  kind: string;
   image: string;
+  /** Logos sit inside the frame instead of filling it. */
+  imageFit?: "contain";
   detailImage?: { src: string; alt: string; width: number; height: number };
   /** The live thing, when there is one to visit. */
   liveUrl?: string;
@@ -57,9 +61,11 @@ export const projects: Project[] = [
   {
     slug: "undo",
     name: "UNDO",
+    kind: "Game & brand concept",
     description:
       "A game and brand concept for practising critical thinking. Less autopilot, more you.",
     image: "/undo-logo.png",
+    imageFit: "contain",
     liveUrl:
       "https://drive.google.com/file/d/1Fd81UCkRmUkJVN_puyMvyzRtIn0E-QO_/view?usp=sharing",
     linkLabel: "View on Google Drive",
@@ -67,6 +73,7 @@ export const projects: Project[] = [
   {
     slug: "relay",
     name: "Relay",
+    kind: "GTM prototype",
     hidden: true,
     description:
       "Relay is a GTM coordination prototype that coordinates marketing & sales teams.",
@@ -90,6 +97,7 @@ export const projects: Project[] = [
   {
     slug: "way-compass",
     name: "WAY",
+    kind: "Hardware concept",
     description:
       "A pocket compass concept for finding friends in crowded places when cell service is unreliable.",
     image: "/way-compass-hero.jpg",
@@ -126,6 +134,7 @@ export const projects: Project[] = [
   {
     slug: "human-and-chimp",
     name: "Chimp and Human",
+    kind: "3D web sim",
     description:
       "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
     image: "/human-and-chimp-hero.png",
@@ -146,6 +155,7 @@ export const projects: Project[] = [
   {
     slug: "detour",
     name: "detour",
+    kind: "Chrome extension",
     description:
       "A Chrome extension that hides Google Flights itineraries connecting through the US.",
     image: "/detour-landing-hero.jpg",
@@ -167,6 +177,7 @@ export const projects: Project[] = [
   {
     slug: "toronto-cafe-roulette",
     name: "Toronto Cafe Roulette",
+    kind: "Web app",
     description:
       "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
     image: "/toronto-cafe-roulette-hero.png",
@@ -187,6 +198,7 @@ export const projects: Project[] = [
   {
     slug: "tattoos-by-jess",
     name: "Tattoos by Jess",
+    kind: "Social growth",
     description: "Made a friend's tattoo shop go viral.",
     image: "/tattoos-by-jess-hero.png",
     liveUrl: "https://www.instagram.com/tattoosbyjesss/",
@@ -207,6 +219,7 @@ export const projects: Project[] = [
   {
     slug: "the-window-seat",
     name: "The Window Seat",
+    kind: "Web quiz",
     description:
       "A quiz for ambitious people to consider travel for their personal growth.",
     image: "/thewindowseat-hero.png",
@@ -227,6 +240,7 @@ export const projects: Project[] = [
   {
     slug: "sanctions-precedent",
     name: "Sanctions Precedent",
+    kind: "AI research tool",
     hidden: true,
     description:
       "An AI research engine that finds historical sanctions precedents by sector, intensity, and geopolitical objective, built for policy analysts.",
