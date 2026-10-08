@@ -1,254 +1,210 @@
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
-/* ─── Story hero — three photo bands split by heavy black rules ───
-   Follows the "03 - Artboard 1" layout: a short intro band with the name
-   top-left, a tall middle band with "what I offer" set large on the right
-   (links beside it), and "my background" set large bottom-left. Band
-   heights and type sizes are proportions measured off that artboard.
+/* ─── Story hero ───
+   Opens centred: the name, a line under it, the links, and the Machu Picchu
+   photo as a big 4:3 frame. The first scroll slides the photo over to the
+   right-hand side and brings the story in beside it.
 
-   The photos run bright (Cusco daylight) to near-black (beach at night), so
-   type sits in cream over a left-hand scrim rather than relying on the image
-   underneath it. `position` picks the crop, since a thin band keeps very
-   little of a tall photo. */
+   The photo is a 480×360, 1-bit dither — black pixels on white — scaled up
+   with nearest-neighbour rendering so each pixel stays a crisp square. It
+   skips the image optimiser, which would smooth them back out. */
 
-type Band = {
-  src: string;
-  alt: string;
-  position: string;
-  slot?: 'intro' | 'offer' | 'background';
-};
-
-const BANDS: Band[] = [
-  {
-    src: '/photo-monaco-walk.jpg',
-    alt: 'Koshin walking above Monaco',
-    position: '34% 66%',
-    slot: 'intro',
-  },
-  {
-    src: '/photo-halifax-forum.jpg',
-    alt: 'The Halifax International Security Forum in session',
-    position: '38% 64%',
-    slot: 'offer',
-  },
-  {
-    src: '/photo-beach-night.jpg',
-    alt: 'Friends on a pebble beach at night',
-    position: '50% 56%',
-    slot: 'background',
-  },
+const POINTS = [
+  'Born & raised in downtown & uptown Toronto',
+  "Went to arts school for 9 years, developed a strong eye for visuals & talent in all artistic mediums (developed the taste everyone's talking about in tech)",
+  "@ 15, got invited to a NATO/EU conference in Halifax → wanted to use my creativity to help peoples' day-to-day",
+  'High school: student council, finance for the Toronto Youth Environmental Council, 30k in sales for GradCity, marketing for Outward Bound Canada. Loved anything related to attracting people to a cause',
+  'Solo travelled 9 countries in my summers → wanted adventure & got it + social intelligence skills maxxed',
 ];
 
-/** A tile of desaturated fractal noise as a data URI — rendered once by the
-    browser and repeated, which is far cheaper than filtering each band.
-    `punch` steepens the noise's own contrast: raw turbulence clusters around
-    mid-grey, which reads as haze rather than grain once blended. */
-function grain(baseFrequency: number, size: number, punch = 1) {
-  const svg =
-    `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}'>` +
-    `<filter id='g'>` +
-    `<feTurbulence type='fractalNoise' baseFrequency='${baseFrequency}' numOctaves='4' stitchTiles='stitch'/>` +
-    `<feColorMatrix type='saturate' values='0'/>` +
-    `<feComponentTransfer>` +
-    `<feFuncR type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
-    `<feFuncG type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
-    `<feFuncB type='linear' slope='${punch}' intercept='${(1 - punch) / 2}'/>` +
-    `</feComponentTransfer>` +
-    `</filter>` +
-    `<rect width='100%' height='100%' filter='url(%23g)'/>` +
-    `</svg>`;
-  return `url("data:image/svg+xml,${svg.replace(/</g, '%3C').replace(/>/g, '%3E').replace(/#/g, '%23')}")`;
-}
+const CURRENTLY = "Deferred Queen's University for a year, rebranding VC firms & startups and creating content";
 
-const GRAIN_FINE = grain(0.9, 180, 2.4);
-const GRAIN_COARSE = grain(0.32, 300, 2.0);
+/* How far the page has to move before the hero switches to its open state. */
+const THRESHOLD = 24;
 
-export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) {
+const EASE = [0.77, 0, 0.18, 1] as const;
+
+export function StoryHero() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const update = () => setOpen(window.scrollY > THRESHOLD);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
   return (
-    <section aria-label="Introduction" className="sh">
+    <section aria-label="Introduction" className={`sh${open ? ' sh-open' : ''}`}>
       <style>{`
-        /* One viewport tall; the three bands share it 24 / 44 / 32 like the
-           artboard, with heavy rules between them. */
         .sh {
-          display: flex;
-          flex-direction: column;
-          height: 100dvh;
-          background: var(--ink);
-        }
-
-        .sh-band {
           position: relative;
-          display: flex;
-          align-items: center;
-          min-height: 0;
-          padding: 0 clamp(1.25rem, 3.4vw, 4rem);
-          isolation: isolate;
-          overflow: hidden;
-        }
-        .sh-band + .sh-band { border-top: clamp(6px, 0.75vw, 12px) solid var(--ink); }
-
-        .sh-band-intro { flex: 24; padding-left: clamp(1.5rem, 6.1vw, 7rem); }
-        .sh-band-offer { flex: 44; justify-content: flex-end; }
-        .sh-band-background { flex: 32; }
-
-        /* Clear the fixed nav pill floating over the top of the page. */
-        .sh-band-intro { padding-top: 4.5rem; }
-
-        /* Photos run in full colour — grain is the only treatment. */
-        .sh-img { object-fit: cover; z-index: 0; }
-
-        .sh-grain, .sh-grain-hard, .sh-scrim {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
+          background: #ffffff;
+          color: var(--ink);
+          min-height: 100dvh;
+          /* Clears the fixed nav pill floating over the top of the page. */
+          padding: clamp(6rem, 13vh, 8rem) clamp(1.25rem, 5vw, 5rem) clamp(3rem, 8vh, 5rem);
         }
 
-        /* Heavy grain: fine sensor noise over coarser mottling, with a second
-           overlay pass that pushes it past a subtle texture. */
-        .sh-grain {
-          background-image: ${GRAIN_FINE}, ${GRAIN_COARSE};
-          background-size: 180px 180px, 300px 300px;
-          mix-blend-mode: soft-light;
+        .sh-head {
+          position: relative;
           z-index: 2;
+          text-align: center;
         }
-        .sh-grain-hard {
-          background-image: ${GRAIN_FINE};
-          background-size: 140px 140px;
-          opacity: 0.62;
-          mix-blend-mode: overlay;
-          z-index: 3;
-        }
-
-        /* Darkens the side the type sits on so white type holds up on bright
-           photos. */
-        .sh-scrim {
-          background: linear-gradient(
-            to right,
-            rgba(16, 18, 24, 0.62) 0%,
-            rgba(16, 18, 24, 0.28) 45%,
-            rgba(16, 18, 24, 0) 75%
-          );
-          z-index: 4;
-        }
-        .sh-band-offer .sh-scrim {
-          background: linear-gradient(
-            to left,
-            rgba(16, 18, 24, 0.62) 0%,
-            rgba(16, 18, 24, 0.28) 45%,
-            rgba(16, 18, 24, 0) 75%
-          );
-        }
-
-        .sh-body { position: relative; z-index: 5; }
-
-        .sh-text {
+        .sh-name {
           font-family: var(--font-display);
+          font-size: clamp(3rem, 9vw, 8.5rem);
           font-weight: 500;
-          letter-spacing: -0.035em;
-          line-height: 0.95;
-          color: #ffffff;
+          letter-spacing: -0.045em;
+          line-height: 0.9;
           margin: 0;
-          text-decoration: none;
-          text-shadow: 0 1px 14px rgba(12, 14, 20, 0.4);
         }
-        /* Sizes track width but are capped by height, so the type never
-           outgrows its band on a short, wide window. */
-        .sh-text-sm { font-size: min(7.1vw, 9.5dvh); }
-        .sh-text-lg { font-size: min(9.9vw, 14dvh); }
-        a.sh-text:hover, a.sh-text:focus-visible { opacity: 0.85; }
+        .sh-tagline {
+          font-family: var(--font-display);
+          font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+          font-weight: 500;
+          letter-spacing: -0.02em;
+          line-height: 1.25;
+          margin: 0.8rem 0 0;
+          color: rgb(var(--ink-rgb) / 0.62);
+        }
 
-        /* Links sit to the left of "what I offer", on its baseline row. */
-        .sh-offer {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          flex-wrap: wrap-reverse;
-          gap: clamp(1rem, 2.5vw, 2.5rem);
-        }
+        /* Square boxes with thin black edges, close together but apart. */
         .sh-links {
           display: flex;
+          justify-content: center;
           flex-wrap: wrap;
-          gap: 0.6rem;
+          gap: 0.35rem;
+          margin-top: 1.1rem;
         }
         .sh-link {
           font-family: var(--font-body);
-          font-size: clamp(0.82rem, 1.2vw, 1rem);
-          font-weight: 600;
+          font-size: 0.85rem;
+          font-weight: 500;
           color: var(--ink);
-          background: var(--paper);
+          background: #ffffff;
+          border: 1px solid var(--ink);
+          padding: 0.5rem 1rem;
           text-decoration: none;
-          padding: 0.55rem 1.15rem;
-          border-radius: 999px;
-          box-shadow: 0 6px 20px rgba(10, 12, 18, 0.35);
-          white-space: nowrap;
+          transition: background 0.2s, color 0.2s;
         }
-        .sh-link:hover, .sh-link:focus-visible {
-          background: var(--ink);
-          color: var(--paper);
+        .sh-link:hover, .sh-link:focus-visible { background: var(--ink); color: #ffffff; }
+
+        /* The photo: centred and large to start, beside the story once open. */
+        .sh-photo {
+          position: relative;
+          aspect-ratio: 4 / 3;
+          margin: clamp(1.5rem, 3vh, 2.5rem) auto 0;
+          width: min(100%, 64rem, calc((100dvh - 22rem) * 4 / 3));
+          min-width: min(100%, 20rem);
+          background: url('/koshin-machu-picchu.png') center / cover no-repeat;
+          image-rendering: pixelated;
+        }
+        .sh-story {
+          max-width: 44rem;
+          margin: clamp(3rem, 8vh, 5rem) auto 0;
+          font-family: var(--font-body);
         }
 
-        /* Narrow screens: links drop under the heading, still right-aligned. */
-        @media (max-width: 767px) {
-          .sh-offer { flex-direction: column-reverse; align-items: flex-end; gap: 0.9rem; }
-          .sh-links { justify-content: flex-end; }
+        @media (min-width: 900px) {
+          .sh-open .sh-main {
+            display: grid;
+            grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+            gap: clamp(2.5rem, 5vw, 5rem);
+            align-items: start;
+            max-width: 76rem;
+            margin: clamp(3rem, 7vh, 4.5rem) auto 0;
+          }
+          .sh-open .sh-photo {
+            grid-column: 2;
+            grid-row: 1;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+          }
+          .sh-open .sh-story { grid-column: 1; grid-row: 1; margin: 0; }
         }
+
+        .sh-intro {
+          font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+          line-height: 1.45;
+          margin: 0 0 1.25rem;
+        }
+        .sh-points {
+          list-style: disc;
+          margin: 0;
+          padding-left: 1.2rem;
+        }
+        .sh-points li {
+          font-size: 1rem;
+          line-height: 1.55;
+          margin: 0 0 0.65rem;
+          padding-left: 0.25rem;
+          color: rgb(var(--ink-rgb) / 0.78);
+        }
+        .sh-points li::marker { color: var(--ink); }
+        .sh-points .sh-now { color: var(--ink); }
+        .sh-now strong { font-weight: 600; }
+
       `}</style>
 
-      {BANDS.map((band) => (
-        <div
-          key={band.src}
-          className={`sh-band${band.slot ? ` sh-band-${band.slot}` : ''}`}
+      <div className="sh-head">
+        <h1 className="sh-name">Koshin Bathmax</h1>
+        <p className="sh-tagline">
+          changing how people see brands &amp; solo-travelling when I can
+        </p>
+        <nav className="sh-links" aria-label="Links">
+          <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
+            my work
+          </Link>
+          <Link className="sh-link" href="/resume">
+            resumé
+          </Link>
+          <a
+            className="sh-link"
+            href="https://www.linkedin.com/in/koshinbathmax/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            linkedin
+          </a>
+        </nav>
+      </div>
+
+      <div className="sh-main">
+        <motion.div
+          layout
+          transition={{ layout: { duration: 0.8, ease: EASE } }}
+          className="sh-photo"
+          role="img"
+          aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
+        />
+
+        {/* Always in the page, so it's there for search engines and screen
+            readers; it only fades in once the photo has moved out of the way. */}
+        <motion.div
+          className="sh-story"
+          initial={false}
+          animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
         >
-          <Image
-            className="sh-img"
-            src={band.src}
-            alt={band.alt}
-            fill
-            sizes="100vw"
-            priority
-            style={{ objectPosition: band.position }}
-          />
-          <span className="sh-grain" aria-hidden="true" />
-          <span className="sh-grain-hard" aria-hidden="true" />
-          <span className="sh-scrim" aria-hidden="true" />
-
-          {band.slot === 'intro' && (
-            <h1 className="sh-text sh-text-sm sh-body">hi! I&rsquo;m Koshin</h1>
-          )}
-
-          {band.slot === 'offer' && (
-            <div className="sh-body sh-offer">
-              <nav className="sh-links" aria-label="What I offer">
-                <Link className="sh-link" href="/resume">
-                  resumé
-                </Link>
-                <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
-                  my work
-                </Link>
-                <a
-                  className="sh-link"
-                  href="https://www.linkedin.com/in/koshinbathmax/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  linkedin
-                </a>
-              </nav>
-              <p className="sh-text sh-text-lg">what I offer</p>
-            </div>
-          )}
-
-          {band.slot === 'background' &&
-            (backgroundHref ? (
-              <Link className="sh-text sh-text-lg sh-body" href={backgroundHref}>
-                my background
-              </Link>
-            ) : (
-              <p className="sh-text sh-text-lg sh-body">my background</p>
+          <p className="sh-intro">
+            I&apos;m intensely devoted to creating things that change how humans live &amp; think
+          </p>
+          <ul className="sh-points">
+            {POINTS.map((point) => (
+              <li key={point}>{point}</li>
             ))}
-        </div>
-      ))}
+            <li className="sh-now">
+              <strong>Currently:</strong> {CURRENTLY}
+            </li>
+          </ul>
+        </motion.div>
+      </div>
     </section>
   );
 }

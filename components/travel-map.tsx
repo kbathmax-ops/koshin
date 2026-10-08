@@ -7,8 +7,8 @@ import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
 
 /*
  * "X Marks The Spot" travel map — adapted from the Claude Design project into
- * a native React + framer-motion component in the site's own fonts (Plus
- * Jakarta Sans / mono) and warm palette.
+ * a native React + framer-motion component in the site's own type (Neue Haas
+ * Grotesk) and drawn in outline only.
  *
  * The whole world assembles on scroll-into-view and X-marks pop at every
  * visited country. The five European stops are tightly clustered, so a
@@ -21,16 +21,16 @@ import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
  * ships static SVG, no d3 in the bundle, no runtime map fetch.
  */
 
-// Monochrome: land is a light ink tint, visited countries a stronger one.
-// These stay literal hex/rgba (not CSS vars) because MARK_HOT gets a hex
-// alpha suffix appended below.
-const LAND = 'rgba(11,11,11,0.07)';
-const LAND_STROKE = 'rgba(11,11,11,0.20)';
-const VISITED_FILL = 'rgba(11,11,11,0.30)';
+// Outline only: no fills anywhere. Visited countries get a solid black edge,
+// the rest a light one. These stay literal hex/rgba (not CSS vars) because
+// MARK_HOT gets a hex alpha suffix appended below.
+const LAND = 'none';
+const LAND_STROKE = 'rgba(11,11,11,0.30)';
+const VISITED_FILL = 'none';
 const VISITED_STROKE = '#0b0b0b';
 const MARK = '#0b0b0b';
 const MARK_HOT = '#76766f';
-const OCEAN = '#ffffff';
+const OCEAN = 'none';
 const OCEAN_STROKE = 'rgba(11,11,11,0.14)';
 const EASE_OUT_BACK: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
@@ -232,7 +232,7 @@ export function TravelMap() {
                     x={m.x} y={m.y + m.labelDy} textAnchor="middle"
                     variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
                     onClick={note ? () => select(m.name) : undefined}
-                    style={{ fontFamily: "var(--font-display)", fontSize: '22px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: 'var(--paper)', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
+                    style={{ fontFamily: "var(--font-display)", fontSize: '22px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
                   >
                     {m.name}
                   </motion.text>
@@ -251,8 +251,7 @@ export function TravelMap() {
           style={{
             position: 'absolute', left: `${LENS_LEFT_PCT}%`, top: `${LENS_TOP_PCT}%`,
             width: `${LENS_W * 100}%`, aspectRatio: '1', borderRadius: '50%', overflow: 'hidden',
-            border: `2.5px solid ${VISITED_STROKE}`, background: 'var(--paper-raised)',
-            boxShadow: '0 12px 40px rgb(var(--ink-rgb) / 0.20), inset 0 0 30px rgb(var(--ink-rgb) / 0.06)',
+            border: `1.5px solid ${VISITED_STROKE}`, background: '#ffffff',
             transformOrigin: 'center',
           }}
         >
@@ -271,12 +270,12 @@ export function TravelMap() {
                   {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
                   <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
                   <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-display)", fontSize: '30px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: 'var(--paper)', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-display)", fontSize: '30px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
                 </g>
               );
             })}
           </svg>
-          <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: VISITED_STROKE, pointerEvents: 'none' }}>
+          <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 500, letterSpacing: '-0.01em', color: VISITED_STROKE, pointerEvents: 'none' }}>
             Europe
           </span>
         </motion.div>
@@ -311,8 +310,8 @@ export function TravelMap() {
                     borderLeft: '7px solid transparent',
                     borderRight: '7px solid transparent',
                     ...(open.placement === 'below'
-                      ? { borderBottom: `8px solid ${MARK_HOT}` }
-                      : { borderTop: `8px solid ${MARK_HOT}` }),
+                      ? { borderBottom: `8px solid ${VISITED_STROKE}` }
+                      : { borderTop: `8px solid ${VISITED_STROKE}` }),
                   }}
                 />
               </span>
@@ -339,11 +338,9 @@ export function TravelMap() {
                 style={{
                   position: 'relative',
                   pointerEvents: 'auto',
-                  background: 'var(--paper-sunk)',
-                  border: `1px solid ${MARK_HOT}55`,
-                  borderRadius: '0.9rem',
+                  background: '#ffffff',
+                  border: `1px solid ${VISITED_STROKE}`,
                   padding: '1.15rem 1.25rem 1.3rem',
-                  boxShadow: '0 18px 50px rgb(var(--ink-rgb) / 0.22)',
                 }}
               >
                 <button
@@ -384,7 +381,7 @@ export function TravelMap() {
       </motion.div>
 
       {/* Visited chips — the keyboard-accessible way into the same notes. */}
-      <figcaption style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontFamily: 'var(--font-body)', fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgb(var(--ink-rgb) / 0.5)' }}>
+      <figcaption style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: 500, letterSpacing: '-0.01em', color: 'rgb(var(--ink-rgb) / 0.6)' }}>
         {WORLD.marks.map((m) => {
           const note = getTravelNote(m.name);
           const inner = (

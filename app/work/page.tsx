@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { ContactForm } from "@/components/contact-form";
-import { WorkStage } from "@/components/work-stage";
+import { SelectedWorks } from "@/components/selected-works";
 import { designWork } from "@/lib/design-work";
 import { projects } from "@/lib/projects";
 
@@ -110,8 +110,8 @@ export default function WorkPage() {
       />
       <Nav />
 
-      {/* ── Products / designs ── */}
-      <WorkStage products={visibleProjects} designs={designWork} />
+      {/* ── Builds, then design pieces ── */}
+      <SelectedWorks products={visibleProjects} designs={designWork} />
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pt-16 md:pt-24 pb-32">
 
@@ -136,11 +136,10 @@ export default function WorkPage() {
         <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
           <FadeUp>
             <div
-              className="rounded-[2rem] p-6 md:p-12 relative overflow-hidden"
-              style={{ background: 'var(--paper-raised)', boxShadow: '0 10px 40px rgb(var(--ink-rgb) / 0.12)' }}
+              className="p-6 md:p-12"
+              style={{ background: 'var(--paper-raised)', border: '1px solid rgb(var(--ink-rgb) / 0.14)' }}
             >
-              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgb(var(--ink-rgb) / 0.06)' }} />
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div>
                   <h2
                     className="font-medium text-3xl md:text-4xl tracking-tight mb-4 leading-tight"

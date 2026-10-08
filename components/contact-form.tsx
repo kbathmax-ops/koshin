@@ -58,7 +58,7 @@ export function ContactForm() {
         placeholder="Name"
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-full px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
+        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
       />
       <input
         name="email"
@@ -66,7 +66,7 @@ export function ContactForm() {
         placeholder="Email"
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-full px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
+        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
       />
       <textarea
         name="message"
@@ -74,7 +74,7 @@ export function ContactForm() {
         rows={3}
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-[1.5rem] px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all resize-none disabled:opacity-50"
+        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all resize-none disabled:opacity-50"
       />
       {status === "error" && (
         <p className="text-sm text-red-600 font-medium">Something went wrong. Try again.</p>
@@ -82,7 +82,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full bg-primary text-white py-4 rounded-full font-medium text-base hover:bg-secondary transition-colors duration-200 active:scale-95 disabled:opacity-50"
+        className="w-full bg-primary text-white py-4 rounded-none font-medium text-base hover:bg-secondary transition-colors duration-200 active:scale-95 disabled:opacity-50"
         style={{ fontFamily: "var(--font-display)" }}
       >
         {status === "sending" ? "Sending…" : "Send Message"}

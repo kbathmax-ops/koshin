@@ -36,6 +36,8 @@ export type Project = {
   name: string;
   description: string;
   image: string;
+  /** Logos sit inside the frame instead of filling it. */
+  imageFit?: "contain";
   detailImage?: { src: string; alt: string; width: number; height: number };
   /** The live thing, when there is one to visit. */
   liveUrl?: string;
@@ -60,6 +62,7 @@ export const projects: Project[] = [
     description:
       "A game and brand concept for practising critical thinking. Less autopilot, more you.",
     image: "/undo-logo.png",
+    imageFit: "contain",
     liveUrl:
       "https://drive.google.com/file/d/1Fd81UCkRmUkJVN_puyMvyzRtIn0E-QO_/view?usp=sharing",
     linkLabel: "View on Google Drive",

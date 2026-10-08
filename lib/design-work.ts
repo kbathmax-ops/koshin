@@ -1,4 +1,4 @@
-/* Design pieces shown in the "designs" view of /work. */
+/* Design pieces shown in the /work grid, after the builds. */
 
 export type Shot = {
   src: string;
@@ -17,12 +17,15 @@ export type DesignProject = {
   role: string;
   year: string;
   description: string;
+  /** One line for the /work grid. */
+  tagline: string;
   shots: Shot[];
 };
 
 export const designWork: DesignProject[] = [
   {
     id: "way",
+    tagline: "A keychain compass for finding friends when cell service drops.",
     name: "WAY",
     href: "https://way-compass.vercel.app",
     role: "Product design",
@@ -41,6 +44,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "snap-toronto",
+    tagline: "Identity and site for my Toronto AI workshop series.",
     name: "Snap Toronto",
     href: "https://snaptoronto.org",
     role: "Identity & site design",
@@ -87,6 +91,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "hot-take-slideshow-night",
+    tagline: "Brush-lettered poster for a Toronto slideshow night.",
     name: "Toronto's Hot Take Slideshow Night",
     role: "Event poster",
     year: "2026",
@@ -104,6 +109,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "ocean-management",
+    tagline: "Brand identity and pitch deck for an influencer agency.",
     name: "Ocean Management",
     role: "Brand identity & deck",
     year: "2026",
