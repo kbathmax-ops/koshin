@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 
 /* ─── Story hero ───
    Opens centred: the name, a line under it, the links, and the Machu Picchu
-   photo as a big 4:3 frame. The first scroll tucks the photo into the top
-   right and brings the story in underneath.
+   photo as a big 4:3 frame. The first scroll slides the photo over to the
+   right-hand side and brings the story in beside it.
 
    The photo is a 480×360, 1-bit dither — black pixels on white — scaled up
    with nearest-neighbour rendering so each pixel stays a crisp square. It
@@ -94,19 +94,9 @@ export function StoryHero() {
         }
         .sh-link:hover, .sh-link:focus-visible { background: var(--ink); color: #ffffff; }
 
-        /* Once the photo is tucked top-right it can run under the end of the
-           line; a white backing keeps the grey type readable over it. */
-        .sh-tagline span {
-          background: #ffffff;
-          box-decoration-break: clone;
-          -webkit-box-decoration-break: clone;
-          padding: 0 0.15em;
-        }
-
-        /* The photo: centred and large to start, tucked top-right once open. */
+        /* The photo: centred and large to start, beside the story once open. */
         .sh-photo {
           position: relative;
-          z-index: 1;
           aspect-ratio: 4 / 3;
           margin: clamp(1.5rem, 3vh, 2.5rem) auto 0;
           width: min(100%, 64rem, calc((100dvh - 22rem) * 4 / 3));
@@ -114,23 +104,31 @@ export function StoryHero() {
           background: url('/koshin-machu-picchu.png') center / cover no-repeat;
           image-rendering: pixelated;
         }
-        .sh-open .sh-photo {
-          position: absolute;
-          top: clamp(5.5rem, 11vh, 7rem);
-          right: clamp(1.25rem, 5vw, 5rem);
-          margin: 0;
-          width: clamp(8rem, 24vw, 22rem);
-          min-width: 0;
-          /* Shrunk past one screen pixel per dither pixel, nearest-neighbour
-             turns to noise; let the browser average it instead. */
-          image-rendering: auto;
-        }
-
         .sh-story {
           max-width: 44rem;
-          margin: clamp(3rem, 8vh, 5rem) 0 0 clamp(0rem, 8vw, 8rem);
+          margin: clamp(3rem, 8vh, 5rem) auto 0;
           font-family: var(--font-body);
         }
+
+        @media (min-width: 900px) {
+          .sh-open .sh-main {
+            display: grid;
+            grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+            gap: clamp(2.5rem, 5vw, 5rem);
+            align-items: start;
+            max-width: 76rem;
+            margin: clamp(3rem, 7vh, 4.5rem) auto 0;
+          }
+          .sh-open .sh-photo {
+            grid-column: 2;
+            grid-row: 1;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+          }
+          .sh-open .sh-story { grid-column: 1; grid-row: 1; margin: 0; }
+        }
+
         .sh-intro {
           font-size: clamp(1.1rem, 1.5vw, 1.3rem);
           line-height: 1.45;
@@ -152,16 +150,12 @@ export function StoryHero() {
         .sh-points .sh-now { color: var(--ink); }
         .sh-now strong { font-weight: 600; }
 
-        @media (max-width: 767px) {
-          .sh-open .sh-photo { top: 6.5rem; }
-          .sh-open .sh-head { padding-top: calc(clamp(8rem, 24vw, 22rem) * 0.75 + 1.5rem); }
-        }
       `}</style>
 
       <div className="sh-head">
         <h1 className="sh-name">Koshin Bathmax</h1>
         <p className="sh-tagline">
-          <span>changing how people see brands &amp; solo-travelling when I can</span>
+          changing how people see brands &amp; solo-travelling when I can
         </p>
         <nav className="sh-links" aria-label="Links">
           <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
@@ -181,34 +175,36 @@ export function StoryHero() {
         </nav>
       </div>
 
-      <motion.div
-        layout
-        transition={{ layout: { duration: 0.8, ease: EASE } }}
-        className="sh-photo"
-        role="img"
-        aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
-      />
+      <div className="sh-main">
+        <motion.div
+          layout
+          transition={{ layout: { duration: 0.8, ease: EASE } }}
+          className="sh-photo"
+          role="img"
+          aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
+        />
 
-      {/* Always in the page, so it's there for search engines and screen
-          readers; it only fades in once the photo has moved out of the way. */}
-      <motion.div
-        className="sh-story"
-        initial={false}
-        animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-        transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
-      >
-        <p className="sh-intro">
-          I&apos;m intensely devoted to creating things that change how humans live &amp; think
-        </p>
-        <ul className="sh-points">
-          {POINTS.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-          <li className="sh-now">
-            <strong>Currently:</strong> {CURRENTLY}
-          </li>
-        </ul>
-      </motion.div>
+        {/* Always in the page, so it's there for search engines and screen
+            readers; it only fades in once the photo has moved out of the way. */}
+        <motion.div
+          className="sh-story"
+          initial={false}
+          animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
+        >
+          <p className="sh-intro">
+            I&apos;m intensely devoted to creating things that change how humans live &amp; think
+          </p>
+          <ul className="sh-points">
+            {POINTS.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+            <li className="sh-now">
+              <strong>Currently:</strong> {CURRENTLY}
+            </li>
+          </ul>
+        </motion.div>
+      </div>
     </section>
   );
 }

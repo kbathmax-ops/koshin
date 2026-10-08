@@ -306,11 +306,11 @@ export function StoryPageClient() {
   }, []);
 
   return (
-    <div style={{ background: 'var(--paper)', minHeight: '100dvh', color: 'var(--ink)' }}>
+    <div style={{ background: '#ffffff', minHeight: '100dvh', color: 'var(--ink)' }}>
       <StoryHero />
 
       {/* Parallax story rows */}
-      <div style={{ position: 'relative', zIndex: 2, background: 'var(--paper)', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+      <div style={{ position: 'relative', zIndex: 2, background: '#ffffff', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
         {/* Atmospheric — Travel. `id` is the anchor the hero's third band
             links to, and scroll-margin clears the fixed nav pill. */}
