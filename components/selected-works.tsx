@@ -8,7 +8,6 @@ import type { DesignProject } from "@/lib/design-work";
 type Work = {
   id: string;
   name: string;
-  meta: string[];
   line: string;
   image: string;
   fit?: "contain";
@@ -16,14 +15,11 @@ type Work = {
   external: boolean;
 };
 
-const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
-
 function fromProject(p: Project): Work {
   const href = p.detailFirst ? `/work/${p.slug}` : p.liveUrl;
   return {
     id: p.slug,
     name: p.name,
-    meta: p.liveUrl ? [p.kind, host(p.liveUrl)] : [p.kind],
     line: p.description,
     image: p.image,
     fit: p.imageFit,
@@ -36,7 +32,6 @@ function fromDesign(d: DesignProject): Work {
   return {
     id: `design-${d.id}`,
     name: d.name,
-    meta: [d.role, d.year],
     line: d.tagline,
     image: d.shots[0].src,
     href: d.href,
@@ -49,15 +44,25 @@ const rule = "rgb(var(--ink-rgb) / 0.14)";
 export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
   // A design piece that is also a build (WAY) only shows once, as the build.
   const builtUrls = new Set(products.map((p) => p.liveUrl).filter(Boolean));
-  const works = [
-    ...products.map(fromProject),
-    ...designs.filter((d) => !d.href || !builtUrls.has(d.href)).map(fromDesign),
-  ];
+  const misc = designs.filter((d) => !d.href || !builtUrls.has(d.href));
 
   return (
-    <section aria-labelledby="selected-works" style={{ paddingTop: "clamp(7rem, 16vh, 10rem)" }}>
-      <h1
-        id="selected-works"
+    <div style={{ paddingTop: "clamp(7rem, 16vh, 10rem)" }}>
+      <WorkSection id="selected-works" title="Selected works" level="h1" works={products.map(fromProject)} />
+      {misc.length > 0 && (
+        <div style={{ paddingTop: "clamp(4rem, 10vh, 7rem)" }}>
+          <WorkSection id="misc-design" title="Miscellaneous design" works={misc.map(fromDesign)} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; title: string; works: Work[]; level?: "h1" | "h2" }) {
+  return (
+    <section aria-labelledby={id} className="scroll-mt-28">
+      <Heading
+        id={id}
         className="uppercase"
         style={{
           fontFamily: "var(--font-display)",
@@ -70,8 +75,8 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
           margin: 0,
         }}
       >
-        Selected works
-      </h1>
+        {title}
+      </Heading>
 
       <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}` }}>
         {works.map((work, i) => (
@@ -104,7 +109,7 @@ function WorkCard({ work }: { work: Work }) {
         />
       </div>
 
-      <h2
+      <h3
         className="uppercase text-center"
         style={{
           fontFamily: "var(--font-display)",
@@ -113,31 +118,11 @@ function WorkCard({ work }: { work: Work }) {
           letterSpacing: "-0.02em",
           lineHeight: 1.1,
           color: "var(--ink)",
-          margin: "0.75rem 0 0.5rem",
+          margin: "0.75rem 0 0",
         }}
       >
-        &ldquo;{work.name}&rdquo;
-      </h2>
-
-      <ul className="flex" style={{ border: "1px solid var(--ink)" }}>
-        {work.meta.map((cell, j) => (
-          <li
-            key={cell}
-            className="flex-1 min-w-0 truncate text-center uppercase"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "0.6rem",
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-              padding: "0.2rem 0.5rem",
-              borderLeft: j > 0 ? "1px solid var(--ink)" : undefined,
-              color: "var(--ink)",
-            }}
-          >
-            {cell}
-          </li>
-        ))}
-      </ul>
+        {work.name}
+      </h3>
 
       <p
         className="text-center"
@@ -146,7 +131,7 @@ function WorkCard({ work }: { work: Work }) {
           fontSize: "0.9rem",
           lineHeight: 1.5,
           color: "rgb(var(--ink-rgb) / 0.6)",
-          margin: "0.6rem auto 0",
+          margin: "0.35rem auto 0",
           maxWidth: "52ch",
         }}
       >
