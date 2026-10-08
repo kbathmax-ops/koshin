@@ -17,7 +17,7 @@ export function BackgroundShowcase() {
     <section
       aria-labelledby="background-heading"
       style={{
-        padding: '4rem 1.25rem 0',
+        padding: '0 1.25rem',
         maxWidth: '48rem',
         marginInline: 'auto',
       }}

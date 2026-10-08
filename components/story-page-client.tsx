@@ -311,7 +311,7 @@ export function StoryPageClient() {
       <StoryHero />
 
       {/* Parallax story rows */}
-      <div style={{ position: 'relative', zIndex: 2, background: 'var(--paper)', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+      <div style={{ position: 'relative', zIndex: 2, background: 'var(--paper)', paddingTop: '2.5rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
         {/* 01 — My Background (animated heading + full-bleed slideshow) */}
         <BackgroundShowcase />

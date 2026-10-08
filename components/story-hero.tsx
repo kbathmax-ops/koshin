@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-/* ─── Story hero — three photo bands split by heavy black rules ───
+/* ─── Story hero — two photo bands split by a heavy black rule ───
    Follows the "03 - Artboard 1" layout: a short intro band with the name
-   top-left, a tall middle band with "what I offer" set large on the right
-   (links beside it), and "my background" set large bottom-left. Band
-   heights and type sizes are proportions measured off that artboard.
+   top-left and a tall band with "what I offer" set large on the right (links
+   beside it). Band heights and type sizes are proportions measured off that
+   artboard.
 
-   The photos run bright (Cusco daylight) to near-black (beach at night), so
+   The photos vary a lot in brightness, so
    type sits in cream over a left-hand scrim rather than relying on the image
    underneath it. `position` picks the crop, since a thin band keeps very
    little of a tall photo. */
@@ -16,7 +16,7 @@ type Band = {
   src: string;
   alt: string;
   position: string;
-  slot?: 'intro' | 'offer' | 'background';
+  slot?: 'intro' | 'offer';
 };
 
 const BANDS: Band[] = [
@@ -31,12 +31,6 @@ const BANDS: Band[] = [
     alt: 'The Halifax International Security Forum in session',
     position: '38% 64%',
     slot: 'offer',
-  },
-  {
-    src: '/photo-beach-night.jpg',
-    alt: 'Friends on a pebble beach at night',
-    position: '50% 56%',
-    slot: 'background',
   },
 ];
 
@@ -64,16 +58,16 @@ function grain(baseFrequency: number, size: number, punch = 1) {
 const GRAIN_FINE = grain(0.9, 180, 2.4);
 const GRAIN_COARSE = grain(0.32, 300, 2.0);
 
-export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) {
+export function StoryHero() {
   return (
     <section aria-label="Introduction" className="sh">
       <style>{`
-        /* One viewport tall; the three bands share it 24 / 44 / 32 like the
-           artboard, with heavy rules between them. */
+        /* A little short of one viewport, so the writing underneath peeks
+           out above the fold. The bands share it 24 / 44 like the artboard. */
         .sh {
           display: flex;
           flex-direction: column;
-          height: 100dvh;
+          height: max(26rem, calc(100dvh - 9rem));
           background: var(--ink);
         }
 
@@ -90,7 +84,6 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
 
         .sh-band-intro { flex: 24; padding-left: clamp(1.5rem, 6.1vw, 7rem); }
         .sh-band-offer { flex: 44; justify-content: flex-end; }
-        .sh-band-background { flex: 32; }
 
         /* Clear the fixed nav pill floating over the top of the page. */
         .sh-band-intro { padding-top: 4.5rem; }
@@ -238,15 +231,6 @@ export function StoryHero({ backgroundHref }: { backgroundHref?: string } = {}) 
               <p className="sh-text sh-text-lg">what I offer</p>
             </div>
           )}
-
-          {band.slot === 'background' &&
-            (backgroundHref ? (
-              <Link className="sh-text sh-text-lg sh-body" href={backgroundHref}>
-                my background
-              </Link>
-            ) : (
-              <p className="sh-text sh-text-lg sh-body">my background</p>
-            ))}
         </div>
       ))}
     </section>

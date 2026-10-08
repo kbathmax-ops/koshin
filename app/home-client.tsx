@@ -10,7 +10,7 @@ export function HomeClient() {
       <Nav />
 
       <main className="min-h-screen">
-        <StoryHero backgroundHref="/story" />
+        <StoryHero />
         <SiteFooter />
       </main>
     </>
