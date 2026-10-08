@@ -51,14 +51,14 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-[0.35rem]">
       <input
         name="name"
         type="text"
         placeholder="Name"
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
+        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow disabled:opacity-50"
       />
       <input
         name="email"
@@ -66,7 +66,7 @@ export function ContactForm() {
         placeholder="Email"
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all disabled:opacity-50"
+        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow disabled:opacity-50"
       />
       <textarea
         name="message"
@@ -74,7 +74,7 @@ export function ContactForm() {
         rows={3}
         required
         disabled={status === "sending"}
-        className="w-full bg-surface-container border-none rounded-none px-6 py-4 focus:outline-none focus:ring-2 focus:ring-secondary/30 placeholder:text-on-surface-variant/40 text-on-surface font-medium transition-all resize-none disabled:opacity-50"
+        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow resize-none disabled:opacity-50"
       />
       {status === "error" && (
         <p className="text-sm text-red-600 font-medium">Something went wrong. Try again.</p>
@@ -82,7 +82,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full bg-primary text-white py-4 rounded-none font-medium text-base hover:bg-secondary transition-colors duration-200 active:scale-95 disabled:opacity-50"
+        className="w-full bg-[var(--ink)] text-white border border-[var(--ink)] py-3.5 rounded-none font-medium text-base hover:bg-white hover:text-[var(--ink)] transition-colors duration-200 disabled:opacity-50"
         style={{ fontFamily: "var(--font-display)" }}
       >
         {status === "sending" ? "Sending…" : "Send Message"}

@@ -137,7 +137,7 @@ export default function WorkPage() {
           <FadeUp>
             <div
               className="p-6 md:p-12"
-              style={{ background: 'var(--paper-raised)', border: '1px solid rgb(var(--ink-rgb) / 0.14)' }}
+              style={{ background: '#ffffff', border: '1px solid var(--ink)' }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div>
