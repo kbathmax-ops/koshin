@@ -27,7 +27,7 @@ export function Nav() {
     >
       <div
         className={cn(
-          "bg-[var(--paper-sunk)]/75 backdrop-blur-xl rounded-full w-fit mx-auto flex items-center gap-8 md:gap-10 pl-5 pr-5 py-2.5 text-sm transition-shadow duration-300",
+          "bg-[var(--paper-sunk)]/75 backdrop-blur-xl w-fit mx-auto flex items-center gap-8 md:gap-10 pl-5 pr-5 py-2.5 text-sm transition-shadow duration-300",
           scrolled
             ? "shadow-[0_10px_40px_rgb(var(--ink-rgb)_/_0.10)]"
             : "shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.05)]"
@@ -91,7 +91,7 @@ export function Nav() {
       {/* Mobile dropdown */}
       {menuOpen && (
         <div className="md:hidden mt-2 w-fit mx-auto flex justify-center">
-          <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
+          <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
           <Link
             href="/story"
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
