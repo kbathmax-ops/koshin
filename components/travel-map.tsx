@@ -59,6 +59,10 @@ const p2 = { x: lensCX - ux * lensR, y: lensCY - uy * lensR };
 const WORLD_MARK_BY_NAME = new Map(WORLD.marks.map((m) => [m.name, m]));
 
 // Popover box width, and half of it — used to clamp the card inside the frame.
+/* Below this width the map scrolls sideways instead of shrinking to fit. */
+const PHONE_MAX = 767;
+const PHONE_MAP_W = 1100;
+
 const POP_W = 'min(19rem, 72vw)';
 const POP_HALF = 'min(9.5rem, 36vw)';
 
@@ -76,6 +80,24 @@ export function TravelMap() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const popRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [phone, setPhone] = useState(false);
+
+  /* On a phone the map is far too small to read at screen width, so it's
+     drawn wider than the screen inside a side-scrolling strip, with bigger
+     labels. It opens on the Europe lens, where most of the marks are. */
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${PHONE_MAX}px)`);
+    const update = () => setPhone(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (phone && el) el.scrollLeft = (lensCX / WORLD.W) * el.scrollWidth - el.clientWidth / 2;
+  }, [phone]);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -143,242 +165,265 @@ export function TravelMap() {
 
   return (
     <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center' }}>
-      <motion.div
-        ref={frameRef}
-        initial="hidden"
-        whileInView="shown"
-        viewport={{ once: true, amount: 0.3 }}
-        style={{ position: 'relative', width: '100%', maxWidth: '1180px', aspectRatio: `${WORLD.W} / ${WORLD.H}` }}
+      <div
+        ref={scrollRef}
+        style={{
+          width: '100%',
+          overflowX: phone ? 'auto' : 'visible',
+          overflowY: 'hidden',
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehaviorX: 'contain',
+        }}
       >
-        <svg viewBox={`0 0 ${WORLD.W} ${WORLD.H}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
-          {/* Goode's lobes, each its own closed shape — they read as the ocean
-              behind the land and give the projection its interrupted silhouette. */}
-          {WORLD.lobes.map((d, i) => (
-            <motion.path
-              key={i}
-              d={d}
-              fill={OCEAN}
-              stroke={OCEAN_STROKE}
-              strokeWidth={1.5}
-              strokeLinejoin="round"
-              variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } } }}
-            />
-          ))}
-          {/* Features that straddle an interruption (Greenland, Russia at the
-              antimeridian) get clipped imperfectly by d3 and spill into the
-              gaps between lobes. Clipping land to the lobes keeps the
-              silhouette honest — and the fly-in now assembles inside the map. */}
-          <defs>
-            <clipPath id="goode-lobes">
-              {WORLD.lobes.map((d, i) => (
-                <path key={i} d={d} />
-              ))}
-            </clipPath>
-          </defs>
-          <g clipPath="url(#goode-lobes)">
-            {WORLD.countries.map((c, i) => (
-              <motion.path key={c.name + i} d={c.d} variants={flyIn(c)} style={landStyle(c.visited)} />
-            ))}
-          </g>
-
-          {/* Region ring + connector to the magnifier lens */}
-          <motion.circle
-            cx={A.x} cy={A.y} r={A.r} fill="none" stroke={VISITED_STROKE} strokeWidth={2} strokeDasharray="5 6"
-            variants={{ hidden: { opacity: 0 }, shown: { opacity: 0.9, transition: { duration: 0.4, delay: lensDelay - 0.15 } } }}
-          />
-          <motion.line
-            x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={VISITED_STROKE} strokeWidth={1.6} strokeDasharray="5 6"
-            variants={{ hidden: { opacity: 0 }, shown: { opacity: 0.65, transition: { duration: 0.4, delay: lensDelay - 0.1 } } }}
-          />
-
-          {/* X-marks. European ones are small (the lens carries the detail). */}
-          {WORLD.marks.map((m, i) => {
-            const s = m.europe ? 9 : 15;
-            const note = getTravelNote(m.name);
-            const active = open?.name === m.name;
-            return (
-              <g key={m.name}>
-                {/* Outer group owns the scroll-in pop (inherits parent variants);
-                    the inner group owns hover/selection so re-selecting doesn't
-                    replay the staggered entrance delay. */}
-                <motion.g
-                  variants={{
-                    hidden: { scale: 0, opacity: 0 },
-                    shown: { scale: 1, opacity: 1, transition: { duration: reduced ? 0.3 : 0.5, delay: marksBase + i * 0.07, ease: reduced ? 'easeOut' : EASE_OUT_BACK } },
-                  }}
-                  style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
-                >
-                  <motion.g
-                    animate={{ scale: active ? 1.3 : 1 }}
-                    whileHover={note ? { scale: 1.3 } : undefined}
-                    transition={{ duration: 0.25, ease: EASE_OUT_BACK }}
-                    onClick={note ? () => select(m.name) : undefined}
-                    style={{ transformBox: 'fill-box', transformOrigin: 'center', cursor: note ? 'pointer' : 'default' }}
-                  >
-                    {/* Invisible disc widens the tap target well past the stroke. */}
-                    {note && <circle cx={m.x} cy={m.y} r={s * 2.1} fill="transparent" />}
-                    {/* Not-yet-visited marks pulse instead of sitting solid. */}
-                    <g
-                      className={m.pending ? 'travel-mark-pending' : undefined}
-                      style={m.pending ? { animationDelay: `${lensDelay}s` } : undefined}
-                    >
-                      <line x1={m.x - s} y1={m.y - s} x2={m.x + s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
-                      <line x1={m.x + s} y1={m.y - s} x2={m.x - s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
-                    </g>
-                  </motion.g>
-                </motion.g>
-                {m.label && (
-                  <motion.text
-                    x={m.x} y={m.y + m.labelDy} textAnchor="middle"
-                    variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
-                    onClick={note ? () => select(m.name) : undefined}
-                    style={{ fontFamily: "var(--font-display)", fontSize: '22px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
-                  >
-                    {m.name}
-                  </motion.text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-
-        {/* ── Magnifier lens: zoomed Europe ── */}
         <motion.div
-          variants={{
-            hidden: { scale: 0.4, opacity: 0 },
-            shown: { scale: 1, opacity: 1, transition: { duration: reduced ? 0.3 : 0.55, delay: lensDelay, ease: reduced ? 'easeOut' : EASE_OUT_BACK } },
-          }}
+          ref={frameRef}
+          initial="hidden"
+          whileInView="shown"
+          viewport={{ once: true, amount: 0.3 }}
           style={{
-            position: 'absolute', left: `${LENS_LEFT_PCT}%`, top: `${LENS_TOP_PCT}%`,
-            width: `${LENS_W * 100}%`, aspectRatio: '1', borderRadius: '50%', overflow: 'hidden',
-            border: `1.5px solid ${VISITED_STROKE}`, background: '#ffffff',
-            transformOrigin: 'center',
+            position: 'relative',
+            width: phone ? `${PHONE_MAP_W}px` : '100%',
+            maxWidth: phone ? 'none' : '1180px',
+            margin: '0 auto',
+            aspectRatio: `${WORLD.W} / ${WORLD.H}`,
           }}
         >
-          <svg viewBox={`0 0 ${EUROPE.W} ${EUROPE.H}`} preserveAspectRatio="xMidYMid slice" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-            {EUROPE.countries.map((c, i) => (
-              <path key={c.name + i} d={c.d} style={{ fill: c.visited ? VISITED_FILL : LAND, stroke: c.visited ? VISITED_STROKE : LAND_STROKE, strokeWidth: c.visited ? 1.4 : 0.9, strokeLinejoin: 'round' }} />
+          <svg viewBox={`0 0 ${WORLD.W} ${WORLD.H}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
+            {/* Goode's lobes, each its own closed shape — they read as the ocean
+                behind the land and give the projection its interrupted silhouette. */}
+            {WORLD.lobes.map((d, i) => (
+              <motion.path
+                key={i}
+                d={d}
+                fill={OCEAN}
+                stroke={OCEAN_STROKE}
+                strokeWidth={1.5}
+                strokeLinejoin="round"
+                variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } } }}
+              />
             ))}
-            {EUROPE.marks.map((m) => {
+            {/* Features that straddle an interruption (Greenland, Russia at the
+                antimeridian) get clipped imperfectly by d3 and spill into the
+                gaps between lobes. Clipping land to the lobes keeps the
+                silhouette honest — and the fly-in now assembles inside the map. */}
+            <defs>
+              <clipPath id="goode-lobes">
+                {WORLD.lobes.map((d, i) => (
+                  <path key={i} d={d} />
+                ))}
+              </clipPath>
+            </defs>
+            <g clipPath="url(#goode-lobes)">
+              {WORLD.countries.map((c, i) => (
+                <motion.path key={c.name + i} d={c.d} variants={flyIn(c)} style={landStyle(c.visited)} />
+              ))}
+            </g>
+
+            {/* Region ring + connector to the magnifier lens */}
+            <motion.circle
+              cx={A.x} cy={A.y} r={A.r} fill="none" stroke={VISITED_STROKE} strokeWidth={2} strokeDasharray="5 6"
+              variants={{ hidden: { opacity: 0 }, shown: { opacity: 0.9, transition: { duration: 0.4, delay: lensDelay - 0.15 } } }}
+            />
+            <motion.line
+              x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={VISITED_STROKE} strokeWidth={1.6} strokeDasharray="5 6"
+              variants={{ hidden: { opacity: 0 }, shown: { opacity: 0.65, transition: { duration: 0.4, delay: lensDelay - 0.1 } } }}
+            />
+
+            {/* X-marks. European ones are small (the lens carries the detail). */}
+            {WORLD.marks.map((m, i) => {
+              const s = m.europe ? 9 : 15;
               const note = getTravelNote(m.name);
+              const active = open?.name === m.name;
               return (
-                <g
-                  key={m.name}
-                  onClick={note ? () => select(m.name) : undefined}
-                  style={{ cursor: note ? 'pointer' : 'default' }}
-                >
-                  {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
-                  <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
-                  <text x={m.x} y={m.y + 36} textAnchor="middle" style={{ fontFamily: "var(--font-display)", fontSize: '30px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                <g key={m.name}>
+                  {/* Outer group owns the scroll-in pop (inherits parent variants);
+                      the inner group owns hover/selection so re-selecting doesn't
+                      replay the staggered entrance delay. */}
+                  <motion.g
+                    variants={{
+                      hidden: { scale: 0, opacity: 0 },
+                      shown: { scale: 1, opacity: 1, transition: { duration: reduced ? 0.3 : 0.5, delay: marksBase + i * 0.07, ease: reduced ? 'easeOut' : EASE_OUT_BACK } },
+                    }}
+                    style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+                  >
+                    <motion.g
+                      animate={{ scale: active ? 1.3 : 1 }}
+                      whileHover={note ? { scale: 1.3 } : undefined}
+                      transition={{ duration: 0.25, ease: EASE_OUT_BACK }}
+                      onClick={note ? () => select(m.name) : undefined}
+                      style={{ transformBox: 'fill-box', transformOrigin: 'center', cursor: note ? 'pointer' : 'default' }}
+                    >
+                      {/* Invisible disc widens the tap target well past the stroke. */}
+                      {note && <circle cx={m.x} cy={m.y} r={s * 2.1} fill="transparent" />}
+                      {/* Not-yet-visited marks pulse instead of sitting solid. */}
+                      <g
+                        className={m.pending ? 'travel-mark-pending' : undefined}
+                        style={m.pending ? { animationDelay: `${lensDelay}s` } : undefined}
+                      >
+                        <line x1={m.x - s} y1={m.y - s} x2={m.x + s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
+                        <line x1={m.x + s} y1={m.y - s} x2={m.x - s} y2={m.y + s} stroke={active || m.pending ? MARK_HOT : MARK} strokeWidth={m.europe ? 4 : 6} strokeLinecap="round" />
+                      </g>
+                    </motion.g>
+                  </motion.g>
+                  {m.label && (
+                    <motion.text
+                      x={m.x} y={m.y + m.labelDy * (phone ? 1.5 : 1)} textAnchor="middle"
+                      variants={{ hidden: { opacity: 0 }, shown: { opacity: 1, transition: { duration: 0.35, delay: marksBase + i * 0.07 + 0.12 } } }}
+                      onClick={note ? () => select(m.name) : undefined}
+                      style={{ fontFamily: "var(--font-display)", fontSize: phone ? '34px' : '22px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: phone ? 6 : 4, strokeLinejoin: 'round', cursor: note ? 'pointer' : 'default' }}
+                    >
+                      {m.name}
+                    </motion.text>
+                  )}
                 </g>
               );
             })}
           </svg>
-          <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 500, letterSpacing: '-0.01em', color: VISITED_STROKE, pointerEvents: 'none' }}>
-            Europe
-          </span>
-        </motion.div>
 
-        {/* ── Note popover: pops out of the X it belongs to ── */}
-        <AnimatePresence>
-          {open && (
-            <div ref={popRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 20 }}>
-              {/* Pointer stays pinned to the mark even when the card is nudged
-                  inward to clear the map edge. */}
-              {/* Static wrappers own the placement transform — framer animates
-                  `transform` too, so anchoring and animation can't share an
-                  element without one overwriting the other. */}
-              <span
-                style={{
-                  position: 'absolute',
-                  left: `${open.leftPct}%`,
-                  top: `${open.topPct}%`,
-                  transform: open.placement === 'below'
-                    ? 'translate(-50%, 14px)'
-                    : 'translate(-50%, calc(-100% - 14px))',
-                }}
-              >
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.4 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.4 }}
-                  transition={{ duration: reduced ? 0.12 : 0.22 }}
-                  style={{
-                    display: 'block',
-                    width: 0, height: 0,
-                    borderLeft: '7px solid transparent',
-                    borderRight: '7px solid transparent',
-                    ...(open.placement === 'below'
-                      ? { borderBottom: `8px solid ${VISITED_STROKE}` }
-                      : { borderTop: `8px solid ${VISITED_STROKE}` }),
-                  }}
-                />
-              </span>
+          {/* ── Magnifier lens: zoomed Europe ── */}
+          <motion.div
+            variants={{
+              hidden: { scale: 0.4, opacity: 0 },
+              shown: { scale: 1, opacity: 1, transition: { duration: reduced ? 0.3 : 0.55, delay: lensDelay, ease: reduced ? 'easeOut' : EASE_OUT_BACK } },
+            }}
+            style={{
+              position: 'absolute', left: `${LENS_LEFT_PCT}%`, top: `${LENS_TOP_PCT}%`,
+              width: `${LENS_W * 100}%`, aspectRatio: '1', borderRadius: '50%', overflow: 'hidden',
+              border: `1.5px solid ${VISITED_STROKE}`, background: '#ffffff',
+              transformOrigin: 'center',
+            }}
+          >
+            <svg viewBox={`0 0 ${EUROPE.W} ${EUROPE.H}`} preserveAspectRatio="xMidYMid slice" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+              {EUROPE.countries.map((c, i) => (
+                <path key={c.name + i} d={c.d} style={{ fill: c.visited ? VISITED_FILL : LAND, stroke: c.visited ? VISITED_STROKE : LAND_STROKE, strokeWidth: c.visited ? 1.4 : 0.9, strokeLinejoin: 'round' }} />
+              ))}
+              {EUROPE.marks.map((m) => {
+                const note = getTravelNote(m.name);
+                return (
+                  <g
+                    key={m.name}
+                    onClick={note ? () => select(m.name) : undefined}
+                    style={{ cursor: note ? 'pointer' : 'default' }}
+                  >
+                    {note && <circle cx={m.x} cy={m.y} r={34} fill="transparent" />}
+                    <line x1={m.x - 15} y1={m.y - 15} x2={m.x + 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
+                    <line x1={m.x + 15} y1={m.y - 15} x2={m.x - 15} y2={m.y + 15} stroke={MARK} strokeWidth={6} strokeLinecap="round" />
+                    <text x={m.x} y={m.y + (phone ? 62 : 36)} textAnchor="middle" style={{ fontFamily: "var(--font-display)", fontSize: phone ? '52px' : '30px', fontWeight: 500, fill: MARK, paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: phone ? 9 : 6, strokeLinejoin: 'round' }}>{m.name}</text>
+                  </g>
+                );
+              })}
+            </svg>
+            <span style={{ position: 'absolute', top: '7%', left: 0, right: 0, textAlign: 'center', fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 500, letterSpacing: '-0.01em', color: VISITED_STROKE, pointerEvents: 'none' }}>
+              Europe
+            </span>
+          </motion.div>
 
-              <div
-                style={{
-                  position: 'absolute',
-                  // Clamp horizontally so the card never spills off the map.
-                  left: `clamp(${POP_HALF}, ${open.leftPct}%, calc(100% - ${POP_HALF}))`,
-                  top: `${open.topPct}%`,
-                  width: POP_W,
-                  transform: open.placement === 'below'
-                    ? 'translate(-50%, 22px)'
-                    : 'translate(-50%, calc(-100% - 22px))',
-                }}
-              >
-              <motion.div
-                role="dialog"
-                aria-label={open.name}
-                initial={{ opacity: 0, scale: 0.94, y: open.placement === 'below' ? -8 : 8 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.96, y: open.placement === 'below' ? -6 : 6 }}
-                transition={{ duration: reduced ? 0.15 : 0.26, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  position: 'relative',
-                  pointerEvents: 'auto',
-                  background: '#ffffff',
-                  border: `1px solid ${VISITED_STROKE}`,
-                  padding: '1.15rem 1.25rem 1.3rem',
-                }}
-              >
-                <button
-                  ref={closeRef}
-                  type="button"
-                  onClick={() => setOpen(null)}
-                  aria-label="Close"
+          {/* ── Note popover: pops out of the X it belongs to ── */}
+          <AnimatePresence>
+            {open && (
+              <div ref={popRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 20 }}>
+                {/* Pointer stays pinned to the mark even when the card is nudged
+                    inward to clear the map edge. */}
+                {/* Static wrappers own the placement transform — framer animates
+                    `transform` too, so anchoring and animation can't share an
+                    element without one overwriting the other. */}
+                <span
                   style={{
-                    position: 'absolute', top: '0.5rem', right: '0.5rem',
-                    width: '1.75rem', height: '1.75rem', borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: 'rgb(var(--ink-rgb) / 0.06)', border: 'none',
-                    color: 'rgb(var(--ink-rgb) / 0.6)', fontSize: '0.8rem', lineHeight: 1, cursor: 'pointer',
+                    position: 'absolute',
+                    left: `${open.leftPct}%`,
+                    top: `${open.topPct}%`,
+                    transform: open.placement === 'below'
+                      ? 'translate(-50%, 14px)'
+                      : 'translate(-50%, calc(-100% - 14px))',
                   }}
                 >
-                  ✕
-                </button>
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.4 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.4 }}
+                    transition={{ duration: reduced ? 0.12 : 0.22 }}
+                    style={{
+                      display: 'block',
+                      width: 0, height: 0,
+                      borderLeft: '7px solid transparent',
+                      borderRight: '7px solid transparent',
+                      ...(open.placement === 'below'
+                        ? { borderBottom: `8px solid ${VISITED_STROKE}` }
+                        : { borderTop: `8px solid ${VISITED_STROKE}` }),
+                    }}
+                  />
+                </span>
 
-                <h3 style={{
-                  fontFamily: "var(--font-display)", fontWeight: 500,
-                  fontSize: '1.15rem', letterSpacing: '-0.03em', lineHeight: 1.15,
-                  color: 'var(--ink)', margin: '0 2rem 0 0',
-                }}>
-                  {open.name}
-                </h3>
+                <div
+                  style={{
+                    position: 'absolute',
+                    // Clamp horizontally so the card never spills off the map.
+                    left: `clamp(${POP_HALF}, ${open.leftPct}%, calc(100% - ${POP_HALF}))`,
+                    top: `${open.topPct}%`,
+                    width: POP_W,
+                    transform: open.placement === 'below'
+                      ? 'translate(-50%, 22px)'
+                      : 'translate(-50%, calc(-100% - 22px))',
+                  }}
+                >
+                <motion.div
+                  role="dialog"
+                  aria-label={open.name}
+                  initial={{ opacity: 0, scale: 0.94, y: open.placement === 'below' ? -8 : 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: open.placement === 'below' ? -6 : 6 }}
+                  transition={{ duration: reduced ? 0.15 : 0.26, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    position: 'relative',
+                    pointerEvents: 'auto',
+                    background: '#ffffff',
+                    border: `1px solid ${VISITED_STROKE}`,
+                    padding: '1.15rem 1.25rem 1.3rem',
+                  }}
+                >
+                  <button
+                    ref={closeRef}
+                    type="button"
+                    onClick={() => setOpen(null)}
+                    aria-label="Close"
+                    style={{
+                      position: 'absolute', top: '0.5rem', right: '0.5rem',
+                      width: '1.75rem', height: '1.75rem', borderRadius: '50%',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      background: 'rgb(var(--ink-rgb) / 0.06)', border: 'none',
+                      color: 'rgb(var(--ink-rgb) / 0.6)', fontSize: '0.8rem', lineHeight: 1, cursor: 'pointer',
+                    }}
+                  >
+                    ✕
+                  </button>
 
-                <p style={{
-                  fontSize: '0.82rem', lineHeight: 1.6, color: 'rgb(var(--ink-rgb) / 0.72)',
-                  margin: '0.8rem 0 0', whiteSpace: 'pre-line',
-                }}>
-                  {open.blurb}
-                </p>
-              </motion.div>
+                  <h3 style={{
+                    fontFamily: "var(--font-display)", fontWeight: 500,
+                    fontSize: '1.15rem', letterSpacing: '-0.03em', lineHeight: 1.15,
+                    color: 'var(--ink)', margin: '0 2rem 0 0',
+                  }}>
+                    {open.name}
+                  </h3>
+
+                  <p style={{
+                    fontSize: '0.82rem', lineHeight: 1.6, color: 'rgb(var(--ink-rgb) / 0.72)',
+                    margin: '0.8rem 0 0', whiteSpace: 'pre-line',
+                  }}>
+                    {open.blurb}
+                  </p>
+                </motion.div>
+                </div>
               </div>
-            </div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+
+      {phone && (
+        <p style={{ margin: 0, fontFamily: 'var(--font-display)', fontSize: '0.85rem', color: 'rgb(var(--ink-rgb) / 0.55)' }}>
+          ← swipe to explore →
+        </p>
+      )}
 
       {/* Visited chips — the keyboard-accessible way into the same notes. */}
       <figcaption style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: 500, letterSpacing: '-0.01em', color: 'rgb(var(--ink-rgb) / 0.6)' }}>

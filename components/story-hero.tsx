@@ -15,9 +15,9 @@ import { motion } from 'framer-motion';
 
 const POINTS = [
   'Born & raised in downtown & uptown Toronto',
-  "Went to arts school for 9 years, developed a strong eye for visuals & talent in all artistic mediums (developed the taste everyone's talking about in tech)",
-  "@ 15, got invited to a NATO/EU conference in Halifax → wanted to use my creativity to help peoples' day-to-day",
-  'High school: student council, finance for the Toronto Youth Environmental Council, 30k in sales for GradCity, marketing for Outward Bound Canada. Loved anything related to attracting people to a cause',
+  'Went to arts school for 9 years, developed a strong taste for visuals',
+  '@ 15, got invited to a NATO/EU conference in Halifax → decided to use my creativity to improve peoples’ lives',
+  'HS: Student council, finance for an environmental nonprofit, 30k in sales for GradCity, marketing for Outward Bound Canada. I loved attracting people to a cause',
   'Solo travelled 9 countries in my summers → wanted adventure & got it + social intelligence skills maxxed',
 ];
 
