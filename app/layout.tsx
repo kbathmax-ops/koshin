@@ -38,14 +38,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "Koshin — Developer Portfolio",
-    title: "Koshin — Student Developer & AI Builder",
-    description:
-      "17-year-old developer and student founder. AI-powered travel software, sanctions research tools, and B2B SaaS, built with Next.js and the Claude API.",
+    siteName: "Koshin Bathmax",
+    title: "Koshin Bathmax",
+    description: "Changing how people see brands & solo-travelling when I can.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "koshin",
+    title: "Koshin Bathmax",
     description:
       "18 year old taking a gap year to work in startup growth & travel.",
   },

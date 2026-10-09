@@ -1,24 +1,17 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { OgCard } from "@/components/og-card";
+import { OgCard, OG_SIZE, ogAssets } from "@/components/og-card";
 
-export const alt = "Koshin — Student Developer & AI Builder";
-export const size = { width: 1200, height: 630 };
+export const alt = "Koshin Bathmax — changing how people see brands & solo-travelling when I can";
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
 export default async function Image() {
-  // Satori has no built-in font fallback: an empty `fonts` array throws
-  // "No fonts are loaded", which renders the whole card imageless. Read the
-  // face off disk so generating this never depends on a network round-trip.
-  const publicSansBold = await readFile(
-    join(process.cwd(), "assets/fonts/PublicSans-ExtraBold.ttf"),
-  );
+  // Fonts and photo come off disk so generating this never depends on a
+  // network round-trip (Satori also throws with no fonts loaded).
+  const { fonts, photo } = await ogAssets();
 
-  return new ImageResponse(<OgCard subtitle="Student Developer & AI Builder" />, {
-    ...size,
-    fonts: [
-      { name: "Public Sans", data: publicSansBold, style: "normal", weight: 800 },
-    ],
-  });
+  return new ImageResponse(
+    <OgCard subtitle="changing how people see brands & solo-travelling when I can" photo={photo} />,
+    { ...size, fonts },
+  );
 }
