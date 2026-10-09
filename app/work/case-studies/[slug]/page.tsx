@@ -152,6 +152,9 @@ function Intro({ t }: { t: Teardown }) {
         <p>Impression Ventures invests in startups revolutionizing financial technology, from banking, insurance, and wealth management.</p>
         <p>This brand represents the foundation of cutting edge innovation in a rapidly growing sector. For this identity, the intention was to create a brand that feels innovative and egolessly bold, prioritizing their strong results to investors and preeminence for founders.</p>
         <p>I edited Impression’s classic mark - a spark, an homage to their name, but now with sharper, stronger edges to exhibit authority.</p>
+        <Link href="/work/case-studies/impression-ventures/redesign" className="td-link td-link--strong">
+          View the rebuilt site <ArrowUpRight className="h-4 w-4" aria-hidden />
+        </Link>
       </header>
     );
   }
