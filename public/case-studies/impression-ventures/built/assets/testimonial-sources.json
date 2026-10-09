@@ -1,0 +1,103 @@
+{
+  "source": "https://impression.ventures/",
+  "testimonials": [
+    {
+      "name": "Sean",
+      "role": "CEO",
+      "quote": "Impression Ventures has been positively invaluable to Owl.co. They're often our first call with every challenge as they give us objective, practical, and timely advice. They are hands-on but never controlling and they've been instrumental in our success.",
+      "photo": "assets/testimonial-02-photo.png",
+      "logo": "assets/testimonial-02-logo.png"
+    },
+    {
+      "name": "Leah & Tara",
+      "role": "CEO  & COO",
+      "quote": "Impression Ventures has provided us with the resources, assistance, & flexibility we need to remain laser-focused on the solutions Trustate provides to our users. They have been a great sounding board for us, even prior to making an investment in Trustate.",
+      "photo": "assets/testimonial-01-photo.jpeg",
+      "logo": "assets/testimonial-01-logo.png"
+    },
+    {
+      "name": "Hanif",
+      "role": "CEO",
+      "quote": "Experiencing start-up hypergrowth and success in a dynamically changing world was made possible through the unparalleled fintech expertise, mentorship and guidance from Impression Ventures.",
+      "photo": "assets/testimonial-03-photo.png",
+      "logo": "assets/testimonial-03-logo.gif"
+    },
+    {
+      "name": "Tyler",
+      "role": "CEO",
+      "quote": "Impression Ventures has been a great partner and is always in our corner whenever we need them. As entrepreneurs themselves, they completely understand what it takes for a fintech startup like Avesdo to grow and succeed.",
+      "photo": "assets/testimonial-04-photo.jpeg",
+      "logo": "assets/testimonial-04-logo.png"
+    },
+    {
+      "name": "Lauren",
+      "role": "CEO",
+      "quote": "Our partnership with Impression Ventures has pushed us to think bigger and better. We\u2019re so glad to be a part of such a supportive ecosystem, and to have the opportunity to make incredible connections with other leaders in Canada as a result.",
+      "photo": "assets/testimonial-05-photo.jpg",
+      "logo": "assets/testimonial-05-logo.png"
+    },
+    {
+      "name": "Corey",
+      "role": "CEO",
+      "quote": "The value Impression Ventures has delivered is beyond that of any introductions to customers or candidates: it is the understanding of what it means to be an entrepreneur of an early stage venture.",
+      "photo": "assets/testimonial-06-photo.jpg",
+      "logo": "assets/testimonial-06-logo.png"
+    },
+    {
+      "name": "Rasha",
+      "role": "CEO",
+      "quote": "You have no idea how much I love that we're with Impression Ventures. They're the absolute best guys to partner with in FinTech!",
+      "photo": "assets/testimonial-07-photo.jpg",
+      "logo": "assets/testimonial-07-logo.png"
+    },
+    {
+      "name": "Darryl",
+      "role": "CEO",
+      "quote": "I have to say after 1 year in and a several ups and downs in my business that they\u2019ve been men of their word and I can\u2019t imagine having better partners to support us through the exciting year we\u2019ve had.",
+      "photo": "assets/testimonial-08-photo.jpeg",
+      "logo": "assets/testimonial-08-logo.png"
+    },
+    {
+      "name": "Cactus",
+      "role": "CEO",
+      "quote": "The IV team has been our perfect partner through the many challenges of startups. They\u2019ve remained incredibly supportive and always positive. I couldn\u2019t have asked for better investors.",
+      "photo": "assets/testimonial-09-photo.jpg",
+      "logo": "assets/testimonial-09-logo.png"
+    },
+    {
+      "name": "Dave Hanrahan",
+      "role": "CEO",
+      "quote": "The process with Impression Ventures has been refreshing... working with people who are thoughtful, people who love getting into the weeds and people who understand that you can create a really really big business if you do it in the correct way and plan for scale and invest in the right areas.",
+      "photo": "assets/testimonial-10-photo.jpg",
+      "logo": "assets/testimonial-10-logo.png"
+    },
+    {
+      "name": "Jeff",
+      "role": "Founder",
+      "quote": "After CCC Intelligent Solutions acquired Sakekeep in February 2022 \"I have an incredible amount of gratitude for Maor & Christian for their belief in my business and my vision. I would not be here with this amazing parent company that just acquired us without their support. You just want to rinse and repeat with these guys\"",
+      "photo": "assets/testimonial-11-photo.jpg",
+      "logo": "assets/testimonial-11-logo.jpg"
+    },
+    {
+      "name": "Mike",
+      "role": "CEO",
+      "quote": "We love their domain knowledge and their expertise in the Fintech space. They have a strong reputation among their founders... the #1 question when fundraising is can you trust your VCs to have your back and Impression certainly has that reputation in the market.",
+      "photo": "assets/testimonial-12-photo.jpeg",
+      "logo": "assets/testimonial-12-logo.png"
+    },
+    {
+      "name": "Josh",
+      "role": "Co-Founder",
+      "quote": "The biggest thing for Sally and I is that Impression is a true partner. The way they respect and communicate with us on an equal playing field. They have our best interests in both low & high times. It's been awesome to work with them.",
+      "photo": "assets/testimonial-13-photo.jpg",
+      "logo": "assets/testimonial-13-logo.png"
+    },
+    {
+      "name": "Dan",
+      "role": "CEO",
+      "quote": "Working with the Impression team has been invaluable in providing guidance and insight. We've been able to enjoy strategic benefits from an investor that's providing more than just capital and really cares about what we're trying to do, the vision we have and carrying us forward.",
+      "photo": "assets/testimonial-14-photo.jpg",
+      "logo": "assets/testimonial-14-logo.png"
+    }
+  ]
+}
