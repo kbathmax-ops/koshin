@@ -25,7 +25,7 @@ export type DesignProject = {
 export const designWork: DesignProject[] = [
   {
     id: "impression-ventures",
-    name: "Impression Ventures",
+    name: "Impression Ventures Case Study",
     href: "/work/case-studies/impression-ventures",
     role: "Identity & website redesign",
     year: "2026",

@@ -35,7 +35,7 @@ function fromDesign(d: DesignProject): Work {
     line: d.tagline,
     image: d.shots[0].src,
     href: d.href,
-    external: true,
+    external: Boolean(d.href && !d.href.startsWith("/")),
   };
 }
 
@@ -44,17 +44,40 @@ const rule = "rgb(var(--ink-rgb) / 0.14)";
 export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
   // A design piece that is also a build (WAY) only shows once, as the build.
   const builtUrls = new Set(products.map((p) => p.liveUrl).filter(Boolean));
-  const misc = designs.filter((d) => !d.href || !builtUrls.has(d.href));
+  const caseStudies = designs.filter((d) => d.id === "impression-ventures");
+  const misc = designs.filter((d) => d.id !== "impression-ventures" && (!d.href || !builtUrls.has(d.href)));
 
   return (
     <div style={{ paddingTop: "clamp(7rem, 16vh, 10rem)" }}>
-      <WorkSection id="selected-works" title="Selected works" level="h1" works={products.map(fromProject)} />
+      <WorkSection id="selected-works" title="Selected works" level="h1" works={[...caseStudies.map(fromDesign), ...products.map(fromProject)]} />
       {misc.length > 0 && (
         <div style={{ paddingTop: "clamp(4rem, 10vh, 7rem)" }}>
-          <WorkSection id="misc-design" title="Miscellaneous design" works={misc.map(fromDesign)} />
+          <DesignGallery designs={misc} />
         </div>
       )}
     </div>
+  );
+}
+
+function DesignGallery({ designs }: { designs: DesignProject[] }) {
+  return (
+    <section id="misc-design" aria-labelledby="misc-design-title" className="scroll-mt-28 mx-auto max-w-7xl px-6 md:px-12">
+      <h2 id="misc-design-title" className="text-3xl md:text-5xl font-medium tracking-tight mb-10" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>Miscellaneous design</h2>
+      <ul className="flex flex-wrap items-start gap-x-12 gap-y-16">
+        {designs.map(design => {
+          const shot = design.shots[0];
+          const artwork = <Image src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} sizes="(min-width: 768px) 600px, 100vw" className="block w-full h-auto" />;
+          return (
+            <li key={design.id} id={`design-${design.id}`} className="max-w-full scroll-mt-28" style={{ width: shot.width / shot.height > 1.8 ? "40rem" : "30rem" }}>
+              <figure>
+                {design.href ? (design.href.startsWith("/") ? <Link href={design.href}>{artwork}</Link> : <a href={design.href} target="_blank" rel="noopener noreferrer">{artwork}</a>) : artwork}
+                <figcaption className="mt-3 text-sm" style={{ color: "rgb(var(--ink-rgb) / .7)" }}>{design.name}</figcaption>
+              </figure>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
