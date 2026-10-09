@@ -255,6 +255,13 @@ const withRedesign = (sections: TeardownSection[]) => sections.flatMap((section)
     id: "founder-support",
     label: "Founder support",
     headline: "Practical support <after the cheque>",
+    theirs: {
+      ...section.theirs,
+      src: `${dir}/05-founder-support-before.png`,
+      alt: "Original Lead Investments and Guide and Engage cards describing lead investments and founder support",
+      width: 1798,
+      height: 1102,
+    },
     mine: REDESIGN["founder-support"],
   }];
 });
