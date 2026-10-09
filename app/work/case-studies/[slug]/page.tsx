@@ -7,6 +7,7 @@ import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 import { AnnotatedShot } from "@/components/poster/annotated-shot";
 import { BookStack } from "@/components/poster/book-stack";
+import { CarouselDetail } from "@/components/poster/carousel-detail";
 import { Bracketed, CodeTag, PixelMark, PosterFooter, TriBadge } from "@/components/poster/primitives";
 import { getTeardown, teardowns } from "@/lib/teardowns";
 import type { Teardown, TeardownSection } from "@/lib/teardowns/types";
@@ -73,9 +74,7 @@ export default async function TeardownPage({ params }: Params) {
                   <Image src={advisors.theirs.src} alt={advisors.theirs.alt} width={advisors.theirs.width} height={advisors.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
                 ) : section.mine?.shot && (
                   section.id === "portfolio" ? (
-                    <div className="td-carousel-detail">
-                      <Image src={section.mine.shot.src} alt="Close-up of the redesigned vertical portfolio logo carousel" width={section.mine.shot.width} height={section.mine.shot.height} sizes="2000px" className="td-spread-image" />
-                    </div>
+                    <CarouselDetail shot={section.mine.shot} />
                   ) : (
                     <Image src={section.mine.shot.src} alt={section.mine.shot.alt} width={section.mine.shot.width} height={section.mine.shot.height} sizes={section.theirs.pending ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"} className="td-spread-image" />
                   )
