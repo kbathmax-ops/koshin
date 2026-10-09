@@ -24,6 +24,22 @@ export type DesignProject = {
 
 export const designWork: DesignProject[] = [
   {
+    id: "impression-ventures",
+    name: "Impression Ventures",
+    href: "/work/case-studies/impression-ventures",
+    role: "Identity & website redesign",
+    year: "2026",
+    description: "Impression Ventures invests in startups revolutionizing financial technology, from banking, insurance, and wealth management.",
+    tagline: "A fintech venture capital identity and homepage redesign.",
+    shots: [{
+      src: "/case-studies/impression-ventures/after/impression-centred-glass-intro.png",
+      alt: "Impression Ventures redesign: centred wordmark over the glass spark mark",
+      label: "Homepage redesign",
+      width: 1280,
+      height: 720,
+    }],
+  },
+  {
     id: "way",
     tagline: "A keychain compass for finding friends when cell service drops.",
     name: "WAY",
