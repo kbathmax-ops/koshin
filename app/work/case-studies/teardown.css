@@ -474,3 +474,32 @@
 /* A plain, three-paragraph introduction to the identity. */
 .td-intro-minimal{max-width:56rem;gap:1.6rem;border-bottom:0;padding-bottom:1rem}
 .td-intro-minimal p{font-size:clamp(1.125rem,1.8vw,1.5rem);line-height:1.6;color:rgb(var(--ink-rgb) / .85)}
+
+/* Impression: centred, numbered pairs, with only the page images. */
+.td-page--gallery .td-main { max-width: 96rem; padding-bottom: 6rem; }
+.td-page--gallery .td-intro-minimal {
+  margin-inline: auto;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+.td-spread { padding-block: clamp(2rem, 5vw, 5rem); scroll-margin-top: 6rem; }
+.td-spread-number {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  letter-spacing: .08em;
+}
+.td-spread-pages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.5rem, 2vw, 2rem);
+  align-items: start;
+}
+.td-spread-image { display: block; width: 100%; height: auto; }
+.td-spread-pages--single { grid-template-columns: minmax(0, 1fr); max-width: calc(50% - 1rem); margin-inline: auto; }
+@media (max-width: 767px) {
+  .td-page--gallery .td-main { padding-inline: .75rem; }
+  .td-spread-pages--single { max-width: 100%; }
+}
