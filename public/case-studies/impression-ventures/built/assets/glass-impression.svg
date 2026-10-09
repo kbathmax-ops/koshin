@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" fill="none">
+<defs>
+ <linearGradient id="body" x1="220" y1="80" x2="700" y2="850" gradientUnits="userSpaceOnUse"><stop stop-color="#eaf7ff" stop-opacity=".25"/><stop offset=".24" stop-color="#bed8f0" stop-opacity=".55"/><stop offset=".4" stop-color="#f9fdff" stop-opacity=".94"/><stop offset=".51" stop-color="#7094ba" stop-opacity=".4"/><stop offset=".64" stop-color="#f7fcff" stop-opacity=".82"/><stop offset="1" stop-color="#aec8e0" stop-opacity=".2"/></linearGradient>
+ <linearGradient id="edge" x1="160" y1="100" x2="750" y2="750" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset=".3" stop-color="#9bb5d0"/><stop offset=".48" stop-color="white"/><stop offset=".68" stop-color="#7997b9"/><stop offset="1" stop-color="#ecf7ff"/></linearGradient>
+ <linearGradient id="shine" x1="200" y1="100" x2="680" y2="850" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".95"/><stop offset=".47" stop-color="white" stop-opacity=".05"/><stop offset=".54" stop-color="white" stop-opacity=".9"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="12"/></filter>
+ <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.3"/></filter>
+ <g id="rays" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M432 529 417 105"/><path d="M357 557 180 158"/><path d="M288 624 74 410"/><path d="M266 697 65 641"/><path d="M280 778 121 774"/><path d="M534 559 739 207"/><path d="M607 634 784 516"/><path d="M636 715 803 687"/><path d="M641 791 771 779"/>
+ </g>
+</defs>
+<use href="#rays" transform="translate(13 19)" stroke="#5b7898" stroke-opacity=".20" stroke-width="54" filter="url(#shadow)"/>
+<use href="#rays" stroke="url(#edge)" stroke-width="60"/>
+<use href="#rays" stroke="url(#body)" stroke-width="55"/>
+<use href="#rays" transform="translate(-7 -5)" stroke="url(#shine)" stroke-width="7" filter="url(#soft)"/>
+<use href="#rays" transform="translate(15 5)" stroke="#adc8e3" stroke-opacity=".28" stroke-width="3"/>
+</svg>

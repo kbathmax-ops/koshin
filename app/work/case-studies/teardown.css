@@ -1,0 +1,476 @@
+/*
+ * Website teardown — minimal "stacked pages" layout.
+ * Rules: .claude/skills/poster-case-study/SKILL.md
+ */
+
+.td-page {
+  --td-cream: #f2efe6;
+  --fg: var(--ink);
+  --bg: var(--paper);
+  --rule: rgb(var(--ink-rgb) / 0.85);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100dvh;
+}
+
+.td-main {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 8rem 1rem 2rem;
+}
+@media (min-width: 768px) {
+  .td-main { padding-inline: 2rem; }
+}
+
+/* ---------- Type ---------- */
+
+.td-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.td-display--xl { font-size: clamp(2.75rem, 7vw, 6rem); }
+.td-display--md { font-size: clamp(2rem, 4.2vw, 3.5rem); }
+
+.poster-bracket { white-space: nowrap; opacity: 0.45; }
+
+.td-num,
+.poster-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Intro ---------- */
+
+.td-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.td-back,
+.td-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.td-back { opacity: 0.85; }
+.td-link { border-bottom: 1px solid var(--rule); }
+.td-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+.td-link--strong { font-weight: 700; }
+.td-badges { display: flex; align-items: flex-end; gap: 0.75rem; }
+.td-lede {
+  max-width: 40rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: rgb(var(--ink-rgb) / 0.78);
+}
+.td-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.td-index a { display: inline-flex; gap: 0.5rem; align-items: baseline; }
+.td-index a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Sections + stacked sheets ---------- */
+
+.td-section {
+  padding-block: 5rem;
+  border-bottom: 1px solid rgb(var(--ink-rgb) / 0.12);
+  scroll-margin-top: 6rem;
+}
+.td-kicker {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.td-section > div:first-child { margin-bottom: 2.5rem; }
+
+/* ---------- Book: before + after pages ---------- */
+
+.book-tabs {
+  display: inline-flex;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--rule);
+}
+.book-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-width: 8.5rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.book-tab + .book-tab { border-left: 1px solid var(--rule); }
+.book-tab[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.book-tab-sub {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.book-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Both pages share one grid cell; "after" starts halfway down "before"
+   (--book-offset is measured in BookStack). */
+.book-stack {
+  --book-offset: 12rem;
+  display: grid;
+  padding: 0 12px 12px 0;
+}
+.book-page {
+  grid-area: 1 / 1;
+  position: relative;
+  align-self: start;
+  width: calc(100% - 1rem);
+  padding: 1.25rem;
+  border: 1px solid rgb(var(--ink-rgb) / 0.18);
+  transition: translate 0.3s ease, box-shadow 0.3s ease;
+}
+@media (min-width: 768px) {
+  .book-page { width: 72%; padding: 1.75rem; }
+}
+
+/* Before: the bound book — a stack of page edges behind it, tilted left. */
+.book-page--before {
+  justify-self: start;
+  background: var(--paper-raised);
+  rotate: -0.6deg;
+  box-shadow:
+    4px 4px 0 -1px var(--paper-raised),
+    4px 4px 0 0 rgb(var(--ink-rgb) / 0.16),
+    8px 8px 0 -1px var(--paper-raised),
+    8px 8px 0 0 rgb(var(--ink-rgb) / 0.12),
+    12px 12px 0 -1px var(--paper-raised),
+    12px 12px 0 0 rgb(var(--ink-rgb) / 0.08);
+}
+
+/* After: a loose page laid on top — tilted right, shaded binding edge, dog-eared corner. */
+.book-page--after {
+  justify-self: end;
+  margin-top: var(--book-offset);
+  background:
+    linear-gradient(to right, rgb(var(--ink-rgb) / 0.08), transparent 2rem),
+    var(--td-cream);
+  rotate: 0.5deg;
+  box-shadow:
+    -1px 0 0 rgb(var(--ink-rgb) / 0.1),
+    0 2px 4px rgb(var(--ink-rgb) / 0.08),
+    0 28px 50px -16px rgb(var(--ink-rgb) / 0.32);
+}
+.book-page--after::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: linear-gradient(315deg, var(--paper) 50%, #ddd7c8 50%);
+  box-shadow: -2px -2px 4px rgb(var(--ink-rgb) / 0.08);
+}
+
+.book-page.is-front { z-index: 2; translate: 0 -4px; }
+.book-page--before.is-front {
+  box-shadow:
+    4px 4px 0 -1px var(--paper-raised),
+    4px 4px 0 0 rgb(var(--ink-rgb) / 0.16),
+    8px 8px 0 -1px var(--paper-raised),
+    8px 8px 0 0 rgb(var(--ink-rgb) / 0.12),
+    0 28px 50px -16px rgb(var(--ink-rgb) / 0.32);
+}
+
+.book-page-tag {
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Covers the page while it's underneath; one tap brings it forward. */
+.book-page-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  cursor: pointer;
+  background: transparent;
+}
+.book-page-hint {
+  position: absolute;
+  padding: 0.35rem 0.6rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.book-page--before .book-page-hint { top: 1.25rem; right: 1.25rem; }
+.book-page--after .book-page-hint { bottom: 1.25rem; right: 3rem; }
+.book-page-reveal:hover .book-page-hint,
+.book-page-reveal:focus-visible .book-page-hint { opacity: 1; }
+.book-page-reveal:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .book-page { rotate: none; transition: none; }
+  .book-page.is-front { translate: none; }
+}
+
+.td-shot { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); }
+
+.td-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1.5px dashed var(--rule);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.td-pixel-arrow { width: 2rem; height: auto; }
+
+.td-notes {
+  display: grid;
+  gap: 0.5rem 1.75rem;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+@media (min-width: 1024px) {
+  .td-notes { grid-template-columns: 1fr 1fr; }
+}
+.td-notes li {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgb(var(--ink-rgb) / 0.15);
+}
+.td-notes .td-num { padding-top: 0.15rem; }
+.td-notes strong { font-weight: 600; }
+.td-notes-todo { color: rgb(var(--ink-rgb) / 0.5); }
+
+/* ---------- Annotated screenshot ---------- */
+
+.ann { display: flex; flex-direction: column; }
+.ann-row {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+}
+.ann-row li { position: relative; padding: 0 0.25rem; }
+.ann-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15rem;
+}
+/* Tick that joins the label to its arrow on the screenshot edge. */
+.ann-row li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1.5px;
+  height: 0.875rem;
+  background: currentColor;
+}
+.ann-row--top { padding-bottom: 0.875rem; }
+.ann-row--top li::after { top: 100%; }
+.ann-row--bottom { padding-top: 0.875rem; }
+.ann-row--bottom li::after { bottom: 100%; }
+
+.ann-frame { position: relative; outline: 1px solid var(--rule); }
+.ann-img { display: block; width: 100%; height: auto; }
+.ann-pending {
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(135deg, transparent 0 10px, rgb(127 127 127 / 0.12) 10px 11px);
+}
+.ann-lines {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.ann-halo { stroke: #fff; stroke-width: 4; stroke-linecap: round; }
+.ann-line { stroke: var(--ink); stroke-width: 1.5; }
+.ann-pin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  outline: 2px solid #fff;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .ann-row { display: grid; }
+  .ann-row--empty { display: block; padding: 0; }
+  .ann-lines { display: block; }
+  .ann-pin { display: none; }
+}
+
+/* ---------- Takeaways ---------- */
+
+.td-takeaways { border-bottom: 0; }
+.td-takeaways-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.td-pixel-disc { width: clamp(3.5rem, 8vw, 5.5rem); height: auto; flex: none; }
+.td-rules { display: grid; max-width: 48rem; }
+.td-rules li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+.td-rules h3 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.td-rules p { font-size: 0.9375rem; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.75); }
+
+/* ---------- Footer strip + badges + pixels ---------- */
+
+.td-foot {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+@media (min-width: 768px) {
+  .td-foot { padding-inline: 2rem; }
+}
+.poster-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.poster-foot-mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  background: var(--fg);
+  color: var(--bg);
+}
+.poster-foot-mark svg { width: 70%; }
+.poster-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  line-height: 1;
+}
+.poster-stack li {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-right: 0.25rem;
+  border: 1px solid var(--rule);
+}
+.poster-stack-glyph {
+  display: inline-grid;
+  place-items: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-right: 1px solid var(--rule);
+  font-size: 0.5rem;
+}
+.poster-barcode { width: 2.5rem; height: 1.25rem; flex: none; }
+.poster-foot-right { margin-left: auto; text-align: right; }
+@media (max-width: 480px) {
+  .poster-barcode { display: none; }
+}
+
+.poster-tri { width: 3.25rem; height: auto; }
+.poster-tri-text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  fill: currentColor;
+}
+.poster-code {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1.5px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.poster-code span { padding: 0.25rem 0.4rem; }
+.poster-code span + span { border-top: 1.5px solid var(--rule); }
+
+.td-disclaimer {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgb(var(--ink-rgb) / 0.6);
+}
+
+/* ---------- Collateral gallery ---------- */
+
+.td-collateral { border-top: 1px solid rgb(var(--ink-rgb) / 0.12); }
+.td-collateral-lede { margin-top: 1rem; }
+.td-gallery {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+.td-gallery li { flex: none; scroll-snap-align: start; }
+.td-gallery img { display: block; width: auto; height: clamp(18rem, 42vw, 30rem); max-width: none; }
+
+/* A plain, three-paragraph introduction to the identity. */
+.td-intro-minimal{max-width:56rem;gap:1.6rem;border-bottom:0;padding-bottom:1rem}
+.td-intro-minimal p{font-size:clamp(1.125rem,1.8vw,1.5rem);line-height:1.6;color:rgb(var(--ink-rgb) / .85)}

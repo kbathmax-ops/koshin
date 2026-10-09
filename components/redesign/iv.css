@@ -1,0 +1,393 @@
+/*
+ * Impression Ventures redesign concept. Layout after the Northzone reference:
+ * full-width serif wordmark, split tracked-caps nav, centred condensed headline,
+ * caps section labels over horizontal rows. Blue + orange kept from their brand.
+ */
+
+.iv {
+  --iv-blue: #1b66c0;
+  --iv-blue-deep: #12487f;
+  --iv-orange: #ff8a6b;
+  --iv-ink: #0e1726;
+  --iv-paper: #ffffff;
+  --iv-mist: #eef3fa;
+  --iv-line: rgb(14 23 38 / 0.14);
+  --iv-muted: rgb(14 23 38 / 0.62);
+  --iv-gutter: clamp(1rem, 3vw, 2.5rem);
+
+  background: var(--iv-paper);
+  color: var(--iv-ink);
+  font-family: var(--iv-sans), "Helvetica Neue", Arial, sans-serif;
+  min-height: 100dvh;
+}
+.iv a { color: inherit; }
+
+.iv-wrap {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding-inline: var(--iv-gutter);
+}
+
+.iv-caps {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.iv-label {
+  display: block;
+  margin-bottom: 1.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.iv-condensed {
+  font-family: var(--iv-condensed), "Impact", "Arial Narrow", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+.iv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  background: var(--iv-orange);
+  color: var(--iv-ink);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+.iv-btn:hover { background: #ff7752; }
+.iv-btn--sm { padding: 0.55rem 0.9rem; font-size: 0.75rem; }
+.iv-btn:focus-visible,
+.iv-link:focus-visible,
+.iv-menu-toggle:focus-visible { outline: 2px solid var(--iv-blue); outline-offset: 3px; }
+
+.iv-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* ---------- Header ---------- */
+
+.iv-header { padding-top: 1.5rem; }
+.iv-wordmark {
+  display: block;
+  font-family: var(--iv-serif), "Didot", Georgia, serif;
+  font-weight: 900;
+  font-size: 13.4vw;
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  text-align: center;
+  white-space: nowrap;
+}
+@media (min-width: 90rem) {
+  .iv-wordmark { font-size: 12rem; }
+}
+.iv-wordmark-sub {
+  display: block;
+  margin-top: 1.1rem;
+  font-family: var(--iv-sans), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.6em;
+  text-align: center;
+  text-transform: uppercase;
+  padding-left: 0.6em;
+}
+
+.iv-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-block: 0.9rem;
+  border-block: 1px solid var(--iv-line);
+}
+.iv-nav ul { display: flex; gap: 1.75rem; align-items: center; }
+.iv-nav-right { margin-left: auto; }
+.iv-nav-quiet { color: var(--iv-muted); }
+.iv-menu-toggle { display: none; }
+
+@media (max-width: 767px) {
+  .iv-nav-links,
+  .iv-nav-quiet-item { display: none !important; }
+  .iv-menu-toggle {
+    display: inline-flex;
+    padding: 0.55rem 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+}
+
+/* Mobile menu: opens straight to its links — nothing to scroll for. */
+.iv-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem var(--iv-gutter) 2rem;
+  background: var(--iv-blue);
+  color: #fff;
+}
+.iv-menu-top { display: flex; justify-content: space-between; align-items: center; }
+.iv-menu-mark {
+  font-family: var(--iv-serif), Georgia, serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.iv-menu-links { display: flex; flex-direction: column; gap: 0.25rem; }
+.iv-menu-links a {
+  font-family: var(--iv-condensed), Impact, sans-serif;
+  font-size: 3.25rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.iv-menu-links a:first-child { color: var(--iv-orange); }
+.iv-menu-foot { margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; opacity: 0.85; }
+
+/* ---------- Hero ---------- */
+
+.iv-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+  text-align: center;
+}
+.iv-hero h1 {
+  font-size: clamp(2.75rem, 6.2vw, 5.75rem);
+  max-width: 17ch;
+  text-wrap: balance;
+}
+.iv-hero h1 em { font-style: normal; color: var(--iv-blue); }
+.iv-hero-sub {
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--iv-muted);
+}
+.iv-proof {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--iv-mist);
+  font-size: 0.9375rem;
+}
+.iv-proof strong {
+  font-family: var(--iv-condensed), Impact, sans-serif;
+  font-weight: 400;
+  font-size: 1.75rem;
+  color: var(--iv-blue);
+  line-height: 1;
+}
+.iv-proof small { color: var(--iv-muted); font-size: 0.75rem; }
+.iv-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem; }
+
+/* ---------- Sections ---------- */
+
+.iv-section { padding-block: clamp(3.5rem, 7vw, 6rem); }
+.iv-section + .iv-section { border-top: 1px solid var(--iv-line); }
+
+/* Horizontal rows: scroll sideways, snap per card, edge-to-edge on phones. */
+.iv-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(15rem, 1fr);
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+}
+.iv-row > * { scroll-snap-align: start; min-width: 0; }
+.iv-row-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--iv-muted);
+}
+
+/* Portfolio cards */
+.iv-card-art { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; }
+.iv-card-body { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.9rem; }
+.iv-card-name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.iv-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.iv-chip {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--iv-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.iv-chip--fill { background: var(--iv-ink); color: #fff; }
+
+/* Numbers band */
+.iv-band { background: var(--iv-blue); color: #fff; }
+.iv-band .iv-label { color: rgb(255 255 255 / 0.85); }
+.iv-band-title {
+  max-width: 18ch;
+  margin: 0 auto 3rem;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  text-align: center;
+}
+.iv-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2rem;
+}
+.iv-stat { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 1rem; border-top: 2px solid rgb(255 255 255 / 0.5); }
+.iv-stat-num { font-size: clamp(4rem, 9vw, 7rem); color: #fff; }
+.iv-stat-num span { color: var(--iv-orange); }
+.iv-stat p { max-width: 22rem; font-size: 1rem; line-height: 1.45; }
+.iv-band-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  font-size: 0.8125rem;
+}
+.iv-band-foot small { opacity: 0.8; }
+
+/* Founder quotes */
+.iv-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  background: var(--iv-mist);
+  min-height: 100%;
+}
+.iv-quote-mark {
+  font-family: var(--iv-serif), Georgia, serif;
+  font-size: 4rem;
+  line-height: 0.6;
+  color: var(--iv-blue);
+}
+.iv-quote blockquote { font-size: 1.1875rem; line-height: 1.45; letter-spacing: -0.005em; }
+.iv-quote figcaption { margin-top: auto; font-size: 0.875rem; }
+.iv-quote figcaption b { display: block; font-weight: 700; }
+.iv-quote--cta {
+  justify-content: space-between;
+  background: var(--iv-orange);
+}
+.iv-quote--cta p { font-family: var(--iv-condensed), Impact, sans-serif; font-size: 2.5rem; line-height: 1; text-transform: uppercase; }
+
+/* Ethos */
+.iv-ethos { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+.iv-ethos p {
+  max-width: 24ch;
+  font-family: var(--iv-serif), Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 4.4vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.iv-ethos p em { color: var(--iv-blue); }
+
+/* Events */
+.iv-row--events { grid-auto-columns: minmax(14rem, 19rem); justify-content: center; }
+.iv-event img { display: block; width: 100%; height: auto; aspect-ratio: 600 / 848; object-fit: cover; }
+.iv-event h3 { margin-top: 0.9rem; font-size: 1.25rem; font-weight: 700; }
+.iv-event p { margin-top: 0.25rem; font-size: 0.875rem; color: var(--iv-muted); }
+.iv-event--more {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  aspect-ratio: 600 / 848;
+  background: var(--iv-mist);
+}
+.iv-event--more strong { font-family: var(--iv-condensed), Impact, sans-serif; font-weight: 400; font-size: 2.25rem; line-height: 1; text-transform: uppercase; }
+
+/* Closing + footer */
+.iv-closing { display: flex; flex-direction: column; align-items: center; gap: 1.75rem; text-align: center; }
+.iv-closing h2 { font-size: clamp(3rem, 8vw, 6.5rem); }
+.iv-closing h2 span { color: var(--iv-blue); }
+.iv-footer { background: var(--iv-ink); color: #fff; padding-block: 3rem 2rem; }
+.iv-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+.iv-footer-mark {
+  font-family: var(--iv-serif), Georgia, serif;
+  font-weight: 900;
+  font-size: 2.25rem;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.iv-footer ul { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9375rem; }
+.iv-footer address { font-style: normal; font-size: 0.9375rem; line-height: 1.5; opacity: 0.85; }
+.iv-footer-base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.iv-concept {
+  padding: 0.5rem var(--iv-gutter);
+  background: var(--iv-ink);
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+}
+.iv-concept a { text-decoration: underline; }
+
+/* ---------- About page ---------- */
+
+.iv-people { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0; border-top: 1px solid var(--iv-ink); }
+.iv-person {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--iv-line);
+}
+.iv-person-face {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: linear-gradient(160deg, #cfd8e6, #9fb0c8);
+  filter: grayscale(1);
+}
+.iv-person b { display: block; font-size: 1rem; }
+.iv-person span { font-size: 0.875rem; color: var(--iv-muted); }
+.iv-h2 { font-size: clamp(2.25rem, 5vw, 3.75rem); margin-bottom: 2rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .iv * { transition: none !important; scroll-behavior: auto !important; }
+}
