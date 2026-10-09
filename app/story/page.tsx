@@ -14,15 +14,14 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Koshin",
+  name: "Koshin Bathmax",
   url: "https://kbathmax.com",
   sameAs: [
     "https://github.com/koshinbathmax",
     "https://www.linkedin.com/in/koshinbathmax/",
   ],
-  jobTitle: "Student Developer & Founder",
   description:
-    "17-year-old developer and student founder building AI-powered travel software, sanctions research tools, and B2B SaaS platforms.",
+    "Changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
 };
 
 export default function Story() {
