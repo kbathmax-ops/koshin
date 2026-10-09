@@ -43,20 +43,42 @@ export default async function TeardownPage({ params }: Params) {
   if (!t) notFound();
 
   if (t.slug === "impression-ventures") {
+    const sections = [t.sections[1], t.sections[0], ...t.sections.slice(2)].filter(section => section.id !== "advisors");
+    const advisors = t.sections.find(section => section.id === "advisors");
     return (
       <div className="td-page td-page--gallery">
         <Nav />
         <main className="td-main">
           <Intro t={t} />
-          {t.sections.map((section, i) => (
+          {sections.map((section, i) => (
             <section className="td-spread" id={section.id} key={section.id} aria-label={`${pad(i + 1)} — ${section.label}`}>
               <p className="td-spread-number" aria-hidden>{pad(i + 1)}</p>
+              {section.id === "where-we-invest" && (
+                <p className="td-before-note">Too text heavy — conciseness is key when investors and founders look at a VC firm’s page.</p>
+              )}
+              {section.id === "founder-support" && (
+                <p className="td-before-note">The third and fourth notes don’t explain where Impression invests; they describe what differentiates the firm.</p>
+              )}
+              {section.id === "testimonials" && (
+                <p className="td-before-note">Removed the text-heavy heading and replaced it with a minimal testimonial. Don’t explain what the section is when it’s obvious.</p>
+              )}
+              {section.id === "team" && (
+                <p className="td-team-note">I replaced the team headshots. Hovering to reveal text adds no value, and headshots take up unnecessary space. Show how great the team is on dedicated “Our Team” and “Our Advisors” pages.</p>
+              )}
               <div className={`td-spread-pages${section.theirs.pending ? " td-spread-pages--single" : ""}`}>
                 {!section.theirs.pending && (
                   <Image src={section.theirs.src} alt={section.theirs.alt} width={section.theirs.width} height={section.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
                 )}
-                {section.mine?.shot && (
-                  <Image src={section.mine.shot.src} alt={section.mine.shot.alt} width={section.mine.shot.width} height={section.mine.shot.height} sizes={section.theirs.pending ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"} className="td-spread-image" />
+                {section.id === "team" && advisors ? (
+                  <Image src={advisors.theirs.src} alt={advisors.theirs.alt} width={advisors.theirs.width} height={advisors.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
+                ) : section.mine?.shot && (
+                  section.id === "portfolio" ? (
+                    <div className="td-carousel-detail">
+                      <Image src={section.mine.shot.src} alt="Close-up of the redesigned vertical portfolio logo carousel" width={section.mine.shot.width} height={section.mine.shot.height} sizes="2000px" className="td-spread-image" />
+                    </div>
+                  ) : (
+                    <Image src={section.mine.shot.src} alt={section.mine.shot.alt} width={section.mine.shot.width} height={section.mine.shot.height} sizes={section.theirs.pending ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"} className="td-spread-image" />
+                  )
                 )}
               </div>
             </section>
