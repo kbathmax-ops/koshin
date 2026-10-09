@@ -13,7 +13,7 @@ export default function Resume() {
   return (
     <>
       <Nav />
-      <main style={{ background: "var(--paper)", minHeight: "100dvh", color: "var(--ink)" }}>
+      <main style={{ background: "#ffffff", minHeight: "100dvh", color: "var(--ink)" }}>
         <div
           style={{
             maxWidth: "1100px",

@@ -117,7 +117,7 @@ export function ResumeViewer({
         .rv-bar {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.35rem;
           flex-wrap: wrap;
         }
         .rv-btn {
@@ -128,16 +128,17 @@ export function ResumeViewer({
           min-width: 2.4rem;
           height: 2.4rem;
           padding: 0 0.75rem;
-          border-radius: 999px;
-          border: 1px solid rgb(var(--ink-rgb) / 0.16);
-          background: var(--paper-sunk);
+          border: 1px solid var(--ink);
+          background: #ffffff;
           color: var(--ink);
+          text-decoration: none;
+          transition: background 0.2s, color 0.2s;
           font-family: var(--font-body);
           font-size: 0.8rem;
           font-weight: 500;
           cursor: pointer;
         }
-        .rv-btn:hover { background: #ffffff; color: var(--ink); }
+        .rv-btn:hover, .rv-btn:focus-visible { background: var(--ink); color: #ffffff; }
         .rv-pct {
           font-family: var(--font-body);
           font-size: 0.75rem;
@@ -152,9 +153,8 @@ export function ResumeViewer({
           position: relative;
           overflow: hidden;
           height: min(78vh, 900px);
-          border-radius: 0.75rem;
-          background: var(--paper-raised);
-          border: 1px solid rgb(var(--ink-rgb) / 0.12);
+          background: #ffffff;
+          border: 1px solid var(--ink);
           touch-action: none;
           cursor: grab;
         }
@@ -166,7 +166,7 @@ export function ResumeViewer({
           left: 0;
           transform-origin: 0 0;
           will-change: transform;
-          box-shadow: 0 10px 40px rgb(var(--ink-rgb) / 0.22);
+          outline: 1px solid var(--ink);
           background: #ffffff;
         }
         .rv-sheet img { display: block; width: 100%; height: auto; user-select: none; }
