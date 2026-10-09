@@ -500,6 +500,15 @@
 .td-spread-image { display: block; width: 100%; height: auto; }
 .td-carousel-detail { position: relative; overflow: hidden; aspect-ratio: 3 / 5; }
 .td-carousel-detail .td-spread-image { position: absolute; width: 444.444%; max-width: none; left: -333.333%; top: -33.333%; }
+.td-carousel-preview { width: min(100%, 14rem); margin-inline: auto; }
+.td-carousel-enlarge { position: relative; display: block; width: 100%; cursor: zoom-in; }
+.td-carousel-enlarge:focus-visible, .td-image-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.td-enlarge-icon { position: absolute; right: .5rem; bottom: .5rem; background: var(--paper); padding: .25rem; box-sizing: content-box; }
+.td-image-dialog { border: 0; padding: 0; background: transparent; color: var(--ink); margin: auto; max-height: 94dvh; overflow: visible; }
+.td-image-dialog::backdrop { background: rgb(0 0 0 / .65); }
+.td-image-dialog-content { position: relative; width: min(24rem, 45dvh, 80vw); padding-top: 2.5rem; }
+.td-image-close { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 2rem; height: 2rem; background: var(--paper); cursor: pointer; }
+body:has(.td-image-dialog[open]) { overflow: hidden; }
 .td-before-note { width: calc(50% - clamp(.5rem, 2vw, 2rem) / 2); margin-bottom: 1.5rem; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
 .td-team-note { max-width: 48rem; margin: 0 auto 1.5rem; text-align: center; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
 .td-spread-pages--single { grid-template-columns: minmax(0, 1fr); max-width: calc(50% - 1rem); margin-inline: auto; }
