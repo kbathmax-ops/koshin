@@ -15,9 +15,9 @@ import { motion } from 'framer-motion';
 
 const POINTS = [
   'Born & raised in downtown & uptown Toronto',
-  "Went to arts school for 9 years, developed a strong eye for visuals & talent in all artistic mediums (developed the taste everyone's talking about in tech)",
-  "@ 15, got invited to a NATO/EU conference in Halifax → wanted to use my creativity to help peoples' day-to-day",
-  'High school: student council, finance for the Toronto Youth Environmental Council, 30k in sales for GradCity, marketing for Outward Bound Canada. Loved anything related to attracting people to a cause',
+  'Went to arts school for 9 years, developed a strong taste for visuals',
+  '@ 15, got invited to a NATO/EU conference in Halifax → decided to use my creativity to improve peoples’ lives',
+  'HS: Student council, finance for an environmental nonprofit, 30k in sales for GradCity, marketing for Outward Bound Canada. I loved attracting people to a cause',
   'Solo travelled 9 countries in my summers → wanted adventure & got it + social intelligence skills maxxed',
 ];
 
@@ -129,11 +129,6 @@ export function StoryHero() {
           .sh-open .sh-story { grid-column: 1; grid-row: 1; margin: 0; }
         }
 
-        .sh-intro {
-          font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-          line-height: 1.45;
-          margin: 0 0 1.25rem;
-        }
         .sh-points {
           list-style: disc;
           margin: 0;
@@ -192,10 +187,7 @@ export function StoryHero() {
           animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
         >
-          <p className="sh-intro">
-            I&apos;m intensely devoted to creating things that change how humans live &amp; think
-          </p>
-          <ul className="sh-points">
+            <ul className="sh-points">
             {POINTS.map((point) => (
               <li key={point}>{point}</li>
             ))}
