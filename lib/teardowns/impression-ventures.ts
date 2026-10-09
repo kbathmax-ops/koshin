@@ -149,7 +149,7 @@ const REDESIGN: Record<string, NonNullable<TeardownSection["mine"]>> = {
       },
       {
             "title": "Authentic testimonials",
-            "why": "The full original Owl.co and Trustate quotes are preserved."
+            "why": "All 14 original founder testimonials are preserved."
       },
       {
             "title": "Horizontal composition",
@@ -157,7 +157,7 @@ const REDESIGN: Record<string, NonNullable<TeardownSection["mine"]>> = {
       },
       {
             "title": "Manual controls",
-            "why": "Previous and next controls switch between the two testimonials without autoplay."
+            "why": "Previous and next controls switch between all 14 testimonials without autoplay."
       }
 ]
   },

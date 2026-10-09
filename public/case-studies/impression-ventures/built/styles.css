@@ -163,3 +163,5 @@ main{overflow-x:clip}
  .review .portrait{aspect-ratio:3/4}
  .reviews .review-controls{margin-top:24px}
 }
+
+.review-company-logo{display:block;width:auto;max-width:140px;height:auto;max-height:48px;object-fit:contain;margin:0 0 24px}
