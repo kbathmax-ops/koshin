@@ -4,27 +4,28 @@ import { HomeClient } from "./home-client";
 export const metadata: Metadata = {
   title: { absolute: "Koshin Bathmax" },
   description:
-    "Portfolio of Koshin, a 17-year-old student developer building AI-powered travel software, sanctions research tools, and B2B SaaS with Next.js and Claude API.",
+    "Koshin Bathmax: changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
   alternates: { canonical: "https://kbathmax.com" },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Koshin",
+  name: "Koshin Bathmax",
   url: "https://kbathmax.com",
-  sameAs: ["https://github.com/koshinbathmax"],
-  jobTitle: "Student Developer & Founder",
+  sameAs: [
+    "https://github.com/koshinbathmax",
+    "https://www.linkedin.com/in/koshinbathmax/",
+  ],
   description:
-    "17-year-old developer and student founder building AI-powered travel software, sanctions research tools, and B2B SaaS platforms.",
+    "Changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
   knowsAbout: [
+    "Brand design",
+    "Rebranding",
+    "Content creation",
+    "Startup growth",
     "Next.js",
-    "TypeScript",
     "Claude API",
-    "AI Agent Architecture",
-    "Full-stack Development",
-    "Supabase",
-    "Stripe",
   ],
 };
 

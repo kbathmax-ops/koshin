@@ -30,8 +30,8 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Projects by Koshin — Student Developer",
-  description: "AI-powered software projects by a 17-year-old developer and student founder.",
+  name: "Work by Koshin Bathmax",
+  description: "Builds and design work by Koshin Bathmax.",
   itemListElement: [
     {
       "@type": "SoftwareApplication",
