@@ -42,6 +42,30 @@ export default async function TeardownPage({ params }: Params) {
   const t = getTeardown(slug);
   if (!t) notFound();
 
+  if (t.slug === "impression-ventures") {
+    return (
+      <div className="td-page td-page--gallery">
+        <Nav />
+        <main className="td-main">
+          <Intro t={t} />
+          {t.sections.map((section, i) => (
+            <section className="td-spread" id={section.id} key={section.id} aria-label={`${pad(i + 1)} — ${section.label}`}>
+              <p className="td-spread-number" aria-hidden>{pad(i + 1)}</p>
+              <div className={`td-spread-pages${section.theirs.pending ? " td-spread-pages--single" : ""}`}>
+                {!section.theirs.pending && (
+                  <Image src={section.theirs.src} alt={section.theirs.alt} width={section.theirs.width} height={section.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
+                )}
+                {section.mine?.shot && (
+                  <Image src={section.mine.shot.src} alt={section.mine.shot.alt} width={section.mine.shot.width} height={section.mine.shot.height} sizes={section.theirs.pending ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"} className="td-spread-image" />
+                )}
+              </div>
+            </section>
+          ))}
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="td-page">
       <Nav />
