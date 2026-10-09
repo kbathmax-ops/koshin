@@ -129,6 +129,11 @@ export function StoryHero() {
           .sh-open .sh-story { grid-column: 1; grid-row: 1; margin: 0; }
         }
 
+        .sh-intro {
+          font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+          line-height: 1.45;
+          margin: 0 0 1.25rem;
+        }
         .sh-points {
           list-style: disc;
           margin: 0;
@@ -187,7 +192,10 @@ export function StoryHero() {
           animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
         >
-            <ul className="sh-points">
+          <p className="sh-intro">
+            I&apos;m intensely devoted to creating things that change how humans live &amp; think
+          </p>
+          <ul className="sh-points">
             {POINTS.map((point) => (
               <li key={point}>{point}</li>
             ))}
