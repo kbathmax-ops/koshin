@@ -498,6 +498,9 @@
   align-items: start;
 }
 .td-spread-image { display: block; width: 100%; height: auto; }
+.td-carousel-detail { position: relative; overflow: hidden; aspect-ratio: 3 / 5; }
+.td-carousel-detail .td-spread-image { position: absolute; width: 444.444%; max-width: none; left: -333.333%; top: -33.333%; }
+.td-before-note { width: calc(50% - clamp(.5rem, 2vw, 2rem) / 2); margin-bottom: 1.5rem; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
 .td-spread-pages--single { grid-template-columns: minmax(0, 1fr); max-width: calc(50% - 1rem); margin-inline: auto; }
 @media (max-width: 767px) {
   .td-page--gallery .td-main { padding-inline: .75rem; }
