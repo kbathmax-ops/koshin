@@ -64,7 +64,13 @@ export default async function TeardownPage({ params }: Params) {
           {sections.map((section, i) => (
             <section className="td-spread" id={section.id} key={section.id} aria-label={`${pad(i + 1)} — ${section.label}`}>
               <p className="td-spread-number" aria-hidden>{pad(i + 1)}</p>
-              {impressionDescriptions[section.id] && (
+              {section.id === "where-we-invest" ? (
+                <ul className="td-description-arrows">
+                  {impressionDescriptions[section.id].split(/(?<=\.)\s+/).map(sentence => (
+                    <li key={sentence}><span aria-hidden>→</span><span>{sentence}</span></li>
+                  ))}
+                </ul>
+              ) : impressionDescriptions[section.id] && (
                 <p className="td-team-note">{impressionDescriptions[section.id]}</p>
               )}
               {section.id === "testimonials" && (

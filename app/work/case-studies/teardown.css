@@ -511,6 +511,8 @@
 body:has(.td-image-dialog[open]) { overflow: hidden; }
 .td-before-note { width: calc(50% - clamp(.5rem, 2vw, 2rem) / 2); margin-bottom: 1.5rem; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
 .td-team-note { max-width: 48rem; margin: 0 auto 1.5rem; text-align: center; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
+.td-description-arrows { max-width: 48rem; margin: 0 auto 2rem; display: grid; gap: 1rem; font-size: clamp(.875rem, 1.4vw, 1.125rem); line-height: 1.5; }
+.td-description-arrows li { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: .75rem; }
 .td-spread-pages--single { grid-template-columns: minmax(0, 1fr); max-width: calc(50% - 1rem); margin-inline: auto; }
 @media (max-width: 767px) {
   .td-page--gallery .td-main { padding-inline: .75rem; }
