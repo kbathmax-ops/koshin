@@ -38,6 +38,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
+const impressionDescriptions: Record<string, string> = {
+  menu: "Glass hero for authority, with a preview of different site pages. Professional & an assertive first impression.",
+  hero: "Immediate CTA for CEOs in a rush. A one liner that describes the kind of companies Impression invests in - no need for searching through the endless text below. North America graphic with the translucent outline fills in negative space in a way that maintains minimalism.",
+  portfolio: "Vertical carousel showcases brands that do not disrupt the site’s colour palette.",
+  "where-we-invest": "01/02 is unnecessarily text heavy and subtext drifts the viewer away from the paragraphs (critical text). Boxes 03/04 do not answer the \"where we invest\" question. Removed the subheading & subtext, 03/04 boxes, and summarized the “fintech specialists” and “seed stage experts” sections to the most critical, important information. If CEOs want a more in depth description of Impression’s investments, they will find the dedicated page.",
+  "founder-support": "Summarized/added on-theme graphics I made with Astra that provide the same value as the long paragraphs",
+  media: "Media section is outdated & the text/image overlap is unpleasant to look at. Simplified the section on theme.",
+  closing: "The footer is unnecessarily loud. Final CTA should be simple & easy to look at.",
+};
+
 export default async function TeardownPage({ params }: Params) {
   const { slug } = await params;
   const t = getTeardown(slug);
@@ -54,11 +64,8 @@ export default async function TeardownPage({ params }: Params) {
           {sections.map((section, i) => (
             <section className="td-spread" id={section.id} key={section.id} aria-label={`${pad(i + 1)} — ${section.label}`}>
               <p className="td-spread-number" aria-hidden>{pad(i + 1)}</p>
-              {section.id === "where-we-invest" && (
-                <p className="td-before-note">Too text heavy — conciseness is key when investors and founders look at a VC firm’s page.</p>
-              )}
-              {section.id === "founder-support" && (
-                <p className="td-before-note">The third and fourth notes don’t explain where Impression invests; they describe what differentiates the firm.</p>
+              {impressionDescriptions[section.id] && (
+                <p className="td-team-note">{impressionDescriptions[section.id]}</p>
               )}
               {section.id === "testimonials" && (
                 <p className="td-before-note">Removed the text-heavy heading and replaced it with a minimal testimonial. Don’t explain what the section is when it’s obvious.</p>
