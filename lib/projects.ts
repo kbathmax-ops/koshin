@@ -132,7 +132,7 @@ export const projects: Project[] = [
     description:
       "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
     image: "/toronto-cafe-roulette-hero.png",
-    liveUrl: "https://toronto-cafe-roulette.vercel.app/",
+    liveUrl: "https://caffein.cafe",
     story: {
       intention: todo(
         "What were you trying to make easier — picking a cafe, or having the coffee chat itself?",
