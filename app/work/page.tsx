@@ -36,20 +36,20 @@ const jsonLd = {
     {
       "@type": "SoftwareApplication",
       position: 1,
+      name: "Toronto Cafe Roulette",
+      description: "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
+      applicationCategory: "LifestyleApplication",
+      operatingSystem: "Web",
+    },
+    {
+      "@type": "SoftwareApplication",
+      position: 2,
       name: "Chimp and Human",
       description:
         "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
       applicationCategory: "SimulationApplication",
       operatingSystem: "Web",
       url: "https://chimpvshuman.space",
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 2,
-      name: "Toronto Cafe Roulette",
-      description: "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
-      applicationCategory: "LifestyleApplication",
-      operatingSystem: "Web",
     },
     {
       "@type": "SoftwareApplication",
@@ -82,14 +82,6 @@ const jsonLd = {
       name: "Ocean Management — brand identity & deck",
       description:
         "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 7,
-      name: "The Window Seat",
-      description: "A quiz for ambitious people to consider travel for their personal growth.",
-      applicationCategory: "TravelApplication",
-      operatingSystem: "Web",
     },
   ],
 };

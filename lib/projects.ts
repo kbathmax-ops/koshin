@@ -127,22 +127,22 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "human-and-chimp",
-    name: "Chimp and Human",
+    slug: "toronto-cafe-roulette",
+    name: "Toronto Cafe Roulette",
     description:
-      "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
-    image: "/human-and-chimp-hero.png",
-    liveUrl: "https://chimpvshuman.space",
+      "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
+    image: "/toronto-cafe-roulette-hero.png",
+    liveUrl: "https://toronto-cafe-roulette.vercel.app/",
     story: {
       intention: todo(
-        "Why this one? Was it the meme, the 3D challenge, seeing if you could ship something on a trend fast?",
+        "What were you trying to make easier — picking a cafe, or having the coffee chat itself?",
       ),
       process: [
-        todo("How did you work with GPT-6 Astra here — what did it do well, where did you have to take over?"),
-        todo("What was hardest to get right in the 3D simulation?"),
+        todo("Where did the cafe list come from, and how did you decide what counted?"),
+        todo("Why a roulette rather than a map or a ranked list?"),
       ],
       learnings: [
-        todo("What did building on a viral moment teach you about timing and attention?"),
+        todo("What did you learn about making something small that people actually open twice?"),
       ],
     },
   },
@@ -168,47 +168,28 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "toronto-cafe-roulette",
-    name: "Toronto Cafe Roulette",
+    slug: "human-and-chimp",
+    name: "Chimp and Human",
     description:
-      "A roulette of Toronto coffee shops to discover the city & your next coffee chat.",
-    image: "/toronto-cafe-roulette-hero.png",
-    liveUrl: "https://toronto-cafe-roulette.vercel.app/",
+      "3D simulator of the viral chimp vs human fight built with the help of GPT-6 Astra.",
+    image: "/human-and-chimp-hero.png",
+    liveUrl: "https://chimpvshuman.space",
     story: {
       intention: todo(
-        "What were you trying to make easier — picking a cafe, or having the coffee chat itself?",
+        "Why this one? Was it the meme, the 3D challenge, seeing if you could ship something on a trend fast?",
       ),
       process: [
-        todo("Where did the cafe list come from, and how did you decide what counted?"),
-        todo("Why a roulette rather than a map or a ranked list?"),
+        todo("How did you work with GPT-6 Astra here — what did it do well, where did you have to take over?"),
+        todo("What was hardest to get right in the 3D simulation?"),
       ],
       learnings: [
-        todo("What did you learn about making something small that people actually open twice?"),
-      ],
-    },
-  },
-  {
-    slug: "tattoos-by-jess",
-    name: "Tattoos by Jess",
-    description: "Made a friend's tattoo shop go viral.",
-    image: "/tattoos-by-jess-hero.png",
-    liveUrl: "https://www.instagram.com/tattoosbyjesss/",
-    linkLabel: "View on Instagram",
-    story: {
-      intention: todo(
-        "What state was the shop's presence in when you started, and what were you trying to get for Jess — bookings, followers, something else?",
-      ),
-      process: [
-        todo("What did you actually change: the content, the posting cadence, the positioning? Name the moves."),
-        todo("What did you try that flopped before something worked?"),
-      ],
-      learnings: [
-        todo("This is your strongest marketing proof point — what does it prove you can do? Numbers if you have them."),
+        todo("What did building on a viral moment teach you about timing and attention?"),
       ],
     },
   },
   {
     slug: "the-window-seat",
+    hidden: true,
     name: "The Window Seat",
     description:
       "A quiz for ambitious people to consider travel for their personal growth.",
