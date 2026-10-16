@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OgCard, OG_SIZE, ogAssets } from "@/components/og-card";
 
-export const alt = "Koshin Bathmax — changing how people see brands & solo-travelling when I can";
+export const alt = "Koshin Bathmax — building beautiful things";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
@@ -11,7 +11,7 @@ export default async function Image() {
   const { fonts, photo } = await ogAssets();
 
   return new ImageResponse(
-    <OgCard subtitle="changing how people see brands & solo-travelling when I can" photo={photo} />,
+    <OgCard subtitle="building beautiful things" photo={photo} />,
     { ...size, fonts },
   );
 }

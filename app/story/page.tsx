@@ -4,8 +4,6 @@ import { StoryPageClient } from "@/components/story-page-client";
 
 export const metadata: Metadata = {
   title: "story",
-  description:
-    "The story behind the work, and where Koshin is going next.",
   alternates: { canonical: "https://kbathmax.com/story" },
 };
 
@@ -21,7 +19,7 @@ const jsonLd = {
     "https://www.linkedin.com/in/koshinbathmax/",
   ],
   description:
-    "Changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
+    "Building beautiful things.",
 };
 
 export default function Story() {

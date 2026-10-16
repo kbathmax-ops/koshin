@@ -18,7 +18,7 @@ const POINTS = [
   'Went to arts school for 9 years, developed a strong taste for visuals',
   '@ 15, got invited to a NATO/EU conference in Halifax → decided to use my creativity to improve peoples’ lives',
   'HS: Student council, finance for an environmental nonprofit, 30k in sales for GradCity, marketing for Outward Bound Canada. I loved attracting people to a cause',
-  'Solo travelled 9 countries in my summers → wanted adventure & got it + social intelligence skills maxxed',
+  'Solo travelled 9 countries in my summers',
 ];
 
 const CURRENTLY = "Deferred Queen's University for a year, rebranding VC firms & startups and creating content";
@@ -155,7 +155,7 @@ export function StoryHero() {
       <div className="sh-head">
         <h1 className="sh-name">Koshin Bathmax</h1>
         <p className="sh-tagline">
-          changing how people see brands &amp; solo-travelling when I can
+          building beautiful things
         </p>
         <nav className="sh-links" aria-label="Links">
           <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>

@@ -4,7 +4,7 @@ import { HomeClient } from "./home-client";
 export const metadata: Metadata = {
   title: { absolute: "Koshin Bathmax" },
   description:
-    "Koshin Bathmax: changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
+    "Building beautiful things.",
   alternates: { canonical: "https://kbathmax.com" },
 };
 

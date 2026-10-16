@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Koshin Bathmax",
   },
   description:
-    "Koshin Bathmax: changing how people see brands & solo-travelling when I can. On a gap year from Queen's University, rebranding VC firms & startups and creating content.",
+    "Building beautiful things.",
   keywords: [
     "Koshin Bathmax",
     "brand design",
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
     url: BASE_URL,
     siteName: "Koshin Bathmax",
     title: "Koshin Bathmax",
-    description: "Changing how people see brands & solo-travelling when I can.",
+    description: "Building beautiful things.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Koshin Bathmax",
     description:
-      "18 year old taking a gap year to work in startup growth & travel.",
+      "Building beautiful things.",
   },
   robots: {
     index: true,
