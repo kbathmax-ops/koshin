@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AlertCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
+import { WayModel } from "@/components/way-model";
+import { ZoomableImage } from "@/components/zoomable-image";
 import { FadeUp } from "@/components/fade-up";
 import { getProject, isTodo, projects, todoPrompt } from "@/lib/projects";
 
@@ -111,7 +113,9 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             {project.description}
           </p>
 
-          {project.liveUrl ? (
+          {project.model === "way" ? (
+            <WayModel />
+          ) : project.liveUrl ? (
             <a
               href={project.liveUrl}
               target="_blank"
@@ -208,13 +212,12 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               style={{ background: "var(--paper-raised)", boxShadow: "0 6px 24px rgb(var(--ink-rgb) / 0.13)" }}
             >
               {project.detailImage ? (
-                <Image
+                <ZoomableImage
                   src={project.detailImage.src}
                   alt={project.detailImage.alt}
                   width={project.detailImage.width}
                   height={project.detailImage.height}
                   sizes="(min-width: 768px) 672px, 100vw"
-                  className="w-full h-auto"
                 />
               ) : (
                 <div className="aspect-[16/10] relative">
@@ -231,7 +234,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           </figure>
         </FadeUp>
 
-        {project.detailFirst && project.liveUrl && (
+        {project.detailFirst && project.liveUrl && !project.model && (
           <FadeUp>
             <a
               href={project.liveUrl}

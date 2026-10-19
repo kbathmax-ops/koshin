@@ -47,6 +47,8 @@ export type Project = {
   unavailable?: boolean;
   /** Shipped but waiting on a store review — flags the card with a green light. */
   inReview?: boolean;
+  /** Show an interactive 3D model in place of the outbound link. */
+  model?: "way";
   /** Open the portfolio write-up before the live site. */
   detailFirst?: boolean;
   details?: ProjectDetails;
@@ -104,6 +106,7 @@ export const projects: Project[] = [
     },
     liveUrl: "https://way-compass.vercel.app",
     linkLabel: "Explore the interactive WAY site",
+    model: "way",
     detailFirst: true,
     details: {
       problem: [
