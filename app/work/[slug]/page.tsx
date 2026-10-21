@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AlertCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/nav";
-import { WayModel } from "@/components/way-model";
+import { WayShowcase } from "@/components/way-showcase";
 import { ZoomableImage } from "@/components/zoomable-image";
 import { FadeUp } from "@/components/fade-up";
 import { getProject, isTodo, projects, todoPrompt } from "@/lib/projects";
@@ -114,7 +114,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           </p>
 
           {project.model === "way" ? (
-            <WayModel />
+            <WayShowcase />
           ) : project.liveUrl ? (
             <a
               href={project.liveUrl}

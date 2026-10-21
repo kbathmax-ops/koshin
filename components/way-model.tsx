@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { Material } from "three";
+import "@/components/way/way.css";
+import { buildWay, WAY_BUTTON_POINT } from "@/components/way/build-way";
 
 /**
  * The WAY compass as a draggable 3D model on a transparent canvas. Geometry and
@@ -11,11 +12,14 @@ import type { Material } from "three";
 export function WayModel() {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stage = stageRef.current;
     const canvas = canvasRef.current;
-    if (!stage || !canvas) return;
+    const label = labelRef.current;
+    const pill = label?.querySelector<HTMLElement>(".way-button-label__text");
+    if (!stage || !canvas || !label || !pill) return;
 
     let disposed = false;
     let cleanup = () => {};
@@ -38,169 +42,8 @@ export function WayModel() {
       model.rotation.set(DEFAULT.x, DEFAULT.y, DEFAULT.z);
       scene.add(model);
 
-      const roundedRectShape = (width: number, height: number, radius: number) => {
-        const x = -width / 2;
-        const y = -height / 2;
-        const shape = new THREE.Shape();
-        shape.moveTo(x + radius, y);
-        shape.lineTo(x + width - radius, y);
-        shape.quadraticCurveTo(x + width, y, x + width, y + radius);
-        shape.lineTo(x + width, y + height - radius);
-        shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-        shape.lineTo(x + radius, y + height);
-        shape.quadraticCurveTo(x, y + height, x, y + height - radius);
-        shape.lineTo(x, y + radius);
-        shape.quadraticCurveTo(x, y, x + radius, y);
-        return shape;
-      };
-
-      const roundedSlab = (
-        width: number,
-        height: number,
-        depth: number,
-        radius: number,
-        material: Material,
-        bevel = 1.6,
-      ) => {
-        const geometry = new THREE.ExtrudeGeometry(roundedRectShape(width, height, radius), {
-          depth,
-          bevelEnabled: true,
-          bevelSegments: 5,
-          steps: 1,
-          bevelSize: bevel,
-          bevelThickness: bevel * 0.72,
-          curveSegments: 18,
-        });
-        geometry.center();
-        geometry.computeVertexNormals();
-        return new THREE.Mesh(geometry, material);
-      };
-
-      const aluminum = new THREE.MeshStandardMaterial({ color: 0xa7aaa9, roughness: 0.34, metalness: 0.9 });
-      const darkMetal = new THREE.MeshStandardMaterial({ color: 0x20231f, roughness: 0.26, metalness: 0.68 });
-      const gasketMaterial = new THREE.MeshStandardMaterial({ color: 0x121411, roughness: 0.82, metalness: 0.04 });
-      const lensMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0x20251c,
-        roughness: 0.2,
-        metalness: 0.05,
-        clearcoat: 0.8,
-        clearcoatRoughness: 0.2,
-      });
-      const ledOffMaterial = new THREE.MeshStandardMaterial({
-        color: 0x56633d,
-        emissive: 0x0e1305,
-        emissiveIntensity: 0.2,
-        roughness: 0.45,
-      });
-      const ledOnMaterial = new THREE.MeshStandardMaterial({
-        color: 0xd8ff36,
-        emissive: 0xb6ff12,
-        emissiveIntensity: 2.2,
-        roughness: 0.25,
-      });
-      const innerMaterial = new THREE.MeshStandardMaterial({ color: 0x0b0d0a, metalness: 0.1, roughness: 0.62 });
-
-      model.add(roundedSlab(52, 40, 10.5, 7, aluminum, 1.9));
-
-      const gasket = roundedSlab(49.7, 37.7, 2.1, 6, gasketMaterial, 1.1);
-      gasket.position.z = 6.4;
-      model.add(gasket);
-
-      const face = roundedSlab(48.8, 36.8, 1.5, 5.5, darkMetal, 1);
-      face.position.z = 8.1;
-      model.add(face);
-
-      const lens = new THREE.Mesh(new THREE.CylinderGeometry(13.7, 13.7, 1.35, 64), lensMaterial);
-      lens.rotation.x = Math.PI / 2;
-      lens.position.set(-1.5, 0, 9.55);
-      model.add(lens);
-
-      const innerDisk = new THREE.Mesh(new THREE.CylinderGeometry(9.2, 9.2, 0.55, 64), innerMaterial);
-      innerDisk.rotation.x = Math.PI / 2;
-      innerDisk.position.set(-1.5, 0, 10.36);
-      model.add(innerDisk);
-
-      // Arrow and the 12-segment ring, turned slightly toward a friend.
-      const indicator = new THREE.Group();
-      indicator.position.set(-1.5, 0, 10.85);
-      indicator.rotation.z = -0.55;
-      model.add(indicator);
-
-      const segmentGeometry = new THREE.BoxGeometry(1.9, 5.1, 0.65);
-      segmentGeometry.translate(0, 0.15, 0);
-      for (let i = 0; i < 12; i += 1) {
-        const angle = (i / 12) * Math.PI * 2;
-        const segment = new THREE.Mesh(segmentGeometry, i === 0 ? ledOnMaterial : ledOffMaterial);
-        segment.position.set(Math.sin(angle) * 10.85, Math.cos(angle) * 10.85, 0);
-        segment.rotation.z = -angle;
-        indicator.add(segment);
-      }
-
-      const arrowShape = new THREE.Shape();
-      arrowShape.moveTo(0, 7.7);
-      arrowShape.lineTo(3.2, 1.5);
-      arrowShape.lineTo(1.25, 2.1);
-      arrowShape.lineTo(1.25, -5.4);
-      arrowShape.lineTo(-1.25, -5.4);
-      arrowShape.lineTo(-1.25, 2.1);
-      arrowShape.lineTo(-3.2, 1.5);
-      arrowShape.closePath();
-      const arrowGeometry = new THREE.ExtrudeGeometry(arrowShape, {
-        depth: 0.55,
-        bevelEnabled: true,
-        bevelSize: 0.25,
-        bevelThickness: 0.18,
-        bevelSegments: 2,
-      });
-      arrowGeometry.center();
-      const arrow = new THREE.Mesh(arrowGeometry, ledOnMaterial);
-      arrow.position.z = 0.75;
-      indicator.add(arrow);
-
-      const button = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 3.5, 1.15, 48), aluminum);
-      button.rotation.x = Math.PI / 2;
-      button.position.set(17.8, -11.2, 10.1);
-      model.add(button);
-
-      const buttonMark = new THREE.Mesh(new THREE.RingGeometry(1.15, 1.35, 32), ledOffMaterial);
-      buttonMark.position.set(17.8, -11.2, 10.72);
-      model.add(buttonMark);
-
-      const brandCanvas = document.createElement("canvas");
-      brandCanvas.width = 512;
-      brandCanvas.height = 128;
-      const brandContext = brandCanvas.getContext("2d");
-      if (brandContext) {
-        brandContext.fillStyle = "#d8d8d2";
-        brandContext.font = "700 70px sans-serif";
-        brandContext.textAlign = "center";
-        brandContext.textBaseline = "middle";
-        brandContext.fillText("W•Y", 256, 65);
-      }
-      const brandMap = new THREE.CanvasTexture(brandCanvas);
-      brandMap.colorSpace = THREE.SRGBColorSpace;
-      brandMap.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      const brand = new THREE.Mesh(
-        new THREE.PlaneGeometry(8, 2),
-        new THREE.MeshBasicMaterial({ map: brandMap, transparent: true, opacity: 0.86 }),
-      );
-      brand.position.set(17.7, 11.3, 10.8);
-      model.add(brand);
-
-      const loop = new THREE.Group();
-      loop.add(new THREE.Mesh(new THREE.TorusGeometry(5.2, 2.15, 18, 52), aluminum));
-      const loopInner = new THREE.Mesh(new THREE.TorusGeometry(5.2, 0.62, 14, 52), darkMetal);
-      loopInner.position.z = 0.2;
-      loop.add(loopInner);
-      loop.position.set(22.8, 18.5, 0.1);
-      loop.rotation.z = -0.48;
-      model.add(loop);
-
-      const sidePort = roundedSlab(8.5, 2.2, 0.8, 1, gasketMaterial, 0.28);
-      sidePort.rotation.y = Math.PI / 2;
-      sidePort.rotation.z = Math.PI / 2;
-      sidePort.position.set(-27.7, -6, 0.2);
-      model.add(sidePort);
+      const way = buildWay(THREE, { anisotropy: renderer.capabilities.getMaxAnisotropy() });
+      model.add(way.group);
 
       scene.add(new THREE.HemisphereLight(0xffffff, 0x65675e, 2.2));
       const keyLight = new THREE.DirectionalLight(0xffffff, 5.2);
@@ -278,6 +121,25 @@ export function WayModel() {
       });
       visibilityObserver.observe(stage);
 
+      // Keep the button label pinned to the button, hiding it once the face turns away.
+      const buttonPoint = new THREE.Vector3(...WAY_BUTTON_POINT);
+      const projected = new THREE.Vector3();
+      const faceNormal = new THREE.Vector3();
+      const placeLabel = () => {
+        const width = stage.clientWidth;
+        const height = stage.clientHeight;
+        projected.copy(buttonPoint).applyMatrix4(model.matrixWorld).project(camera);
+        const x = ((projected.x + 1) / 2) * width;
+        const y = ((1 - projected.y) / 2) * height;
+        const facing = faceNormal.set(0, 0, 1).transformDirection(model.matrixWorld).z > 0.25;
+        label.style.transform = `translate(${x}px, ${y}px)`;
+        // Center the pill under the button but keep it inside the frame.
+        const pillWidth = pill.offsetWidth;
+        const pillLeft = Math.min(Math.max(x - pillWidth / 2, 8), width - pillWidth - 8);
+        pill.style.transform = `translateX(${pillLeft - x}px)`;
+        label.style.opacity = facing ? "1" : "0";
+      };
+
       const timer = new THREE.Timer();
       let frame = 0;
       const animate = (time: number) => {
@@ -290,6 +152,7 @@ export function WayModel() {
         camera.position.z += (targetZoom - camera.position.z) * 0.09;
         model.position.y = reducedMotion ? 0 : Math.sin(timer.getElapsed() * 0.8) * 0.35;
         renderer.render(scene, camera);
+        placeLabel();
       };
       frame = requestAnimationFrame(animate);
 
@@ -302,12 +165,7 @@ export function WayModel() {
         canvas.removeEventListener("pointerup", onPointerUp);
         canvas.removeEventListener("pointercancel", onPointerUp);
         canvas.removeEventListener("keydown", onKeyDown);
-        scene.traverse((object) => {
-          if (!(object instanceof THREE.Mesh)) return;
-          object.geometry.dispose();
-          (object.material as Material).dispose();
-        });
-        brandMap.dispose();
+        way.dispose();
         renderer.dispose();
       };
     });
@@ -323,9 +181,20 @@ export function WayModel() {
       <canvas
         ref={canvasRef}
         tabIndex={0}
-        aria-label="3D model of the WAY compass. Drag to rotate, or use the arrow keys; plus and minus zoom, Home resets."
+        aria-label="3D model of the WAY compass. Its one button, at the lower right of the face, switches friends with a press and sends an SOS when held. Drag to rotate, or use the arrow keys; plus and minus zoom, Home resets."
         className="block h-full w-full cursor-grab active:cursor-grabbing outline-none touch-pan-y"
       />
+      <div
+        ref={labelRef}
+        className="way-button-label pointer-events-none absolute left-0 top-0 opacity-0 transition-opacity duration-200"
+        aria-hidden
+      >
+        <span className="way-button-label__dot" />
+        <span className="way-button-label__line" />
+        <span className="way-button-label__text">
+          <strong>Button</strong> press to switch friends, hold for SOS
+        </span>
+      </div>
     </div>
   );
 }
