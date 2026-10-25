@@ -79,18 +79,18 @@ export function StoryHero() {
           text-align: center;
         }
 
-        .sh-story {
-          width: 100%;
-          margin-bottom: 1.5rem;
-          font-family: var(--font-body);
-        }
-
         .sh-photo {
           position: relative;
           aspect-ratio: 4 / 3;
           width: min(100%, 42rem);
+          margin-bottom: 1.75rem;
           background: url('/koshin-machu-picchu.png') center / cover no-repeat;
           image-rendering: pixelated;
+        }
+
+        .sh-story {
+          width: 100%;
+          font-family: var(--font-body);
         }
 
         .sh-intro {
@@ -141,9 +141,6 @@ export function StoryHero() {
           <Link className="sh-link" href="/work">
             my work
           </Link>
-          <Link className="sh-link" href="/resume">
-            resumé
-          </Link>
           <a
             className="sh-link"
             href="https://www.linkedin.com/in/koshinbathmax/"
@@ -156,6 +153,12 @@ export function StoryHero() {
       </div>
 
       <div className="sh-main">
+        <div
+          className="sh-photo"
+          role="img"
+          aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
+        />
+
         <div className="sh-story">
           <button
             type="button"
@@ -187,12 +190,6 @@ export function StoryHero() {
             )}
           </AnimatePresence>
         </div>
-
-        <div
-          className="sh-photo"
-          role="img"
-          aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
-        />
       </div>
     </section>
   );
