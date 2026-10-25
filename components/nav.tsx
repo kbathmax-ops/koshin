@@ -17,8 +17,8 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const isWork = pathname?.startsWith("/work");
   const isStory = pathname === "/story";
+  const isTravels = pathname === "/travels";
 
   return (
     <nav
@@ -35,7 +35,7 @@ export function Nav() {
       >
         {/* Logo */}
         <Link
-          href="/story"
+          href="/"
           className="text-base font-medium text-[var(--ink)] tracking-tighter"
           style={{ fontFamily: "var(--font-display)" }}
         >
@@ -58,19 +58,19 @@ export function Nav() {
             Story
           </Link>
           <Link
-            href="/work"
+            href="/travels"
             className={cn(
               "font-medium tracking-tight transition-colors duration-200",
-              isWork
+              isTravels
                 ? "text-[var(--ink)]"
                 : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
             )}
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Work
+            Travels
           </Link>
           <Link
-            href="/work#contact"
+            href="/#contact"
             className="text-[var(--ink)]/70 font-medium hover:text-[var(--ink)] transition-colors duration-200"
             style={{ fontFamily: "var(--font-display)" }}
           >
@@ -100,14 +100,14 @@ export function Nav() {
             Story
           </Link>
           <Link
-            href="/work"
+            href="/travels"
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
-            Work
+            Travels
           </Link>
           <Link
-            href="/work#contact"
+            href="/#contact"
             className="font-medium text-[var(--ink)]/70 hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >

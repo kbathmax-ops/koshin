@@ -1,17 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-/* ─── Story hero ───
-   Opens centred: the name, a line under it, the links, and the Machu Picchu
-   photo as a big 4:3 frame. A moment after the page loads the photo slides
-   over to the right-hand side and the story comes in beside it.
-
-   The photo is a 480×360, 1-bit dither — black pixels on white — scaled up
-   with nearest-neighbour rendering so each pixel stays a crisp square. It
-   skips the image optimiser, which would smooth them back out. */
+import { motion, AnimatePresence } from 'framer-motion';
 
 const POINTS = [
   'Born & raised in downtown & uptown Toronto',
@@ -23,30 +14,16 @@ const POINTS = [
 
 const CURRENTLY = "Deferred Queen's University for a year, rebranding VC firms & startups and creating content";
 
-/* How long the centred photo holds before sliding aside (ms). */
-const HOLD = 700;
-
-const EASE = [0.77, 0, 0.18, 1] as const;
-
 export function StoryHero() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    // With reduced motion there's nothing to watch, so skip straight to it.
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const t = window.setTimeout(() => setOpen(true), reduced ? 0 : HOLD);
-    return () => window.clearTimeout(t);
-  }, []);
+  const [pointsOpen, setPointsOpen] = useState(false);
 
   return (
-    <section aria-label="Introduction" className={`sh${open ? ' sh-open' : ''}`}>
+    <section aria-label="Introduction" className="sh">
       <style>{`
         .sh {
           position: relative;
           background: #ffffff;
           color: var(--ink);
-          min-height: 100dvh;
-          /* Clears the fixed nav pill floating over the top of the page. */
           padding: clamp(6rem, 13vh, 8rem) clamp(1.25rem, 5vw, 5rem) clamp(3rem, 8vh, 5rem);
         }
 
@@ -73,7 +50,6 @@ export function StoryHero() {
           color: rgb(var(--ink-rgb) / 0.62);
         }
 
-        /* Square boxes with thin black edges, close together but apart. */
         .sh-links {
           display: flex;
           justify-content: center;
@@ -94,50 +70,55 @@ export function StoryHero() {
         }
         .sh-link:hover, .sh-link:focus-visible { background: var(--ink); color: #ffffff; }
 
-        /* The photo: centred and large to start, beside the story once open. */
+        .sh-main {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          max-width: 52rem;
+          margin: clamp(2rem, 5vh, 3.5rem) auto 0;
+          text-align: center;
+        }
+
         .sh-photo {
           position: relative;
           aspect-ratio: 4 / 3;
-          margin: clamp(1.5rem, 3vh, 2.5rem) auto 0;
-          width: min(100%, 64rem, calc((100dvh - 22rem) * 4 / 3));
-          min-width: min(100%, 20rem);
+          width: min(100%, 42rem);
+          margin-bottom: 1.75rem;
           background: url('/koshin-machu-picchu.png') center / cover no-repeat;
           image-rendering: pixelated;
         }
-        .sh-story {
-          max-width: 44rem;
-          margin: clamp(3rem, 8vh, 5rem) auto 0;
-          font-family: var(--font-body);
-        }
 
-        @media (min-width: 900px) {
-          .sh-open .sh-main {
-            display: grid;
-            grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-            gap: clamp(2.5rem, 5vw, 5rem);
-            align-items: start;
-            max-width: 76rem;
-            margin: clamp(3rem, 7vh, 4.5rem) auto 0;
-          }
-          .sh-open .sh-photo {
-            grid-column: 2;
-            grid-row: 1;
-            width: 100%;
-            min-width: 0;
-            margin: 0;
-          }
-          .sh-open .sh-story { grid-column: 1; grid-row: 1; margin: 0; }
+        .sh-story {
+          width: 100%;
+          font-family: var(--font-body);
         }
 
         .sh-intro {
           font-size: clamp(1.1rem, 1.5vw, 1.3rem);
           line-height: 1.45;
-          margin: 0 0 1.25rem;
+          margin: 0 auto 0.5rem;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          user-select: none;
+          max-width: 36rem;
         }
+        .sh-intro:hover { color: rgb(var(--ink-rgb) / 0.75); }
+        .sh-chevron {
+          display: inline-block;
+          transition: transform 0.2s ease;
+          font-size: 0.75em;
+        }
+        .sh-chevron.open { transform: rotate(90deg); }
         .sh-points {
           list-style: disc;
-          margin: 0;
+          margin: 0.75rem auto 0;
           padding-left: 1.2rem;
+          text-align: left;
+          max-width: 36rem;
+          overflow: hidden;
         }
         .sh-points li {
           font-size: 1rem;
@@ -149,7 +130,6 @@ export function StoryHero() {
         .sh-points li::marker { color: var(--ink); }
         .sh-points .sh-now { color: var(--ink); }
         .sh-now strong { font-weight: 600; }
-
       `}</style>
 
       <div className="sh-head">
@@ -158,11 +138,8 @@ export function StoryHero() {
           building beautiful things
         </p>
         <nav className="sh-links" aria-label="Links">
-          <Link className="sh-link" href="/work" transitionTypes={['nav-forward']}>
+          <Link className="sh-link" href="/work">
             my work
-          </Link>
-          <Link className="sh-link" href="/resume">
-            resumé
           </Link>
           <a
             className="sh-link"
@@ -176,34 +153,43 @@ export function StoryHero() {
       </div>
 
       <div className="sh-main">
-        <motion.div
-          layout
-          transition={{ layout: { duration: 0.8, ease: EASE } }}
+        <div
           className="sh-photo"
           role="img"
           aria-label="Koshin at Machu Picchu, looking back over his shoulder at Huayna Picchu"
         />
 
-        {/* Always in the page, so it's there for search engines and screen
-            readers; it only fades in once the photo has moved out of the way. */}
-        <motion.div
-          className="sh-story"
-          initial={false}
-          animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
-        >
-          <p className="sh-intro">
-            I&apos;m intensely devoted to creating things that change how humans live &amp; think
-          </p>
-          <ul className="sh-points">
-            {POINTS.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-            <li className="sh-now">
-              <strong>Currently:</strong> {CURRENTLY}
-            </li>
-          </ul>
-        </motion.div>
+        <div className="sh-story">
+          <button
+            type="button"
+            className="sh-intro"
+            onClick={() => setPointsOpen((v) => !v)}
+            aria-expanded={pointsOpen}
+            style={{ background: 'none', border: 'none', padding: 0, color: 'inherit' }}
+          >
+            <span className={`sh-chevron${pointsOpen ? ' open' : ''}`} aria-hidden>▶</span>
+            I'm intensely devoted to creating things that change how humans live and think using product, design, and business intuition.
+          </button>
+
+          <AnimatePresence initial={false}>
+            {pointsOpen && (
+              <motion.ul
+                className="sh-points"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {POINTS.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+                <li className="sh-now">
+                  <strong>Currently:</strong> {CURRENTLY}
+                </li>
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

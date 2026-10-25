@@ -42,48 +42,18 @@ function fromDesign(d: DesignProject): Work {
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
 export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
-  // A design piece that is also a build (WAY) only shows once, as the build.
-  const builtUrls = new Set(products.map((p) => p.liveUrl).filter(Boolean));
   const caseStudies = designs.filter((d) => d.id === "impression-ventures");
-  const misc = designs.filter((d) => d.id !== "impression-ventures" && (!d.href || !builtUrls.has(d.href)));
 
   return (
-    <div style={{ paddingTop: "clamp(7rem, 16vh, 10rem)" }}>
+    <div style={{ paddingTop: "clamp(4rem, 8vh, 6rem)", background: "#ffffff" }}>
       <WorkSection id="selected-works" title="Selected works" level="h1" works={[...caseStudies.map(fromDesign), ...products.map(fromProject)]} />
-      {misc.length > 0 && (
-        <div style={{ paddingTop: "clamp(4rem, 10vh, 7rem)" }}>
-          <DesignGallery designs={misc} />
-        </div>
-      )}
     </div>
-  );
-}
-
-function DesignGallery({ designs }: { designs: DesignProject[] }) {
-  return (
-    <section id="misc-design" aria-labelledby="misc-design-title" className="scroll-mt-28 mx-auto max-w-7xl px-6 md:px-12">
-      <h2 id="misc-design-title" className="text-3xl md:text-5xl font-medium tracking-tight mb-10" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>Miscellaneous design</h2>
-      <ul className="flex flex-wrap items-start gap-x-12 gap-y-16">
-        {designs.map(design => {
-          const shot = design.shots[0];
-          const artwork = <Image src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} sizes="(min-width: 768px) 600px, 100vw" className="block w-full h-auto" />;
-          return (
-            <li key={design.id} id={`design-${design.id}`} className="max-w-full scroll-mt-28" style={{ width: shot.width / shot.height > 1.8 ? "40rem" : "30rem" }}>
-              <figure>
-                {design.href ? (design.href.startsWith("/") ? <Link href={design.href}>{artwork}</Link> : <a href={design.href} target="_blank" rel="noopener noreferrer">{artwork}</a>) : artwork}
-                <figcaption className="mt-3 text-sm" style={{ color: "rgb(var(--ink-rgb) / .7)" }}>{design.name}</figcaption>
-              </figure>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
   );
 }
 
 function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; title: string; works: Work[]; level?: "h1" | "h2" }) {
   return (
-    <section aria-labelledby={id} className="scroll-mt-28">
+    <section aria-labelledby={id} className="scroll-mt-28" style={{ background: "#ffffff" }}>
       <Heading
         id={id}
         className="uppercase"
@@ -94,6 +64,7 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
           lineHeight: 0.9,
           letterSpacing: "-0.04em",
           color: "var(--ink)",
+          textAlign: "center",
           padding: "0 clamp(1rem, 2vw, 1.5rem) clamp(0.5rem, 1vw, 0.75rem)",
           margin: 0,
         }}
@@ -101,13 +72,13 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
         {title}
       </Heading>
 
-      <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}` }}>
+      <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
         {works.map((work, i) => (
           <li
             key={work.id}
             id={work.id}
             className="scroll-mt-28 md:odd:border-r"
-            style={{ borderBottom: `1px solid ${rule}`, borderColor: rule }}
+            style={{ borderBottom: `1px solid ${rule}`, borderColor: rule, background: "#ffffff" }}
           >
             <FadeUp delay={(i % 2) * 0.06}>
               <WorkCard work={work} />
@@ -121,8 +92,8 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
 
 function WorkCard({ work }: { work: Work }) {
   const body = (
-    <div style={{ padding: "clamp(0.75rem, 1.2vw, 1rem)" }}>
-      <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "var(--paper-raised)" }}>
+    <div style={{ padding: "clamp(0.75rem, 1.2vw, 1rem)", background: "#ffffff" }}>
+      <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "#f7f7f5" }}>
         <Image
           src={work.image}
           alt={`${work.name} — work by Koshin`}
