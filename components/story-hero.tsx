@@ -135,7 +135,7 @@ export function StoryHero() {
       <div className="sh-head">
         <h1 className="sh-name">Koshin Bathmax</h1>
         <p className="sh-tagline">
-          using product, business, and design intuition
+          building beautiful things
         </p>
         <nav className="sh-links" aria-label="Links">
           <Link className="sh-link" href="/work">
@@ -167,7 +167,7 @@ export function StoryHero() {
             aria-expanded={pointsOpen}
             style={{ background: 'none', border: 'none', padding: 0, color: 'inherit' }}
           >
-            I'm intensely devoted to creating things that change how humans live & think
+            I'm intensely devoted to creating things that change how humans live and think using product, design, and business intuition.
             <span className={`sh-chevron${pointsOpen ? ' open' : ''}`} aria-hidden>▶</span>
           </button>
 
