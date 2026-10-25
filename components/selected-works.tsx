@@ -42,20 +42,18 @@ function fromDesign(d: DesignProject): Work {
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
 export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
-  // A design piece that is also a build (WAY) only shows once, as the build.
   const caseStudies = designs.filter((d) => d.id === "impression-ventures");
 
   return (
-    <div style={{ paddingTop: "clamp(7rem, 16vh, 10rem)" }}>
+    <div style={{ paddingTop: "clamp(4rem, 8vh, 6rem)", background: "#ffffff" }}>
       <WorkSection id="selected-works" title="Selected works" level="h1" works={[...caseStudies.map(fromDesign), ...products.map(fromProject)]} />
-      {/* Miscellaneous design archived — DesignGallery no longer rendered. */}
     </div>
   );
 }
 
 function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; title: string; works: Work[]; level?: "h1" | "h2" }) {
   return (
-    <section aria-labelledby={id} className="scroll-mt-28">
+    <section aria-labelledby={id} className="scroll-mt-28" style={{ background: "#ffffff" }}>
       <Heading
         id={id}
         className="uppercase"
@@ -66,6 +64,7 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
           lineHeight: 0.9,
           letterSpacing: "-0.04em",
           color: "var(--ink)",
+          textAlign: "center",
           padding: "0 clamp(1rem, 2vw, 1.5rem) clamp(0.5rem, 1vw, 0.75rem)",
           margin: 0,
         }}
@@ -73,13 +72,13 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
         {title}
       </Heading>
 
-      <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}` }}>
+      <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
         {works.map((work, i) => (
           <li
             key={work.id}
             id={work.id}
             className="scroll-mt-28 md:odd:border-r"
-            style={{ borderBottom: `1px solid ${rule}`, borderColor: rule }}
+            style={{ borderBottom: `1px solid ${rule}`, borderColor: rule, background: "#ffffff" }}
           >
             <FadeUp delay={(i % 2) * 0.06}>
               <WorkCard work={work} />
@@ -93,8 +92,8 @@ function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; 
 
 function WorkCard({ work }: { work: Work }) {
   const body = (
-    <div style={{ padding: "clamp(0.75rem, 1.2vw, 1rem)" }}>
-      <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "var(--paper-raised)" }}>
+    <div style={{ padding: "clamp(0.75rem, 1.2vw, 1rem)", background: "#ffffff" }}>
+      <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "#f7f7f5" }}>
         <Image
           src={work.image}
           alt={`${work.name} — work by Koshin`}
