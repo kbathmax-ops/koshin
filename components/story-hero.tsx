@@ -135,7 +135,7 @@ export function StoryHero() {
       <div className="sh-head">
         <h1 className="sh-name">Koshin Bathmax</h1>
         <p className="sh-tagline">
-          building beautiful things
+          using product, business, and design intuition
         </p>
         <nav className="sh-links" aria-label="Links">
           <Link className="sh-link" href="/work">
