@@ -167,8 +167,8 @@ export function StoryHero() {
             aria-expanded={pointsOpen}
             style={{ background: 'none', border: 'none', padding: 0, color: 'inherit' }}
           >
-            I'm intensely devoted to creating things that change how humans live and think using product, design, and business intuition.
             <span className={`sh-chevron${pointsOpen ? ' open' : ''}`} aria-hidden>▶</span>
+            I'm intensely devoted to creating things that change how humans live and think using product, design, and business intuition.
           </button>
 
           <AnimatePresence initial={false}>
