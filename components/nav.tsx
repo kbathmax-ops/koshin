@@ -17,7 +17,8 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const isWork = pathname?.startsWith("/work");
+  const isHome = pathname === "/";
+  const isWork = pathname?.startsWith("/work") || isHome;
   const isStory = pathname === "/story";
 
   return (
@@ -35,7 +36,7 @@ export function Nav() {
       >
         {/* Logo */}
         <Link
-          href="/story"
+          href="/"
           className="text-base font-medium text-[var(--ink)] tracking-tighter"
           style={{ fontFamily: "var(--font-display)" }}
         >
@@ -45,6 +46,18 @@ export function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
+          <Link
+            href="/#work"
+            className={cn(
+              "font-medium tracking-tight transition-colors duration-200",
+              isWork
+                ? "text-[var(--ink)]"
+                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
+            )}
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Work
+          </Link>
           <Link
             href="/story"
             className={cn(
@@ -58,23 +71,18 @@ export function Nav() {
             Story
           </Link>
           <Link
-            href="/work"
-            className={cn(
-              "font-medium tracking-tight transition-colors duration-200",
-              isWork
-                ? "text-[var(--ink)]"
-                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
-            )}
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Work
-          </Link>
-          <Link
-            href="/work#contact"
+            href="/#contact"
             className="text-[var(--ink)]/70 font-medium hover:text-[var(--ink)] transition-colors duration-200"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Contact
+          </Link>
+          <Link
+            href="/resume"
+            className="text-[var(--ink)]/70 font-medium hover:text-[var(--ink)] transition-colors duration-200"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Resume
           </Link>
         </div>
 
@@ -93,6 +101,13 @@ export function Nav() {
         <div className="md:hidden mt-2 w-fit mx-auto flex justify-center">
           <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
           <Link
+            href="/#work"
+            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
+            onClick={() => setMenuOpen(false)}
+          >
+            Work
+          </Link>
+          <Link
             href="/story"
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
@@ -100,18 +115,18 @@ export function Nav() {
             Story
           </Link>
           <Link
-            href="/work"
-            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
-            onClick={() => setMenuOpen(false)}
-          >
-            Work
-          </Link>
-          <Link
-            href="/work#contact"
+            href="/#contact"
             className="font-medium text-[var(--ink)]/70 hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
             Contact
+          </Link>
+          <Link
+            href="/resume"
+            className="font-medium text-[var(--ink)]/70 hover:text-[var(--ink)] transition-colors py-3"
+            onClick={() => setMenuOpen(false)}
+          >
+            Resume
           </Link>
           </div>
         </div>
