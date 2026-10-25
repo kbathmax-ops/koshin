@@ -7,7 +7,6 @@ import { ArrowRight } from 'lucide-react';
 import Lenis from 'lenis';
 import { StoryHero } from './story-hero';
 import { SiteFooter } from './site-footer';
-import { TravelMap } from './travel-map';
 
 /* ─── Section label + heading + body as a text block ─── */
 interface StoryBlockProps {
@@ -90,7 +89,7 @@ function Section04() {
             margin: 0,
           }}
         >
-          I value innovation &amp; impact.
+          I value innovation & impact.
         </h2>
         <p
           style={{
@@ -101,7 +100,7 @@ function Section04() {
             margin: '1rem 0 0',
           }}
         >
-          If you&apos;re starting something big,{' '}
+          If you're starting something big,{' '}
           <Link
             href="/work#contact"
             style={{ color: 'var(--ink)', textDecoration: 'underline', textUnderlineOffset: '0.2em', textDecorationThickness: '1px' }}
@@ -312,34 +311,8 @@ export function StoryPageClient() {
       {/* Parallax story rows */}
       <div style={{ position: 'relative', zIndex: 2, background: '#ffffff', paddingTop: '4rem', paddingBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
-        {/* Atmospheric — Travel. `id` is the anchor the hero's third band
-            links to, and scroll-margin clears the fixed nav pill. */}
-        <div
-          id="travel"
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', padding: '0 0 3.5rem', scrollMarginTop: 'clamp(5.5rem, 13vh, 8rem)' }}
-        >
-          <div style={{ width: '100%', padding: '0 clamp(1.5rem, 5vw, 5rem)', textAlign: 'center' }}>
-            <h2 style={{
-              fontFamily: "var(--font-display)",
-              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-              fontWeight: 500,
-              color: 'var(--ink)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.03em',
-            }}>
-              where I&apos;ve been
-            </h2>
-          </div>
-          {/* Zoomed-in Europe travel map — X marks the places visited */}
-          <div style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1rem, 2.5vw, 2.5rem)' }}>
-            <TravelMap />
-          </div>
-        </div>
-
-
         {/* 04 — Values */}
         <Section04 />
-
 
       </div>
 
