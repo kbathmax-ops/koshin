@@ -76,13 +76,6 @@ export function Nav() {
           >
             Contact
           </Link>
-          <Link
-            href="/resume"
-            className="text-[var(--ink)]/70 font-medium hover:text-[var(--ink)] transition-colors duration-200"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Resume
-          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -119,13 +112,6 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Contact
-          </Link>
-          <Link
-            href="/resume"
-            className="font-medium text-[var(--ink)]/70 hover:text-[var(--ink)] transition-colors py-3"
-            onClick={() => setMenuOpen(false)}
-          >
-            Resume
           </Link>
           </div>
         </div>
