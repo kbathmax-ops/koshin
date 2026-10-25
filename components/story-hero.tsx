@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /* ─── Story hero ───
    Opens centred: the name, a line under it, the links, and the Machu Picchu
@@ -30,6 +30,7 @@ const EASE = [0.77, 0, 0.18, 1] as const;
 
 export function StoryHero() {
   const [open, setOpen] = useState(false);
+  const [pointsOpen, setPointsOpen] = useState(false);
 
   useEffect(() => {
     // With reduced motion there's nothing to watch, so skip straight to it.
@@ -132,12 +133,25 @@ export function StoryHero() {
         .sh-intro {
           font-size: clamp(1.1rem, 1.5vw, 1.3rem);
           line-height: 1.45;
-          margin: 0 0 1.25rem;
+          margin: 0 0 0.5rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          user-select: none;
         }
+        .sh-intro:hover { color: rgb(var(--ink-rgb) / 0.75); }
+        .sh-chevron {
+          display: inline-block;
+          transition: transform 0.2s ease;
+          font-size: 0.75em;
+        }
+        .sh-chevron.open { transform: rotate(90deg); }
         .sh-points {
           list-style: disc;
-          margin: 0;
+          margin: 0.75rem 0 0;
           padding-left: 1.2rem;
+          overflow: hidden;
         }
         .sh-points li {
           font-size: 1rem;
@@ -192,17 +206,35 @@ export function StoryHero() {
           animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={open ? { duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.2 }}
         >
-          <p className="sh-intro">
-            I&apos;m intensely devoted to creating things that change how humans live &amp; think
-          </p>
-          <ul className="sh-points">
-            {POINTS.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-            <li className="sh-now">
-              <strong>Currently:</strong> {CURRENTLY}
-            </li>
-          </ul>
+          <button
+            type="button"
+            className="sh-intro"
+            onClick={() => setPointsOpen((v) => !v)}
+            aria-expanded={pointsOpen}
+            style={{ background: 'none', border: 'none', padding: 0, textAlign: 'left', color: 'inherit', width: '100%' }}
+          >
+            I'm intensely devoted to creating things that change how humans live & think
+            <span className={`sh-chevron${pointsOpen ? ' open' : ''}`} aria-hidden>▶</span>
+          </button>
+
+          <AnimatePresence initial={false}>
+            {pointsOpen && (
+              <motion.ul
+                className="sh-points"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {POINTS.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+                <li className="sh-now">
+                  <strong>Currently:</strong> {CURRENTLY}
+                </li>
+              </motion.ul>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
