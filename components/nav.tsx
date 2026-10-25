@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,6 @@ export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -18,21 +17,6 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const scrollToWork = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setMenuOpen(false);
-    if (pathname === "/") {
-      const el = document.getElementById("work");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    } else {
-      router.push("/#work");
-    }
-  };
-
-  const isHome = pathname === "/";
-  const isWork = pathname?.startsWith("/work") || isHome;
   const isStory = pathname === "/story";
   const isTravels = pathname === "/travels";
 
@@ -61,19 +45,6 @@ export function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
-          <a
-            href="/#work"
-            onClick={scrollToWork}
-            className={cn(
-              "font-medium tracking-tight transition-colors duration-200 cursor-pointer",
-              isWork
-                ? "text-[var(--ink)]"
-                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
-            )}
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Work
-          </a>
           <Link
             href="/story"
             className={cn(
@@ -128,13 +99,6 @@ export function Nav() {
       {menuOpen && (
         <div className="md:hidden mt-2 w-fit mx-auto flex justify-center">
           <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
-          <a
-            href="/#work"
-            onClick={scrollToWork}
-            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3 cursor-pointer"
-          >
-            Work
-          </a>
           <Link
             href="/story"
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
