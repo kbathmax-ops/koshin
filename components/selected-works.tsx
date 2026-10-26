@@ -1,10 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeUp } from "@/components/fade-up";
 import type { Project } from "@/lib/projects";
 import type { DesignProject } from "@/lib/design-work";
 
-/* One shape for both builds and design pieces, so the grid treats them alike. */
+type Category = "all" | "branding" | "product" | "design";
+
 type Work = {
   id: string;
   name: string;
@@ -13,6 +17,7 @@ type Work = {
   fit?: "contain";
   href?: string;
   external: boolean;
+  category: Category;
 };
 
 function fromProject(p: Project): Work {
@@ -25,10 +30,17 @@ function fromProject(p: Project): Work {
     fit: p.imageFit,
     href,
     external: !p.detailFirst && Boolean(p.liveUrl),
+    category: "product",
   };
 }
 
 function fromDesign(d: DesignProject): Work {
+  let category: Category = "design";
+  if (d.id === "impression-ventures" || d.id === "ocean-management" || d.id === "snap-toronto") {
+    category = "branding";
+  } else if (d.id === "way") {
+    category = "product";
+  }
   return {
     id: `design-${d.id}`,
     name: d.name,
@@ -36,57 +48,92 @@ function fromDesign(d: DesignProject): Work {
     image: d.shots[0].src,
     href: d.href,
     external: Boolean(d.href && !d.href.startsWith("/")),
+    category,
   };
 }
+
+const FILTERS: { id: Category; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "branding", label: "Branding" },
+  { id: "product", label: "Product" },
+  { id: "design", label: "Design" },
+];
 
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
 export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
-  const caseStudies = designs.filter((d) => d.id === "impression-ventures");
+  const [active, setActive] = useState<Category>("all");
+
+  const allWorks: Work[] = [
+    ...designs.map(fromDesign),
+    ...products.filter((p) => !p.hidden).map(fromProject),
+  ];
+
+  const filtered = active === "all" ? allWorks : allWorks.filter((w) => w.category === active);
 
   return (
     <div style={{ paddingTop: "clamp(4rem, 8vh, 6rem)", background: "#ffffff" }}>
-      <WorkSection id="selected-works" title="Selected works" level="h1" works={[...caseStudies.map(fromDesign), ...products.map(fromProject)]} />
+      <section aria-labelledby="selected-works" className="scroll-mt-28" style={{ background: "#ffffff" }}>
+        <h1
+          id="selected-works"
+          className="uppercase"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.75rem, 9vw, 8rem)",
+            fontWeight: 700,
+            lineHeight: 0.9,
+            letterSpacing: "-0.04em",
+            color: "var(--ink)",
+            textAlign: "center",
+            padding: "0 clamp(1rem, 2vw, 1.5rem) 1.25rem",
+            margin: 0,
+          }}
+        >
+          Selected works
+        </h1>
+
+        <div className="flex justify-center gap-2 flex-wrap px-4 mb-6">
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setActive(f.id)}
+              className="text-sm font-medium px-4 py-1.5 transition-colors"
+              style={{
+                fontFamily: "var(--font-display)",
+                background: active === f.id ? "var(--ink)" : "transparent",
+                color: active === f.id ? "#ffffff" : "var(--ink)",
+                border: `1px solid ${active === f.id ? "var(--ink)" : rule}`,
+                borderRadius: "999px",
+              }}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
+          {filtered.map((work, i) => (
+            <li
+              key={work.id}
+              id={work.id}
+              className="scroll-mt-28 md:odd:border-r"
+              style={{ borderBottom: `1px solid ${rule}`, borderColor: rule, background: "#ffffff" }}
+            >
+              <FadeUp delay={(i % 2) * 0.06}>
+                <WorkCard work={work} />
+              </FadeUp>
+            </li>
+          ))}
+        </ul>
+
+        {filtered.length === 0 && (
+          <p className="text-center py-16" style={{ color: "rgb(var(--ink-rgb) / 0.5)" }}>
+            Nothing in this category yet.
+          </p>
+        )}
+      </section>
     </div>
-  );
-}
-
-function WorkSection({ id, title, works, level: Heading = "h2" }: { id: string; title: string; works: Work[]; level?: "h1" | "h2" }) {
-  return (
-    <section aria-labelledby={id} className="scroll-mt-28" style={{ background: "#ffffff" }}>
-      <Heading
-        id={id}
-        className="uppercase"
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(2.75rem, 9vw, 8rem)",
-          fontWeight: 700,
-          lineHeight: 0.9,
-          letterSpacing: "-0.04em",
-          color: "var(--ink)",
-          textAlign: "center",
-          padding: "0 clamp(1rem, 2vw, 1.5rem) clamp(0.5rem, 1vw, 0.75rem)",
-          margin: 0,
-        }}
-      >
-        {title}
-      </Heading>
-
-      <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
-        {works.map((work, i) => (
-          <li
-            key={work.id}
-            id={work.id}
-            className="scroll-mt-28 md:odd:border-r"
-            style={{ borderBottom: `1px solid ${rule}`, borderColor: rule, background: "#ffffff" }}
-          >
-            <FadeUp delay={(i % 2) * 0.06}>
-              <WorkCard work={work} />
-            </FadeUp>
-          </li>
-        ))}
-      </ul>
-    </section>
   );
 }
 
