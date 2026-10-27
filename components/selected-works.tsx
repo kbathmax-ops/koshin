@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeUp } from "@/components/fade-up";
+import { WayModel } from "@/components/way-model";
 import type { Project } from "@/lib/projects";
 import type { DesignProject } from "@/lib/design-work";
 
@@ -15,6 +16,7 @@ type Work = {
   line: string;
   image: string;
   fit?: "contain";
+  model?: "way";
   href?: string;
   external: boolean;
   category: Category;
@@ -28,6 +30,7 @@ function fromProject(p: Project): Work {
     line: p.description,
     image: p.image,
     fit: p.imageFit,
+    model: p.model,
     href,
     external: !p.detailFirst && Boolean(p.liveUrl),
     category: "product",
@@ -65,7 +68,7 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
   const [active, setActive] = useState<Category>("all");
 
   const allWorks: Work[] = [
-    ...designs.map(fromDesign),
+    ...designs.filter((d) => !d.hidden).map(fromDesign),
     ...products.filter((p) => !p.hidden).map(fromProject),
   ];
 
@@ -138,9 +141,11 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
 }
 
 function WorkCard({ work }: { work: Work }) {
-  const body = (
-    <div style={{ padding: "clamp(0.75rem, 1.2vw, 1rem)", background: "#ffffff" }}>
-      <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "#f7f7f5" }}>
+  const media = (
+    <div className="relative aspect-[16/11] overflow-hidden" style={{ background: "#f7f7f5" }}>
+      {work.model === "way" ? (
+        <WayModel className="h-full" />
+      ) : (
         <Image
           src={work.image}
           alt={`${work.name} — work by Koshin`}
@@ -148,8 +153,12 @@ function WorkCard({ work }: { work: Work }) {
           sizes="(min-width: 768px) 50vw, 100vw"
           className={`${work.fit === "contain" ? "object-contain p-[12%]" : "object-cover"} transition-transform duration-700 group-hover:scale-[1.03]`}
         />
-      </div>
+      )}
+    </div>
+  );
 
+  const text = (
+    <>
       <h3
         className="uppercase text-center"
         style={{
@@ -178,17 +187,38 @@ function WorkCard({ work }: { work: Work }) {
       >
         {work.line}
       </p>
-    </div>
+    </>
   );
 
-  if (!work.href) return body;
-  return work.external ? (
-    <a href={work.href} target="_blank" rel="noopener noreferrer" className="group block">
-      {body}
-    </a>
-  ) : (
-    <Link href={work.href} className="group block">
-      {body}
-    </Link>
+  const link = (children: React.ReactNode) =>
+    !work.href ? (
+      <div>{children}</div>
+    ) : work.external ? (
+      <a href={work.href} target="_blank" rel="noopener noreferrer" className="group block">
+        {children}
+      </a>
+    ) : (
+      <Link href={work.href} className="group block">
+        {children}
+      </Link>
+    );
+
+  const pad = { padding: "clamp(0.75rem, 1.2vw, 1rem)", background: "#ffffff" };
+
+  // The model is dragged to turn it, so only the words underneath link out.
+  if (work.model) {
+    return (
+      <div style={pad}>
+        {media}
+        {link(text)}
+      </div>
+    );
+  }
+
+  return link(
+    <div style={pad}>
+      {media}
+      {text}
+    </div>
   );
 }

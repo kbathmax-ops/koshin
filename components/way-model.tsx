@@ -9,7 +9,7 @@ import { buildWay, WAY_BUTTON_POINT } from "@/components/way/build-way";
  * materials follow the original model on way-compass.vercel.app. Three.js is
  * loaded on mount so it stays out of every other page's bundle.
  */
-export function WayModel() {
+export function WayModel({ className = "aspect-[4/3]" }: { className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
@@ -177,7 +177,7 @@ export function WayModel() {
   }, []);
 
   return (
-    <div ref={stageRef} className="relative w-full aspect-[4/3]">
+    <div ref={stageRef} className={`relative w-full ${className}`}>
       <canvas
         ref={canvasRef}
         tabIndex={0}
