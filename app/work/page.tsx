@@ -61,28 +61,6 @@ const jsonLd = {
       operatingSystem: "Chrome",
       url: "https://detour-landing-roan.vercel.app",
     },
-    {
-      "@type": "CreativeWork",
-      position: 4,
-      name: "Snap Toronto — identity & site design",
-      description:
-        "Identity and site design for a Toronto AI workshop series: condensed display type, a hand-drawn mark, and full-bleed photography of the businesses it serves.",
-      url: "https://snaptoronto.org",
-    },
-    {
-      "@type": "CreativeWork",
-      position: 5,
-      name: "Toronto's Hot Take Slideshow Night — event poster",
-      description:
-        "Poster design for a Toronto slideshow night: hand-drawn brush lettering over a photograph of the room.",
-    },
-    {
-      "@type": "CreativeWork",
-      position: 6,
-      name: "Ocean Management — brand identity & deck",
-      description:
-        "Identity and pitch deck for a Toronto influencer management agency: a geometric wordmark with the brand's shapes set into its counters.",
-    },
   ],
 };
 

@@ -4,6 +4,14 @@ Removed from `app/work/page.tsx` on 2026-09-06. Everything needed to restore a
 card lives here: the `projects[]` entry, its JSON-LD `itemListElement`, and the
 hero image (in `assets/`, restore to `public/`).
 
+## Hidden design pieces (2026-10-27)
+
+Snap Toronto, Toronto's Hot Take Slideshow Night and Ocean Management were
+taken off the Selected works grid. The design-side WAY entry is hidden too: it
+was merged into the `way-compass` project card, which now shows the 3D model. Their entries stay in `lib/design-work.ts` with
+`hidden: true`, and their images stay in `public/design/`. Delete that line to
+bring one back (and re-add its JSON-LD entry in `app/work/page.tsx`).
+
 ## Snap Toronto
 
 > Note: Snap Toronto came back to `/work` on 2026-09-06 as the first entry in the

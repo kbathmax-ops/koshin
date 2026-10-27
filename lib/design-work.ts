@@ -20,6 +20,8 @@ export type DesignProject = {
   /** One line for the /work grid. */
   tagline: string;
   shots: Shot[];
+  /** Archived — kept here but left out of the grid. */
+  hidden?: boolean;
 };
 
 export const designWork: DesignProject[] = [
@@ -41,6 +43,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "way",
+    hidden: true,
     tagline: "A keychain compass for finding friends when cell service drops.",
     name: "WAY",
     href: "https://way-compass.vercel.app",
@@ -60,6 +63,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "snap-toronto",
+    hidden: true,
     tagline: "Identity and site for my Toronto AI workshop series.",
     name: "Snap Toronto",
     href: "https://snaptoronto.org",
@@ -107,6 +111,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "hot-take-slideshow-night",
+    hidden: true,
     tagline: "Brush-lettered poster for a Toronto slideshow night.",
     name: "Toronto's Hot Take Slideshow Night",
     role: "Event poster",
@@ -125,6 +130,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "ocean-management",
+    hidden: true,
     tagline: "Brand identity and pitch deck for an influencer agency.",
     name: "Ocean Management",
     role: "Brand identity & deck",
