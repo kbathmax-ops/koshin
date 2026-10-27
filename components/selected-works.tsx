@@ -26,7 +26,7 @@ function fromProject(p: Project): Work {
   const href = p.detailFirst ? `/work/${p.slug}` : p.liveUrl;
   return {
     id: p.slug,
-    name: p.name,
+    name: p.cardName ?? p.name,
     line: p.description,
     image: p.image,
     fit: p.imageFit,

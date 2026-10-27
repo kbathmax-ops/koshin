@@ -53,6 +53,8 @@ export type Project = {
   detailFirst?: boolean;
   details?: ProjectDetails;
   story?: ProjectStory;
+  /** Title on the /work grid card, when it should differ from the page title. */
+  cardName?: string;
   /** Kept on file (its detail page still builds) but left off the /work index. */
   hidden?: boolean;
 };
@@ -95,6 +97,7 @@ export const projects: Project[] = [
   {
     slug: "way-compass",
     name: "WAY",
+    cardName: "WAY Case Study",
     description:
       "A pocket compass concept for finding friends in crowded places when cell service is unreliable.",
     image: "/way-compass-hero.jpg",
