@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
-import { ContactForm } from "@/components/contact-form";
+import { ContactSection } from "@/components/contact-section";
 import { SelectedWorks } from "@/components/selected-works";
-import { designWork } from "@/lib/design-work";
-import { projects } from "@/lib/projects";
-
-/* Anything with nowhere to send people sinks to the end of the grid, so the
-   cards a visitor can actually click come first. Sorted rather than hand-
-   ordered, so a project that gains a URL moves up on its own. */
-const visibleProjects = projects
-  .filter((p) => !p.hidden)
-  .sort((a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)));
-
+import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: "work",
@@ -81,7 +72,7 @@ export default function WorkPage() {
       <Nav />
 
       {/* ── Builds, then design pieces ── */}
-      <SelectedWorks products={visibleProjects} designs={designWork} />
+      <SelectedWorks />
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-32 pt-16 md:pt-24 pb-32">
 
@@ -103,48 +94,13 @@ export default function WorkPage() {
         )}
 
         {/* ── Contact ── */}
-        <section id="contact" className="scroll-mt-28 max-w-4xl mx-auto py-16">
-          <FadeUp>
-            <div
-              className="p-6 md:p-12"
-              style={{ background: '#ffffff', border: '1px solid var(--ink)' }}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                <div>
-                  <h2
-                    className="font-medium text-3xl md:text-4xl tracking-tight mb-4 leading-tight"
-                    style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
-                  >
-                    Looking to work somewhere that creates a true mark in their industry.
-                    <br />
-                    <br />
-                    Let&apos;s talk.
-                  </h2>
-                  <p className="text-base leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.62)' }}>
-                    Looking into design, product, and engineering.
-                  </p>
-                </div>
-                <ContactForm />
-              </div>
-            </div>
-          </FadeUp>
-        </section>
+        <ContactSection
+          heading="Looking to work somewhere that creates a true mark in their industry."
+          body="Looking into design, product, and engineering."
+        />
       </main>
 
-      {/* Footer */}
-      <footer style={{ background: 'var(--paper)', borderTop: '1px solid rgb(var(--ink-rgb) / 0.10)' }}>
-        <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
-          <span
-            className="text-lg font-medium tracking-tighter"
-            style={{ fontFamily: "var(--font-display)", color: 'var(--ink)' }}
-          >
-            koshin<span style={{ color: 'var(--ink)' }}>.</span>
-          </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
-            © 2026
-          </p>
-        </div>
-      </footer>
+      <SiteFooter paper />
     </div>
   );
 }

@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FadeUp } from "@/components/fade-up";
 import { WayModel } from "@/components/way-model";
-import type { Project } from "@/lib/projects";
-import type { DesignProject } from "@/lib/design-work";
+import { visibleProjects, type Project } from "@/lib/projects";
+import { visibleDesigns, type DesignProject } from "@/lib/design-work";
 
-type Category = "all" | "branding" | "product" | "design";
+type Category = "all" | DesignProject["category"];
 
 type Work = {
   id: string;
@@ -18,12 +18,10 @@ type Work = {
   fit?: "contain";
   model?: "way";
   href?: string;
-  external: boolean;
   category: Category;
 };
 
 function fromProject(p: Project): Work {
-  const href = p.detailFirst ? `/work/${p.slug}` : p.liveUrl;
   return {
     id: p.slug,
     name: p.name,
@@ -31,29 +29,23 @@ function fromProject(p: Project): Work {
     image: p.image,
     fit: p.imageFit,
     model: p.model,
-    href,
-    external: !p.detailFirst && Boolean(p.liveUrl),
+    href: p.detailFirst ? `/work/${p.slug}` : p.liveUrl,
     category: "product",
   };
 }
 
 function fromDesign(d: DesignProject): Work {
-  let category: Category = "design";
-  if (d.id === "impression-ventures" || d.id === "ocean-management" || d.id === "snap-toronto") {
-    category = "branding";
-  } else if (d.id === "way") {
-    category = "product";
-  }
   return {
     id: `design-${d.id}`,
     name: d.name,
     line: d.tagline,
     image: d.shots[0].src,
     href: d.href,
-    external: Boolean(d.href && !d.href.startsWith("/")),
-    category,
+    category: d.category,
   };
 }
+
+const allWorks: Work[] = [...visibleDesigns.map(fromDesign), ...visibleProjects.map(fromProject)];
 
 const FILTERS: { id: Category; label: string }[] = [
   { id: "all", label: "All" },
@@ -64,19 +56,14 @@ const FILTERS: { id: Category; label: string }[] = [
 
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
-export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
+export function SelectedWorks() {
   const [active, setActive] = useState<Category>("all");
-
-  const allWorks: Work[] = [
-    ...designs.filter((d) => !d.hidden).map(fromDesign),
-    ...products.filter((p) => !p.hidden).map(fromProject),
-  ];
 
   const filtered = active === "all" ? allWorks : allWorks.filter((w) => w.category === active);
 
   return (
     <div style={{ paddingTop: "clamp(4rem, 8vh, 6rem)", background: "#ffffff" }}>
-      <section aria-labelledby="selected-works" className="scroll-mt-28" style={{ background: "#ffffff" }}>
+      <section aria-labelledby="selected-works" className="scroll-mt-28">
         <h1
           id="selected-works"
           className="uppercase"
@@ -115,13 +102,13 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
           ))}
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
+        <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}` }}>
           {filtered.map((work, i) => (
             <li
               key={work.id}
               id={work.id}
               className="scroll-mt-28 md:odd:border-r"
-              style={{ borderBottom: `1px solid ${rule}`, borderColor: rule, background: "#ffffff" }}
+              style={{ borderBottom: `1px solid ${rule}`, borderColor: rule }}
             >
               <FadeUp delay={(i % 2) * 0.06}>
                 <WorkCard work={work} />
@@ -193,7 +180,7 @@ function WorkCard({ work }: { work: Work }) {
   const link = (children: React.ReactNode) =>
     !work.href ? (
       <div>{children}</div>
-    ) : work.external ? (
+    ) : !work.href.startsWith("/") ? (
       <a href={work.href} target="_blank" rel="noopener noreferrer" className="group block">
         {children}
       </a>
@@ -203,7 +190,7 @@ function WorkCard({ work }: { work: Work }) {
       </Link>
     );
 
-  const pad = { padding: "clamp(0.75rem, 1.2vw, 1rem)", background: "#ffffff" };
+  const pad = { padding: "clamp(0.75rem, 1.2vw, 1rem)" };
 
   // The model is dragged to turn it, so only the words underneath link out.
   if (work.model) {

@@ -10,7 +10,7 @@ import { BookStack } from "@/components/poster/book-stack";
 import { CarouselDetail } from "@/components/poster/carousel-detail";
 import { Bracketed, CodeTag, PixelMark, PosterFooter, TriBadge } from "@/components/poster/primitives";
 import { getTeardown, teardowns } from "@/lib/teardowns";
-import type { Teardown, TeardownSection } from "@/lib/teardowns/types";
+import type { Shot, Teardown, TeardownSection } from "@/lib/teardowns/types";
 import "../teardown.css";
 
 export function generateStaticParams() {
@@ -80,16 +80,14 @@ export default async function TeardownPage({ params }: Params) {
                 <p className="td-team-note">I replaced the team headshots. Hovering to reveal text adds no value, and headshots take up unnecessary space. Show how great the team is on dedicated “Our Team” and “Our Advisors” pages.</p>
               )}
               <div className={`td-spread-pages${section.theirs.pending ? " td-spread-pages--single" : ""}`}>
-                {!section.theirs.pending && (
-                  <Image src={section.theirs.src} alt={section.theirs.alt} width={section.theirs.width} height={section.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
-                )}
+                {!section.theirs.pending && <SpreadImage shot={section.theirs} />}
                 {section.id === "team" && advisors ? (
-                  <Image src={advisors.theirs.src} alt={advisors.theirs.alt} width={advisors.theirs.width} height={advisors.theirs.height} sizes="(min-width: 768px) 46vw, 48vw" className="td-spread-image" />
+                  <SpreadImage shot={advisors.theirs} />
                 ) : section.mine?.shot && (
                   section.id === "portfolio" ? (
                     <CarouselDetail shot={section.mine.shot} />
                   ) : (
-                    <Image src={section.mine.shot.src} alt={section.mine.shot.alt} width={section.mine.shot.width} height={section.mine.shot.height} sizes={section.theirs.pending ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"} className="td-spread-image" />
+                    <SpreadImage shot={section.mine.shot} wide={section.theirs.pending} />
                   )
                 )}
               </div>
@@ -106,8 +104,6 @@ export default async function TeardownPage({ params }: Params) {
 
       <main className="td-main">
         <Intro t={t} />
-        {t.slug === "impression-ventures" && <BuiltHomepage />}
-
 
         {t.sections.map((section, i) => (
           <Section key={section.id} section={section} index={i} />
@@ -125,34 +121,17 @@ export default async function TeardownPage({ params }: Params) {
   );
 }
 
-function BuiltHomepage() {
-  const dir = "/case-studies/impression-ventures/after";
+/** One page of a before/after spread. `wide` when it sits alone on the spread. */
+function SpreadImage({ shot, wide }: { shot: Shot; wide?: boolean }) {
   return (
-    <section className="td-section" id="built-homepage" aria-labelledby="built-homepage-title">
-      <h2 className="td-display td-display--md" id="built-homepage-title">
-        The <Bracketed text="built homepage" />
-      </h2>
-      <p className="td-lede">Newsreader headings, Manrope supporting text, and an opening wordmark that becomes the header as you scroll.</p>
-      <div className="td-links">
-        <Link href="/work/case-studies/impression-ventures/redesign" className="td-link td-link--strong">
-          Explore the built redesign <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </Link>
-      </div>
-      <BookStack
-        id="built-homepage"
-        before={<Image src="/case-studies/impression-ventures/01-hero.webp" alt="Original Impression Ventures homepage hero" width={2000} height={1130} className="td-shot" sizes="(min-width: 900px) 70vw, 100vw" />}
-        after={<>
-          <Image src={`${dir}/impression-centred-glass-intro.png`} alt="Centred Impression Ventures wordmark and navigation over a large glass brand symbol" width={1280} height={720} className="td-shot" sizes="(min-width: 900px) 70vw, 100vw" />
-          <Image src={`${dir}/impression-book-hero.png`} alt="Built hero with the original financial services headline, North America outline and vertical portfolio carousel" width={1280} height={720} className="td-shot" sizes="(min-width: 900px) 70vw, 100vw" />
-          <ol className="td-notes">
-            <li><span className="td-num">01</span><span><strong>Scroll into the header.</strong> The opening wordmark and links shrink into persistent navigation.</span></li>
-            <li><span className="td-num">02</span><span><strong>Original content.</strong> The portfolio, investment criteria and founder quotes come from the firm’s existing website.</span></li>
-            <li><span className="td-num">03</span><span><strong>Founder photos beside their words.</strong> Authentic testimonials use a horizontal layout with manual previous and next controls.</span></li>
-          </ol>
-        </>}
-      />
-      <p className="td-lede" style={{ marginTop: 64 }}>Every spread below pairs the original website with the corresponding section of the built redesign.</p>
-    </section>
+    <Image
+      src={shot.src}
+      alt={shot.alt}
+      width={shot.width}
+      height={shot.height}
+      sizes={wide ? "(min-width: 768px) 46vw, 90vw" : "(min-width: 768px) 46vw, 48vw"}
+      className="td-spread-image"
+    />
   );
 }
 

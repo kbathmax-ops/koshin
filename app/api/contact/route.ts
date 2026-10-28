@@ -17,6 +17,13 @@ const hits = new Map<string, number[]>();
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
+  // Forget IPs whose last request has aged out, so the map can't grow forever
+  // on a long-lived instance.
+  if (hits.size > 1000) {
+    for (const [key, times] of hits) {
+      if (now - times[times.length - 1] >= WINDOW_MS) hits.delete(key);
+    }
+  }
   const timestamps = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   timestamps.push(now);
   hits.set(ip, timestamps);

@@ -43,8 +43,6 @@ export type Project = {
   liveUrl?: string;
   /** Wording for the outbound link when "View live site" is wrong. */
   linkLabel?: string;
-  /** Live site is down — flags the card with a red marker. */
-  unavailable?: boolean;
   /** Shipped but waiting on a store review — flags the card with a green light. */
   inReview?: boolean;
   /** Show an interactive 3D model in place of the outbound link. */
@@ -78,7 +76,6 @@ export const projects: Project[] = [
     image: "/relay-handoff.png",
     // The old link pointed at a chatgpt.site domain that redirects to ChatGPT.
     // Left off until there's a real URL to send people to.
-    unavailable: true,
     story: {
       intention: todo(
         "What made you build a GTM coordination tool? What did you watch go wrong between marketing and sales that made this feel worth prototyping?",
@@ -218,7 +215,6 @@ export const projects: Project[] = [
     description:
       "An AI research engine that finds historical sanctions precedents by sector, intensity, and geopolitical objective, built for policy analysts.",
     image: "/sanctions-precedent-hero.png",
-    unavailable: true,
     story: {
       intention: todo(
         "This connects to the Halifax forum and wanting to work in national defense — say that. What does a policy analyst do today that this was meant to replace?",
@@ -235,3 +231,10 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+/* Anything with nowhere to send people sinks to the end of the grid, so the
+   cards a visitor can actually click come first. Sorted rather than hand-
+   ordered, so a project that gains a URL moves up on its own. */
+export const visibleProjects = projects
+  .filter((p) => !p.hidden)
+  .sort((a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)));
