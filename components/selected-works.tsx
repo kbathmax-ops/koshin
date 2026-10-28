@@ -24,7 +24,7 @@ type Work = {
 function fromProject(p: Project): Work {
   return {
     id: p.slug,
-    name: p.name,
+    name: p.cardName ?? p.name,
     line: p.description,
     image: p.image,
     fit: p.imageFit,
