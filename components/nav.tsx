@@ -17,7 +17,9 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const isStory = pathname === "/story";
+  // RevOps case studies live under /work/[slug] but belong to the RevOps tab.
+  const isRevops = ["/revops", "/work/client-reporting", "/work/lead-to-revenue"].includes(pathname);
+  const isWork = pathname.startsWith("/work") && !isRevops;
   const isTravels = pathname === "/travels";
 
   return (
@@ -46,16 +48,28 @@ export function Nav() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
           <Link
-            href="/story"
+            href="/work"
             className={cn(
               "font-medium tracking-tight transition-colors duration-200",
-              isStory
+              isWork
                 ? "text-[var(--ink)]"
                 : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
             )}
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Story
+            Work
+          </Link>
+          <Link
+            href="/revops"
+            className={cn(
+              "font-medium tracking-tight transition-colors duration-200",
+              isRevops
+                ? "text-[var(--ink)]"
+                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
+            )}
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            RevOps
           </Link>
           <Link
             href="/travels"
@@ -93,11 +107,18 @@ export function Nav() {
         <div className="md:hidden mt-2 w-fit mx-auto flex justify-center">
           <div className="bg-[var(--paper-sunk)]/95 backdrop-blur-xl shadow-[0_10px_30px_rgb(var(--ink-rgb)_/_0.08)] px-6 py-2 flex flex-col items-center text-center min-w-[9rem]">
           <Link
-            href="/story"
+            href="/work"
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >
-            Story
+            Work
+          </Link>
+          <Link
+            href="/revops"
+            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
+            onClick={() => setMenuOpen(false)}
+          >
+            RevOps
           </Link>
           <Link
             href="/travels"
