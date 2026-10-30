@@ -8,7 +8,7 @@ import { WayModel } from "@/components/way-model";
 import type { Project } from "@/lib/projects";
 import type { DesignProject } from "@/lib/design-work";
 
-type Category = "all" | "branding" | "product" | "design";
+type Category = "all" | "branding" | "product" | "design" | "revops";
 
 type Work = {
   id: string;
@@ -33,7 +33,7 @@ function fromProject(p: Project): Work {
     model: p.model,
     href,
     external: !p.detailFirst && Boolean(p.liveUrl),
-    category: "product",
+    category: p.category ?? "product",
   };
 }
 
@@ -64,7 +64,17 @@ const FILTERS: { id: Category; label: string }[] = [
 
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
-export function SelectedWorks({ products, designs }: { products: Project[]; designs: DesignProject[] }) {
+export function SelectedWorks({
+  products,
+  designs,
+  title = "Selected works",
+  filters = true,
+}: {
+  products: Project[];
+  designs: DesignProject[];
+  title?: string;
+  filters?: boolean;
+}) {
   const [active, setActive] = useState<Category>("all");
 
   const allWorks: Work[] = [
@@ -92,9 +102,10 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
             margin: 0,
           }}
         >
-          Selected works
+          {title}
         </h1>
 
+        {filters && (
         <div className="flex justify-center gap-2 flex-wrap px-4 mb-6">
           {FILTERS.map((f) => (
             <button
@@ -114,6 +125,7 @@ export function SelectedWorks({ products, designs }: { products: Project[]; desi
             </button>
           ))}
         </div>
+        )}
 
         <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}`, background: "#ffffff" }}>
           {filtered.map((work, i) => (

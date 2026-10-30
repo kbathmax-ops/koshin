@@ -10,7 +10,7 @@ import { projects } from "@/lib/projects";
    cards a visitor can actually click come first. Sorted rather than hand-
    ordered, so a project that gains a URL moves up on its own. */
 const visibleProjects = projects
-  .filter((p) => !p.hidden)
+  .filter((p) => !p.hidden && p.category !== "revops")
   .sort((a, b) => Number(Boolean(b.liveUrl)) - Number(Boolean(a.liveUrl)));
 
 

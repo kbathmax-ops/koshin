@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
   if (!project) notFound();
 
-  const { story, details } = project;
+  const { story, details, caseStudy } = project;
 
   return (
     <div style={{ background: "var(--paper)", minHeight: "100dvh" }}>
@@ -91,11 +91,11 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       <main className="max-w-3xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-32">
         <FadeUp>
           <Link
-            href="/work"
+            href={project.category === "revops" ? "/revops" : "/work"}
             className="inline-flex items-center gap-1.5 text-xs font-medium mb-8 transition-opacity hover:opacity-100"
             style={{ color: "var(--ink)", opacity: 0.85 }}
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> All work
+            <ArrowLeft className="h-3.5 w-3.5" /> {project.category === "revops" ? "All RevOps" : "All work"}
           </Link>
 
           <h1
@@ -125,7 +125,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             >
               {project.linkLabel ?? "View live site"} <ArrowRight className="h-4 w-4" />
             </a>
-          ) : (
+          ) : caseStudy ? null : (
             <p
               className="inline-flex items-center gap-1.5 text-sm font-semibold"
               style={{ color: "#c0392b" }}
@@ -135,6 +135,29 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             </p>
           )}
         </FadeUp>
+
+        {caseStudy && (
+          <div className="mt-16 md:mt-20 space-y-12 md:space-y-16">
+            {caseStudy.map((section) => (
+              <FadeUp key={section.title}>
+                <Section title={section.title}>
+                  {section.paragraphs?.map((paragraph) => (
+                    <Prose key={paragraph} copy={paragraph} />
+                  ))}
+                  {section.bullets && (
+                    <ul className="space-y-3 pl-5 list-disc marker:text-[var(--ink)]">
+                      {section.bullets.map((bullet) => (
+                        <li key={bullet} className="pl-1 text-base leading-relaxed" style={{ color: "rgb(var(--ink-rgb) / 0.78)" }}>
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </Section>
+              </FadeUp>
+            ))}
+          </div>
+        )}
 
         {details && (
           <div className="mt-16 md:mt-20 space-y-12 md:space-y-16">
