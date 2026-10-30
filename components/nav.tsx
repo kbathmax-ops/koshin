@@ -17,7 +17,7 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // RevOps case studies live under /work/[slug] but belong to the RevOps tab.
+  // RevOps automations live under /work/[slug] but belong to the RevOps tab.
   const isRevops = ["/revops", "/work/client-reporting", "/work/lead-to-revenue"].includes(pathname);
   const isWork = pathname.startsWith("/work") && !isRevops;
   const isTravels = pathname === "/travels";

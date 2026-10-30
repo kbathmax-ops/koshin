@@ -7,10 +7,10 @@ const revopsProjects = projects.filter((p) => !p.hidden && p.category === "revop
 
 export const metadata: Metadata = {
   title: "revops",
-  description: "RevOps and GTM case studies by Koshin Bathmax.",
+  description: "RevOps and GTM automations by Koshin Bathmax.",
   openGraph: {
     title: "revops | Koshin Bathmax",
-    description: "RevOps and GTM case studies by Koshin Bathmax.",
+    description: "RevOps and GTM automations by Koshin Bathmax.",
     url: "https://kbathmax.com/revops",
   },
   alternates: { canonical: "https://kbathmax.com/revops" },
