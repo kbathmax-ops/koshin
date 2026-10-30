@@ -8,7 +8,7 @@ import { WayModel } from "@/components/way-model";
 import { visibleProjects, type Project } from "@/lib/projects";
 import { visibleDesigns, type DesignProject } from "@/lib/design-work";
 
-type Category = "all" | DesignProject["category"];
+type Category = "all" | DesignProject["category"] | NonNullable<Project["category"]>;
 
 type Work = {
   id: string;
@@ -30,7 +30,7 @@ function fromProject(p: Project): Work {
     fit: p.imageFit,
     model: p.model,
     href: p.detailFirst ? `/work/${p.slug}` : p.liveUrl,
-    category: "product",
+    category: p.category ?? "product",
   };
 }
 
@@ -45,8 +45,6 @@ function fromDesign(d: DesignProject): Work {
   };
 }
 
-const allWorks: Work[] = [...visibleDesigns.map(fromDesign), ...visibleProjects.map(fromProject)];
-
 const FILTERS: { id: Category; label: string }[] = [
   { id: "all", label: "All" },
   { id: "branding", label: "Branding" },
@@ -56,8 +54,20 @@ const FILTERS: { id: Category; label: string }[] = [
 
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 
-export function SelectedWorks() {
+/** Defaults to the main /work grid; other pages pass their own list and title. */
+export function SelectedWorks({
+  projects = visibleProjects,
+  designs = visibleDesigns,
+  title = "Selected works",
+  filters = true,
+}: {
+  projects?: Project[];
+  designs?: DesignProject[];
+  title?: string;
+  filters?: boolean;
+}) {
   const [active, setActive] = useState<Category>("all");
+  const allWorks: Work[] = [...designs.map(fromDesign), ...projects.map(fromProject)];
 
   const filtered = active === "all" ? allWorks : allWorks.filter((w) => w.category === active);
 
@@ -79,9 +89,10 @@ export function SelectedWorks() {
             margin: 0,
           }}
         >
-          Selected works
+          {title}
         </h1>
 
+        {filters && (
         <div className="flex justify-center gap-2 flex-wrap px-4 mb-6">
           {FILTERS.map((f) => (
             <button
@@ -101,6 +112,7 @@ export function SelectedWorks() {
             </button>
           ))}
         </div>
+        )}
 
         <ul className="grid grid-cols-1 md:grid-cols-2" style={{ borderTop: `1px solid ${rule}` }}>
           {filtered.map((work, i) => (
