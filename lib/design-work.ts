@@ -19,6 +19,8 @@ export type DesignProject = {
   description: string;
   /** One line for the /work grid. */
   tagline: string;
+  /** Which filter on the /work grid this piece shows under. */
+  category: "branding" | "product" | "design";
   shots: Shot[];
   /** Archived — kept here but left out of the grid. */
   hidden?: boolean;
@@ -27,6 +29,7 @@ export type DesignProject = {
 export const designWork: DesignProject[] = [
   {
     id: "impression-ventures",
+    category: "branding",
     name: "Impression Ventures Case Study",
     href: "/work/case-studies/impression-ventures",
     role: "Identity & website redesign",
@@ -43,6 +46,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "way",
+    category: "product",
     hidden: true,
     tagline: "A keychain compass for finding friends when cell service drops.",
     name: "WAY",
@@ -63,6 +67,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "snap-toronto",
+    category: "branding",
     hidden: true,
     tagline: "Identity and site for my Toronto AI workshop series.",
     name: "Snap Toronto",
@@ -111,6 +116,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "hot-take-slideshow-night",
+    category: "design",
     hidden: true,
     tagline: "Brush-lettered poster for a Toronto slideshow night.",
     name: "Toronto's Hot Take Slideshow Night",
@@ -130,6 +136,7 @@ export const designWork: DesignProject[] = [
   },
   {
     id: "ocean-management",
+    category: "branding",
     hidden: true,
     tagline: "Brand identity and pitch deck for an influencer agency.",
     name: "Ocean Management",
@@ -155,3 +162,5 @@ export const designWork: DesignProject[] = [
     ],
   },
 ];
+
+export const visibleDesigns = designWork.filter((d) => !d.hidden);

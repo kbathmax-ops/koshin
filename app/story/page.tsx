@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
-import { StoryPageClient } from "@/components/story-page-client";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { StoryHero } from "@/components/story-hero";
+import { SelectedWorks } from "@/components/selected-works";
+import { ContactSection } from "@/components/contact-section";
+import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: "story",
@@ -30,7 +34,23 @@ export default function Story() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <StoryPageClient />
+      <SmoothScroll />
+      <div style={{ background: "#ffffff", minHeight: "100dvh", color: "var(--ink)" }}>
+        <StoryHero />
+
+        <div id="work" className="scroll-mt-28" style={{ background: "var(--paper)" }}>
+          <SelectedWorks />
+
+          <div className="max-w-7xl mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-32">
+            <ContactSection
+              heading="Helping US VC firms look as sharp as their thesis."
+              body="Identity, homepage redesigns, and visual systems for emerging and sector-focused funds."
+            />
+          </div>
+        </div>
+
+        <SiteFooter />
+      </div>
     </>
   );
 }

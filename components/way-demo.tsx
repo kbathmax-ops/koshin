@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
+import { useReducedMotion } from "framer-motion";
 import "@/components/way/way.css";
+import { WAY_HEIGHT, WAY_LIME, WAY_OLIVE, WAY_WIDTH } from "@/components/way/build-way";
 
 /** CSS defines 1cm as 96px / 2.54. */
 const PX_PER_CM = 96 / 2.54;
@@ -38,18 +40,18 @@ function FlatWay({ body, rim, lights }: { body: string; rim: string; lights: Lig
       <circle cx={DIAL.x} cy={DIAL.y} r={13.7} fill="#20251c" />
       <circle cx={DIAL.x} cy={DIAL.y} r={8.6} fill="#0b0d0a" />
       <g transform={`translate(${DIAL.x} ${DIAL.y})`}>
-        <g fill="#56633d">{segments.filter((_, i) => !lit(i))}</g>
+        <g fill={WAY_OLIVE}>{segments.filter((_, i) => !lit(i))}</g>
         <g
           className={`way-lit${lights?.blink ? " is-blinking" : ""}`}
           style={blinkStyle}
-          fill={lights ? "#d8ff36" : "#56633d"}
+          fill={lights ? WAY_LIME : WAY_OLIVE}
         >
           {segments.filter((_, i) => lit(i))}
           <path d={ARROW} transform={`rotate(${angle})`} />
         </g>
       </g>
       <circle cx={43.8} cy={31.2} r={3.5} fill={body} stroke={rim} strokeWidth={0.6} />
-      <circle cx={43.8} cy={31.2} r={1.25} fill="none" stroke="#56633d" strokeWidth={0.3} />
+      <circle cx={43.8} cy={31.2} r={1.25} fill="none" stroke={WAY_OLIVE} strokeWidth={0.3} />
       <text x={43.7} y={8.6} fontSize={2.2} fontWeight={700} fill="#d8d8d2" textAnchor="middle">
         W•Y
       </text>
@@ -68,7 +70,7 @@ export function WayDemo() {
   // Friend position as a fraction of the box, so it survives resizing.
   const [friend, setFriend] = useState({ x: 0.14, y: 0.2 });
   const [running, setRunning] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const reducedMotion = useReducedMotion() ?? false;
   const grab = useRef<{ dx: number; dy: number } | null>(null);
 
   useEffect(() => {
@@ -78,19 +80,12 @@ export function WayDemo() {
       setBox({ w: entry.contentRect.width, h: entry.contentRect.height }),
     );
     observer.observe(element);
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => {
-      observer.disconnect();
-      query.removeEventListener("change", update);
-    };
+    return () => observer.disconnect();
   }, []);
 
   // Device size on screen, in px.
   const w = Math.min(180, Math.max(88, box.w * 0.18));
-  const h = (w * 40) / 52;
+  const h = (w * WAY_HEIGHT) / WAY_WIDTH;
 
   /** Keep the friend inside the box and off your WAY. Takes and returns px from the box centre. */
   const clamp = (x: number, y: number) => {
