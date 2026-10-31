@@ -11,8 +11,9 @@ import {
 
 // Sends from Koshin's Gmail over SMTP. Needs GMAIL_USER and GMAIL_APP_PASSWORD
 // (a 16-character app password, which requires 2-step verification on the account).
-const GMAIL_USER = process.env.GMAIL_USER;
-const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+const GMAIL_USER = process.env.GMAIL_USER?.trim();
+// Google shows app passwords in 4-letter groups; drop the spaces if they were pasted.
+const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
 
 const transporter =
   GMAIL_USER && GMAIL_APP_PASSWORD
