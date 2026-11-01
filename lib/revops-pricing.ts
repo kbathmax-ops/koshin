@@ -14,13 +14,13 @@ export type Tier = {
 
 export const TIERS: Tier[] = [
   {
-    id: "audit",
-    name: "Workflow audit",
+    id: "call",
+    name: "Discovery call",
     price: "Free",
-    line: "A 20-minute look at how inquiries become bookings at your business.",
+    line: "20 minutes on a call going through your week to find the manual tasks AI can take over.",
     includes: [
-      "Walkthrough of your booking flow, forms and inbox",
-      "A 1-page write-up within 3 days on the 3 fixes that save your staff the most hours",
+      "We look at your bookings and inbox together",
+      "Within 3 days, a written list of what AI can handle, with a price for each",
     ],
   },
   {
