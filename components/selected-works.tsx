@@ -60,11 +60,13 @@ export function SelectedWorks({
   designs = visibleDesigns,
   title = "Selected works",
   filters = true,
+  headingAs: Heading = "h1",
 }: {
   projects?: Project[];
   designs?: DesignProject[];
   title?: string;
   filters?: boolean;
+  headingAs?: "h1" | "h2";
 }) {
   const [active, setActive] = useState<Category>("all");
   const allWorks: Work[] = [...designs.map(fromDesign), ...projects.map(fromProject)];
@@ -74,7 +76,7 @@ export function SelectedWorks({
   return (
     <div style={{ paddingTop: "clamp(4rem, 8vh, 6rem)", background: "#ffffff" }}>
       <section aria-labelledby="selected-works" className="scroll-mt-28">
-        <h1
+        <Heading
           id="selected-works"
           className="uppercase"
           style={{
@@ -90,7 +92,7 @@ export function SelectedWorks({
           }}
         >
           {title}
-        </h1>
+        </Heading>
 
         {filters && (
         <div className="flex justify-center gap-2 flex-wrap px-4 mb-6">
