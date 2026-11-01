@@ -284,7 +284,7 @@ export function QuoteBuilder() {
                       Quote sent.
                     </p>
                     <p className="text-sm" style={{ color: muted }}>
-                      Check {sentTo || "your inbox"} for the breakdown. Reply to it with a few times that work and I&apos;ll set up the free audit.
+                      Check {sentTo || "your inbox"} for the breakdown. Reply to it with a few times that work and I&apos;ll set up the free call.
                     </p>
                     <button type="button" onClick={() => setStatus("idle")} className="mt-1 text-sm font-medium underline underline-offset-4">
                       Build another
@@ -319,7 +319,7 @@ export function QuoteBuilder() {
                       {status === "sending" ? "Sending…" : "Send my quote"}
                     </button>
                     <p className="pt-2 text-xs leading-relaxed" style={{ color: muted }}>
-                      This is an estimate. I confirm the final price after the free audit, and you don&apos;t pay anything until you agree to it.
+                      This is an estimate. I confirm the final price after the free call, and you don&apos;t pay anything until you agree to it.
                     </p>
                   </form>
                 )}

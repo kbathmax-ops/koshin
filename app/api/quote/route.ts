@@ -159,7 +159,7 @@ export async function POST(req: Request) {
     "",
     `Timeline: about ${quote.weeks} ${quote.weeks === 1 ? "week" : "weeks"} from kickoff.`,
     "",
-    "This is an estimate. I confirm the final price after a free 20-minute audit, where I look at your booking flow and the tools each workflow has to connect to. If the price changes, I'll tell you why before you pay anything.",
+    "This is an estimate. I confirm the final price after a free 20-minute call, where we go through your booking flow and the tools each workflow has to connect to. If the price changes, I'll tell you why before you pay anything.",
     "",
     "Reply with 2 or 3 times that work for you this week and I'll send an invite.",
     "",
