@@ -78,7 +78,8 @@ export function Pricing() {
                 </ul>
 
                 <a
-                  href={tier.id === "call" ? "mailto:kbathmax@gmail.com?subject=Free%20call" : "#quote"}
+                  href={tier.id === "call" ? "https://calendly.com/kbathmax/ai-audit" : "#quote"}
+                  {...(tier.id === "call" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="mt-auto pt-8 text-sm font-medium inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
                   style={{ fontFamily: "var(--font-display)" }}
                 >

@@ -100,7 +100,9 @@ export default function RevopsPage() {
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href="mailto:kbathmax@gmail.com?subject=Free%20call"
+                href="https://calendly.com/kbathmax/ai-audit"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-white hover:text-[var(--ink)] transition-colors duration-200"
                 style={{ fontFamily: "var(--font-display)" }}
               >
@@ -176,7 +178,9 @@ export default function RevopsPage() {
             ))}
           </ol>
           <a
-            href="mailto:kbathmax@gmail.com?subject=Free%20call"
+            href="https://calendly.com/kbathmax/ai-audit"
+                target="_blank"
+                rel="noopener noreferrer"
             className="mt-10 inline-block bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-white hover:text-[var(--ink)] transition-colors duration-200"
             style={{ fontFamily: "var(--font-display)" }}
           >
