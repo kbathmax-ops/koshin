@@ -26,7 +26,7 @@ export function Pricing() {
           Fixed prices, agreed before I start.
         </h2>
         <p className="mt-5 max-w-xl text-base md:text-lg" style={{ color: "rgb(var(--ink-rgb) / 0.62)" }}>
-          Every project starts with the free audit. You get a written price for each fix, and you only pay for the ones you want built.
+          Every project starts with the free call. You get a written price for each fix, and you only pay for the ones you want built.
         </p>
       </div>
 
@@ -78,11 +78,12 @@ export function Pricing() {
                 </ul>
 
                 <a
-                  href={tier.id === "audit" ? "mailto:kbathmax@gmail.com?subject=Free%20workflow%20audit" : "#quote"}
+                  href={tier.id === "call" ? "https://calendly.com/kbathmax/ai-audit" : "#quote"}
+                  {...(tier.id === "call" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="mt-auto pt-8 text-sm font-medium inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {tier.id === "audit" ? "Book the audit" : tier.id === "care" ? "Add it to a quote" : "Build a quote"} →
+                  {tier.id === "call" ? "Book the call" : tier.id === "care" ? "Add it to a quote" : "Build a quote"} →
                 </a>
               </div>
             </FadeUp>
