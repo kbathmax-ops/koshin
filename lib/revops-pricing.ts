@@ -17,20 +17,20 @@ export const TIERS: Tier[] = [
     id: "call",
     name: "Discovery call",
     price: "Free",
-    line: "20 minutes on a call going through your week to find the manual tasks AI can take over.",
+    line: "20 minutes on a call going through your week to discuss what manual tasks AI can take over.",
     includes: [
       "We look at your bookings and inbox together",
-      "Within 3 days, a written list of what AI can handle, with a price for each",
+      "Within 48 hours, a written list of possible fixes, with a price for each",
     ],
   },
   {
     id: "first-fix",
     name: "First fix",
-    price: "From $1,200",
+    price: "From $800",
     line: "One workflow, built and handed over in about 2 weeks.",
     includes: [
       "One workflow from the list below",
-      "Connected to the tools you already use",
+      "Connected to the tools you use",
       "A short video showing your team how it works",
       "30 days of fixes after launch",
     ],
@@ -39,8 +39,8 @@ export const TIERS: Tier[] = [
   {
     id: "system",
     name: "Revenue system",
-    price: "From $3,800",
-    line: "Inquiry to booking to repeat visit, set up as one connected system.",
+    price: "From $3,000",
+    line: "Inquiry to booking to repeat visit, as one system.",
     includes: [
       "3 or more workflows that pass leads between each other",
       "A weekly report on inquiries, bookings, no-shows and revenue",
@@ -53,10 +53,10 @@ export const TIERS: Tier[] = [
     name: "Monthly care",
     price: "$450",
     cadence: "/mo",
-    line: "I keep everything running and add one small change each month. Cancel any month.",
+    line: "I keep everything running. Cancel any month.",
     includes: [
       "Monitoring and fixes when a tool changes",
-      "One small addition or tweak per month",
+      "3 small additions per month",
     ],
   },
 ];

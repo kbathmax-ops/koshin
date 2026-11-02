@@ -9,13 +9,13 @@ import { projects } from "@/lib/projects";
 const revopsProjects = projects.filter((p) => !p.hidden && p.category === "revops");
 
 const description =
-  "A free call to find the manual tasks AI can take over at your business, then fixed-price builds for ski areas, gyms and studios, and med spas.";
+  "Helping businesses learn workflows to save time and increase revenue.";
 
 export const metadata: Metadata = {
-  title: "revops",
+  title: "RevOps",
   description,
   openGraph: {
-    title: "revops | Koshin Bathmax",
+    title: "RevOps | Koshin Bathmax",
     description,
     url: "https://kbathmax.com/revops",
   },
@@ -25,40 +25,24 @@ export const metadata: Metadata = {
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 const muted = "rgb(var(--ink-rgb) / 0.62)";
 
-const niches = [
-  {
-    name: "Ski and winter tourism",
-    leak: "Lesson and group inquiries pile up in December, and the same 20 questions get answered by hand.",
-  },
-  {
-    name: "Gyms and studios",
-    leak: "January trial signups go cold because nobody follows up after the first class.",
-  },
-  {
-    name: "Med spas",
-    leak: "Consult requests wait a day for a reply, and past clients never get asked to rebook.",
-  },
-];
-
 const steps = [
-  { title: "We get on a 20-minute call", body: "You walk me through a normal week: where inquiries come in and what happens after someone books." },
-  { title: "I send you a list", body: "Within 3 days you get the manual tasks AI can take over and a fixed price to build each one." },
-  { title: "I build the ones you pick", body: "Most take 1 to 2 weeks. You pay half upfront and half at launch, and you can stop after any one of them." },
-  { title: "It keeps running", body: "Optional monthly care covers fixes when a tool changes and one small addition a month." },
+  { title: "We get on a 20-minute call", body: "Here, you'll walk me through a normal week: where inquiries come in and what happens after someone books with you." },
+  { title: "I'll send you a list", body: "Within 48 hours you'll get the manual tasks AI can take over and a fixed price to build each one." },
+  { title: "I'll build what you pick", body: "Most take 1 to 2 weeks. Payment half upfront and half at launch." },
 ];
 
 const faqs = [
   {
     q: "What does the AI do?",
-    a: "It reads and answers routine inquiries, drafts follow-ups, sorts new leads and writes your weekly numbers into one email. Refunds and medical questions always go to a person on your team.",
+    a: "In short, it saves you time. It reads and answers routine inquiries, drafts follow-ups, sorts new leads and writes your weekly numbers into one email. Refunds and medical questions always go to a person on your team.",
   },
   {
     q: "What tools do you work with?",
-    a: "Whatever you already pay for. That usually means your booking system (Mindbody, Vagaro, Boulevard, Checkfront and similar), Gmail or Outlook, Google Sheets, and your website forms. I connect them, and your staff keep using them the way they do now.",
+    a: "Whatever you already pay for. Usually that means your booking system (Mindbody, Vagaro, Boulevard, Checkfront and similar), Gmail or Outlook, Google Sheets, and your website forms. I connect them, and your staff keep using them the way they do now.",
   },
   {
     q: "Do I need to be technical?",
-    a: "No. I build it, test it with real inquiries, and send a short video that shows your staff what changed. If something breaks during the fix period, you email me and I fix it.",
+    a: "No! I build it, test it with real inquiries, and send a short video that shows your staff what changed. If something breaks during the fix period, you email me and I'll fix it free of charge.",
   },
   {
     q: "Who owns what you build?",
@@ -80,7 +64,7 @@ export default function RevopsPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 pt-36 md:pt-44 pb-16 md:pb-24">
           <FadeUp>
             <p className="text-xs uppercase tracking-[0.2em] font-semibold mb-6" style={{ color: "rgb(var(--ink-rgb) / 0.5)" }}>
-              AI for small businesses
+              AI Consulting &amp; Integration
             </p>
             <h1
               className="max-w-5xl"
@@ -96,7 +80,7 @@ export default function RevopsPage() {
               Let&apos;s find the manual work AI can take off your plate.
             </h1>
             <p className="mt-8 max-w-2xl text-lg md:text-xl leading-snug" style={{ color: muted }}>
-              I&apos;m Koshin, an independent consultant. We sit down on a free 20-minute call, go through how you handle inquiries and bookings, and I show you where AI would save your staff hours each week.
+              I&apos;m Koshin, an independent consultant. We sit down on a free 20-minute call and go through how you handle inquiries and bookings. I&apos;ll show you where AI would save your staff hours each week.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
@@ -118,24 +102,6 @@ export default function RevopsPage() {
             </div>
           </FadeUp>
         </div>
-
-        {/* Who it's for */}
-        <ul className="grid grid-cols-1 md:grid-cols-3" style={{ borderTop: `1px solid ${rule}`, borderBottom: `1px solid ${rule}` }}>
-          {niches.map((n, i) => (
-            <li key={n.name} className="border-b md:border-b-0 md:border-r md:last:border-r-0 last:border-b-0" style={{ borderColor: rule }}>
-              <FadeUp delay={i * 0.06}>
-                <div className="p-6 md:p-10">
-                  <h2 className="text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
-                    {n.name}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: muted }}>
-                    {n.leak}
-                  </p>
-                </div>
-              </FadeUp>
-            </li>
-          ))}
-        </ul>
       </header>
 
       {/* How the call works */}
@@ -158,7 +124,7 @@ export default function RevopsPage() {
           >
             It starts with a call.
           </h2>
-          <ol className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: rule, border: `1px solid ${rule}` }}>
+          <ol className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: rule, border: `1px solid ${rule}` }}>
             {steps.map((s, i) => (
               <li key={s.title} style={{ background: "var(--paper)" }}>
                 <FadeUp delay={i * 0.05} className="h-full">
@@ -184,7 +150,7 @@ export default function RevopsPage() {
             className="mt-10 inline-block bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-white hover:text-[var(--ink)] transition-colors duration-200"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Book a free call
+            Book a free 30-minute audit
           </a>
         </div>
       </section>

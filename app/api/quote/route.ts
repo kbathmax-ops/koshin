@@ -99,7 +99,6 @@ export async function POST(req: Request) {
     typeof name !== "string" ||
     typeof email !== "string" ||
     typeof business !== "string" ||
-    typeof businessType !== "string" ||
     typeof locations !== "string" ||
     !Array.isArray(workflowIds)
   ) {
@@ -130,13 +129,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const typeLabel = BUSINESS_TYPES.find((t) => t.id === businessType)?.label;
+  // Business type is optional in the form.
+  const typeLabel = BUSINESS_TYPES.find((t) => t.id === businessType)?.label ?? "(not given)";
   const locationLabel = LOCATION_BANDS.find((b) => b.id === locations)?.label;
   const validIds = workflowIds.filter(
     (id): id is string => typeof id === "string" && WORKFLOWS.some((w) => w.id === id),
   );
 
-  if (!typeLabel || !locationLabel || validIds.length === 0) {
+  if (!locationLabel || validIds.length === 0) {
     return NextResponse.json({ error: "Pick at least one workflow" }, { status: 400 });
   }
 
