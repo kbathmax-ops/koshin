@@ -23,11 +23,8 @@ export function Pricing() {
             color: "var(--ink)",
           }}
         >
-          Fixed prices, agreed before I start.
+          Integration prices
         </h2>
-        <p className="mt-5 max-w-xl text-base md:text-lg" style={{ color: "rgb(var(--ink-rgb) / 0.62)" }}>
-          Every project starts with the free call. You get a written price for each fix, and you only pay for the ones you want built.
-        </p>
       </div>
 
       <ul
@@ -46,16 +43,9 @@ export function Pricing() {
           >
             <FadeUp delay={i * 0.05} className="h-full">
               <div className="flex h-full flex-col p-6 md:p-8">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-base font-medium tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-                    {tier.name}
-                  </h3>
-                  {tier.featured && (
-                    <span className="text-[10px] uppercase tracking-[0.18em] font-semibold px-2 py-1" style={{ border: "1px solid rgb(255 255 255 / 0.35)" }}>
-                      Fixed price
-                    </span>
-                  )}
-                </div>
+                <h3 className="text-base font-medium tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+                  {tier.name}
+                </h3>
 
                 <p className="mt-6 flex items-baseline gap-1" style={{ fontFamily: "var(--font-display)" }}>
                   <span style={{ fontSize: "clamp(2rem, 3.2vw, 2.75rem)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1 }}>
