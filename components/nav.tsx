@@ -20,6 +20,7 @@ export function Nav() {
   // RevOps automations live under /work/[slug] but belong to the RevOps tab.
   const isRevops = ["/revops", "/work/client-reporting", "/work/lead-to-revenue"].includes(pathname);
   const isWork = pathname.startsWith("/work") && !isRevops;
+  const isTutoring = pathname === "/tutoring";
   const isTravels = pathname === "/travels";
 
   return (
@@ -72,6 +73,18 @@ export function Nav() {
             RevOps
           </Link>
           <Link
+            href="/tutoring"
+            className={cn(
+              "font-medium tracking-tight transition-colors duration-200",
+              isTutoring
+                ? "text-[var(--ink)]"
+                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
+            )}
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Tutoring
+          </Link>
+          <Link
             href="/travels"
             className={cn(
               "font-medium tracking-tight transition-colors duration-200",
@@ -119,6 +132,13 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             RevOps
+          </Link>
+          <Link
+            href="/tutoring"
+            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
+            onClick={() => setMenuOpen(false)}
+          >
+            Tutoring
           </Link>
           <Link
             href="/travels"
