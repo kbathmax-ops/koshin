@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { REVOPS_URL } from "@/lib/revops-host";
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,7 +62,7 @@ export function Nav() {
             Work
           </Link>
           <Link
-            href="/revops"
+            href={REVOPS_URL}
             className={cn(
               "font-medium tracking-tight transition-colors duration-200",
               isRevops
@@ -127,7 +128,7 @@ export function Nav() {
             Work
           </Link>
           <Link
-            href="/revops"
+            href={REVOPS_URL}
             className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
             onClick={() => setMenuOpen(false)}
           >

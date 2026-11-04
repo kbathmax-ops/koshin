@@ -8,6 +8,7 @@ import {
   usd,
   type Quote,
 } from "@/lib/revops-pricing";
+import { REVOPS_URL } from "@/lib/revops-host";
 
 // Sends from Koshin's Gmail over SMTP. Needs GMAIL_USER and GMAIL_APP_PASSWORD
 // (a 16-character app password, which requires 2-step verification on the account).
@@ -164,7 +165,7 @@ export async function POST(req: Request) {
     "Reply with 2 or 3 times that work for you this week and I'll send an invite.",
     "",
     "Koshin",
-    "kbathmax.com/revops",
+    REVOPS_URL.replace("https://", ""),
   ].join("\n");
 
   const ownerText = [
