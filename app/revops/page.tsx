@@ -5,6 +5,7 @@ import { SelectedWorks } from "@/components/selected-works";
 import { Pricing } from "@/components/revops/pricing";
 import { QuoteBuilder } from "@/components/revops/quote-builder";
 import { projects } from "@/lib/projects";
+import { REVOPS_URL } from "@/lib/revops-host";
 
 const revopsProjects = projects.filter((p) => !p.hidden && p.category === "revops");
 
@@ -17,9 +18,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "RevOps | Koshin Bathmax",
     description,
-    url: "https://kbathmax.com/revops",
+    url: REVOPS_URL,
   },
-  alternates: { canonical: "https://kbathmax.com/revops" },
+  alternates: { canonical: REVOPS_URL },
 };
 
 const rule = "rgb(var(--ink-rgb) / 0.14)";
