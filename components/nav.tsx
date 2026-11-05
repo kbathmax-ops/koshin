@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { REVOPS_HOST, REVOPS_URL } from "@/lib/revops-host";
+import { REVOPS_HOST } from "@/lib/revops-host";
 
 const MAIN_URL = "https://kbathmax.com";
 
@@ -26,9 +26,7 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // RevOps automations live under /work/[slug] but belong to the RevOps tab.
-  const isRevops = ["/revops", "/work/client-reporting", "/work/lead-to-revenue"].includes(pathname);
-  const isWork = pathname.startsWith("/work") && !isRevops;
+  const isWork = pathname.startsWith("/work");
   const isTutoring = pathname === "/tutoring";
   const isTravels = pathname === "/travels";
 
@@ -87,18 +85,6 @@ export function Nav() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             Work
-          </Link>
-          <Link
-            href={REVOPS_URL}
-            className={cn(
-              "font-medium tracking-tight transition-colors duration-200",
-              isRevops
-                ? "text-[var(--ink)]"
-                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
-            )}
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            RevOps
           </Link>
           <Link
             href="/tutoring"
@@ -174,13 +160,6 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Work
-          </Link>
-          <Link
-            href={REVOPS_URL}
-            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
-            onClick={() => setMenuOpen(false)}
-          >
-            RevOps
           </Link>
           <Link
             href="/tutoring"
