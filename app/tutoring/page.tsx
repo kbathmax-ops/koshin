@@ -20,6 +20,8 @@ const PHONE = "647-563-5617";
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 const muted = "rgb(var(--ink-rgb) / 0.62)";
 const eyebrow = "rgb(var(--ink-rgb) / 0.5)";
+// Matches the printed poster; a touch deeper than #ff6a00 so white text on it stays readable.
+const orange = "#f25c00";
 
 const h2Style = {
   fontFamily: "var(--font-display)",
@@ -65,8 +67,8 @@ function Button({ href, children, solid }: { href: string; children: React.React
       href={href}
       className={
         solid
-          ? "bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-white hover:text-[var(--ink)] transition-colors duration-200"
-          : "border border-[var(--ink)] px-6 py-3.5 font-medium text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+          ? "bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-[#f25c00] hover:border-[#f25c00] transition-colors duration-200"
+          : "border border-[var(--ink)] px-6 py-3.5 font-medium text-[var(--ink)] hover:border-[#f25c00] hover:text-[#f25c00] transition-colors duration-200"
       }
       style={{ fontFamily: "var(--font-display)" }}
     >
@@ -85,7 +87,7 @@ export default function TutoringPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 pt-36 md:pt-44 pb-16 md:pb-24">
           <FadeUp>
             <p className="text-xs uppercase tracking-[0.2em] font-semibold mb-6" style={{ color: eyebrow }}>
-              AI Tutoring
+              AI Tutoring <span style={{ color: orange }}>·</span> Toronto
             </p>
             <h1
               className="max-w-5xl"
@@ -98,7 +100,7 @@ export default function TutoringPage() {
                 color: "var(--ink)",
               }}
             >
-              Learn how to use AI, 1&nbsp;on&nbsp;1.
+              Learn how to use AI, <span style={{ color: orange }}>1&nbsp;on&nbsp;1.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg md:text-xl leading-snug" style={{ color: muted }}>
               I&apos;m Koshin, a student in Toronto. I teach people how to use ChatGPT, Claude and Gemini for work, school, their business or just for fun. The first 30 minutes are free.
@@ -112,6 +114,22 @@ export default function TutoringPage() {
           </FadeUp>
         </div>
       </header>
+
+      {/* Free-consult band, same as the strip on the poster */}
+      <div style={{ background: orange, color: "#ffffff" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <p
+            className="uppercase"
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}
+          >
+            First 30 minutes free
+          </p>
+          <p className="text-sm md:text-base font-semibold md:text-right leading-snug">
+            ChatGPT, Claude, Gemini.
+            <br className="hidden md:block" /> In person or on a call.
+          </p>
+        </div>
+      </div>
 
       {/* Topics */}
       <section id="topics" aria-labelledby="topics-title" className="scroll-mt-28" style={{ background: "var(--paper)" }}>
@@ -127,7 +145,10 @@ export default function TutoringPage() {
               <li key={t.title} style={{ background: "var(--paper)" }}>
                 <FadeUp delay={i * 0.04} className="h-full">
                   <div className="p-6 md:p-8 h-full">
-                    <h3 className="text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
+                    <span className="text-xs font-bold tabular-nums" style={{ color: orange }}>
+                      0{i + 1}
+                    </span>
+                    <h3 className="mt-3 text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
                       {t.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed" style={{ color: muted }}>
@@ -161,7 +182,7 @@ export default function TutoringPage() {
               className="border-b sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:[&:nth-last-child(-n+2)]:border-b-0"
               style={{
                 borderColor: rule,
-                background: s.featured ? "var(--ink)" : "#ffffff",
+                background: s.featured ? orange : "#ffffff",
                 color: s.featured ? "#ffffff" : "var(--ink)",
               }}
             >
@@ -174,9 +195,9 @@ export default function TutoringPage() {
                     <span style={{ fontSize: "clamp(2rem, 3.2vw, 2.75rem)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1 }}>
                       {s.price}
                     </span>
-                    <span className="text-sm opacity-60">{s.cadence}</span>
+                    <span className="text-sm" style={{ opacity: s.featured ? 0.9 : 0.6 }}>{s.cadence}</span>
                   </p>
-                  <p className="mt-4 text-sm leading-relaxed" style={{ opacity: 0.7 }}>
+                  <p className="mt-4 text-sm leading-relaxed" style={{ opacity: s.featured ? 1 : 0.7 }}>
                     {s.line}
                   </p>
                 </div>
@@ -200,7 +221,7 @@ export default function TutoringPage() {
               <li key={s.title} style={{ background: "var(--paper)" }}>
                 <FadeUp delay={i * 0.05} className="h-full">
                   <div className="p-6 md:p-8 h-full">
-                    <span className="text-xs font-semibold tabular-nums" style={{ color: eyebrow }}>
+                    <span className="text-xs font-bold tabular-nums" style={{ color: orange }}>
                       0{i + 1}
                     </span>
                     <h3 className="mt-3 text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
@@ -254,7 +275,7 @@ export default function TutoringPage() {
             className="text-lg font-medium tracking-tighter"
             style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
           >
-            koshin<span style={{ color: "var(--ink)" }}>.</span>
+            koshin<span style={{ color: orange }}>.</span>
           </span>
           <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: "rgb(var(--ink-rgb) / 0.45)" }}>
             © 2026
