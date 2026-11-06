@@ -7,9 +7,9 @@ export const WAY_WIDTH = 52;
 export const WAY_HEIGHT = 40;
 export const WAY_BUTTON_POINT = [17.8, -11.2, 10.1] as const;
 
-
-const LIME = 0xd8ff36;
-const OLIVE = 0x56633d;
+/** LED colours, lit and unlit. Shared with the flat SVG drawing in way-demo. */
+export const WAY_LIME = "#d8ff36";
+export const WAY_OLIVE = "#56633d";
 
 export type WayLights = {
   /** Direction to point, in radians clockwise from the device's top edge. */
@@ -85,13 +85,13 @@ export function buildWay(
     clearcoatRoughness: 0.2,
   });
   const ledOffMaterial = new THREE.MeshStandardMaterial({
-    color: OLIVE,
+    color: WAY_OLIVE,
     emissive: 0x0e1305,
     emissiveIntensity: 0.2,
     roughness: 0.45,
   });
   const ledOnMaterial = new THREE.MeshStandardMaterial({
-    color: LIME,
+    color: WAY_LIME,
     emissive: 0xb6ff12,
     emissiveIntensity: 2.2,
     roughness: 0.25,
@@ -200,8 +200,8 @@ export function buildWay(
   sidePort.position.set(-27.7, -6, 0.2);
   group.add(sidePort);
 
-  const dim = new THREE.Color(OLIVE);
-  const lime = new THREE.Color(LIME);
+  const dim = new THREE.Color(WAY_OLIVE);
+  const lime = new THREE.Color(WAY_LIME);
 
   const setLights = (lights: WayLights | null) => {
     if (!lights) {

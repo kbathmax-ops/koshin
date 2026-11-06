@@ -4,10 +4,9 @@ import { FadeUp } from "@/components/fade-up";
 import { SelectedWorks } from "@/components/selected-works";
 import { Pricing } from "@/components/revops/pricing";
 import { QuoteBuilder } from "@/components/revops/quote-builder";
-import { projects } from "@/lib/projects";
+import { SiteFooter } from "@/components/site-footer";
+import { revopsProjects } from "@/lib/projects";
 import { REVOPS_URL } from "@/lib/revops-host";
-
-const revopsProjects = projects.filter((p) => !p.hidden && p.category === "revops");
 
 const description =
   "Helping businesses learn workflows to save time and increase revenue.";
@@ -156,7 +155,7 @@ export default function RevopsPage() {
         </div>
       </section>
 
-      <SelectedWorks products={revopsProjects} designs={[]} title="Automations" filters={false} headingAs="h2" />
+      <SelectedWorks projects={revopsProjects} designs={[]} title="Automations" filters={false} headingAs="h2" />
 
       <Pricing />
 
@@ -194,19 +193,7 @@ export default function RevopsPage() {
         </div>
       </section>
 
-      <footer style={{ background: "var(--paper)", borderTop: "1px solid rgb(var(--ink-rgb) / 0.10)" }}>
-        <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
-          <span
-            className="text-lg font-medium tracking-tighter"
-            style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-          >
-            koshin<span style={{ color: "var(--ink)" }}>.</span>
-          </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: "rgb(var(--ink-rgb) / 0.45)" }}>
-            © 2026
-          </p>
-        </div>
-      </footer>
+      <SiteFooter paper />
     </div>
   );
 }

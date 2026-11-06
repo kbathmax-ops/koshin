@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
+import { SiteFooter } from "@/components/site-footer";
 
 const description =
   "1-on-1 lessons in Toronto on how to use ChatGPT, Claude and Gemini for work, school, your business or just for fun. The first 30 minutes are free.";
@@ -248,19 +249,7 @@ export default function TutoringPage() {
         </div>
       </section>
 
-      <footer style={{ background: "var(--paper)", borderTop: "1px solid rgb(var(--ink-rgb) / 0.10)" }}>
-        <div className="flex flex-col items-center gap-2 px-6 py-12 md:px-12 md:py-14">
-          <span
-            className="text-lg font-medium tracking-tighter"
-            style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-          >
-            koshin<span style={{ color: "var(--ink)" }}>.</span>
-          </span>
-          <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: "rgb(var(--ink-rgb) / 0.45)" }}>
-            © 2026
-          </p>
-        </div>
-      </footer>
+      <SiteFooter paper />
     </div>
   );
 }

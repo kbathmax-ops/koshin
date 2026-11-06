@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { WORLD, EUROPE } from '@/lib/travel-map-data';
 import { getTravelNote, type TravelNote } from '@/lib/travel-notes';
 
@@ -75,7 +75,7 @@ type OpenNote = TravelNote & {
 };
 
 export function TravelMap() {
-  const [reduced, setReduced] = useState(false);
+  const reduced = useReducedMotion() ?? false;
   const [open, setOpen] = useState<OpenNote | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const popRef = useRef<HTMLDivElement>(null);
@@ -98,14 +98,6 @@ export function TravelMap() {
     const el = scrollRef.current;
     if (phone && el) el.scrollLeft = (lensCX / WORLD.W) * el.scrollWidth - el.clientWidth / 2;
   }, [phone]);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
 
   /*
    * Escape closes the popover, as does a pointer landing outside the map frame.

@@ -7,7 +7,8 @@ import { buildWay, WAY_BUTTON_POINT } from "@/components/way/build-way";
 /**
  * The WAY compass as a draggable 3D model on a transparent canvas. Geometry and
  * materials follow the original model on way-compass.vercel.app. Three.js is
- * loaded on mount so it stays out of every other page's bundle.
+ * loaded only once the model nears the viewport, so it stays out of every other
+ * page's bundle and costs nothing for visitors who never scroll to it.
  */
 export function WayModel({ className = "aspect-[4/3]" }: { className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export function WayModel({ className = "aspect-[4/3]" }: { className?: string })
     let disposed = false;
     let cleanup = () => {};
 
-    import("three").then((THREE) => {
+    const start = () => import("three").then((THREE) => {
       if (disposed) return;
 
       const scene = new THREE.Scene();
@@ -93,15 +94,21 @@ export function WayModel({ className = "aspect-[4/3]" }: { className?: string })
         event.preventDefault();
       };
 
-      canvas.addEventListener("pointerdown", onPointerDown);
-      canvas.addEventListener("pointermove", onPointerMove);
-      canvas.addEventListener("pointerup", onPointerUp);
-      canvas.addEventListener("pointercancel", onPointerUp);
-      canvas.addEventListener("keydown", onKeyDown);
+      const listeners = new AbortController();
+      const { signal } = listeners;
+      canvas.addEventListener("pointerdown", onPointerDown, { signal });
+      canvas.addEventListener("pointermove", onPointerMove, { signal });
+      canvas.addEventListener("pointerup", onPointerUp, { signal });
+      canvas.addEventListener("pointercancel", onPointerUp, { signal });
+      canvas.addEventListener("keydown", onKeyDown, { signal });
 
+      // Sizes are cached here so the per-frame label update only writes styles.
+      let width = 0;
+      let height = 0;
+      let pillWidth = pill.offsetWidth;
       const resize = () => {
-        const width = stage.clientWidth;
-        const height = stage.clientHeight;
+        width = stage.clientWidth;
+        height = stage.clientHeight;
         if (!width || !height) return;
         renderer.setSize(width, height, false);
         camera.aspect = width / height;
@@ -113,28 +120,22 @@ export function WayModel({ className = "aspect-[4/3]" }: { className?: string })
       const resizeObserver = new ResizeObserver(resize);
       resizeObserver.observe(stage);
       resize();
-
-      // Only render while the model is on screen.
-      let visible = true;
-      const visibilityObserver = new IntersectionObserver(([entry]) => {
-        visible = entry.isIntersecting;
+      const pillObserver = new ResizeObserver(() => {
+        pillWidth = pill.offsetWidth;
       });
-      visibilityObserver.observe(stage);
+      pillObserver.observe(pill);
 
       // Keep the button label pinned to the button, hiding it once the face turns away.
       const buttonPoint = new THREE.Vector3(...WAY_BUTTON_POINT);
       const projected = new THREE.Vector3();
       const faceNormal = new THREE.Vector3();
       const placeLabel = () => {
-        const width = stage.clientWidth;
-        const height = stage.clientHeight;
         projected.copy(buttonPoint).applyMatrix4(model.matrixWorld).project(camera);
         const x = ((projected.x + 1) / 2) * width;
         const y = ((1 - projected.y) / 2) * height;
         const facing = faceNormal.set(0, 0, 1).transformDirection(model.matrixWorld).z > 0.25;
         label.style.transform = `translate(${x}px, ${y}px)`;
         // Center the pill under the button but keep it inside the frame.
-        const pillWidth = pill.offsetWidth;
         const pillLeft = Math.min(Math.max(x - pillWidth / 2, 8), width - pillWidth - 8);
         pill.style.transform = `translateX(${pillLeft - x}px)`;
         label.style.opacity = facing ? "1" : "0";
@@ -144,7 +145,6 @@ export function WayModel({ className = "aspect-[4/3]" }: { className?: string })
       let frame = 0;
       const animate = (time: number) => {
         frame = requestAnimationFrame(animate);
-        if (!visible) return;
         timer.update(time);
         model.rotation.x += (target.x - model.rotation.x) * 0.075;
         model.rotation.y += (target.y - model.rotation.y) * 0.075;
@@ -154,24 +154,38 @@ export function WayModel({ className = "aspect-[4/3]" }: { className?: string })
         renderer.render(scene, camera);
         placeLabel();
       };
-      frame = requestAnimationFrame(animate);
+
+      // Only run the frame loop while the model is on screen.
+      const visibilityObserver = new IntersectionObserver(([entry]) => {
+        cancelAnimationFrame(frame);
+        if (entry.isIntersecting) frame = requestAnimationFrame(animate);
+      });
+      visibilityObserver.observe(stage);
 
       cleanup = () => {
         cancelAnimationFrame(frame);
         resizeObserver.disconnect();
+        pillObserver.disconnect();
         visibilityObserver.disconnect();
-        canvas.removeEventListener("pointerdown", onPointerDown);
-        canvas.removeEventListener("pointermove", onPointerMove);
-        canvas.removeEventListener("pointerup", onPointerUp);
-        canvas.removeEventListener("pointercancel", onPointerUp);
-        canvas.removeEventListener("keydown", onKeyDown);
+        listeners.abort();
         way.dispose();
         renderer.dispose();
       };
     });
 
+    const loadObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        loadObserver.disconnect();
+        start();
+      },
+      { rootMargin: "300px" },
+    );
+    loadObserver.observe(stage);
+
     return () => {
       disposed = true;
+      loadObserver.disconnect();
       cleanup();
     };
   }, []);
