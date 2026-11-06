@@ -21,14 +21,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // The story is the landing page — kbathmax.com goes straight to it.
-      // Deliberately temporary: a permanent redirect gets cached hard by
-      // browsers and is painful to undo while the site is still moving.
+      // The story is the landing page and lives at the root.
       {
-        source: "/",
-        missing: onRevopsHost,
-        destination: "/story",
-        permanent: false,
+        source: "/story",
+        destination: "/",
+        permanent: true,
       },
       // RevOps has its own domain now. Temporary while that domain is a
       // vercel.app link; make it permanent once the real one is attached.

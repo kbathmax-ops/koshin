@@ -7,12 +7,10 @@ import { ContactSection } from "@/components/contact-section";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "story",
-  alternates: { canonical: "https://kbathmax.com/story" },
+  title: { absolute: "Koshin Bathmax" },
+  alternates: { canonical: "https://kbathmax.com" },
 };
 
-/* Lives here rather than on "/" because the root redirects to this page, so
-   this is what search engines actually index. */
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -26,7 +24,7 @@ const jsonLd = {
     "Building beautiful things.",
 };
 
-export default function Story() {
+export default function Home() {
   return (
     <>
       <script
