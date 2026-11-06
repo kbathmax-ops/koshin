@@ -74,7 +74,7 @@ export const projects: Project[] = [
     name: "AI Client Reporting",
     cardName: "AI Client Reporting Automation",
     description:
-      "A weekly reporting system for marketing agencies. It pulls ad data, flags problems, has Claude write the client note, and checks every number before it's sent.",
+      "A weekly reporting system for marketing agencies. It pulls ad data, flags problems, has Claude write the client note, and checks the data.",
     image: "/case-studies/client-reporting/dashboard.png",
     detailImage: {
       src: "/case-studies/client-reporting/how-it-works.png",
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     name: "Lead-to-Revenue Loop",
     cardName: "Lead-to-Revenue Automation",
     description:
-      "A weekly system for businesses with a front desk and a till, like dental practices and gyms. It follows every ad lead to the sale and tells Meta and Google who actually paid.",
+      "A weekly system for businesses with a front desk and a till, like dental practices and gyms. It follows every ad lead to the sale and sends the payment data back to Meta and Google.",
     image: "/case-studies/lead-to-revenue/how-it-works.png",
     detailImage: {
       src: "/case-studies/lead-to-revenue/how-it-works.png",

@@ -9,6 +9,7 @@ import { ZoomableImage } from "@/components/zoomable-image";
 import { FadeUp } from "@/components/fade-up";
 import { SiteFooter } from "@/components/site-footer";
 import { getProject, isTodo, projects, todoPrompt } from "@/lib/projects";
+import { REVOPS_URL } from "@/lib/revops-host";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -92,7 +93,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       <main className="max-w-3xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-32">
         <FadeUp>
           <Link
-            href={project.category === "revops" ? "/revops" : "/work"}
+            href={project.category === "revops" ? REVOPS_URL : "/work"}
             className="inline-flex items-center gap-1.5 text-xs font-medium mb-8 transition-opacity hover:opacity-100"
             style={{ color: "var(--ink)", opacity: 0.85 }}
           >

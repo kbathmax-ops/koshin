@@ -55,7 +55,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 export function QuoteBuilder() {
-  const [businessType, setBusinessType] = useState(BUSINESS_TYPES[0].id);
+  const [businessType, setBusinessType] = useState("");
   const [locations, setLocations] = useState(LOCATION_BANDS[0].id);
   const [workflowIds, setWorkflowIds] = useState<string[]>(["inquiry-replies"]);
   const [care, setCare] = useState(false);
@@ -131,19 +131,16 @@ export function QuoteBuilder() {
             color: "var(--ink)",
           }}
         >
-          Price it yourself in 2 minutes.
+          Here are my prices.
         </h2>
-        <p className="mt-5 max-w-xl text-base md:text-lg" style={{ color: "rgb(var(--ink-rgb) / 0.62)" }}>
-          Pick what you need and the total updates as you go. Send it and I&apos;ll email you the full quote from my own inbox.
-        </p>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Options */}
           <div className="lg:col-span-7">
-            <Step n={1} title="What kind of business?">
+            <Step n={1} title="What kind of business? (optional)">
               <div className="flex flex-wrap gap-2">
                 {BUSINESS_TYPES.map((t) => (
-                  <Chip key={t.id} active={businessType === t.id} onClick={() => setBusinessType(t.id)}>
+                  <Chip key={t.id} active={businessType === t.id} onClick={() => setBusinessType((cur) => (cur === t.id ? "" : t.id))}>
                     {t.label}
                   </Chip>
                 ))}
@@ -231,7 +228,7 @@ export function QuoteBuilder() {
                     <span className="text-sm tabular-nums">{usd(CARE_PRICE)}/mo</span>
                   </span>
                   <span className="block mt-1 text-sm leading-snug" style={{ color: muted }}>
-                    Fixes when a tool changes, plus one small addition a month. Cancel any month.
+                    Fixes when a tool changes, plus 3 small additions a month. Cancel any month.
                   </span>
                 </span>
               </label>

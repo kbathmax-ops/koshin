@@ -1,5 +1,8 @@
 import path from "path";
 import type { NextConfig } from "next";
+import { REVOPS_HOST, REVOPS_URL } from "./lib/revops-host";
+
+const onRevopsHost = [{ type: "host" as const, value: REVOPS_HOST }];
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -23,7 +26,16 @@ const nextConfig: NextConfig = {
       // browsers and is painful to undo while the site is still moving.
       {
         source: "/",
+        missing: onRevopsHost,
         destination: "/story",
+        permanent: false,
+      },
+      // RevOps has its own domain now. Temporary while that domain is a
+      // vercel.app link; make it permanent once the real one is attached.
+      {
+        source: "/revops",
+        missing: onRevopsHost,
+        destination: REVOPS_URL,
         permanent: false,
       },
       // Case studies used to live at the top level; they now sit under /work.
@@ -38,6 +50,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: "/", has: onRevopsHost, destination: "/revops" }],
+      afterFiles: [],
+      fallback: [],
+    };
   },
   async headers() {
     return [

@@ -8,6 +8,7 @@ import {
   usd,
   type Quote,
 } from "@/lib/revops-pricing";
+import { REVOPS_URL } from "@/lib/revops-host";
 
 // Sends from Koshin's Gmail over SMTP. Needs GMAIL_USER and GMAIL_APP_PASSWORD
 // (a 16-character app password, which requires 2-step verification on the account).
@@ -99,7 +100,6 @@ export async function POST(req: Request) {
     typeof name !== "string" ||
     typeof email !== "string" ||
     typeof business !== "string" ||
-    typeof businessType !== "string" ||
     typeof locations !== "string" ||
     !Array.isArray(workflowIds)
   ) {
@@ -130,13 +130,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const typeLabel = BUSINESS_TYPES.find((t) => t.id === businessType)?.label;
+  // Business type is optional in the form.
+  const typeLabel = BUSINESS_TYPES.find((t) => t.id === businessType)?.label ?? "(not given)";
   const locationLabel = LOCATION_BANDS.find((b) => b.id === locations)?.label;
   const validIds = workflowIds.filter(
     (id): id is string => typeof id === "string" && WORKFLOWS.some((w) => w.id === id),
   );
 
-  if (!typeLabel || !locationLabel || validIds.length === 0) {
+  if (!locationLabel || validIds.length === 0) {
     return NextResponse.json({ error: "Pick at least one workflow" }, { status: 400 });
   }
 
@@ -164,7 +165,7 @@ export async function POST(req: Request) {
     "Reply with 2 or 3 times that work for you this week and I'll send an invite.",
     "",
     "Koshin",
-    "kbathmax.com/revops",
+    REVOPS_URL.replace("https://", ""),
   ].join("\n");
 
   const ownerText = [
