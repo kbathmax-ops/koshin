@@ -3,7 +3,7 @@ import { Nav } from "@/components/nav";
 import { FadeUp } from "@/components/fade-up";
 
 const description =
-  "1-on-1 lessons in Toronto on how to use ChatGPT, Claude and Gemini for work, school, your business or just for fun. The first 30 minutes are free.";
+  "1-on-1 lessons in Toronto on using AI to automate the busywork in your business and your personal life, with Claude, ChatGPT, Grok and Gemini. The first 30 minutes are free.";
 
 export const metadata: Metadata = {
   title: "Tutoring",
@@ -20,6 +20,8 @@ const PHONE = "647-563-5617";
 const rule = "rgb(var(--ink-rgb) / 0.14)";
 const muted = "rgb(var(--ink-rgb) / 0.62)";
 const eyebrow = "rgb(var(--ink-rgb) / 0.5)";
+// Navy from the printed flyer's "30 MIN." line.
+const navy = "#0b2a6b";
 
 const h2Style = {
   fontFamily: "var(--font-display)",
@@ -31,30 +33,31 @@ const h2Style = {
 } as const;
 
 const topics = [
-  { title: "The basics", body: "Setting up an account, writing prompts that get good answers, and spotting when the answer is wrong." },
-  { title: "Work", body: "Drafting emails and reports, summarizing long documents, and cleaning up spreadsheets." },
-  { title: "Your business", body: "Replying to customers, writing posts and quotes, and setting up simple automations." },
-  { title: "School", body: "Studying, research and feedback on your writing, while you still do the work yourself." },
-  { title: "Just for fun", body: "Trip plans, recipes, images, and that side project you keep putting off." },
-  { title: "Whatever you bring", body: "Got a specific task in mind? Bring it and we'll work through it together." },
+  { group: "Business", title: "Customer messages", body: "Draft replies to emails, texts and reviews in your voice, so you approve them instead of writing them." },
+  { group: "Business", title: "Quotes, invoices and posts", body: "Turn a few notes into a quote, an invoice or a week of social posts." },
+  { group: "Business", title: "Admin and paperwork", body: "Sort receipts, summarize contracts, and fill in the spreadsheets you keep putting off." },
+  { group: "Personal", title: "Inbox and calendar", body: "Summarize long email threads, pull out what needs a reply, and plan your week." },
+  { group: "Personal", title: "Money and errands", body: "Track spending, compare prices, and build meal plans and grocery lists." },
+  { group: "Personal", title: "Trips and projects", body: "Plan a trip day by day, or break a side project into steps you'll get done." },
 ];
 
 const sessions = [
-  { name: "First consult", price: "Free", cadence: "30 min", line: "We figure out what you want AI for, and you leave with one thing working.", featured: true },
-  { name: "Lesson", price: "$50", cadence: "1 hour", line: "Hands-on, on your own laptop and accounts, on whatever topic you pick." },
-  { name: "4-lesson pack", price: "$180", cadence: "4 hours", line: "One lesson a week for a month. Good for getting properly comfortable." },
+  { name: "First consult", price: "Free", cadence: "30 min", line: "We pick one task you do every week and get AI doing it before you leave.", featured: true },
+  { name: "Lesson", price: "$50", cadence: "1 hour", line: "Hands-on, on your own laptop and accounts. We automate whatever you pick." },
+  { name: "4-lesson pack", price: "$180", cadence: "4 hours", line: "One lesson a week for a month, one new task handed off each week." },
   { name: "Business setup", price: "$250", cadence: "90 min", line: "We set AI up to handle 3 tasks you or your staff do every week." },
 ];
 
 const steps = [
-  { title: "Call or text me", body: "Tell me what you want to learn and we'll pick a time." },
+  { title: "Call or text me", body: "Tell me what eats up your week and we'll pick a time." },
   { title: "We meet for 30 minutes", body: "In person in Toronto or over a video call. Bring your laptop." },
   { title: "You decide what's next", body: "Book more lessons if it helped. If not, no hard feelings." },
 ];
 
 const faqs = [
   { q: "Do I need to be good with tech?", a: "No. If you can send an email, you can do this. We go at your pace." },
-  { q: "Which AI tools do you teach?", a: "Mostly ChatGPT, Claude and Gemini. The free versions are enough to start." },
+  { q: "What does automate mean here?", a: "Getting AI to do a task you'd otherwise do by hand, like writing the first draft of a reply or sorting a list. You still check its work before anything goes out." },
+  { q: "Which AI tools do you teach?", a: "Claude, ChatGPT, Grok and Gemini. The free versions are enough to start, and I'll tell you if a paid plan is worth it for what you want." },
   { q: "Where do we meet?", a: "A library or coffee shop in Toronto, or over a video call if that's easier." },
   { q: "How do I pay?", a: "The first 30 minutes are free. After that, e-transfer or cash at the end of each lesson." },
 ];
@@ -65,8 +68,8 @@ function Button({ href, children, solid }: { href: string; children: React.React
       href={href}
       className={
         solid
-          ? "bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-white hover:text-[var(--ink)] transition-colors duration-200"
-          : "border border-[var(--ink)] px-6 py-3.5 font-medium text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+          ? "bg-[var(--ink)] text-white border border-[var(--ink)] px-6 py-3.5 font-medium hover:bg-[#0b2a6b] hover:border-[#0b2a6b] transition-colors duration-200"
+          : "border border-[var(--ink)] px-6 py-3.5 font-medium text-[var(--ink)] hover:border-[#0b2a6b] hover:text-[#0b2a6b] transition-colors duration-200"
       }
       style={{ fontFamily: "var(--font-display)" }}
     >
@@ -85,7 +88,7 @@ export default function TutoringPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 pt-36 md:pt-44 pb-16 md:pb-24">
           <FadeUp>
             <p className="text-xs uppercase tracking-[0.2em] font-semibold mb-6" style={{ color: eyebrow }}>
-              AI Tutoring
+              AI Tutoring <span style={{ color: navy }}>·</span> Toronto
             </p>
             <h1
               className="max-w-5xl"
@@ -98,20 +101,36 @@ export default function TutoringPage() {
                 color: "var(--ink)",
               }}
             >
-              Learn how to use AI, 1&nbsp;on&nbsp;1.
+              Automate your life with AI, <span style={{ color: navy }}>1&nbsp;on&nbsp;1.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg md:text-xl leading-snug" style={{ color: muted }}>
-              I&apos;m Koshin, a student in Toronto. I teach people how to use ChatGPT, Claude and Gemini for work, school, their business or just for fun. The first 30 minutes are free.
+              I&apos;m Koshin, a student in Toronto. I show people how to hand the repetitive parts of their business and their personal life to Claude, ChatGPT, Grok and Gemini. The first 30 minutes are free.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button href={`tel:${PHONE}`} solid>
                 Call or text {PHONE}
               </Button>
-              <Button href="#topics">What we can cover</Button>
+              <Button href="#topics">What we can automate</Button>
             </div>
           </FadeUp>
         </div>
       </header>
+
+      {/* Free-consult band, same as the strip on the poster */}
+      <div style={{ background: navy, color: "#ffffff" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <p
+            className="uppercase"
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}
+          >
+            First 30 minutes free
+          </p>
+          <p className="text-sm md:text-base font-semibold md:text-right leading-snug">
+            Claude, ChatGPT, Grok, Gemini.
+            <br className="hidden md:block" /> In person or on a call.
+          </p>
+        </div>
+      </div>
 
       {/* Topics */}
       <section id="topics" aria-labelledby="topics-title" className="scroll-mt-28" style={{ background: "var(--paper)" }}>
@@ -120,14 +139,17 @@ export default function TutoringPage() {
             Topics
           </p>
           <h2 id="topics-title" className="max-w-3xl" style={h2Style}>
-            What we can work on.
+            What we can automate.
           </h2>
           <ul className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: rule, border: `1px solid ${rule}` }}>
             {topics.map((t, i) => (
               <li key={t.title} style={{ background: "var(--paper)" }}>
                 <FadeUp delay={i * 0.04} className="h-full">
                   <div className="p-6 md:p-8 h-full">
-                    <h3 className="text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
+                    <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color: navy }}>
+                      0{i + 1} · {t.group}
+                    </span>
+                    <h3 className="mt-3 text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
                       {t.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed" style={{ color: muted }}>
@@ -161,7 +183,7 @@ export default function TutoringPage() {
               className="border-b sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 sm:[&:nth-last-child(-n+2)]:border-b-0"
               style={{
                 borderColor: rule,
-                background: s.featured ? "var(--ink)" : "#ffffff",
+                background: s.featured ? navy : "#ffffff",
                 color: s.featured ? "#ffffff" : "var(--ink)",
               }}
             >
@@ -174,9 +196,9 @@ export default function TutoringPage() {
                     <span style={{ fontSize: "clamp(2rem, 3.2vw, 2.75rem)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1 }}>
                       {s.price}
                     </span>
-                    <span className="text-sm opacity-60">{s.cadence}</span>
+                    <span className="text-sm" style={{ opacity: s.featured ? 0.9 : 0.6 }}>{s.cadence}</span>
                   </p>
-                  <p className="mt-4 text-sm leading-relaxed" style={{ opacity: 0.7 }}>
+                  <p className="mt-4 text-sm leading-relaxed" style={{ opacity: s.featured ? 1 : 0.7 }}>
                     {s.line}
                   </p>
                 </div>
@@ -200,7 +222,7 @@ export default function TutoringPage() {
               <li key={s.title} style={{ background: "var(--paper)" }}>
                 <FadeUp delay={i * 0.05} className="h-full">
                   <div className="p-6 md:p-8 h-full">
-                    <span className="text-xs font-semibold tabular-nums" style={{ color: eyebrow }}>
+                    <span className="text-xs font-bold tabular-nums" style={{ color: navy }}>
                       0{i + 1}
                     </span>
                     <h3 className="mt-3 text-lg font-medium tracking-tight" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
@@ -254,7 +276,7 @@ export default function TutoringPage() {
             className="text-lg font-medium tracking-tighter"
             style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
           >
-            koshin<span style={{ color: "var(--ink)" }}>.</span>
+            koshin<span style={{ color: navy }}>.</span>
           </span>
           <p className="text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: "rgb(var(--ink-rgb) / 0.45)" }}>
             © 2026
