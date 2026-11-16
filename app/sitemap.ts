@@ -23,12 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/tutoring`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
       url: `${BASE_URL}/work/client-reporting`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -42,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Other per-project pages still build, but their cards link directly to
     // live sites, so they stay out of the sitemap for now.
+    // Tutoring is archived (see archive/tutoring) — no longer routed.
     // Case studies are archived (see archive/work/case-studies) — no longer routed.
   ];
 }
