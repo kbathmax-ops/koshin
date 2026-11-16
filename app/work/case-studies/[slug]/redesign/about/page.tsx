@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IvAbout } from "@/components/redesign/iv-site";
+import { IvAbout } from "@/components/redesign/iv-about";
 
 export function generateStaticParams() {
   return [{ slug: "impression-ventures" }];

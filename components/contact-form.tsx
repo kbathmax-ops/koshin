@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { CheckCircle } from "lucide-react";
 
+const field =
+  "w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow disabled:opacity-50";
+
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
@@ -58,7 +61,7 @@ export function ContactForm() {
         placeholder="Name"
         required
         disabled={status === "sending"}
-        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow disabled:opacity-50"
+        className={field}
       />
       <input
         name="email"
@@ -66,7 +69,7 @@ export function ContactForm() {
         placeholder="Email"
         required
         disabled={status === "sending"}
-        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow disabled:opacity-50"
+        className={field}
       />
       <textarea
         name="message"
@@ -74,7 +77,7 @@ export function ContactForm() {
         rows={3}
         required
         disabled={status === "sending"}
-        className="w-full bg-white border border-[var(--ink)] rounded-none px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-[var(--ink)] placeholder:text-[var(--ink)]/40 text-[var(--ink)] transition-shadow resize-none disabled:opacity-50"
+        className={`${field} resize-none`}
       />
       {status === "error" && (
         <p className="text-sm text-red-600 font-medium">Something went wrong. Try again.</p>
