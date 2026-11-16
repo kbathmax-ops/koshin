@@ -1,7 +1,7 @@
 # Archived tutoring page
 
 Taken off the site on 2026-11-15. `page.tsx` is the full `/tutoring` page as it
-last stood, including the poster orange accents.
+last stood, with the navy accents and automation copy from PR #32.
 
 To restore it:
 
