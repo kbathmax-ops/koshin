@@ -27,7 +27,6 @@ export function Nav() {
   }, []);
 
   const isWork = pathname.startsWith("/work");
-  const isTutoring = pathname === "/tutoring";
   const isTravels = pathname === "/travels";
 
   return (
@@ -85,18 +84,6 @@ export function Nav() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             Work
-          </Link>
-          <Link
-            href="/tutoring"
-            className={cn(
-              "font-medium tracking-tight transition-colors duration-200",
-              isTutoring
-                ? "text-[var(--ink)]"
-                : "text-[var(--ink)]/70 hover:text-[var(--ink)]"
-            )}
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Tutoring
           </Link>
           <Link
             href="/travels"
@@ -160,13 +147,6 @@ export function Nav() {
             onClick={() => setMenuOpen(false)}
           >
             Work
-          </Link>
-          <Link
-            href="/tutoring"
-            className="font-medium text-[var(--ink)] hover:text-[var(--ink)] transition-colors py-3"
-            onClick={() => setMenuOpen(false)}
-          >
-            Tutoring
           </Link>
           <Link
             href="/travels"

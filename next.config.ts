@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
         destination: REVOPS_URL,
         permanent: false,
       },
+      // Tutoring is archived (archive/tutoring). Temporary so the page can
+      // come back at the same address.
+      {
+        source: "/tutoring",
+        destination: "/",
+        permanent: false,
+      },
       // Case studies used to live at the top level; they now sit under /work.
       {
         source: "/case-studies",
