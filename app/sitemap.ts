@@ -34,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/editing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     // Other per-project pages still build, but their cards link directly to
     // live sites, so they stay out of the sitemap for now.
     // Tutoring is archived (see archive/tutoring) — no longer routed.
