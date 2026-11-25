@@ -41,8 +41,8 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-32">
             <ContactSection
-              heading="Helping US VC firms look as sharp as their thesis."
-              body="Identity, homepage redesigns, and visual systems for emerging and sector-focused funds."
+              heading="have an editing job, design project, want to collab? reach out :)"
+              letsTalk={false}
             />
           </div>
         </div>
